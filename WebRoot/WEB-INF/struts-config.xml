@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+  <form-beans >
+    <form-bean name="userForm" type="com.uic.web.struts.form.UserForm" />
+
+  </form-beans>
+
+  <global-exceptions />
+  <global-forwards />
+  <action-mappings >
+    <action
+      attribute="userForm"
+      input="/WEB-INF/login.jsp"
+      name="userForm"
+      parameter="flag"
+      path="/login"
+      scope="request"
+      type="com.uic.web.struts.action.LoginAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goLoginUi" path="/WEB-INF/login.jsp" />
+      <forward name="loginok" path="/goUI.do" />
+    </action>
+    <action
+      parameter="flag"
+      path="/goUI"
+      type="com.uic.web.struts.action.GoUIAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goMainUi" path="/WEB-INF/logined/Coordinator/main.jsp" />
+    </action>
+    <action
+      input="/WEB-INF/logined/Coordinator/main.jsp"
+      parameter="flag"
+      path="/goManageAccountUi"
+      type="com.uic.web.struts.action.GoManageAccountUiAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goManageAccountUi" path="/WEB-INF/logined/Coordinator/manageAccount.jsp" />
+    </action>
+
+    
+
+
+
+
+  </action-mappings>
+
+  <message-resources parameter="com.uic.web.struts.ApplicationResources" />
+</struts-config>
+
