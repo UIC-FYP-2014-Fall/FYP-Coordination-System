@@ -89,6 +89,7 @@ public class LoginAction extends DispatchAction {
 			}
 			
 			request.getSession().setAttribute("userinfo", user);
+			request.getSession().setAttribute("role", type);
 			if(user.getType().equals("student")){
 				request.getSession().setAttribute("studentinfo", (Student)obj);
 			}else if(user.getType().equals("teacher")){

@@ -26,8 +26,8 @@
       <form class="form-signin" action="${pageContext.request.contextPath }/login.do?flag=login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <font color="#FF0000">${requestScope.msg}</font><br /><br/>
-        <input type="text" class="input-block-level" placeholder="User Name" name="username">
-        <input type="password" class="input-block-level" placeholder="Password" name="password">
+        <input type="text" class="input-block-level" placeholder="User Name" name="username" required="required">
+        <input type="password" class="input-block-level" placeholder="Password" name="password" required="required">
         <select name="type">
         	<option value="student">Student</option>
             <option value="teacher">Teacher</option>

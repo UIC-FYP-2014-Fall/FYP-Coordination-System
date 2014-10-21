@@ -18,6 +18,8 @@
     </init-param>
     <load-on-startup>0</load-on-startup>
   </servlet>
+ 
+
   
   <filter>
   	<filter-name>AutoLoginFilter</filter-name>
@@ -52,47 +54,47 @@
   </filter-mapping>
   
   <filter>
-  	<filter-name>SessionFilter</filter-name>
-  	<filter-class>com.uic.filter.SessionFilter</filter-class>
-  	<init-param>
-      	<description>将当前登录的用户的信息保存在 session 中时使用的key，如果没有配置此参数，则该过滤器不起作用</description>
-      	<param-name>sessionKey</param-name>
-      	<param-value>userInfo</param-value>
-  	</init-param>
-  	<init-param>
-      	<description>
-         	 如果用户未登录（即在 session 中 key 为 sessionKey 的属性不存在或为空），则将请求重定向到该 url。
-          	该 url 不包含web应用的 ContextPath。
-          	如果不配置此参数，则在用户未登录系统的情况下，直接重定向到web应用的根路径（/）
-      	</description>
-      	<param-name>redirectUrl</param-name>
-      	<param-value>/login.jsp</param-value>
-  	</init-param>
-  	<init-param>
-     	<description>
-          	不需要进行拦截的 url 的正则表达式，即：如果当前请求的 url 的 servletPath 能匹配该正则表达式，则直接放行（即使未登录系统）。
-          	此参数的值一般为 loginServlet 和 registServlet 等。
-          	另外，参数 redirectUrl 的值不用包含在该正则表达式中，因为 redirectUrl 对应的 url 会被自动放行。
-          	还有一点需要说明的是，该参数的值不包含web应用的 ContextPath。
-      	</description>
-      	<param-name>excepUrlRegex</param-name>
-      	<!-- 不拦截 /servlets/loginServlet 和 /servlets/registServlet -->
-      	<param-value>/servlets/(login|regist)Servlet</param-value>
-  	</init-param>
- </filter>
+  	<filter-name>CoordinatorAuthentication</filter-name>
+  	<filter-class>com.uic.filter.CoordinatorAuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>CoordinatorAuthentication</filter-name>
+  	<url-pattern>/logined/Coordinator/*</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>TeacherAuthentication</filter-name>
+  	<filter-class>com.uic.filter.TeacherAuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>TeacherAuthentication</filter-name>
+  	<url-pattern>/logined/Teacher/*</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>StudentAuthentication</filter-name>
+  	<filter-class>com.uic.filter.StudentAuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>StudentAuthentication</filter-name>
+  	<url-pattern>/logined/Student/*</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>LoginFilter</filter-name>
+  	<filter-class>com.uic.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>LoginFilter</filter-name>
+  	<url-pattern>*.do</url-pattern>
+  </filter-mapping>
  
- <filter-mapping>
-  <filter-name>SessionFilter</filter-name>
-  <url-pattern>/servlets/*</url-pattern>
- </filter-mapping>
- <filter-mapping>
-  <filter-name>SessionFilter</filter-name>
-  <url-pattern>/jsp/*</url-pattern>
- </filter-mapping>
+ 
 	
   <servlet-mapping>
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
   
 </web-app>
