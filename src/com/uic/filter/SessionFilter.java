@@ -40,10 +40,10 @@ public class SessionFilter extends HttpServlet implements Filter {
 		HttpServletRequest hrequest = (HttpServletRequest)request;
         HttpServletResponseWrapper wrapper = new HttpServletResponseWrapper((HttpServletResponse) response);
         
-        String logonStrings = config.getInitParameter("logonStrings");        // 登录登陆页面
-        String includeStrings = config.getInitParameter("includeStrings");    // 过滤资源后缀参数
-        String redirectPath = hrequest.getContextPath() + config.getInitParameter("redirectPath");// 没有登陆转向页面
-        String disabletestfilter = config.getInitParameter("disabletestfilter");// 过滤器是否有效
+        String logonStrings = config.getInitParameter("logonStrings");        // login page
+        String includeStrings = config.getInitParameter("includeStrings");    // Filter Resources suffix parameter
+        String redirectPath = hrequest.getContextPath() + config.getInitParameter("redirectPath");// redirect path
+        String disabletestfilter = config.getInitParameter("disabletestfilter");// The filter is active.
         //String currentURL = hrequest.getRequestURI();
         
         //Obtain the absolute path to the root directory.
@@ -53,24 +53,25 @@ public class SessionFilter extends HttpServlet implements Filter {
         
         //System.out.println("URL: "+currentURL);
         
-        if (disabletestfilter.toUpperCase().equals("Y")) {    // 过滤无效
+        // Filter invalid
+        if (disabletestfilter.toUpperCase().equals("Y")) {    
             chain.doFilter(request, response);
             return;
         }
         String[] logonList = logonStrings.split(";");
         String[] includeList = includeStrings.split(";");
-        
-        if (!isContains(hrequest.getRequestURI(), includeList)) {// 只对指定过滤参数后缀进行过滤
+        // Only to specify the filter parameters to filter suffix
+        if (!isContains(hrequest.getRequestURI(), includeList)) {
             chain.doFilter(request, response);
             return;
         }
-        
-        if (isContains(hrequest.getRequestURI(), logonList)) {// 对登录页面不进行过滤
+        //login page without filtering
+        if (isContains(hrequest.getRequestURI(), logonList)) {
             chain.doFilter(request, response);
             return;
         }       
-        
-        String user = ( String ) hrequest.getSession().getAttribute("role");//判断用户是否登录
+        //Determine whether the user login
+        String user = ( String ) hrequest.getSession().getAttribute("role");
         if (user == null) {
         	hrequest.setAttribute("msg", "Illegal access to the viewer. Please use a valid URL!");
             wrapper.sendRedirect(redirectPath);
