@@ -39,7 +39,7 @@
                                 		<a tabindex="-1">Hello, ${coordinatorinfo.name }</a>
                                 	</li>
                                     <li>
-                                        <a tabindex="-1" href="${pageContext.request.contextPath }/login.do?flag=logout">Logout</a>
+                                        <a tabindex="-1" href="${pageContext.request.contextPath }/logout.do">Logout</a>
                                     </li>
                                 </ul>
                             </li>

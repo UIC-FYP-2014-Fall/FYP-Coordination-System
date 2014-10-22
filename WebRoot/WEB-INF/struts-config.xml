@@ -8,21 +8,13 @@
   </form-beans>
 
   <global-exceptions />
-  <global-forwards />
+  <global-forwards >
+    <forward name="goLogin" path="/index.jsp" />
+
+  </global-forwards>
+
   <action-mappings >
-    <action
-      attribute="userForm"
-      input="/WEB-INF/login.jsp"
-      name="userForm"
-      parameter="flag"
-      path="/login"
-      scope="request"
-      type="com.uic.web.struts.action.LoginAction"
-      validate="false"
-      cancellable="true" >
-      <forward name="goLoginUi" path="/WEB-INF/login.jsp" />
-      <forward name="loginok" path="/goUI.do" />
-    </action>
+    
     <action
       parameter="flag"
       path="/goUI"
@@ -40,6 +32,27 @@
       cancellable="true" >
       <forward name="goManageAccountUi" path="/WEB-INF/logined/Coordinator/manageAccount.jsp" />
     </action>
+    <action
+      attribute="userForm"
+      input="/WEB-INF/login.jsp"
+      name="userForm"
+      path="/login"
+      scope="request"
+      type="com.uic.web.struts.action.LoginAction"
+      validate="false"
+      cancellable="true">
+      <forward name="loginok" path="/goUI.do" />
+      <forward name="goLoginUi" path="/WEB-INF/login.jsp" />
+    </action>
+    <action
+      path="/logout"
+      type="com.uic.web.struts.action.LogoutAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goLoginUi" path="/WEB-INF/login.jsp" />
+    </action>
+
+    
 
     
 

@@ -8,10 +8,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.actions.DispatchAction;
 
 import com.uic.domain.Coordinator;
 import com.uic.domain.Student;
@@ -22,31 +22,34 @@ import com.uic.service.inter.UsersServiceInter;
 import com.uic.util.SecurityUtil;
 import com.uic.web.struts.form.UserForm;
 
-/** 
- * MyEclipse Struts
- * Creation date: 10-19-2014
+/**
+ * MyEclipse Struts Creation date: 10-19-2014
  * 
  * XDoclet definition:
+ * 
  * @struts.action path="/login" name="userForm" parameter="flag" scope="request"
  */
-public class LoginAction extends DispatchAction {
-	private int expires = 7 * 24 * 60 * 60;//cookie save one week
+public class LoginAction extends Action {
+	private int expires = 7 * 24 * 60 * 60;// cookie save one week
+
 	/*
 	 * Generated Methods
 	 */
 
-	/** 
+	/**
 	 * Method execute
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
 	 * @param response
 	 * @return ActionForward
 	 */
-	public ActionForward login(ActionMapping mapping, ActionForm form,
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		UserForm userForm = (UserForm) form;// TODO Auto-generated method stub
-		//receive login.jsp form information
+
+		// receive login.jsp form information
 		Users user = new Users();
 		user.setUsername(userForm.getUsername());
 		user.setPassword(userForm.getPassword());
@@ -55,69 +58,82 @@ public class LoginAction extends DispatchAction {
 		String username = userForm.getUsername();
 		String password = userForm.getPassword();
 		String type = userForm.getType();
-		//System.out.println(username + password + remember + "===========");
-		//check username and password
-		UsersServiceInter usersServiceInter = new UsersServiceImp();
-		Object obj = new Object();
-		obj = usersServiceInter.checkUser(user);
-		if(obj!=null){
-			//set up cookie
-			if("remember".equals(remember)){
-				//The declaration of cookie
-				Cookie autoCookie = null;
-				//Get all of cookie
-				Cookie cookies[] = request.getCookies();
-				//traversal cookie to find whether autoCooie is existent
-				for (Cookie cookie : cookies) {
-					//Found out cookie
-					if ("autologin".equals(cookie.getName())) {
-						autoCookie = cookie;
-						//reset expires
-						long time = System.currentTimeMillis() + expires*1000;
-						//MD5 encode cookie
-						String newValue = type + ":" + username + ":" + time + ":"+ SecurityUtil.MD5( type+ ":" + username + ":" + password + ":" + time);
-						cookie.setValue(newValue);
-					}else{
-						//Not find out cookie. Create a cookie
-						long time = System.currentTimeMillis() + expires*1000;
-						String cookieValue = type + ":" + username + ":" + time + ":"+ SecurityUtil.MD5( type+ ":" + username + ":" + password + ":" + time);
-						autoCookie = new Cookie("autologin", cookieValue);
+		//System.out.println(type);
+		if (userForm.getType()!=null) {
+			// System.out.println(username + password + remember +
+			// "===========");
+			// check username and password
+			UsersServiceInter usersServiceInter = new UsersServiceImp();
+			Object obj = new Object();
+			obj = usersServiceInter.checkUser(user);
+			if (obj != null) {
+				// set up cookie
+				if ("remember".equals(remember)) {
+					// The declaration of cookie
+					Cookie autoCookie = null;
+					// Get all of cookie
+					Cookie cookies[] = request.getCookies();
+					// traversal cookie to find whether autoCooie is existent
+					for (Cookie cookie : cookies) {
+						// Found out cookie
+						if ("autologin".equals(cookie.getName())) {
+							autoCookie = cookie;
+							// reset expires
+							long time = System.currentTimeMillis() + expires
+									* 1000;
+							// MD5 encode cookie
+							String newValue = type
+									+ ":"
+									+ username
+									+ ":"
+									+ time
+									+ ":"
+									+ SecurityUtil.MD5(type + ":" + username
+											+ ":" + password + ":" + time);
+							cookie.setValue(newValue);
+						} else {
+							// Not find out cookie. Create a cookie
+							long time = System.currentTimeMillis() + expires
+									* 1000;
+							String cookieValue = type
+									+ ":"
+									+ username
+									+ ":"
+									+ time
+									+ ":"
+									+ SecurityUtil.MD5(type + ":" + username
+											+ ":" + password + ":" + time);
+							autoCookie = new Cookie("autologin", cookieValue);
+						}
 					}
+					autoCookie.setMaxAge(expires);
+					response.addCookie(autoCookie);
 				}
-				autoCookie.setMaxAge(expires);
-				response.addCookie(autoCookie);
+
+				request.getSession().setAttribute("userinfo", user);
+				request.getSession().setAttribute("role", type);
+				if (user.getType().equals("student")) {
+					request.getSession().setAttribute("studentinfo",
+							(Student) obj);
+				} else if (user.getType().equals("teacher")) {
+					request.getSession().setAttribute("teacherinfo",
+							(Teacher) obj);
+				} else if (user.getType().equals("coordinator")) {
+					request.getSession().setAttribute("coordinatorinfo",
+							(Coordinator) obj);
+				}
+				return mapping.findForward("loginok");
+			} else {
+				request.setAttribute("msg",
+						"Incorrect username or password! Please try again.");
+				return mapping.findForward("goLoginUi");
 			}
-			
-			request.getSession().setAttribute("userinfo", user);
-			request.getSession().setAttribute("role", type);
-			if(user.getType().equals("student")){
-				request.getSession().setAttribute("studentinfo", (Student)obj);
-			}else if(user.getType().equals("teacher")){
-				request.getSession().setAttribute("teacherinfo", (Teacher)obj);
-			}else if(user.getType().equals("coordinator")){
-				request.getSession().setAttribute("coordinatorinfo", (Coordinator)obj);
-			}
-			return mapping.findForward("loginok");
-		}else{
-			request.setAttribute("msg", "Incorrect username or password! Please try again.");
+		} else {
+			request.setAttribute(
+					"msg",
+					"Sorry, this session has been expired. Please re-login to continue enjoying the service.");
 			return mapping.findForward("goLoginUi");
 		}
 	}
-	public ActionForward logout(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		//clear up cookie
-		Cookie cookies[] = request.getCookies();
-		for(int i=0;i<cookies.length;i++){
-			if ("autologin".equals(cookies[i].getName())){
-				cookies[i].setMaxAge(0);
-				response.addCookie(cookies[i]);
-				System.out.println("cookie clear!!!!!!!!!!!");
-			}
-		}
-		//clear up session
-		request.getSession().invalidate();
-		return mapping.findForward("goLoginUi");
-		
-	}
+
 }

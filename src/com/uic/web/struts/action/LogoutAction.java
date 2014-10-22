@@ -4,21 +4,23 @@
  */
 package com.uic.web.struts.action;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.actions.DispatchAction;
 
 /** 
  * MyEclipse Struts
- * Creation date: 10-19-2014
+ * Creation date: 10-22-2014
  * 
  * XDoclet definition:
- * @struts.action parameter="flag"
+ * @struts.action
  */
-public class GoManageAccountUiAction extends DispatchAction {
+public class LogoutAction extends Action {
 	/*
 	 * Generated Methods
 	 */
@@ -34,12 +36,17 @@ public class GoManageAccountUiAction extends DispatchAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		if(request.getSession().getAttribute("role").equals("coordinator")){
-			return mapping.findForward("goManageAccountUi");
-		}else{
-			request.setAttribute("msg", "ERROR: Permission denied.");
-			return mapping.findForward("goLogin");
-		}
-		
+		//clear up cookie
+				Cookie cookies[] = request.getCookies();
+				for(int i=0;i<cookies.length;i++){
+					if ("autologin".equals(cookies[i].getName())){
+						cookies[i].setMaxAge(0);
+						response.addCookie(cookies[i]);
+						System.out.println("cookie clear!!!!!!!!!!!");
+					}
+				}
+				//clear up session
+				request.getSession().invalidate();
+				return mapping.findForward("goLoginUi");
 	}
 }

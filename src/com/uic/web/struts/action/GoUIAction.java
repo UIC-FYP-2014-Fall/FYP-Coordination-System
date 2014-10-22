@@ -34,6 +34,12 @@ public class GoUIAction extends DispatchAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		return mapping.findForward("goMainUi");
+		if(request.getSession().getAttribute("role").equals("coordinator")){
+			return mapping.findForward("goMainUi");
+		}else{
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+		
 	}
 }

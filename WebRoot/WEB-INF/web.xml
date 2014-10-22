@@ -19,8 +19,6 @@
     <load-on-startup>0</load-on-startup>
   </servlet>
  
-
-  
   <filter>
   	<filter-name>AutoLoginFilter</filter-name>
   	<filter-class>com.uic.filter.AutoLoginFilter</filter-class>
@@ -53,48 +51,47 @@
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
   
-  <filter>
-  	<filter-name>CoordinatorAuthentication</filter-name>
-  	<filter-class>com.uic.filter.CoordinatorAuthenticationFilter</filter-class>
-  </filter>
-  <filter-mapping>
-  	<filter-name>CoordinatorAuthentication</filter-name>
-  	<url-pattern>/logined/Coordinator/*</url-pattern>
-  </filter-mapping>
   
-  <filter>
-  	<filter-name>TeacherAuthentication</filter-name>
-  	<filter-class>com.uic.filter.TeacherAuthenticationFilter</filter-class>
-  </filter>
-  <filter-mapping>
-  	<filter-name>TeacherAuthentication</filter-name>
-  	<url-pattern>/logined/Teacher/*</url-pattern>
-  </filter-mapping>
-  
-  <filter>
-  	<filter-name>StudentAuthentication</filter-name>
-  	<filter-class>com.uic.filter.StudentAuthenticationFilter</filter-class>
-  </filter>
-  <filter-mapping>
-  	<filter-name>StudentAuthentication</filter-name>
-  	<url-pattern>/logined/Student/*</url-pattern>
-  </filter-mapping>
-  
-  <filter>
-  	<filter-name>LoginFilter</filter-name>
-  	<filter-class>com.uic.filter.LoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-  	<filter-name>LoginFilter</filter-name>
-  	<url-pattern>*.do</url-pattern>
-  </filter-mapping>
- 
+  <!-- Verify whether the user login -->
+   <!-- <filter>
+	  <filter-name>LoginFilter</filter-name>
+	  <filter-class>com.uic.filter.LoginFilter</filter-class>
+   </filter>
+   <filter-mapping>
+	  <filter-name>LoginFilter</filter-name>
+	  <url-pattern>*.do</url-pattern>
+   </filter-mapping> -->
+ <filter>
+    <filter-name>SessionFilter</filter-name>
+    <filter-class>com.uic.filter.SessionFilter</filter-class>
+    <init-param>
+        <param-name>logonStrings</param-name><!-- 对登录页面不进行过滤 -->
+        <param-value>index.jsp;login.do</param-value>
+    </init-param>
+    <init-param>
+        <param-name>includeStrings</param-name><!-- 只对指定过滤参数后缀进行过滤 -->
+        <param-value>.do;.jsp</param-value>
+    </init-param>
+    <init-param>
+        <param-name>redirectPath</param-name><!-- 未通过跳转到登录界面 -->
+        <param-value>/</param-value>
+    </init-param>
+    <init-param>
+        <param-name>disabletestfilter</param-name><!-- Y:过滤无效 -->
+        <param-value>N</param-value>
+    </init-param>
+</filter>
+<filter-mapping>
+    <filter-name>SessionFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
  
 	
   <servlet-mapping>
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
   
   
 </web-app>
