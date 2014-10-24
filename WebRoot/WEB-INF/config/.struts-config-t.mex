@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowViewLayout Version="1.2">
+  <StrutsActivity path="/goUploadTopicUi.do" location="75,210" dimension="307,88" />
+  <StrutsActivity path="/WEB-INF/logined/Teacher/uploadTopic.jsp" location="150,345" dimension="150,100" />
+  <StrutsTransition id=";6,null,,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="60,75" />
+      <AbsolutePoint location="60,175" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/goUploadTopicUi.do,goUploadTopicUi,/WEB-INF/logined/Teacher/uploadTopic.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="225,298" />
+      <AbsolutePoint location="225,345" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id=",null,,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="40,175" />
+      <AbsolutePoint location="40,145" />
+      <AbsolutePoint location="0,145" />
+      <AbsolutePoint location="0,206" />
+      <AbsolutePoint location="30,206" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/WEB-INF/logined/Teacher/teacherMain.jsp,null,/goUploadTopicUi.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="228,145" />
+      <AbsolutePoint location="228,210" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+</FlowViewLayout>
+
