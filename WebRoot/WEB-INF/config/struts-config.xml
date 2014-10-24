@@ -52,6 +52,49 @@
       cancellable="true" >
       <forward name="goLoginUi" path="/WEB-INF/login.jsp" />
     </action>
+    <action
+      input="/WEB-INF/logined/Teacher/teacherMain.jsp"
+      path="/goUploadTopicUi"
+      scope="request"
+      validate="false"
+      type="com.uic.web.struts.action.GoUploadTopicUiAction"
+      cancellable="true" >
+      <forward name="goUploadTopicUi" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
+    </action>
+    <action
+      path="/goChangePasswordUi"
+      scope="request"
+      type="com.uic.web.struts.action.GoChangePasswordUiAction"
+      validate="false"
+      cancellable="true">
+      <forward name="goChangePasswordUi" path="/WEB-INF/logined/Teacher/changePwd.jsp" />
+    </action>
+    <action
+      path="/goChooseObserverUi"
+      type="com.uic.web.struts.action.GoChooseObserverUiAction"
+      cancellable="true">
+      <forward name="goChooseObserverUi" path="/WEB-INF/logined/Teacher/chooseObserver.jsp" />
+    </action>
+    <action
+      path="/goEditTopicUi"
+      type="com.uic.web.struts.action.GoEditTopicUiAction"
+      cancellable="true">
+      <forward name="goEditTopicUi" path="/WEB-INF/logined/Teacher/editTopic.jsp" />
+    </action>
+    <action
+      path="/goTimetableUi"
+      type="com.uic.web.struts.action.GoTimetableUiAction"
+      cancellable="true">
+      <forward name="goTimetableUi" path="/WEB-INF/logined/Teacher/timetable.jsp" />
+    </action>
+    <action
+      path="/goTopicListUi"
+      type="com.uic.web.struts.action.GoTopicListUiAction"
+      cancellable="true">
+      <forward name="goTopicListUi" path="/WEB-INF/logined/Teacher/topicList.jsp" />
+    </action>
+    
+
 
     
 
