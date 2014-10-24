@@ -36,6 +36,8 @@ public class GoUIAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		if(request.getSession().getAttribute("role").equals("coordinator")){
 			return mapping.findForward("goMainUi");
+		}else if(request.getSession().getAttribute("role").equals("teacher")){
+			return mapping.findForward("goTeacherMainUI");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
