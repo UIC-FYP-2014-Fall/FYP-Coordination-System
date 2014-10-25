@@ -4,12 +4,20 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+
+import com.uic.domain.Message;
+import com.uic.domain.Users;
+import com.uic.service.imp.MessagesServiceImp;
+import com.uic.service.inter.MessagesServiceInter;
 
 /** 
  * MyEclipse Struts
@@ -35,6 +43,25 @@ public class GoUIAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if(request.getSession().getAttribute("role").equals("coordinator")){
+			//pagination
+			int pageNow=1;
+			//get pageNow from the main.jsp
+			String s_pageNow=request.getParameter("pageNow");
+			//check pageNow from the main.jsp
+			if(s_pageNow!=null){
+				pageNow=Integer.parseInt(s_pageNow);
+			}
+			
+			
+			//load the messages from database
+			MessagesServiceInter messagesServiceInter = new MessagesServiceImp();
+			Users user = (Users)request.getSession().getAttribute("userinfo");
+			List<Message> list = messagesServiceInter.getMessages(user,pageNow,4);
+			int pageCount = messagesServiceInter.getPageCount(user, 4);
+			
+			request.setAttribute("messageList", list);
+			request.setAttribute("pageCount", pageCount);
+			request.setAttribute("pageNow", pageNow);
 			return mapping.findForward("goMainUi");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
