@@ -4,6 +4,7 @@
 <struts-config>
   <form-beans >
     <form-bean name="userForm" type="com.uic.web.struts.form.UserForm" />
+    <form-bean name="changePwdForm" type="com.uic.web.struts.form.ChangePwdForm" />
 
   </form-beans>
 
@@ -22,7 +23,9 @@
       validate="false"
       cancellable="true" >
       <forward name="goMainUi" path="/WEB-INF/logined/Coordinator/main.jsp" />
-      <forward name="goTeacherMainUI" path="/WEB-INF/logined/Teacher/teacherMain.jsp" />
+      <forward name="goTeacherMain" path="/WEB-INF/logined/Teacher/teacherMain.jsp" />
+      
+      
     </action>
     <action
       input="/WEB-INF/logined/Coordinator/main.jsp"
@@ -53,56 +56,30 @@
       <forward name="goLoginUi" path="/WEB-INF/login.jsp" />
     </action>
     <action
-      input="/WEB-INF/logined/Teacher/teacherMain.jsp"
-      path="/goUploadTopicUi"
+      parameter="flag"
+      path="/teacherPageControl"
       scope="request"
-      validate="false"
-      type="com.uic.web.struts.action.GoUploadTopicUiAction"
-      cancellable="true" >
-      <forward name="goUploadTopicUi" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
+      type="com.uic.web.struts.action.TeacherPageControlAction"
+      cancellable="true">
+      <forward name="changePwd" path="/WEB-INF/logined/Teacher/changePwd.jsp" />
+      <forward name="chooseObserver" path="/WEB-INF/logined/Teacher/chooseObserver.jsp" />
+      <forward name="topicList" path="/WEB-INF/logined/Teacher/topicList.jsp" />
+      <forward name="mainPage" path="/WEB-INF/logined/Teacher/teacherMain.jsp" />
+      <forward name="timetable" path="/WEB-INF/logined/Teacher/timetable.jsp" />
+      <forward name="uploadTopic" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
     </action>
     <action
-      path="/goChangePasswordUi"
+      attribute="changePwdForm"
+      input="/WEB-INF/logined/Teacher/changePwd.jsp"
+      name="changePwdForm"
+      parameter="flag"
+      path="/changePwd"
       scope="request"
-      type="com.uic.web.struts.action.GoChangePasswordUiAction"
-      validate="false"
+      type="com.uic.web.struts.action.ChangePwdAction"
       cancellable="true">
-      <forward name="goChangePasswordUi" path="/WEB-INF/logined/Teacher/changePwd.jsp" />
+      <forward name="changePwdOk" path="/logout.do" />
+      <forward name="changePwdErr" path="/WEB-INF/logined/Teacher/changePwd.jsp" />
     </action>
-    <action
-      path="/goChooseObserverUi"
-      type="com.uic.web.struts.action.GoChooseObserverUiAction"
-      cancellable="true">
-      <forward name="goChooseObserverUi" path="/WEB-INF/logined/Teacher/chooseObserver.jsp" />
-    </action>
-    <action
-      path="/goEditTopicUi"
-      type="com.uic.web.struts.action.GoEditTopicUiAction"
-      cancellable="true">
-      <forward name="goEditTopicUi" path="/WEB-INF/logined/Teacher/editTopic.jsp" />
-    </action>
-    <action
-      path="/goTimetableUi"
-      type="com.uic.web.struts.action.GoTimetableUiAction"
-      cancellable="true">
-      <forward name="goTimetableUi" path="/WEB-INF/logined/Teacher/timetable.jsp" />
-    </action>
-    <action
-      path="/goTopicListUi"
-      type="com.uic.web.struts.action.GoTopicListUiAction"
-      cancellable="true">
-      <forward name="goTopicListUi" path="/WEB-INF/logined/Teacher/topicList.jsp" />
-    </action>
-    
-
-
-    
-
-    
-
-
-
-
   </action-mappings>
 
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />

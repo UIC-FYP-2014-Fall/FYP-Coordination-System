@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html class="no-js">
     
@@ -50,19 +53,19 @@
                             <a href="${pageContext.request.contextPath }/goUI.do"><i class="icon-chevron-right"></i> Main</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath }/goUploadTopicUi.do"><i class="icon-chevron-right"></i> Upload Topic</a>
+                            <a href="${pageContext.request.contextPath }/teacherPageControl.do?flag=uploadTopic"><i class="icon-chevron-right"></i> Upload Topic</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath }/goTopicListUi.do"><i class="icon-chevron-right"></i> Topic List</a>
+                            <a href="${pageContext.request.contextPath }/teacherPageControl.do?flag=topicList"><i class="icon-chevron-right"></i> Topic List</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath }/goChooseObserverUi.do"><i class="icon-chevron-right"></i> Choose Observer</a>
+                            <a href="${pageContext.request.contextPath }/teacherPageControl.do?flag=chooseObserver"><i class="icon-chevron-right"></i> Choose Observer</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath }/goTimetableUi.do"><i class="icon-chevron-right"></i> Timetable</a>
+                            <a href="${pageContext.request.contextPath }/teacherPageControl.do?flag=timetable"><i class="icon-chevron-right"></i> Timetable</a>
                         </li>
                         <li class="active">
-                            <a href="${pageContext.request.contextPath }/goChangePasswordUi.do"><i class="icon-chevron-right"></i> Change Password</a>
+                            <a href="${pageContext.request.contextPath }/teacherPageControl.do?flag=changePwd"><i class="icon-chevron-right"></i> Change Password</a>
                         </li>
                     </ul>
                 </div>
@@ -79,7 +82,7 @@
                                 </div>
 
                                 <div class="block-content collapse in">
-                                    <form class="form-horizontal">         
+                                    <form action="${pageContext.request.contextPath}/changePwd.do?flag=teacherChangePwd" method="post" class="form-horizontal">         
                                         <div class="control-group">
                                             <label class="control-label">Original Password: <span class="required">*</span></label>
                                             <div class="controls">
@@ -97,9 +100,10 @@
                                             <div class="controls">
                                                 <input name="confirmPwd" type="password" class="input-xlarge focused"/>
                                             </div>
-                                        </div>                                           
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>                                     
                                     </form>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                   
                                 </div>
                             </div>
 

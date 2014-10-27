@@ -32,7 +32,6 @@ public abstract class BaseServiceImp implements BaseInterface{
 			throw new RuntimeException(e.getMessage());
 		}
 		return obj;
-		
 	}
 
 }
