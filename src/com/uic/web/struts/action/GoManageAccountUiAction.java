@@ -38,6 +38,7 @@ public class GoManageAccountUiAction extends DispatchAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
+		System.out.println("Using GoManageAccountUiAction");
 		if(request.getSession().getAttribute("role").equals("coordinator")){
 			
 			//load teacher data

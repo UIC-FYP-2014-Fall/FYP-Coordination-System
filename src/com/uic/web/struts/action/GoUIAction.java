@@ -42,6 +42,7 @@ public class GoUIAction extends DispatchAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
+		System.out.println("Using GoUIAction");
 		if(request.getSession().getAttribute("role").equals("coordinator")){
 			//pagination
 			int pageNow=1;
@@ -63,6 +64,8 @@ public class GoUIAction extends DispatchAction {
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("pageNow", pageNow);
 			return mapping.findForward("goMainUi");
+		}else if(request.getSession().getAttribute("role").equals("teacher")){
+			return mapping.findForward("goTeacherMain");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
