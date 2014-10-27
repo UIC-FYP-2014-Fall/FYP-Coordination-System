@@ -6,7 +6,7 @@ import com.uic.domain.Teacher;
 import com.uic.service.inter.TeachersServiceInter;
 import com.uic.util.HibernateUtil;
 
-public class TeachersServiceImp implements TeachersServiceInter{
+public class TeachersServiceImp extends BaseServiceImp implements TeachersServiceInter{
 
 	@Override
 	public List<Teacher> getTeachers() {
@@ -16,5 +16,6 @@ public class TeachersServiceImp implements TeachersServiceInter{
 		List<Teacher> list = HibernateUtil.executeQueryOpenInView(hql, null);
 		return list;
 	}
+
 
 }

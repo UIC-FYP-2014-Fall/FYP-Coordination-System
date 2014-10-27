@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.uic.domain.Teacher;
 
-public interface TeachersServiceInter {
+public interface TeachersServiceInter extends BaseInterface{
 	
 	public List<Teacher> getTeachers();
+	
 
 }

@@ -35,4 +35,19 @@ public abstract class BaseServiceImp implements BaseInterface{
 		
 	}
 
+	@Override
+	public boolean saveObject(Object obj) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		try {
+			HibernateUtil.saveOpenInView(obj);
+			flag = true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			flag=false;
+			throw new RuntimeException(e.getMessage());
+		}
+		return flag;
+	}
+
 }

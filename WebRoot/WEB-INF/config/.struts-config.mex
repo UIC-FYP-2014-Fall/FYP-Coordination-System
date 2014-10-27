@@ -49,6 +49,12 @@
       <AbsolutePoint location="174,561" />
     </AutomaticBendpoints>
   </StrutsTransition>
+  <StrutsTransition id="/WEB-INF/logined/Coordinator/manageAccount.jsp,null,/goManageAccountUi.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="204,1122" />
+      <AbsolutePoint location="204,1022" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="/WEB-INF/logined/Coordinator/main.jsp,null,/goManageAccountUi.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="174,818" />

@@ -55,7 +55,7 @@
 						href="${pageContext.request.contextPath }/goUI.do"><i
 							class="icon-chevron-right"></i> Main</a></li>
 					<li><a
-						href="${pageContext.request.contextPath }/goManageAccountUi.do"><i
+						href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=goUi"><i
 							class="icon-chevron-right"></i> Manage Account</a></li>
 					<li><a href="export.html"><i class="icon-chevron-right"></i>
 							Export</a></li>

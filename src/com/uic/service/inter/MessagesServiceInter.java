@@ -5,7 +5,7 @@ import java.util.List;
 import com.uic.domain.Message;
 import com.uic.domain.Users;
 
-public interface MessagesServiceInter {
+public interface MessagesServiceInter extends BaseInterface{
 	
 	public List<Message> getMessages(Users user);
 	

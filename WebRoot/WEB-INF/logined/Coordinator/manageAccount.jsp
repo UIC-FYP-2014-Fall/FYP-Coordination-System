@@ -57,7 +57,7 @@
                             <a href="${pageContext.request.contextPath }/goUI.do"><i class="icon-chevron-right"></i> Main</a>
                         </li>
                         <li class="active">
-                            <a href="${pageContext.request.contextPath }/goManageAccountUi.do"><i class="icon-chevron-right"></i> Manage Account</a>
+                            <a href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=goUi"><i class="icon-chevron-right"></i> Manage Account</a>
                         </li>
                         <li>
                             <a href="export.html"><i class="icon-chevron-right"></i> Export</a>
@@ -85,7 +85,21 @@
                 
                 <!--/span-->
                 <div class="span9" id="content">
-      <div class="row-fluid"> 
+      <div class="row-fluid">
+      <c:if test="${addTeacher=='success' }">
+      	<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Success</h4>
+            The operation completed successfully
+        </div>
+      </c:if>
+      <c:if test="${addTeacher=='error' }">
+      	<div class="alert alert-error">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <h4>Error</h4>
+          The operation failed
+       	</div>
+      </c:if>
         
         <!-- block -->
         <div class="block">
@@ -128,7 +142,7 @@
                   <h4>Create A New Account</h4>
                 </div>
                 <div class="modal-body">
-                <form class="form-horizontal" method="post" action="#" id="form_sample_1">
+                <form class="form-horizontal" method="post" action="${pageContext.request.contextPath }/goManageAccountUi.do?flag=add" id="form_sample_1">
                 	<div class="alert alert-error hide">
 						<button class="close" data-dismiss="alert"></button>
 								You have some form errors. Please check below.
@@ -197,7 +211,10 @@ jQuery(document).ready(function() {
 	   FormValidation.init();
 	   
 	});
-
+$(".alert-success").alert();
+window.setTimeout(function() { $(".alert-success").alert('close'); }, 5000);
+$(".alert-error").alert();
+window.setTimeout(function() { $(".alert-error").alert('close'); }, 5000);
 </script>
 
 </body>

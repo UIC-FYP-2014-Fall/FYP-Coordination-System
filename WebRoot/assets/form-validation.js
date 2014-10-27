@@ -86,7 +86,7 @@ var FormValidation = function () {
                 submitHandler: function (form) {
                     success1.show();
                     error1.hide();
-					alert("submitted!");
+					/*alert("submitted!");*/
 					form.submit(); 
                 }
 				

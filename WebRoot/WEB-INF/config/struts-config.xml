@@ -4,6 +4,7 @@
 <struts-config>
   <form-beans >
     <form-bean name="userForm" type="com.uic.web.struts.form.UserForm" />
+    <form-bean name="teacherForm" type="com.uic.web.struts.form.TeacherForm" />
 
   </form-beans>
 
@@ -24,12 +25,15 @@
       <forward name="goMainUi" path="/WEB-INF/logined/Coordinator/main.jsp" />
     </action>
     <action
-      input="/WEB-INF/logined/Coordinator/main.jsp"
+      attribute="teacherForm"
+      input="/WEB-INF/logined/Coordinator/manageAccount.jsp"
+      name="teacherForm"
       parameter="flag"
       path="/goManageAccountUi"
+      scope="request"
       type="com.uic.web.struts.action.GoManageAccountUiAction"
       validate="false"
-      cancellable="true" >
+      cancellable="true">
       <forward name="goManageAccountUi" path="/WEB-INF/logined/Coordinator/manageAccount.jsp" />
     </action>
     <action

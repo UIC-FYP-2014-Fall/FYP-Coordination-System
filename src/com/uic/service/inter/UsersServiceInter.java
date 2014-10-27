@@ -4,7 +4,7 @@ import com.uic.domain.Users;
 
 
 
-public interface UsersServiceInter {
+public interface UsersServiceInter extends BaseInterface{
 	
 	public Object checkUser(Users user);
 	
