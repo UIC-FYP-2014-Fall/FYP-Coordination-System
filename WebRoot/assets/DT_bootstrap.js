@@ -10,7 +10,7 @@ $.extend( true, $.fn.dataTable.defaults, {
 
 /* Default class modification */
 $.extend( $.fn.dataTableExt.oStdClasses, {
-	"sWrapper": "dataTables_wrapper form-inline"
+	"sWrapper": "dataTables_wrapper form-inline",
 } );
 
 
@@ -164,5 +164,22 @@ $(document).ready(function() {
 			"sLengthMenu": "_MENU_ records per page"
 		}
 	} );
+	
+	$('#teacherTable').dataTable( {
+		"sDom": "<'row'<'span5'l><'span7'f>r>t<'row'<'span3'i><'span9'p>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sLengthMenu": "_MENU_ records per page"
+		},
+		"aoColumnDefs": [{
+				"aTargets": [4],
+				"bSortable":false
+            }]
+
+		
+		
+	} );
+	
+	
 
 } );

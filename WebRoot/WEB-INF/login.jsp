@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,9 +26,16 @@
 
       <form class="form-signin" action="${pageContext.request.contextPath }/login.do" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <font color="#FF0000">${requestScope.msg}</font><br /><br/>
-        <input type="text" class="input-block-level" placeholder="User Name" name="username" required="required">
-        <input type="password" class="input-block-level" placeholder="Password" name="password" required="required">
+        
+        <c:if test="${requestScope.msg!=null }">
+        	<div class="alert alert-error">
+				<a href="#" class="close" data-dismiss="alert"><i class="icon-remove"></i></a>
+					${requestScope.msg}
+			</div>
+        </c:if>
+        
+        <input type="text" class="input-block-level" placeholder="User Name" name="username" required>
+        <input type="password" class="input-block-level" placeholder="Password" name="password" required>
         <select name="type">
         	<option value="student">Student</option>
             <option value="teacher">Teacher</option>

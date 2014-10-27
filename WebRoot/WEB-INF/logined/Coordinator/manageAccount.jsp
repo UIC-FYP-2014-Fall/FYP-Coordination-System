@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html  class="no-js">
 <head>
@@ -8,13 +9,15 @@
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
+        <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="vendors/flot/excanvas.min.js"></script><![endif]-->
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
@@ -74,77 +77,139 @@
                         <li>
                             <a href="clearProject.html"><i class="icon-chevron-right"></i> Clear Project</a>
                         </li>
+                        <li>
+                            <a href="changePwd.html"><i class="icon-chevron-right"></i> Change Password</a>
+                        </li>
                     </ul>
                 </div>
                 
                 <!--/span-->
                 <div class="span9" id="content">
-                     <div class="row-fluid">
-                        <div class="span6">
-                            <!-- block -->
-                            <div class="block">
-                                
-                                <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Teachers' Account</div>
-                                </div>
-
-                                <div class="block-content collapse in">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Account</th>
-                                                <th>Name</th>
-                                                <th>E-mail</th>
-                                                <th> </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>WF.SU</td>
-                                                <td>WeiFeng</td>
-                                                <td>wfsu@uic.edu.hk</td>
-                                                <td>
-                                                    <button class="btn btn-primary"><i class="icon-pencil icon-white"></i> Reset</button>
-                                                    <button class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Judy</td>
-                                                <td>XinFeng</td>
-                                                <td>xinfeng@uic.edu.hk</td>
-                                                <td>
-                                                    <button class="btn btn-primary"><i class="icon-pencil icon-white"></i> Reset</button>
-                                                    <button class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>                 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Vincent</td>
-                                                <td>Gabriel</td>
-                                                <td>xxx@uic.edu.hk</td>
-                                                <td>
-                                                    <button class="btn btn-primary"><i class="icon-pencil icon-white"></i> Reset</button>
-                                                    <button class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>
-                                                </td>
-                                            </tr>                                    
-                                        </tbody>
-                                    </table>
-                                    <button type="submit" class="btn btn-primary" onclick="location.href='addAccount.html'">Add</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+      <div class="row-fluid"> 
+        
+        <!-- block -->
+        <div class="block">
+          <div class="navbar navbar-inner block-header">
+            <div class="muted pull-left">Teachers' Account</div>
+          </div>
+          <div class="block-content collapse in">
+            <div class="span12">
+              <table  cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"  id="teacherTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Account</th>
+                    <th>Phone</th>
+                    <th>E-mail</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>WeiFeng</td>
+                    <td>wfsu</td>
+                    <td>13</td>
+                    <td>wfsu@uic.edu.hk</td>
+                    <td><button class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Reset</button>
+                      <button class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i> Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>XinFeng</td>
+                    <td>judy</td>
+                    <td>15</td>
+                    <td>xinfeng@uic.edu.hk</td>
+                    <td><button class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Reset</button>
+                      <button class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i> Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Vincent</td>
+                    <td>Gabriel</td>
+                    <td>14</td>
+                    <td>xxx@uic.edu.hk</td>
+                    <td><button class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Reset</button>
+                      <button class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i> Delete</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="table-toolbar"> <a href="#add" data-toggle="modal">
+                <button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button>
+                </a>
+                <div class="modal hide fade" id="add">
+                <div class="modal-header"> <a href="#" class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+                  <h4>Create A New Account</h4>
                 </div>
+                <div class="modal-body">
+                <form class="form-horizontal" method="post" action="#" id="form_sample_1">
+                	<div class="alert alert-error hide">
+						<button class="close" data-dismiss="alert"></button>
+								You have some form errors. Please check below.
+					</div>
+                    
+                  <div class="control-group">
+                    <label class="control-label">Name<span class="required">*</span></label>
+                    <div class="controls">
+                      <input type="text" name="name"  data-required="1" class="m-wrap">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Account<span class="required">*</span></label>
+                    <div class="controls">
+                      <input type="text" name="account" class="m-wrap">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Phone<span class="required">*</span></label>
+                    <div class="controls">
+                      <input type="text" name="phone" class="m-wrap">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Email<span class="required">*</span></label>
+                    <div class="controls">
+                      <input name="email" type="text" class="m-wrap">
+                    </div>
+                  </div>
+                 
+                  </div>
+                  <div class="modal-footer">
+                  	<button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn">Reset</button>
+                	</form>
+                  </div>
+                  
+              </div>
             </div>
+          </div>
+          <!-- <a href="addAccount.html">
+              <button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button>
+              </a> --> 
         </div>
-        <!--/.fluid-container-->
-        <script src="vendors/jquery-1.9.1.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/easypiechart/jquery.easy-pie-chart.js"></script>
-        <script src="assets/scripts.js"></script>
+      </div>
+    </div>
+    <!-- /block --> 
+  </div>
+</div>
+</div>
+<hr>
+</div>
+<!--/.fluid-container--> 
+<script src="vendors/jquery-1.9.1.min.js"></script> 
+<script src="bootstrap/js/bootstrap.min.js"></script> 
+<script src="vendors/datatables/js/jquery.dataTables.min.js"></script> 
+
+<script src="assets/scripts.js"></script> 
+<script src="assets/DT_bootstrap.js"></script>
+
+<script type="text/javascript" src="vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="assets/form-validation.js"></script>
+    
+<script>
+jQuery(document).ready(function() {   
+	   FormValidation.init();
+	   
+	});
+
+</script>
+
 </body>
 </html>

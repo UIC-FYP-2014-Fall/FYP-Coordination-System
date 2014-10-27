@@ -7,6 +7,8 @@ var FormValidation = function () {
             var form1 = $('#form_sample_1');
             var error1 = $('.alert-error', form1);
             var success1 = $('.alert-success', form1);
+			
+			
 
             form1.validate({
                 errorElement: 'span', //default input error message container
@@ -14,14 +16,23 @@ var FormValidation = function () {
                 focusInvalid: false, // do not focus the last invalid input
                 ignore: "",
                 rules: {
+					account: {
+						minlength: 2,
+                        required: true
+					},
                     name: {
-                        minlength: 2,
+                        minlength: 3,
                         required: true
                     },
                     email: {
                         required: true,
                         email: true
                     },
+					phone: {
+						required: true,
+						digits:true,
+						rangelength:[6,11]
+					},
                     url: {
                         required: true,
                         url: true
@@ -69,12 +80,31 @@ var FormValidation = function () {
                         .addClass('valid').addClass('help-inline ok') // mark the current input as valid and display OK icon
                     .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
                 },
+				
+				
 
                 submitHandler: function (form) {
                     success1.show();
                     error1.hide();
+					alert("submitted!");
+					form.submit(); 
                 }
+				
+				
+				
             });
+			$("button:reset").click(function() {
+				error1.hide();
+				success1.hide();
+				$("label.error").closest('.control-group').hide();
+				$("label.success").closest('.control-group').hide();
+				$(".error").closest('.control-group').removeClass('error');
+				$(".success").closest('.control-group').removeClass('success');
+				
+    			form1.validate().resetForm();
+				
+			});
+			
     }
 
     return {
@@ -82,6 +112,7 @@ var FormValidation = function () {
         init: function () {
 
             handleValidation1();
+			
 
         },
 
