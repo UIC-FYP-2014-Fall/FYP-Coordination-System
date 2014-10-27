@@ -6,10 +6,14 @@ package com.uic.web.struts.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+
+import com.uic.service.imp.TeachersServiceImp;
+import com.uic.service.inter.TeachersServiceInter;
 
 /** 
  * MyEclipse Struts
@@ -35,6 +39,10 @@ public class GoManageAccountUiAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if(request.getSession().getAttribute("role").equals("coordinator")){
+			
+			//load teacher data
+			TeachersServiceInter teachersServiceInter =  new TeachersServiceImp();
+			request.getSession().setAttribute("teacherList", teachersServiceInter.getTeachers());
 			return mapping.findForward("goManageAccountUi");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");

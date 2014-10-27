@@ -105,30 +105,19 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>WeiFeng</td>
-                    <td>wfsu</td>
-                    <td>13</td>
-                    <td>wfsu@uic.edu.hk</td>
-                    <td><button class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Reset</button>
-                      <button class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i> Delete</button></td>
+                <c:forEach items="${teacherList }" var="teacher">
+                <tr>
+                    <td>${teacher.name }</td>
+                    <td>${teacher.account }</td>
+                    <td>${teacher.phone }</td>
+                    <td>${teacher.email }</td>
+                    <td>
+                    	<button class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Reset</button>
+                      	<button class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i> Delete</button>
+                   </td>
                   </tr>
-                  <tr>
-                    <td>XinFeng</td>
-                    <td>judy</td>
-                    <td>15</td>
-                    <td>xinfeng@uic.edu.hk</td>
-                    <td><button class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Reset</button>
-                      <button class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i> Delete</button></td>
-                  </tr>
-                  <tr>
-                    <td>Vincent</td>
-                    <td>Gabriel</td>
-                    <td>14</td>
-                    <td>xxx@uic.edu.hk</td>
-                    <td><button class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Reset</button>
-                      <button class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i> Delete</button></td>
-                  </tr>
+                </c:forEach>
+                  
                 </tbody>
               </table>
               <div class="table-toolbar"> <a href="#add" data-toggle="modal">

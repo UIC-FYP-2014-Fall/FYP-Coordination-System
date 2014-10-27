@@ -173,7 +173,8 @@ $(document).ready(function() {
 		},
 		"aoColumnDefs": [{
 				"aTargets": [4],
-				"bSortable":false
+				"bSortable":false,
+				"bFilter":false
             }]
 
 		
