@@ -47,7 +47,7 @@ public class GoManageAccountUiAction extends DispatchAction {
 			
 			//load teacher data
 			TeachersServiceInter teachersServiceInter =  new TeachersServiceImp();
-			request.getSession().setAttribute("teacherList", teachersServiceInter.getTeachers());
+			request.setAttribute("teacherList", teachersServiceInter.getTeachers());
 			return mapping.findForward("goManageAccountUi");
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
@@ -75,9 +75,57 @@ public class GoManageAccountUiAction extends DispatchAction {
 			// save the teacher
 			TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
 			if (teachersServiceInter.saveObject(teacher)) {
-				request.getSession().setAttribute("addTeacher", "success");
+				request.setAttribute("TeacherOperation", "success");
 			} else {
-				request.getSession().setAttribute("addTeacher", "error");
+				request.setAttribute("TeacherOperation", "error");
+			}
+
+			// TODO: handle exception
+
+			return new ActionForward("/goManageAccountUi.do?flag=goUi");
+		} else {
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+
+	}
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		if (request.getSession().getAttribute("role").equals("coordinator")) {
+
+			String tid = request.getParameter("tid");
+
+			// delete the teacher
+			TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
+			if (teachersServiceInter.deleteTeacher(tid)) {
+				request.setAttribute("TeacherOperation", "success");
+			} else {
+				request.setAttribute("TeacherOperation", "error");
+			}
+
+			// TODO: handle exception
+
+			return new ActionForward("/goManageAccountUi.do?flag=goUi");
+		} else {
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+
+	}
+	public ActionForward reset(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		if (request.getSession().getAttribute("role").equals("coordinator")) {
+
+			String tid = request.getParameter("tid");
+
+			// reset the teacher password
+			TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
+			if (teachersServiceInter.resetTeacher(tid)) {
+				request.setAttribute("TeacherOperation", "success");
+			} else {
+				request.setAttribute("TeacherOperation", "error");
 			}
 
 			// TODO: handle exception

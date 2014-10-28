@@ -8,5 +8,9 @@ public interface TeachersServiceInter extends BaseInterface{
 	
 	public List<Teacher> getTeachers();
 	
+	public boolean deleteTeacher(String id);
+	
+	public boolean resetTeacher(String id);
+	
 
 }

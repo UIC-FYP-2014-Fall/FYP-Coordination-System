@@ -86,14 +86,14 @@
                 <!--/span-->
                 <div class="span9" id="content">
       <div class="row-fluid">
-      <c:if test="${addTeacher=='success' }">
+      <c:if test="${requestScope.TeacherOperation=='success'}">
       	<div class="alert alert-success">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
             <h4>Success</h4>
             The operation completed successfully
         </div>
       </c:if>
-      <c:if test="${addTeacher=='error' }">
+      <c:if test="${requestScope.TeacherOperation=='error'}">
       	<div class="alert alert-error">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <h4>Error</h4>
@@ -126,8 +126,8 @@
                     <td>${teacher.phone }</td>
                     <td>${teacher.email }</td>
                     <td>
-                    	<button class="btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i> Reset</button>
-                      	<button class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i> Delete</button>
+                    	<a class="btn btn-primary btn-mini" data-confirm="Are you sure?" href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=reset&tid=${teacher.id}"><i class="icon-pencil icon-white"></i> Reset</a>
+                      	<a class="btn btn-danger btn-mini" data-confirm="Are you sure you want to delete the teacher?" href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=delete&tid=${teacher.id}"><i class="icon-remove icon-white"></i> Delete</a>
                    </td>
                   </tr>
                 </c:forEach>
@@ -211,10 +211,23 @@ jQuery(document).ready(function() {
 	   FormValidation.init();
 	   
 	});
+$(document).ready(function() {
+    $('a[data-confirm]').click(function(ev) {
+        var href = $(this).attr('href');
+
+        if (!$('#dataConfirmModal').length) {
+            $('body').append('<div id="dataConfirmModal" class="modal" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="dataConfirmLabel">Please Confirm</h3></div><div class="modal-body"></div><div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button><a class="btn btn-danger" id="dataConfirmOK">OK</a></div></div>');
+        } 
+        $('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
+        $('#dataConfirmOK').attr('href', href);
+        $('#dataConfirmModal').modal({show:true});
+        return false;
+    });
+});
 $(".alert-success").alert();
-window.setTimeout(function() { $(".alert-success").alert('close'); }, 5000);
+window.setTimeout(function() { $(".alert-success").alert('close'); }, 4000);
 $(".alert-error").alert();
-window.setTimeout(function() { $(".alert-error").alert('close'); }, 5000);
+window.setTimeout(function() { $(".alert-error").alert('close'); }, 4000);
 </script>
 
 </body>
