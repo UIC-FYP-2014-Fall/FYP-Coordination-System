@@ -42,12 +42,12 @@ public class GoManageAccountUiAction extends DispatchAction {
 	public ActionForward goUi(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		if (request.getSession().getAttribute("role").equals("coordinator")) {
 
-			// load teacher data
-			TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
-			request.getSession().setAttribute("teacherList",
-					teachersServiceInter.getTeachers());
+		if(request.getSession().getAttribute("role").equals("coordinator")){
+			
+			//load teacher data
+			TeachersServiceInter teachersServiceInter =  new TeachersServiceImp();
+			request.getSession().setAttribute("teacherList", teachersServiceInter.getTeachers());
 			return mapping.findForward("goManageAccountUi");
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
@@ -82,7 +82,7 @@ public class GoManageAccountUiAction extends DispatchAction {
 
 			// TODO: handle exception
 
-			return new ActionForward("goManageAccountUi.do?flag=goUi");
+			return new ActionForward("/goManageAccountUi.do?flag=goUi");
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");

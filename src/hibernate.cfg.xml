@@ -6,9 +6,7 @@
 <hibernate-configuration>
 
 	<session-factory>
-		<property name="dialect">
-			org.hibernate.dialect.MySQLDialect
-		</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="connection.url">
 			jdbc:mysql://127.0.0.1:3306/fyp
 		</property>

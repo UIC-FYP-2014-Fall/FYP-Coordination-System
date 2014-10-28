@@ -82,7 +82,7 @@ final public class HibernateUtil {
 	}
 	
 	//统一的一个修改和删除(批量 hql) hql"delete upate ...??"
-		public static void executeUpdate(String hql,String [] parameters){
+		public static void executeUpdate(String hql,String[] parameters){
 			
 			Session s=null;
 			Transaction tx=null;
@@ -116,11 +116,8 @@ final public class HibernateUtil {
 	
 	//统一的一个修改和删除(批量 hql) hql"delete upate ...??"
 	//OpenSessionInView
-	public static void executeUpdateOpenInView(String hql,String [] parameters){
-		
+	public static void executeUpdateOpenInView(String hql,String[] parameters){
 			Session s = getCurrentSession();
-
-		
 			Query query=s.createQuery(hql);
 			//先判断是否有参数要绑定
 			if(parameters!=null&& parameters.length>0){
@@ -128,10 +125,8 @@ final public class HibernateUtil {
 					query.setString(i, parameters[i]);
 				}
 			}
+			System.out.println("query+++++++++++++++++++++++++++++++"+query.toString());
 			query.executeUpdate();
-			
-		
-		
 	}
 	
 	//统一的添加的方法
