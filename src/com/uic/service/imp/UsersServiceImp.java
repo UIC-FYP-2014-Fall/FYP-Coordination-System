@@ -49,4 +49,26 @@ public class UsersServiceImp extends BaseServiceImp implements UsersServiceInter
 		return obj;
 	}
 
+	@Override
+	public boolean changePwd(String role, String newPwd, String id) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		if(role.equals("student")){
+			String hql = "update Student set password=? where id=?";
+			String parameters[]={newPwd,id};
+			flag = updateObject(hql, parameters);
+		}else if(role.equals("teacher")){
+			String hql = "update Teacher set password=? where id=?";
+			String parameters[]={newPwd,id};
+			flag =  updateObject(hql, parameters);
+		}else if(role.equals("coordinator")){
+			String hql = "update Coordinator set password=? where id=?";
+			String parameters[]={newPwd,id};
+			flag = updateObject(hql, parameters);
+		}
+		return flag;
+	}
+
+	
+
 }

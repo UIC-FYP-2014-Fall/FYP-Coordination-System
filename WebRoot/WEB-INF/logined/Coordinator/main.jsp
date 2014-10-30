@@ -57,7 +57,7 @@
 					<li><a
 						href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=goUi"><i
 							class="icon-chevron-right"></i> Manage Account</a></li>
-					<li><a href="export.html"><i class="icon-chevron-right"></i>
+					<li><a href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i class="icon-chevron-right"></i>
 							Export</a></li>
 					<li><a href="preTime.html"><i class="icon-chevron-right"></i>
 							Set Pre Time</a></li>
@@ -69,7 +69,7 @@
 							Set Workload</a></li>
 					<li><a href="clearProject.html"><i
 							class="icon-chevron-right"></i> Clear Project</a></li>
-					<li><a href="changePwd.html"><i class="icon-chevron-right"></i>
+					<li><a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i>
 							Change Password</a></li>
 				</ul>
 			</div>

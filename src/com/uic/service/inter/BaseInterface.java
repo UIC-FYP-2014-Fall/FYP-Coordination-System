@@ -9,5 +9,7 @@ public interface BaseInterface {
 	public Object getUniqueObject(String hql, String[] parameters);
 	
 	public boolean saveObject(Object obj);
+	
+	public boolean updateObject(String hql, String[] parameters);
 
 }

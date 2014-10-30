@@ -49,4 +49,20 @@ public abstract class BaseServiceImp implements BaseInterface{
 		return flag;
 	}
 
+	@Override
+	public boolean updateObject(String hql, String[] parameters) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		try {
+			HibernateUtil.executeUpdateOpenInView(hql, parameters);
+			flag = true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			flag=false;
+			throw new RuntimeException(e.getMessage());
+		}
+		return flag;
+	
+	}
+
 }

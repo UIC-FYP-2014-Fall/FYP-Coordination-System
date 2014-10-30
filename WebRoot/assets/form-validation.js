@@ -28,6 +28,17 @@ var FormValidation = function () {
                         required: true,
                         email: true
                     },
+					oldPwd: {
+						required: true,
+					},
+					newPwd:{
+						required: true,
+						rangelength:[6,16]
+					},
+					confirmPwd:{
+						required: true,
+						equalTo:"#newPwd"
+					},
 					phone: {
 						required: true,
 						digits:true,
@@ -86,7 +97,7 @@ var FormValidation = function () {
                 submitHandler: function (form) {
                     success1.show();
                     error1.hide();
-					/*alert("submitted!");*/
+					
 					form.submit(); 
                 }
 				

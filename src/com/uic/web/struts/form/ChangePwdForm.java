@@ -25,6 +25,7 @@ public class ChangePwdForm extends ActionForm {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 
 	/** oldPwd property */
 	private String oldPwd;

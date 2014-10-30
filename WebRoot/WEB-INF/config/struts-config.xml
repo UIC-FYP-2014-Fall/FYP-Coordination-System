@@ -74,18 +74,30 @@
       <forward name="timetable" path="/WEB-INF/logined/Teacher/timetable.jsp" />
       <forward name="uploadTopic" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
     </action>
+    
+    <action
+      parameter="flag"
+      path="/export"
+      type="com.uic.web.struts.action.ExportAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goExportUi" path="/WEB-INF/logined/Coordinator/export.jsp" />
+    </action>
     <action
       attribute="changePwdForm"
-      input="/WEB-INF/logined/Teacher/changePwd.jsp"
+      input="/WEB-INF/logined/Coordinator/changePwd.jsp"
       name="changePwdForm"
       parameter="flag"
-      path="/changePwd"
+      path="/changPwd"
       scope="request"
-      type="com.uic.web.struts.action.ChangePwdAction"
-      cancellable="true">
-      <forward name="changePwdOk" path="/logout.do" />
-      <forward name="changePwdErr" path="/WEB-INF/logined/Teacher/changePwd.jsp" />
+      type="com.uic.web.struts.action.ChangPwdAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goPwdUi" path="/WEB-INF/logined/Coordinator/changePwd.jsp" />
+      <forward name="goTeacherPwdUi" path="/WEB-INF/logined/Teacher/changePwd.jsp" />
     </action>
+
+
   </action-mappings>
 
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />

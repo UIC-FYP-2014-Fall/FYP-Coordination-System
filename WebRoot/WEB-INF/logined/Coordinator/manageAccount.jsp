@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html  class="no-js">
+<html>
 <head>
 
 <title>FYP Coordination System</title>
@@ -60,7 +60,7 @@
                             <a href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=goUi"><i class="icon-chevron-right"></i> Manage Account</a>
                         </li>
                         <li>
-                            <a href="export.html"><i class="icon-chevron-right"></i> Export</a>
+                            <a href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i class="icon-chevron-right"></i> Export</a>
                         </li>
                         <li>
                             <a href="preTime.html"><i class="icon-chevron-right"></i> Set Pre Time</a>
@@ -78,7 +78,7 @@
                             <a href="clearProject.html"><i class="icon-chevron-right"></i> Clear Project</a>
                         </li>
                         <li>
-                            <a href="changePwd.html"><i class="icon-chevron-right"></i> Change Password</a>
+                            <a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i> Change Password</a>
                         </li>
                     </ul>
                 </div>
