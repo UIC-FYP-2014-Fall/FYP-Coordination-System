@@ -87,14 +87,14 @@
                 <div class="span9" id="content">
       <div class="row-fluid">
       <c:if test="${requestScope.TeacherOperation=='success'}">
-      	<div class="alert alert-success">
+      	<div class="alert alert-success SuccessInfo">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
             <h4>Success</h4>
             The operation completed successfully
         </div>
       </c:if>
       <c:if test="${requestScope.TeacherOperation=='error'}">
-      	<div class="alert alert-error">
+      	<div class="alert alert-error ErrorInfo">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <h4>Error</h4>
           The operation failed
@@ -225,9 +225,9 @@ $(document).ready(function() {
     });
 });
 $(".alert-success").alert();
-window.setTimeout(function() { $(".alert-success").alert('close'); }, 4000);
+window.setTimeout(function() { $(".SuccessInfo").alert('close'); }, 4000);
 $(".alert-error").alert();
-window.setTimeout(function() { $(".alert-error").alert('close'); }, 4000);
+window.setTimeout(function() { $(".ErrorInfo").alert('close'); }, 4000);
 </script>
 
 </body>
