@@ -46,5 +46,23 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 		}
 	}
 
+	@Override
+	public boolean checkAccount(String account) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		String hql = "from Teacher where account=?";
+		String[] parameters={account};
+		try {
+			Object obj = getUniqueObject(hql, parameters);
+			if(obj==null){
+				flag = true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 
 }

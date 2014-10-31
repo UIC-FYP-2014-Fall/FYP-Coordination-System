@@ -12,5 +12,7 @@ public interface TeachersServiceInter extends BaseInterface{
 	
 	public boolean resetTeacher(String id);
 	
+	public boolean checkAccount(String account);
+	
 
 }

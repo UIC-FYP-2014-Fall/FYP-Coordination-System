@@ -97,7 +97,7 @@
       	<div class="alert alert-error ErrorInfo">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <h4>Error</h4>
-          The operation failed
+          The operation failed! ${ErrorInfo}
        	</div>
       </c:if>
         
@@ -225,9 +225,9 @@ $(document).ready(function() {
     });
 });
 $(".alert-success").alert();
-window.setTimeout(function() { $(".SuccessInfo").alert('close'); }, 4000);
+window.setTimeout(function() { $(".SuccessInfo").alert('close'); }, 5000);
 $(".alert-error").alert();
-window.setTimeout(function() { $(".ErrorInfo").alert('close'); }, 4000);
+window.setTimeout(function() { $(".ErrorInfo").alert('close'); }, 5000);
 </script>
 
 </body>

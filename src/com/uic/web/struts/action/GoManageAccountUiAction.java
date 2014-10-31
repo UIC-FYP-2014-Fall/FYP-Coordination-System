@@ -62,25 +62,33 @@ public class GoManageAccountUiAction extends DispatchAction {
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
 
 			TeacherForm teacherForm = (TeacherForm) form;
-
-			// construct a teacher to receive info from jsp
-			Teacher teacher = new Teacher();
-
-			teacher.setAccount(teacherForm.getAccount());
-			teacher.setName(teacherForm.getName());
-			teacher.setEmail(teacherForm.getEmail());
-			teacher.setPhone(teacherForm.getPhone());
-			teacher.setPassword(SystemUtil.getDefaultTeacherPassword());
-
-			// save the teacher
+			
 			TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
-			if (teachersServiceInter.saveObject(teacher)) {
-				request.setAttribute("TeacherOperation", "success");
-			} else {
-				request.setAttribute("TeacherOperation", "error");
-			}
+			
+			if(teachersServiceInter.checkAccount(teacherForm.getAccount())){
+				// construct a teacher to receive info from jsp
+				Teacher teacher = new Teacher();
 
-			// TODO: handle exception
+				teacher.setAccount(teacherForm.getAccount());
+				teacher.setName(teacherForm.getName());
+				teacher.setEmail(teacherForm.getEmail());
+				teacher.setPhone(teacherForm.getPhone());
+				teacher.setPassword(SystemUtil.getDefaultTeacherPassword());
+
+				// save the teacher
+				
+				if (teachersServiceInter.saveObject(teacher)) {
+					request.setAttribute("TeacherOperation", "success");
+				} else {
+					request.setAttribute("TeacherOperation", "error");
+				}
+
+				// TODO: handle exception
+
+			}else{
+				request.setAttribute("TeacherOperation", "error");
+				request.setAttribute("ErrorInfo", "This account '"+teacherForm.getAccount()+"' has been used before, please change one.");
+			}
 
 			return new ActionForward("/goManageAccountUi.do?flag=goUi");
 		} else {

@@ -36,7 +36,7 @@ public class LogoutAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		System.out.println("Using LogoutAction");
+		//System.out.println("Using LogoutAction");
 		//clear up cookie
 				Cookie cookies[] = request.getCookies();
 				for(int i=0;i<cookies.length;i++){
