@@ -93,12 +93,7 @@
                                                 <td>
                                                     <label class="control-label" for="select01">Supervisor</label>
                                                     <div class="controls">
-                                                        <select id="select01" class="chzn-select">
-                                                            <option>aaa</option>
-                                                            <option>bbb</option>
-                                                            <option>ccc</option>
-                                                            <option>ddd</option>
-                                                        </select>
+                                                        <input class="input focused" id="supervisor" type="text" value="">
                                                     </div>
                                                 </td>
                                                 <td>
