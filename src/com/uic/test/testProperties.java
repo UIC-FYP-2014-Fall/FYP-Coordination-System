@@ -1,14 +1,19 @@
 package com.uic.test;
 
-import java.util.Date;
-
-import com.uic.util.BaseUtil;
-import com.uic.util.SystemUtil;
+import com.uic.util.PropertiesHelper;
 
 public class testProperties {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+		System.out.println(ph.getProperties("DefaultTeacherPassword"));
+		try {
+			ph.deleteProperties("endTime");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		/*String startTime = SystemUtil.getKeyValue("PreStartTime");
 
@@ -34,7 +39,7 @@ public class testProperties {
 			System.out.print("晚于今天");*/
 		
 		//System.out.println(SystemUtil.getKeyValue("DefaultTeacherPassword"));
-		SystemUtil.writeProperties("PreStartTime", "2014-10-31 12:00:00");
+		//SystemUtil.writeProperties("PreStartTime", "2014-10-31 12:00:00");
 		//SystemUtil.delete();
 
 	}

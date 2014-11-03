@@ -13,7 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.uic.util.BaseUtil;
-import com.uic.util.SystemUtil;
+import com.uic.util.PropertiesHelper;
 import com.uic.web.struts.form.PreTimeForm;
 
 /**
@@ -73,9 +73,16 @@ public class PreTimeAction extends DispatchAction {
 			
 			
 			if(dStartTime.after(nowDate)&&dEndTime.after(nowDate)&&dStartTime.before(dEndTime)){
-				SystemUtil.writeProperties("PreStartDateTime", startDateTime);
-				SystemUtil.writeProperties("PreEndDateTime", endDateTime);
-				SystemUtil.writeProperties("PreDateTimeState", "true");
+				PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+				
+				try {
+					ph.setProperties("PreStartDateTime", startDateTime);
+					ph.setProperties("PreEndDateTime", endDateTime);
+					ph.setProperties("PreDateTimeState", "true");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				request.setAttribute("PreTimeOperation", "success");
 			}else{
 				request.setAttribute("PreTimeOperation", "error");

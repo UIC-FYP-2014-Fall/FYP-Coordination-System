@@ -5,7 +5,7 @@ import java.util.List;
 import com.uic.domain.Teacher;
 import com.uic.service.inter.TeachersServiceInter;
 import com.uic.util.HibernateUtil;
-import com.uic.util.SystemUtil;
+import com.uic.util.PropertiesHelper;
 
 public class TeachersServiceImp extends BaseServiceImp implements TeachersServiceInter{
 
@@ -35,8 +35,9 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 	@Override
 	public boolean resetTeacher(String id) {
 		// TODO Auto-generated method stub
+		PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 		String hql = "update Teacher set password=? where id=?";
-		String[] parameters={SystemUtil.getKeyValue("DefaultTeacherPassword"),id};
+		String[] parameters={ph.getProperties("DefaultTeacherPassword"),id};
 		try {
 			HibernateUtil.executeUpdateOpenInView(hql, parameters);
 			return true;
