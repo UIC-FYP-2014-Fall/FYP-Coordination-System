@@ -73,7 +73,7 @@ public class GoManageAccountUiAction extends DispatchAction {
 				teacher.setName(teacherForm.getName());
 				teacher.setEmail(teacherForm.getEmail());
 				teacher.setPhone(teacherForm.getPhone());
-				teacher.setPassword(SystemUtil.getDefaultTeacherPassword());
+				teacher.setPassword(SystemUtil.getKeyValue("DefaultTeacherPassword"));
 
 				// save the teacher
 				

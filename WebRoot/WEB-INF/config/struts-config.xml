@@ -8,6 +8,7 @@
     <form-bean name="teacherForm" type="com.uic.web.struts.form.TeacherForm" />
 
     <form-bean name="changePwdForm" type="com.uic.web.struts.form.ChangePwdForm" />
+    <form-bean name="preTimeForm" type="com.uic.web.struts.form.PreTimeForm" />
 
   </form-beans>
 
@@ -96,6 +97,19 @@
       <forward name="goPwdUi" path="/WEB-INF/logined/Coordinator/changePwd.jsp" />
       <forward name="goTeacherPwdUi" path="/WEB-INF/logined/Teacher/changePwd.jsp" />
     </action>
+    <action
+      attribute="preTimeForm"
+      input="/WEB-INF/logined/Coordinator/preTime.jsp"
+      name="preTimeForm"
+      parameter="flag"
+      path="/preTime"
+      scope="request"
+      type="com.uic.web.struts.action.PreTimeAction"
+      validate="false"
+      cancellable="true">
+      <forward name="goPreTimeUi" path="/WEB-INF/logined/Coordinator/preTime.jsp" />
+    </action>
+
 
 
   </action-mappings>

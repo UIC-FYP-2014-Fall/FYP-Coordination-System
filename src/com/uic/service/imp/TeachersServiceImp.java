@@ -36,7 +36,7 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 	public boolean resetTeacher(String id) {
 		// TODO Auto-generated method stub
 		String hql = "update Teacher set password=? where id=?";
-		String[] parameters={SystemUtil.getDefaultTeacherPassword(),id};
+		String[] parameters={SystemUtil.getKeyValue("DefaultTeacherPassword"),id};
 		try {
 			HibernateUtil.executeUpdateOpenInView(hql, parameters);
 			return true;

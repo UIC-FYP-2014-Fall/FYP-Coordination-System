@@ -17,7 +17,7 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
+
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
@@ -63,7 +63,7 @@
                             <a href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i class="icon-chevron-right"></i> Export</a>
                         </li>
                         <li>
-                            <a href="preTime.html"><i class="icon-chevron-right"></i> Set Pre Time</a>
+                            <a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi"><i class="icon-chevron-right"></i> Set Pre Time</a>
                         </li>
                         <li>
                             <a href="quota.html"><i class="icon-chevron-right"></i> Set Quota</a>
