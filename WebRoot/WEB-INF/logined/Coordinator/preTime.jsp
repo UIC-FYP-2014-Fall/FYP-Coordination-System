@@ -128,7 +128,7 @@
                   
                   	<div class="input-prepend">
                     	<span class="add-on"><i class="icon-calendar"></i></span>
-                    	<input type="text" name="startDate" data-required="1" class="span10" value="" id="dpd1" readonly>
+                    	<input type="text" name="startDate" data-required="1" class="span10" value='<c:if test="${startDate!=null }">${startDate }</c:if>' id="dpd1" readonly>
                     </div>
                     <div id="starttime" class="input-append">
     					<input data-format="hh:mm:ss" name="startTime" type="text" class="span5" readonly></input>
@@ -145,7 +145,7 @@
                   <div class="controls">
                  	<div class="input-prepend">
                   		<span class="add-on"><i class="icon-calendar"></i></span>
-                    	<input type="text" name="endDate" class="span10" value="" id="dpd2" readonly />
+                    	<input type="text" name="endDate" class="span10" value="<c:if test="${endDate!=null }">${endDate }</c:if>" id="dpd2" readonly />
                    	</div>
                     <div id="endtime" class="input-append">
     					<input data-format="hh:mm:ss" name="endTime" type="text" class="span5" readonly></input>

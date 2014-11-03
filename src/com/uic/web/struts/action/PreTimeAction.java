@@ -41,6 +41,19 @@ public class PreTimeAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
+			//prepare data for the jsp page
+			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+			String startDateTime = ph.getProperties("PreStartDateTime");
+			String endDateTime = ph.getProperties("PreEndDateTime");
+			System.out.println(startDateTime);
+			if(startDateTime!=null&&endDateTime!=null){
+				String[] start = startDateTime.split(" ");
+				String[] end = endDateTime.split(" ");
+				request.setAttribute("startDate", start[0]);
+				request.setAttribute("startTime", start[1]);
+				request.setAttribute("endDate", end[0]);
+				request.setAttribute("ednTime", end[1]);
+			}
 
 			return mapping.findForward("goPreTimeUi");
 		} else {
@@ -54,23 +67,23 @@ public class PreTimeAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
 			PreTimeForm preTimeForm = (PreTimeForm)form;
-			
+			//get date and time from jsp
 			String startDate = preTimeForm.getStartDate();
 			String startTime = preTimeForm.getStartTime();
 			String endDate = preTimeForm.getEndDate();
 			String endTime = preTimeForm.getEndTime();
-			
+			//format conversion
 			String startDateTime = startDate+" "+startTime;
 			String endDateTime = endDate+" "+endTime;
 			
-			System.out.println(startDateTime);
-			System.out.println(endDateTime);
+			//System.out.println(startDateTime);
+			//System.out.println(endDateTime);
 			
 			java.util.Date dStartTime = BaseUtil.StringConvertDate(startDateTime);
 			java.util.Date dEndTime = BaseUtil.StringConvertDate(endDateTime);
 			
 			java.util.Date nowDate = new java.util.Date();
-			
+			//System.out.println(nowDate);
 			
 			if(dStartTime.after(nowDate)&&dEndTime.after(nowDate)&&dStartTime.before(dEndTime)){
 				PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
@@ -88,7 +101,7 @@ public class PreTimeAction extends DispatchAction {
 				request.setAttribute("PreTimeOperation", "error");
 			}
 			
-			return mapping.findForward("goPreTimeUi");
+			return new ActionForward("/preTime.do?flag=goPreTimeUi");
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");

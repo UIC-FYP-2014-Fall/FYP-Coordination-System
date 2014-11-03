@@ -138,7 +138,7 @@ public class PropertiesHelper {
 
 	public String getAbsolutePath() {
 		try {
-			return file.getAbsolutePath();
+			return java.net.URLDecoder.decode(file.getAbsolutePath(), "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
