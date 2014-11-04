@@ -45,14 +45,21 @@ public class PreTimeAction extends DispatchAction {
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 			String startDateTime = ph.getProperties("PreStartDateTime");
 			String endDateTime = ph.getProperties("PreEndDateTime");
-			System.out.println(startDateTime);
+			//System.out.println(startDateTime);
 			if(startDateTime!=null&&endDateTime!=null){
 				String[] start = startDateTime.split(" ");
 				String[] end = endDateTime.split(" ");
+				String[] startTime = start[1].split(":");
+				String[] endTime = end[1].split(":");
+				
 				request.setAttribute("startDate", start[0]);
-				request.setAttribute("startTime", start[1]);
+				request.setAttribute("startHH", startTime[0]);
+				request.setAttribute("startMM", startTime[1]);
+				request.setAttribute("startSS", startTime[2]);
 				request.setAttribute("endDate", end[0]);
-				request.setAttribute("ednTime", end[1]);
+				request.setAttribute("endHH", endTime[0]);
+				request.setAttribute("endMM", endTime[1]);
+				request.setAttribute("endSS", endTime[2]);
 			}
 
 			return mapping.findForward("goPreTimeUi");

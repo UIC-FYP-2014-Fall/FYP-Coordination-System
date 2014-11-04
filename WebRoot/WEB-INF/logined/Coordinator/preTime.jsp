@@ -191,8 +191,20 @@
 <script>
 var nowTemp = new Date();
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+<%
+	if(request.getAttribute("startHH")!=null){
+%>
+var now1 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), <%=request.getAttribute("startHH")%>, <%=request.getAttribute("startMM")%>, <%=request.getAttribute("startSS")%>, 0);
+<%}else{%>
 var now1 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 9, 0, 0, 0);
+<%}%>
+<%
+	if(request.getAttribute("endHH")!=null){
+%>
+var now2 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), <%=request.getAttribute("endHH")%>, <%=request.getAttribute("endMM")%>, <%=request.getAttribute("endSS")%>, 0);
+<%}else{%>
 var now2 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 18, 0, 0, 0);
+<%}%>
 var checkin = $('#dpd1').datepicker({
 			format: 'yyyy-mm-dd',
           	onRender: function(date) {
