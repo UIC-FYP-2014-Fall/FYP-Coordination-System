@@ -111,7 +111,7 @@ public class AutoLoginFilter extends HttpServlet implements Filter {
 	        	 arg2.doFilter(request, response);
 	        	 return;
 	         }
-	         request.getSession().setAttribute("userinfo", user);
+	         request.getSession().setAttribute("userinfo", tempUser);
 	         request.getSession().setAttribute("role", type);
 	         request.getRequestDispatcher("goUI.do").forward(request, response);
 	         

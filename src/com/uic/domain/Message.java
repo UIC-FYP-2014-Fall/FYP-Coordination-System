@@ -16,7 +16,7 @@ public class Message implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String content;
-	private Timestamp date;
+	private java.util.Date date;
 	private String receiver;
 	private String type;
 
@@ -52,11 +52,11 @@ public class Message implements java.io.Serializable {
 		this.content = content;
 	}
 
-	public Timestamp getDate() {
-		return this.date;
+	public java.util.Date getDate() {
+		return date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(java.util.Date date) {
 		this.date = date;
 	}
 

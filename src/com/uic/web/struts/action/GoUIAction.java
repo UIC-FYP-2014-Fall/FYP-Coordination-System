@@ -42,7 +42,7 @@ public class GoUIAction extends DispatchAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		System.out.println("Using GoUIAction");
+		//System.out.println("Using GoUIAction");
 		if(request.getSession().getAttribute("role").equals("coordinator")){
 			//pagination
 			int pageNow=1;
