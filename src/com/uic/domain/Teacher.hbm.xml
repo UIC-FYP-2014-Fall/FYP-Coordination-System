@@ -25,6 +25,9 @@
         <property name="phone" type="java.lang.String">
             <column name="phone" length="11" not-null="true" />
         </property>
-        
+        <set name="teaTopic">
+			<key column="teacher_id" />
+			<one-to-many class="com.uic.domain.TeaTopic" />
+		</set>
     </class>
 </hibernate-mapping>

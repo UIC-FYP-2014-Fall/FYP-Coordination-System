@@ -21,7 +21,6 @@
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
-
 	<filter>
 		<filter-name>AutoLoginFilter</filter-name>
 		<filter-class>com.uic.filter.AutoLoginFilter</filter-class>
@@ -78,10 +77,6 @@
 		<filter-name>SessionFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
-
-
-
 
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>

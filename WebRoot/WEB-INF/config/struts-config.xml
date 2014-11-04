@@ -53,6 +53,7 @@
       validate="false"
       cancellable="true">
       <forward name="loginok" path="/goUI.do" />
+      
       <forward name="goLoginUi" path="/WEB-INF/login.jsp" />
     </action>
     <action
@@ -105,7 +106,10 @@
       path="/uploadFYP"
       scope="request"
       type="com.uic.web.struts.action.UploadFYPAction"
-      cancellable="true" />
+      cancellable="true" >
+      <forward name="uploaded" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
+    </action>
+
 
     <action
       attribute="preTimeForm"
