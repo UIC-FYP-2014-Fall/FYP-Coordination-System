@@ -15,7 +15,7 @@ import org.apache.struts.actions.DispatchAction;
 import com.uic.domain.Teacher;
 import com.uic.service.imp.TeachersServiceImp;
 import com.uic.service.inter.TeachersServiceInter;
-import com.uic.util.SystemUtil;
+import com.uic.util.PropertiesHelper;
 import com.uic.web.struts.form.TeacherForm;
 
 /**
@@ -73,7 +73,8 @@ public class GoManageAccountUiAction extends DispatchAction {
 				teacher.setName(teacherForm.getName());
 				teacher.setEmail(teacherForm.getEmail());
 				teacher.setPhone(teacherForm.getPhone());
-				teacher.setPassword(SystemUtil.getDefaultTeacherPassword());
+				PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+				teacher.setPassword(ph.getProperties("DefaultTeacherPassword"));
 
 				// save the teacher
 				

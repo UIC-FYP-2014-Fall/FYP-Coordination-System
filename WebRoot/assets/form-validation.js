@@ -65,7 +65,15 @@ var FormValidation = function () {
                     },
                     category: {
                         required: true
-                    }
+                    },
+                    startDate: {
+						required: true,
+						date: true
+					},
+					endDate: {
+						required: true,
+						date: true
+					},
                 },
 
                 invalidHandler: function (event, validator) { //display error alert on form submit              
