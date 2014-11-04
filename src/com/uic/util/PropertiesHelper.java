@@ -19,10 +19,10 @@ public class PropertiesHelper {
 
 	public PropertiesHelper(String filePath) {
 		// Get to the physical root directory of the project
-		project_root = this.getClass().getResource("/").toString()
-				.replace("file:/", "");
-		project_root = project_root.substring(0,
-				project_root.indexOf("/WEB-INF"));
+		//project_root = this.getClass().getResource("/").toString().replace("file:/", "");
+		project_root = PropertiesHelper.class.getResource("/").getPath();
+		
+		project_root = project_root.substring(0,project_root.indexOf("/WEB-INF"));
 
 		if (filePath != null && filePath.length() > 0) {
 			try {
@@ -138,7 +138,7 @@ public class PropertiesHelper {
 
 	public String getAbsolutePath() {
 		try {
-			return java.net.URLDecoder.decode(file.getAbsolutePath(), "UTF-8");
+			return java.net.URLDecoder.decode(file.getPath(), "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
