@@ -8,6 +8,7 @@
     <form-bean name="teacherForm" type="com.uic.web.struts.form.TeacherForm" />
 
     <form-bean name="changePwdForm" type="com.uic.web.struts.form.ChangePwdForm" />
+    <form-bean name="uploadFYPForm" type="com.uic.web.struts.form.UploadFYPForm" />
 
   </form-beans>
 
@@ -18,7 +19,6 @@
   </global-forwards>
 
   <action-mappings >
-    
     <action
       parameter="flag"
       path="/goUI"
@@ -96,6 +96,15 @@
       <forward name="goPwdUi" path="/WEB-INF/logined/Coordinator/changePwd.jsp" />
       <forward name="goTeacherPwdUi" path="/WEB-INF/logined/Teacher/changePwd.jsp" />
     </action>
+    <action
+      attribute="uploadFYPForm"
+      input="/WEB-INF/logined/Teacher/uploadTopic.jsp"
+      name="uploadFYPForm"
+      parameter="flag"
+      path="/uploadFYP"
+      scope="request"
+      type="com.uic.web.struts.action.UploadFYPAction"
+      cancellable="true" />
 
 
   </action-mappings>

@@ -25,5 +25,6 @@
         <property name="phone" type="java.lang.String">
             <column name="phone" length="11" not-null="true" />
         </property>
+        
     </class>
 </hibernate-mapping>

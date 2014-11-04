@@ -1,89 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <display-name>FYP_system</display-name>
-  <servlet>
-    <servlet-name>action</servlet-name>
-    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
-    <init-param>
-      <param-name>config</param-name>
-      <param-value>/WEB-INF/config/struts-config.xml</param-value>
-    </init-param>
-    <init-param>
-      <param-name>debug</param-name>
-      <param-value>3</param-value>
-    </init-param>
-    <init-param>
-      <param-name>detail</param-name>
-      <param-value>3</param-value>
-    </init-param>
-    <load-on-startup>0</load-on-startup>
-  </servlet>
- 
-  <filter>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<filter-class>com.uic.filter.AutoLoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<url-pattern>/login.jsp</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-  	<filter-name>AutoLoginFilter</filter-name>
-  	<url-pattern>/index.jsp</url-pattern>
-  </filter-mapping>
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>FYP_system</display-name>
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/config/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>3</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>3</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
 
-  <filter>
-  	<filter-name>CharacterFilter</filter-name>
-  	<filter-class>com.uic.filter.CharacterFilter</filter-class>
-  </filter>
-  <filter-mapping>
-  	<filter-name>CharacterFilter</filter-name>
-  	<url-pattern>/*</url-pattern>
-  </filter-mapping>
-  
-  <filter>
-  	<filter-name>OpenSessionInView</filter-name>
-	<filter-class>com.uic.filter.OpenSessionInView</filter-class>
-  </filter>
-  <filter-mapping>
-  	<filter-name>OpenSessionInView</filter-name>
-  	<url-pattern>/*</url-pattern>
-  </filter-mapping>
-  
-  
+	<filter>
+		<filter-name>AutoLoginFilter</filter-name>
+		<filter-class>com.uic.filter.AutoLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>/login.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AutoLoginFilter</filter-name>
+		<url-pattern>/index.jsp</url-pattern>
+	</filter-mapping>
 
- <filter>
-    <filter-name>SessionFilter</filter-name>
-    <filter-class>com.uic.filter.SessionFilter</filter-class>
-    <init-param>
-        <param-name>logonStrings</param-name><!-- On the login page without filtering -->
-        <param-value>index.jsp;login.do</param-value>
-    </init-param>
-    <init-param>
-        <param-name>includeStrings</param-name><!-- Only to specify the filter parameters to filter suffix -->
-        <param-value>.do;.jsp</param-value>
-    </init-param>
-    <init-param>
-        <param-name>redirectPath</param-name><!-- Jump to the login page-->
-        <param-value>/</param-value>
-    </init-param>
-    <init-param>
-        <param-name>disabletestfilter</param-name><!-- Y:Filter invalid-->
-        <param-value>N</param-value>
-    </init-param>
-</filter>
-<filter-mapping>
-    <filter-name>SessionFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-</filter-mapping>
- 
-	
-  <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
-  
-  
-  
+
+	<filter>
+		<filter-name>CharacterFilter</filter-name>
+		<filter-class>com.uic.filter.CharacterFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>OpenSessionInView</filter-name>
+		<filter-class>com.uic.filter.OpenSessionInView</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenSessionInView</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>SessionFilter</filter-name>
+		<filter-class>com.uic.filter.SessionFilter</filter-class>
+		<init-param>
+			<param-name>logonStrings</param-name><!-- On the login page without filtering -->
+			<param-value>index.jsp;login.do</param-value>
+		</init-param>
+		<init-param>
+			<param-name>includeStrings</param-name><!-- Only to specify the filter 
+				parameters to filter suffix -->
+			<param-value>.do;.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>redirectPath</param-name><!-- Jump to the login page -->
+			<param-value>/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>disabletestfilter</param-name><!-- Y:Filter invalid -->
+			<param-value>N</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+
+
+
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+
+
 </web-app>
