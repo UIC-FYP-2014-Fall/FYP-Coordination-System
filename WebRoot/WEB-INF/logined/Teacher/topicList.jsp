@@ -70,10 +70,7 @@
 
                 <div class="span9" id="content">
                      <div class="row-fluid">
-
-                        <div class="span6">
                             <!-- block -->
- 
 
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
@@ -87,7 +84,7 @@
                                                 <th>Title</th>
                                                 <th>Supervisor</th>
                                                 <th>Group/Individual</th>
-                                                <th>Create Time</th>
+                                                <th>Credits</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -97,7 +94,7 @@
                                                 <td>aaa</td>
                                                 <td>aaa</td>
                                                 <td>Group</td>
-                                                <td>2014/01/01</td>
+                                                <td>3</td>
                                                 <td><button class="btn btn-primary btn-mini" onclick="location.href='${pageContext.request.contextPath }/goEditTopicUi.do'">Edit</button></td>
                                             </tr>
                                             <tr>
@@ -105,7 +102,7 @@
                                                 <td>bbb</td>
                                                 <td>bbb</td>
                                                 <td>Group</td>
-                                                <td>2014/01/01</td>
+                                                <td>3</td>
                                                 <td><button class="btn btn-primary btn-mini" onclick="location.href='${pageContext.request.contextPath }/goEditTopicUi.do'"> Edit</button></td>
                                             </tr>
                                             <tr>
@@ -113,7 +110,7 @@
                                                 <td>ccc</td>
                                                 <td>ccc</td>
                                                 <td>Group</td>
-                                                <td>2014/01/01</td>
+                                                <td>6</td>
                                                 <td><button class="btn btn-primary btn-mini" onclick="location.href='${pageContext.request.contextPath }/goEditTopicUi.do'">Edit</button></td>
                                             </tr>                                    
                                         </tbody>
@@ -123,9 +120,6 @@
                                 </div>
                             </div>
 
-                            
-
-                        </div>
                     </div>
                 </div>
 

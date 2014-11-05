@@ -71,8 +71,6 @@
 
                 <div class="span9" id="content">
                      <div class="row-fluid">
-
-                        <div class="span6">
                             <!-- block -->
 
                             <div class="block">
@@ -146,7 +144,7 @@
                                     
                                 </div>
                             </div>
-                        </div>
+                 
                     </div>
                 </div>
 

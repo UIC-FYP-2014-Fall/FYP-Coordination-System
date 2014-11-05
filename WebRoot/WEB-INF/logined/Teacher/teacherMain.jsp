@@ -76,18 +76,15 @@
 
                 <div class="span9" id="content">
                      <div class="row-fluid">
-
-                        <div class="span6">
+                       
                             <!-- block -->
-                            
-                				
+                                            				
 							<div class="alert alert-info alert-block">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
 								<h4 class="alert-heading">Info!</h4>
 									Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
 							</div>									
                     		
-
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Students under Supervision</div>                                   
@@ -120,8 +117,7 @@
 
                                 </div>
                             </div>
-
-                        </div>
+                        
                     </div>
                 </div>
 
