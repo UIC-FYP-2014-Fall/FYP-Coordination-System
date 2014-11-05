@@ -121,4 +121,16 @@ public class TeacherPageControlAction extends DispatchAction {
 			return mapping.findForward("goLogin");
 		}
 	}
+	
+	public ActionForward editTopic(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		System.out.println("Using TeacherPageControlAction");
+		if(request.getSession().getAttribute("role").equals("teacher")){
+			return mapping.findForward("editTopic");
+		}else{
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
 }

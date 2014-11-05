@@ -111,7 +111,7 @@
 										out.println("<td>"+teaTopic.get(i).getTeacher().getName()+"</td>");
 										out.println("<td>"+teaTopic.get(i).getTopic().getIndividual()+"</td>");
 										out.println("<td>"+teaTopic.get(i).getTopic().getCredit()+"</td>");
-										out.println("<td><form action=\"??\" method=\"post\"><input name=\"????\" type=\"hidden\" value=\"??\"><button class=\"btn btn-primary btn-mini\" onclick=\"location.href='editTopic.html'\">Edit</button></form></td>");
+										out.println("<td><form action=\""+request.getContextPath()+"/teacherPageControl.do?flag=editTopic\" method=\"post\"><input name=\"id\" type=\"hidden\" value=\""+teaTopic.get(i).getId()+"\"><button class=\"btn btn-primary btn-mini\" onclick=\"location.href='editTopic.html'\">Edit</button></form></td>");
 										out.println("</tr>");
 									}
 									

@@ -75,6 +75,7 @@
       <forward name="mainPage" path="/WEB-INF/logined/Teacher/teacherMain.jsp" />
       <forward name="timetable" path="/WEB-INF/logined/Teacher/timetable.jsp" />
       <forward name="uploadTopic" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
+      <forward name="editTopic" path="/WEB-INF/logined/Teacher/editTopic.jsp" />
     </action>
     
     <action
