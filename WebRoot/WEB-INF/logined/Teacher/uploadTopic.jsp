@@ -100,7 +100,7 @@
                                         <div class="control-group">
                                             <label class="control-label" for="select01">Credits <span class="required">*</span></label>
                                             <div class="controls">
-                                                <select name="credit" id="select01" class="chzn-select">
+                                                <select name="credit" id="select01">
                                                     <option>3</option>
                                                     <option>6</option>
                                                 </select>
@@ -110,7 +110,7 @@
                                         <div class="control-group">                          
                                             <label class="control-label">Group/Individual <span class="required">*</span></label>
                                             <div class="controls">
-                                                <select name="individual" id="group" class="chzn-select" onclick="javascript:doit(this);">
+                                                <select name="individual" id="group" onclick="javascript:doit(this);">
                                                     <option value="individual">Individual</option>
                                                     <option value="group">Group</option>
                                                 </select>
@@ -120,8 +120,8 @@
                                         <div class="control-group">
                                             <label class="control-label">Number of students <span class="required">*</span></label>
                                             <div class="controls">
-                                                <select name="numOfStu" id="numofStu" class="chzn-select" >
-                                                    <option value="1">1</option>               
+                                                <select name="numOfStu" id="numofStu" disabled="false">
+                                                    <option value="1">Please select</option>           
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
                                                     <option value="4">4</option>
