@@ -21,6 +21,11 @@ public class UploadFYPForm extends ActionForm {
 	 * Generated fields
 	 */
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** numOfStu property */
 	private String numOfStu;
 
