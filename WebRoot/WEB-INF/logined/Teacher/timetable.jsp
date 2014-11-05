@@ -78,7 +78,7 @@
                                 </div>
 
                                 <div class="block-content collapse in">
-                                    <form action="" method="post">
+                                    <form class="form-horizontal" action="" method="post">
                                         <table class="table table-striped table-bordered">
                                             <th></th>
                                             <th>Mon</th>
@@ -146,12 +146,12 @@
                                                 <td><input type="checkbox" name="name"></td>
                                             </tr>
                                         </table>
-                                        
-                                    </form>
-                                    <div class="form-actions">
-	                                	<button type="submit" class="btn btn-primary">Submit</button>
-	                                    <button type="reset" class="btn">Reset</button>
-                                    </div>
+                                                                            
+	                                    <div class="form-actions">
+		                                	<button type="submit" class="btn btn-primary">Submit</button>
+		                                    <button type="reset" class="btn">Reset</button>
+	                                    </div>
+	                                </form>
 
                                 </div>
                             </div>
