@@ -122,6 +122,49 @@
 
 							</div>
 						</div>
+                            <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">Topic List</div>                                   
+                                </div>
+                                <div class="block-content collapse in">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title</th>
+                                                <th>Supervisor</th>
+                                                <th>Group/Individual</th>
+                                                <th>Credits</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>aaa</td>
+                                                <td>aaa</td>
+                                                <td>Group</td>
+                                                <td>3</td>
+                                                <td><button class="btn btn-primary btn-mini" onclick="location.href='${pageContext.request.contextPath }/goEditTopicUi.do'">Edit</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>bbb</td>
+                                                <td>bbb</td>
+                                                <td>Group</td>
+                                                <td>3</td>
+                                                <td><button class="btn btn-primary btn-mini" onclick="location.href='${pageContext.request.contextPath }/goEditTopicUi.do'"> Edit</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>ccc</td>
+                                                <td>ccc</td>
+                                                <td>Group</td>
+                                                <td>6</td>
+                                                <td><button class="btn btn-primary btn-mini" onclick="location.href='${pageContext.request.contextPath }/goEditTopicUi.do'">Edit</button></td>
+                                            </tr>                                    
+                                        </tbody>
+                                    </table>
 
 
 
@@ -136,6 +179,8 @@
 	<script src="vendors/jquery-1.9.1.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/scripts.js"></script>
+                    </div>
+                </div>
 
 </body>
 

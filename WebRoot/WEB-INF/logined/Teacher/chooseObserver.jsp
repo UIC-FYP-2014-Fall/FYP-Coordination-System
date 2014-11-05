@@ -72,136 +72,136 @@
                 <div class="span9" id="content">
                      <div class="row-fluid">
 
-                        <div class="span6">
+
                             <!-- block -->
  
 
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Individual Project</div>                                   
+                                    <div class="muted pull-left">Choose Observer</div>                                   
                                 </div>
                                 <div class="block-content collapse in">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Project Title</th>
-                                                <th>Observer</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>aaa</td>
-                                                <td>
-                                                    <div class="controls">
-                                                        <select id="select01" class="chzn-select">
-                                                            <option>aaa</option>
-                                                            <option>bbb</option>
-                                                            <option>ccc</option>
-                                                            <option>ddd</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>bbb</td>
-                                                <td>
-                                                    <div class="controls">
-                                                        <select id="select01" class="chzn-select">
-                                                            <option>aaa</option>
-                                                            <option>bbb</option>
-                                                            <option>ccc</option>
-                                                            <option>ddd</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>ccc</td>
-                                                <td>
-                                                    <div class="controls">
-                                                        <select id="select01" class="chzn-select">
-                                                            <option>aaa</option>
-                                                            <option>bbb</option>
-                                                            <option>ccc</option>
-                                                            <option>ddd</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                            </tr>                               
-                                        </tbody>
-                                    </table>
-                                </div>
-                                
+                                    <form class="form-horizontal" action="" method="post">
+                                    	<legend>Individual Projects</legend>
+                                        <table class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Project Title</th>
+                                                    <th>Observer</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>aaa</td>
+                                                    <td>
+                                                        
+                                                            <select id="select01" class="chzn-select">
+                                                                <option>aaa</option>
+                                                                <option>bbb</option>
+                                                                <option>ccc</option>
+                                                                <option>ddd</option>
+                                                            </select>
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>bbb</td>
+                                                    <td>
+                                                        
+                                                            <select id="select01" class="chzn-select">
+                                                                <option>aaa</option>
+                                                                <option>bbb</option>
+                                                                <option>ccc</option>
+                                                                <option>ddd</option>
+                                                            </select>
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>ccc</td>
+                                                    <td>
+                                                        
+                                                            <select id="select01" class="chzn-select">
+                                                                <option>aaa</option>
+                                                                <option>bbb</option>
+                                                                <option>ccc</option>
+                                                                <option>ddd</option>
+                                                            </select>
+                                                        
+                                                    </td>
+                                                </tr>                               
+                                            </tbody>
+                                        </table>
+                                        
+                                    	<legend>Group Projects</legend>
+                                        <table class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Project Title</th>
+                                                    <th>Observer</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>aaa</td>
+                                                    <td>                
+                                                        
+                                                            <select id="select01" class="chzn-select">
+                                                                <option>aaa</option>
+                                                                <option>bbb</option>
+                                                                <option>ccc</option>
+                                                                <option>ddd</option>
+                                                            </select>
+                                                        
+                                                    </td>                                               
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>aaa</td>
+                                                    <td>                
+                                                        
+                                                            <select id="select01" class="chzn-select">
+                                                                <option>aaa</option>
+                                                                <option>bbb</option>
+                                                                <option>ccc</option>
+                                                                <option>ddd</option>
+                                                            </select>
+     
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>aaa</td>
+                                                    <td>                      
+                                                            <select id="select01" class="chzn-select">
+                                                                <option>aaa</option>
+                                                                <option>bbb</option>
+                                                                <option>ccc</option>
+                                                                <option>ddd</option>
+                                                            </select>
 
-                                <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Group Project</div>                                   
-                                </div>
-                                <div class="block-content collapse in">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Project Title</th>
-                                                <th>Observer</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>aaa</td>
-                                                <td>                
-                                                    <div class="controls">
-                                                        <select id="select01" class="chzn-select">
-                                                            <option>aaa</option>
-                                                            <option>bbb</option>
-                                                            <option>ccc</option>
-                                                            <option>ddd</option>
-                                                        </select>
-                                                    </div>
-                                                </td>                                               
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>aaa</td>
-                                                <td>                
-                                                    <div class="controls">
-                                                        <select id="select01" class="chzn-select">
-                                                            <option>aaa</option>
-                                                            <option>bbb</option>
-                                                            <option>ccc</option>
-                                                            <option>ddd</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>aaa</td>
-                                                <td>                
-                                                    <div class="controls">
-                                                        <select id="select01" class="chzn-select">
-                                                            <option>aaa</option>
-                                                            <option>bbb</option>
-                                                            <option>ccc</option>
-                                                            <option>ddd</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                            </tr>                                    
-                                        </tbody>
-                                    </table>
+                                                    </td>
+                                                </tr>                                    
+                                            </tbody>
+                                        </table>
+                                        <div class="form-actions">
+	                                        <button type="submit" class="btn btn-primary">Submit</button>
+	                                        <button type="reset" class="btn">Reset</button>
+                                    	</div>
+                                    </form>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="button" class="btn">Reset</button>
+                            
                             
 
-                        </div>
+
                     </div>
                 </div>
 
