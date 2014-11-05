@@ -2,6 +2,7 @@ package com.uic.service.imp;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
@@ -28,4 +29,16 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		}
 		return true;
 	}
+
+	@Override
+	public List<TeaTopic> getTeaTopic(String teacherID) {
+		// TODO Auto-generated method stub
+		String hql = "from TeaTopic where teacher_id=?";
+		String[] parameters={teacherID};
+		@SuppressWarnings("unchecked")
+		List<TeaTopic> list = HibernateUtil.executeQueryOpenInView(hql, parameters);
+		return list;
+	}
+	
+	
 }
