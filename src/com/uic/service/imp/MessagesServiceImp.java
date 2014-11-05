@@ -47,6 +47,7 @@ public class MessagesServiceImp extends BaseServiceImp implements MessagesServic
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			return false;
 		}
 	}

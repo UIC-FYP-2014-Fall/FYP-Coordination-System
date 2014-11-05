@@ -10,6 +10,7 @@
     <form-bean name="changePwdForm" type="com.uic.web.struts.form.ChangePwdForm" />
     <form-bean name="uploadFYPForm" type="com.uic.web.struts.form.UploadFYPForm" />
     <form-bean name="preTimeForm" type="com.uic.web.struts.form.PreTimeForm" />
+    <form-bean name="quotaForm" type="com.uic.web.struts.form.QuotaForm" />
 
   </form-beans>
 

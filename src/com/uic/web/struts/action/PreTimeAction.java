@@ -4,6 +4,8 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +14,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.uic.domain.Message;
+import com.uic.service.imp.MessagesServiceImp;
+import com.uic.service.inter.MessagesServiceInter;
 import com.uic.util.BaseUtil;
 import com.uic.util.PropertiesHelper;
 import com.uic.web.struts.form.PreTimeForm;
@@ -47,6 +52,8 @@ public class PreTimeAction extends DispatchAction {
 			String endDateTime = ph.getProperties("PreEndDateTime");
 			//System.out.println(startDateTime);
 			if(startDateTime!=null&&endDateTime!=null){
+				
+				
 				String[] start = startDateTime.split(" ");
 				String[] end = endDateTime.split(" ");
 				String[] startTime = start[1].split(":");
@@ -96,6 +103,20 @@ public class PreTimeAction extends DispatchAction {
 				PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 				
 				try {
+					//save the message to database
+					Message message = new Message();
+					message.setReceiver("coordinator");
+					message.setContent("Update presentation time from "+startDateTime+" to "+endDateTime);
+					message.setType("info");
+					message.setDate(new Date());
+					MessagesServiceInter messagesServiceInter = new MessagesServiceImp();
+					
+					if(messagesServiceInter.saveMessage(message)){
+						System.out.println("save message OK");
+					}else{
+						System.out.println("save message error");
+					}
+					
 					ph.setProperties("PreStartDateTime", startDateTime);
 					ph.setProperties("PreEndDateTime", endDateTime);
 					ph.setProperties("PreDateTimeState", "true");
