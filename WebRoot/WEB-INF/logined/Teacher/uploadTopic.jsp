@@ -135,7 +135,6 @@
                                         <div class="control-group">
                                             <label class="control-label">Number of students <span class="required">*</span></label>
                                             <div class="controls">
-
                                                 <select name="numOfStu" id="numofStu" disabled="false">
                                                     <option value="1">Please select</option>               
                                                     <option value="2">2</option>
