@@ -11,4 +11,5 @@ public interface FYPServiceInter extends BaseInterface{
 	public List<Topic> getTopic(String teacherName);
 	public boolean uploadTopic(ArrayList<Teacher> teacher, Topic topic);
 	public List<TeaTopic> getTeaTopic(String teacherID);
+    public List<TeaTopic> getTeaTopicByTopicId(String id);
 }

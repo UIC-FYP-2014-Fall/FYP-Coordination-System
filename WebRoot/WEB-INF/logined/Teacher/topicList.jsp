@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="com.uic.domain.TeaTopic"%>
 <%@ page import="com.uic.domain.Teacher"%>
 <%@ page import="com.uic.domain.Topic"%>
@@ -96,91 +96,50 @@
 											<th>Title</th>
 											<th>Supervisor</th>
 											<th>Group/Individual</th>
-											<th>Create Time</th>
+											<th>Credit</th>
 											<th></th>
 										</tr>
 									</thead>
 									<tbody>
-									<% 
-									List<TeaTopic> teaTopic=(List<TeaTopic>)request.getAttribute("teaTopicList");
-									System.out.println("get List size "+ teaTopic.size());
-									for(int i=0;i<teaTopic.size();i++){
-										out.println("<tr>");
-										out.println("<td>"+i+"</td>");
-										out.println("<td>"+teaTopic.get(i).getTopic().getTitle()+"</td>");
-										out.println("<td>"+teaTopic.get(i).getTeacher().getName()+"</td>");
-										out.println("<td>"+teaTopic.get(i).getTopic().getIndividual()+"</td>");
-										out.println("<td>"+teaTopic.get(i).getTopic().getCredit()+"</td>");
-										out.println("<td><form action=\""+request.getContextPath()+"/teacherPageControl.do?flag=editTopic\" method=\"post\"><input name=\"id\" type=\"hidden\" value=\""+teaTopic.get(i).getId()+"\"><button class=\"btn btn-primary btn-mini\" onclick=\"location.href='editTopic.html'\">Edit</button></form></td>");
-										out.println("</tr>");
-									}
-									
-									%>
+										<%
+											List<TeaTopic> teaTopic = (List<TeaTopic>) request
+													.getAttribute("teaTopicList");
+											System.out.println("get List size " + teaTopic.size());
+											for (int i = 0; i < teaTopic.size(); i++) {
+												out.println("<tr>");
+												out.println("<td>" + i + "</td>");
+												out.println("<td>" + teaTopic.get(i).getTopic().getTitle()
+														+ "</td>");
+												out.println("<td>" + teaTopic.get(i).getTeacher().getName()
+														+ "</td>");
+												out.println("<td>" + teaTopic.get(i).getTopic().getIndividual()
+														+ "</td>");
+												out.println("<td>" + teaTopic.get(i).getTopic().getCredit()
+														+ "</td>");
+												out.println("<td><form action=\""
+														+ request.getContextPath()
+														+ "/teacherPageControl.do?flag=editTopic\" method=\"post\"><input name=\"id\" type=\"hidden\" value=\""
+														+ teaTopic.get(i).getTopic().getFid()
+														+ "\"><button type=\"submit\" class=\"btn btn-primary btn-mini\">Edit</button></form></td>");
+												out.println("</tr>");
+											}
+										%>
 									</tbody>
 								</table>
 
 
 							</div>
 						</div>
-                            <div class="block">
-                                <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Topic List</div>                                   
-                                </div>
-                                <div class="block-content collapse in">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title</th>
-                                                <th>Supervisor</th>
-                                                <th>Group/Individual</th>
-                                                <th>Credits</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>aaa</td>
-                                                <td>aaa</td>
-                                                <td>Group</td>
-                                                <td>3</td>
-                                                <td><button class="btn btn-primary btn-mini" onclick="location.href='${pageContext.request.contextPath }/goEditTopicUi.do'">Edit</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>bbb</td>
-                                                <td>bbb</td>
-                                                <td>Group</td>
-                                                <td>3</td>
-                                                <td><button class="btn btn-primary btn-mini" onclick="location.href='${pageContext.request.contextPath }/goEditTopicUi.do'"> Edit</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>ccc</td>
-                                                <td>ccc</td>
-                                                <td>Group</td>
-                                                <td>6</td>
-                                                <td><button class="btn btn-primary btn-mini" onclick="location.href='${pageContext.request.contextPath }/goEditTopicUi.do'">Edit</button></td>
-                                            </tr>                                    
-                                        </tbody>
-                                    </table>
-
-
-
 					</div>
 				</div>
+				<hr>
 			</div>
-
+			<!--/.fluid-container-->
+			<script src="vendors/jquery-1.9.1.min.js"></script>
+			<script src="bootstrap/js/bootstrap.min.js"></script>
+			<script src="assets/scripts.js"></script>
 		</div>
-		<hr>
 	</div>
-	<!--/.fluid-container-->
-	<script src="vendors/jquery-1.9.1.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/scripts.js"></script>
-                    </div>
-                </div>
 
 </body>
 

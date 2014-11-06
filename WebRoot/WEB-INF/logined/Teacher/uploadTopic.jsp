@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="com.uic.domain.Teacher"%>
+<%@ page import="java.util.List;"%>
+
+
 <!DOCTYPE html>
 <html class="no-js">
     
@@ -92,7 +98,17 @@
                                             <label class="control-label" for="multiSelect">Supervisor <span class="required">*</span></label>
                                             <div class="controls">
                                                 <select name="supervisor" multiple="multiple" id="multiSelect" class="chzn-select span4">
-                                                  <option>Judy Feng</option><option>WF Su</option><option>Dyce Zhao</option><option>Amy Zhang</option><option>Haichuan Zhou</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>District Of Columbia</option><option>Florida</option><option>Georgia</option>
+                                                  <%
+                                                  List<Teacher> teacherList = (List<Teacher>)request.getAttribute("teacherList");
+                                            	  Teacher curTeacher = (Teacher)request.getSession().getAttribute("teacherinfo");
+                                                  for(int i=0;i<teacherList.size();i++){
+                                                	  if(curTeacher.getName().equals(teacherList.get(i).getName())){
+                                                	  	out.println("<option selected=\"selected\">"+teacherList.get(i).getName()+"</option>");
+                                                	  }else{
+                                                		out.println("<option>"+teacherList.get(i).getName()+"</option>");
+                                                	  }
+                                                  }
+                                                  %>
                                                 </select>                           
                                             </div>
                                         </div>

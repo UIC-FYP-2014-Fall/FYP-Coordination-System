@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="com.uic.domain.TeaTopic"%>
+<%@ page import="com.uic.domain.Teacher"%>
+<%@ page import="com.uic.domain.Topic"%>
+<%@ page import="java.util.List;"%>
+
 <!DOCTYPE html>
 <html class="no-js">
 
@@ -88,75 +95,126 @@
 								</ul>
 							</div>
 							<div class="block-content collapse in">
+								<form action="???" method="post">
+									<div class="control-group">
 
-								<div class="control-group">
+										<label class="control-label" for="focusedInput">Title
+											<span class="required">*</span>
+										</label>
+										<div class="controls">
+											<%
+												List<TeaTopic> teaTopic = (List<TeaTopic>)request.getAttribute("teaTopic");
+																			out.println("<input class=\"input-xlarge focused\" id=\"focusedInput\"type=\"text\" value=\""+teaTopic.get(0).getTopic().getTitle()+"\">");
+											%>
+										</div>
 
-									<label class="control-label" for="focusedInput">Title <span
-										class="required">*</span></label>
-									<div class="controls">
-										<input class="input-xlarge focused" id="focusedInput"
-											type="text" value="">
-									</div>
-
-									<table>
-										<tr>
-											<td><label class="control-label" for="select01">Supervisor</label>
-												<div class="controls">
-													<select name="supervisor" multiple="multiple"
-														id="multiSelect" class="chzn-select span4">
-														<option>Judy Feng</option>
-														<option>WF Su</option>
-														<option>Dyce Zhao</option>
-														<option>Amy Zhang</option>
-														<option>Haichuan Zhou</option>
-													</select>
-												</div></td>
-											<td><label class="control-label" for="select01">Credits</label>
-												<div class="controls">
+										<table>
+											<tr>
+												<td><label class="control-label" for="select01">Supervisor</label>
+													<div class="controls">
+														<select name="supervisor" multiple="multiple"
+															id="multiSelect" class="chzn-select span4">
+															<%
+																List<Teacher> teacherList = (List<Teacher>)request.getAttribute("teacherList");
+															    for(int j =0;j<teaTopic.size();j++){
+															    	Teacher curTeacher = teaTopic.get(j).getTeacher();
+															   		for(int i=0;i<teacherList.size();i++){
+															   			if(curTeacher.getName().equals(teacherList.get(i).getName())){
+															   	 			out.println("<option selected=\"selected\">"+teacherList.get(i).getName()+"</option>");
+															   	 			teacherList.remove(i);
+															   			}
+															  		}
+															    }
+															    for(int i=0;i<teacherList.size();i++){
+															    	out.println("<option>"+teacherList.get(i).getName()+"</option>");
+															    }
+															    
+															%>				
+														</select>
+													</div></td>
+												<td><label class="control-label" for="select01">Credits</label>
+													<div class="controls">
 													<select id="select01" class="chzn-select">
-														<option>3</option>
-														<option>6</option>
-													</select>
-												</div></td>
-										</tr>
-										<tr>
-											<td><label class="control-label" for="select01">Group/Individual</label>
-												<div class="controls">
-													<select id="group" class="chzn-select"
-														onclick="javascript:doit(this);">
-														<option value="individual">Individual</option>
-														<option value="group">Group</option>
-													</select>
-												</div></td>
-											<td><label class="control-label" for="select01">Number
-													of students</label>
-												<div class="controls">
-													<select id="numofStu" class="chzn-select" disabled="false">
-														<option value="1">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4</option>
-													</select>
-												</div></td>
-										</tr>
-									</table>
+														<%
+															if(teaTopic.get(0).getTopic().getCredit()==3){
+																out.println("<option selected=\"selected\">3</option>");
+																out.println("<option>6</option>");
+															}else{
+																out.println("<option>3</option>");
+																out.println("<option selected=\"selected\">6</option>");
+															}
+														%>
+														</select>
+													</div></td>
+											</tr>
+											<tr>
+												<td><label class="control-label" for="select01">Group/Individual</label>
+													<div class="controls">
+														<select id="group" class="chzn-select"
+															onclick="javascript:doit(this);">
+															<%
+															if(teaTopic.get(0).getTopic().getIndividual()){
+																out.println("<option selected=\"selected\" value=\"individual\">Individual</option>");
+																out.println("<option value=\"group\">Group</option>");
+															}else{
+																out.println("<option value=\"individual\">Individual</option>");
+																out.println("<option selected=\"selected\" value=\"group\">Group</option>");
+															}
+															%>
+														</select>
+													</div></td>
+												<td><label class="control-label" for="select01">Number
+														of students</label>
+													<div class="controls">
+														<select id="numofStu" class="chzn-select" disabled="false">
+															<%
+																if(teaTopic.get(0).getTopic().getNumOfStudent()==1){
+																	out.println("<option selected=\"selected\">1<option>");
+																	out.println("<option>2<option>");
+																	out.println("<option>3<option>");
+																	out.println("<option>4<option>");
+																}else if(teaTopic.get(0).getTopic().getNumOfStudent()==2){
+																	out.println("<option>1<option>");
+																	out.println("<option selected=\"selected\">2<option>");
+																	out.println("<option>3<option>");
+																	out.println("<option>4<option>");
+																}else if(teaTopic.get(0).getTopic().getNumOfStudent()==3){
+																	out.println("<option>1<option>");
+																	out.println("<option>2<option>");
+																	out.println("<option selected=\"selected\">3<option>");
+																	out.println("<option>4<option>");
+																}else if(teaTopic.get(0).getTopic().getNumOfStudent()==4){
+																	out.println("<option>1<option>");
+																	out.println("<option>2<option>");
+																	out.println("<option>3<option>");
+																	out.println("<option selected=\"selected\">4<option>");
+																}
+															
+															%>
+														</select>
+													</div></td>
+											</tr>
+										</table>
 
-								</div>
-
-								<div class="control-group">
-									<label class="control-label" for="textarea2">Description
-										<span class="required">*</span>
-									</label>
-									<div class="controls">
-										<textarea class="input-xlarge textarea"
-											placeholder="Enter text ..."
-											style="width: 810px; height: 200px" ></textarea>
 									</div>
 
-									<button type="submit" class="btn btn-primary">Submit</button>
+									<div class="control-group">
+										<label class="control-label" for="textarea2">Description
+											<span class="required">*</span>
+										</label>
+										<div class="controls">
+											<%
+											out.println("<textarea value=\""+teaTopic.get(0).getTopic().getDescription()+"\"class=\"input-xlarge textarea\" style=\"width: 810px; height: 200px\" ></textarea>");
+											%>
+										
+										
+											
+										</div>
 
-								</div>
+										<button type="submit" class="btn btn-primary">Submit</button>
 
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -172,25 +230,25 @@
 	<script src="assets/scripts.js"></script>
 
 </body>
-      		</div>
-            <hr>
-        </div>
-        <!--/.fluid-container-->
-        <script src="vendors/jquery-1.9.1.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/scripts.js"></script>
-        <script type="text/javascript">
-        function doit(o){
-           if(o.options[o.selectedIndex].value=='individual'){
-              document.getElementById('numofStu').disabled=true;
-           }else{
-              document.getElementById('numofStu').disabled=false;
+</div>
+<hr>
+</div>
+<!--/.fluid-container-->
+<script src="vendors/jquery-1.9.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/scripts.js"></script>
+<script type="text/javascript">
+	function doit(o) {
+		if (o.options[o.selectedIndex].value == 'individual') {
+			document.getElementById('numofStu').disabled = true;
+		} else {
+			document.getElementById('numofStu').disabled = false;
 
-           }
-           o.disabled=false;
-        }
-        </script>
-        
-    </body>
+		}
+		o.disabled = false;
+	}
+</script>
+
+</body>
 
 </html>
