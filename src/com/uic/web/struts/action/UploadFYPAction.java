@@ -3,6 +3,7 @@
  * Template path: templates/java/JavaClass.vtl
  */
 package com.uic.web.struts.action;
+
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,20 +17,22 @@ import com.uic.service.imp.FYPServiceImp;
 import com.uic.service.imp.TeachersServiceImp;
 import com.uic.web.struts.form.UploadFYPForm;
 
-/** 
- * MyEclipse Struts
- * Creation date: 11-02-2014
+/**
+ * MyEclipse Struts Creation date: 11-02-2014
  * 
  * XDoclet definition:
- * @struts.action path="/uploadFYP" name="uploadFYPForm" parameter="flag" scope="request" validate="true"
+ * 
+ * @struts.action path="/uploadFYP" name="uploadFYPForm" parameter="flag"
+ *                scope="request" validate="true"
  */
 public class UploadFYPAction extends DispatchAction {
 	/*
 	 * Generated Methods
 	 */
 
-	/** 
+	/**
 	 * Method execute
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -39,33 +42,37 @@ public class UploadFYPAction extends DispatchAction {
 	public ActionForward uploadFYP(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("Using UploadFYPaction");
-		UploadFYPForm uploadFYPForm = (UploadFYPForm) form;// TODO Auto-generated method stub
+		UploadFYPForm uploadFYPForm = (UploadFYPForm) form;// TODO
+															// Auto-generated
+															// method stub
 
-		//set up the data service.
-		TeachersServiceImp teachersServiceImp=new TeachersServiceImp();
-		FYPServiceImp fypServiceImp=new FYPServiceImp();
-		
-		//declare the class 
-		String[] supervisor=uploadFYPForm.getSupervisor();
+		// set up the data service.
+		TeachersServiceImp teachersServiceImp = new TeachersServiceImp();
+		FYPServiceImp fypServiceImp = new FYPServiceImp();
+
+		// declare the class
+		String[] supervisor = uploadFYPForm.getSupervisor();
 		Topic topic = new Topic();
-		ArrayList<Teacher> list=new ArrayList<Teacher>();
-		for(int i=0;i<supervisor.length;i++){
+		ArrayList<Teacher> list = new ArrayList<Teacher>();
+		for (int i = 0; i < supervisor.length; i++) {
 			Teacher t = teachersServiceImp.getUniqueTeacher(supervisor[i]);
 			list.add(t);
 		}
-		
-		//fetch the data from the form to the topic object
+
+		// fetch the data from the form to the topic object
 		topic.setTitle(uploadFYPForm.getTitle());
 		topic.setCredit(Integer.parseInt(uploadFYPForm.getCredit()));
-		topic.setNumOfStudent(Integer.parseInt(uploadFYPForm.getNumOfStu()));
+		
 		topic.setDescription(uploadFYPForm.getDescription());
-		if("individual".equals(uploadFYPForm.getIndividual())){
+		if ("individual".equals(uploadFYPForm.getIndividual())) {
 			topic.setIndividual(true);
-		}else{
+			topic.setNumOfStudent(Integer.parseInt("1"));
+		} else {
 			topic.setIndividual(false);
+			topic.setNumOfStudent(Integer.parseInt(uploadFYPForm.getNumOfStu()));
 		}
-		//save to database
+		// save to database
 		fypServiceImp.uploadTopic(list, topic);
-		return mapping.findForward("topicList");
+		return mapping.findForward("uploadok");
 	}
 }

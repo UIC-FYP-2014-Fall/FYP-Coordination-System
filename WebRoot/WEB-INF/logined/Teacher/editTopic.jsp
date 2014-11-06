@@ -28,7 +28,7 @@
                 <div class="container-fluid">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
+         
                     </a>
                     <a class="brand" href="index.html">FYP Coordination System</a>
                     <div class="nav-collapse collapse">
@@ -98,12 +98,6 @@
 								<form action="???" method="post">
 									<div class="control-group">
                                         <label class="control-label" for="focusedInput">Title <span class="required">*</span></label>
-                                        <div class="controls">
-                                            <input class="input-xlarge focused" id="focusedInput" type="text" value="">
-                                        </div>
-										<label class="control-label" for="focusedInput">Title
-											<span class="required">*</span>
-										</label>
 										<div class="controls">
 											<%
 												List<TeaTopic> teaTopic = (List<TeaTopic>)request.getAttribute("teaTopic");
@@ -211,18 +205,9 @@
 											out.println("<textarea class=\"input-xlarge textarea\" style=\"width: 810px; height: 200px\" >"+teaTopic.get(0).getTopic().getDescription()+"</textarea>");
 											%>
 										</div>
-                                    </div>    
-                                     
-                                    <div class="control-group">
-                                        <label class="control-label" for="textarea2">Description <span class="required">*</span></label>
-                                        <div class="controls">
-                                            <textarea class="input-xlarge textarea" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
-                                        </div>
-
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-
-                                    </div>
-                                    
+										<button type="submit" class="btn btn-primary">Submit</button>
+										
+                                    </div>     
                                 </div>
                             </div>
                         </div>
@@ -249,16 +234,4 @@
 </script>
 
 </body>
-=======
-      		</div>
-            <hr>
-        </div>
-        <!--/.fluid-container-->
-        <script src="vendors/jquery-1.9.1.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/scripts.js"></script>
-        
-    </body>
->>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
-
 </html>
