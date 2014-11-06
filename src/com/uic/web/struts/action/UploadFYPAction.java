@@ -3,13 +3,17 @@
  * Template path: templates/java/JavaClass.vtl
  */
 package com.uic.web.struts.action;
-
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+import com.uic.domain.Teacher;
+import com.uic.domain.Topic;
+import com.uic.service.imp.FYPServiceImp;
+import com.uic.service.imp.TeachersServiceImp;
 import com.uic.web.struts.form.UploadFYPForm;
 
 /** 
@@ -34,14 +38,34 @@ public class UploadFYPAction extends DispatchAction {
 	 */
 	public ActionForward uploadFYP(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("Using UploadFYPaction");
 		UploadFYPForm uploadFYPForm = (UploadFYPForm) form;// TODO Auto-generated method stub
-		System.out.println("des"+uploadFYPForm.getTitle());
-		String[] s=uploadFYPForm.getSupervisor();
-		System.out.println("des"+s[1]+s[0]);
-		System.out.println("des"+uploadFYPForm.getIndividual());
-		System.out.println("des"+uploadFYPForm.getCredit());
-		System.out.println("des"+uploadFYPForm.getDescription());
-		System.out.println("numofstu"+uploadFYPForm.getNumOfStu());
-		return null;
+
+		//set up the data service.
+		TeachersServiceImp teachersServiceImp=new TeachersServiceImp();
+		FYPServiceImp fypServiceImp=new FYPServiceImp();
+		
+		//declare the class 
+		String[] supervisor=uploadFYPForm.getSupervisor();
+		Topic topic = new Topic();
+		ArrayList<Teacher> list=new ArrayList<Teacher>();
+		for(int i=0;i<supervisor.length;i++){
+			Teacher t = teachersServiceImp.getUniqueTeacher(supervisor[i]);
+			list.add(t);
+		}
+		
+		//fetch the data from the form to the topic object
+		topic.setTitle(uploadFYPForm.getTitle());
+		topic.setCredit(Integer.parseInt(uploadFYPForm.getCredit()));
+		topic.setNumOfStudent(Integer.parseInt(uploadFYPForm.getNumOfStu()));
+		topic.setDescription(uploadFYPForm.getDescription());
+		if("individual".equals(uploadFYPForm.getIndividual())){
+			topic.setIndividual(true);
+		}else{
+			topic.setIndividual(false);
+		}
+		//save to database
+		fypServiceImp.uploadTopic(list, topic);
+		return mapping.findForward("topicList");
 	}
 }

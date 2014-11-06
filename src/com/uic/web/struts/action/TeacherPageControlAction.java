@@ -4,6 +4,8 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +13,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+
+import com.uic.domain.TeaTopic;
+import com.uic.domain.Teacher;
+import com.uic.service.imp.FYPServiceImp;
 
 /** 
  * MyEclipse Struts
@@ -67,6 +73,12 @@ public class TeacherPageControlAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
+			FYPServiceImp fypServiceImp=new FYPServiceImp();
+			Teacher teacher=(Teacher)request.getSession().getAttribute("teacherinfo");
+			System.out.println("Teacher ID "+ teacher.getId());
+			List<TeaTopic> teaTopic= fypServiceImp.getTeaTopic(teacher.getId().toString());
+			System.out.println("send List size "+ teaTopic.size());
+			request.setAttribute("teaTopicList",teaTopic);
 			return mapping.findForward("topicList");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
@@ -104,6 +116,18 @@ public class TeacherPageControlAction extends DispatchAction {
 		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
 			return mapping.findForward("uploadTopic");
+		}else{
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
+	public ActionForward editTopic(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		System.out.println("Using TeacherPageControlAction");
+		if(request.getSession().getAttribute("role").equals("teacher")){
+			return mapping.findForward("editTopic");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");

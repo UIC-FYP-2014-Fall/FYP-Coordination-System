@@ -19,6 +19,20 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 	}
 
 	@Override
+	public Teacher getUniqueTeacher(String name) {
+		// TODO Auto-generated method stub
+		String hql="from Teacher where name=?";
+		String[] parameters={name};
+		try {
+			Teacher t=(Teacher) HibernateUtil.uniqueQueryOpenInView(hql, parameters);
+			return t;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
+	@Override
 	public boolean deleteTeacher(String id) {
 		// TODO Auto-generated method stub
 		String hql = "delete Teacher where id=?";

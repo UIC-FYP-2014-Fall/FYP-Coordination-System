@@ -70,7 +70,6 @@
                 <!--/span-->
                 <div class="span9" id="content">
                      <div class="row-fluid">
-                        <div class="span6">
                             <!-- block -->
                             <div class="block">
                                 
@@ -79,8 +78,8 @@
                                 </div>
 
                                 <div class="block-content collapse in">
-                                    <form action="">
-                                        <table class="table table-striped">
+                                    <form class="form-horizontal" action="" method="post">
+                                        <table class="table table-striped table-bordered">
                                             <th></th>
                                             <th>Mon</th>
                                             <th>Tue</th>
@@ -147,18 +146,16 @@
                                                 <td><input type="checkbox" name="name"></td>
                                             </tr>
                                         </table>
-                                        
-                                    </form>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="button" class="btn">Reset</button>
-
-                                    
-
+                                                                            
+	                                    <div class="form-actions">
+		                                	<button type="submit" class="btn btn-primary">Submit</button>
+		                                    <button type="reset" class="btn">Reset</button>
+	                                    </div>
+	                                </form>
 
                                 </div>
                             </div>
 
-                        </div>
                     </div>
                 </div>
             </div>

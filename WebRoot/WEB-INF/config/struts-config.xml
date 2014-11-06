@@ -10,6 +10,7 @@
     <form-bean name="changePwdForm" type="com.uic.web.struts.form.ChangePwdForm" />
     <form-bean name="uploadFYPForm" type="com.uic.web.struts.form.UploadFYPForm" />
     <form-bean name="preTimeForm" type="com.uic.web.struts.form.PreTimeForm" />
+    <form-bean name="quotaForm" type="com.uic.web.struts.form.QuotaForm" />
 
   </form-beans>
 
@@ -53,6 +54,7 @@
       validate="false"
       cancellable="true">
       <forward name="loginok" path="/goUI.do" />
+      
       <forward name="goLoginUi" path="/WEB-INF/login.jsp" />
     </action>
     <action
@@ -74,6 +76,7 @@
       <forward name="mainPage" path="/WEB-INF/logined/Teacher/teacherMain.jsp" />
       <forward name="timetable" path="/WEB-INF/logined/Teacher/timetable.jsp" />
       <forward name="uploadTopic" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
+      <forward name="editTopic" path="/WEB-INF/logined/Teacher/editTopic.jsp" />
     </action>
     
     <action
@@ -105,7 +108,10 @@
       path="/uploadFYP"
       scope="request"
       type="com.uic.web.struts.action.UploadFYPAction"
-      cancellable="true" />
+      cancellable="true" >
+      <forward name="uploaded" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
+    </action>
+
 
     <action
       attribute="preTimeForm"

@@ -5,6 +5,7 @@ import java.util.List;
 import com.uic.domain.Teacher;
 
 public interface TeachersServiceInter extends BaseInterface{
+	public Teacher getUniqueTeacher(String name);
 	
 	public List<Teacher> getTeachers();
 	

@@ -33,14 +33,14 @@ public class Topic implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	/*public Topic(String title, Integer credit, Boolean individual,
+	public Topic(String title, Integer credit, Boolean individual,
 			Integer numOfStudent, String description) {
 		this.title = title;
 		this.credit = credit;
 		this.individual = individual;
 		this.numOfStudent = numOfStudent;
 		this.description = description;
-	}*/
+	}
 
 	// Property accessors
 

@@ -13,7 +13,7 @@
         <property name="content" type="java.lang.String">
             <column name="content" length="1024" not-null="true" />
         </property>
-        <property name="date" type="java.util.Date">
+        <property name="date" type="java.sql.Timestamp">
             <column name="date" length="19" not-null="true" />
         </property>
         <property name="receiver" type="java.lang.String">
