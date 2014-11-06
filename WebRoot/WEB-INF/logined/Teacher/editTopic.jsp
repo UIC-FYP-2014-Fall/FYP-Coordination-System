@@ -100,7 +100,7 @@
                                                 <td>
                                                     <label class="control-label" for="select01">Supervisor</label>
                                                     <div class="controls">
-                                                        <select id="select01" class="chzn-select">
+                                                        <select id="select01">
                                                             <option>aaa</option>
                                                             <option>bbb</option>
                                                             <option>ccc</option>
@@ -111,7 +111,7 @@
                                                 <td>
                                                     <label class="control-label" for="select01">Credits</label>
                                                     <div class="controls">
-                                                        <select id="select01" class="chzn-select">
+                                                        <select id="select01">
                                                             <option>3</option>
                                                             <option>6</option>
                                                         </select>
@@ -122,7 +122,7 @@
                                                 <td>
                                                     <label class="control-label" for="select01">Group/Individual</label>
                                                     <div class="controls">
-                                                        <select id="group" class="chzn-select" onclick="javascript:doit(this);">
+                                                        <select id="group" onclick="javascript:doit(this);">
                                                             <option value="individual">Individual</option>
                                                             <option value="group">Group</option>                                                            
                                                         </select>
@@ -131,7 +131,7 @@
                                                 <td>
                                                     <label class="control-label" for="select01">Number of students</label>
                                                     <div class="controls">
-                                                        <select id="numofStu" class="chzn-select" disabled="false">
+                                                        <select id="numofStu" disabled="false">
                                                             <option value="1">Please select</option>                                                            
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
