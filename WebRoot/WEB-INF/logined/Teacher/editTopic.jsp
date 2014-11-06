@@ -111,6 +111,7 @@
 										<table>
 											<tr>
 												<td><label class="control-label" for="select01">Supervisor</label>
+												<div class="control-group">
 													<div class="controls">
 														<select name="supervisor" multiple="multiple"
 															id="multiSelect" class="chzn-select span4">
@@ -131,7 +132,7 @@
 															    
 															%>				
 														</select>
-													</div></td>
+													</div></div></td>
 												<td><label class="control-label" for="select01">Credits</label>
 													<div class="controls">
 													<select id="select01" class="chzn-select">
@@ -204,11 +205,8 @@
 										</label>
 										<div class="controls">
 											<%
-											out.println("<textarea value=\""+teaTopic.get(0).getTopic().getDescription()+"\"class=\"input-xlarge textarea\" style=\"width: 810px; height: 200px\" ></textarea>");
+											out.println("<textarea class=\"input-xlarge textarea\" style=\"width: 810px; height: 200px\" >"+teaTopic.get(0).getTopic().getDescription()+"</textarea>");
 											%>
-										
-										
-											
 										</div>
 
 										<button type="submit" class="btn btn-primary">Submit</button>
