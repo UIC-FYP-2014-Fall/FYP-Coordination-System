@@ -249,16 +249,6 @@
 </script>
 
 </body>
-=======
-      		</div>
-            <hr>
-        </div>
-        <!--/.fluid-container-->
-        <script src="vendors/jquery-1.9.1.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/scripts.js"></script>
-        
-    </body>
->>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
+
 
 </html>
