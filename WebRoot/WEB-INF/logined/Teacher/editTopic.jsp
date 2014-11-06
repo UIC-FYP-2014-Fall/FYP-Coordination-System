@@ -234,4 +234,9 @@
 </script>
 
 </body>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
 </html>
