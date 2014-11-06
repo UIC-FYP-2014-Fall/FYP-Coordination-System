@@ -134,7 +134,7 @@
 													of students</label>
 												<div class="controls">
 													<select id="numofStu" class="chzn-select" disabled="false">
-														<option value="1">Please select</option>
+														<option value="1">1</option>
 														<option value="2">2</option>
 														<option value="3">3</option>
 														<option value="4">4</option>
@@ -152,7 +152,7 @@
 									<div class="controls">
 										<textarea class="input-xlarge textarea"
 											placeholder="Enter text ..."
-											style="width: 810px; height: 200px"></textarea>
+											style="width: 810px; height: 200px" ></textarea>
 									</div>
 
 									<button type="submit" class="btn btn-primary">Submit</button>

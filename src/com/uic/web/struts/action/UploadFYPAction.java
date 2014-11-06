@@ -66,6 +66,6 @@ public class UploadFYPAction extends DispatchAction {
 		}
 		//save to database
 		fypServiceImp.uploadTopic(list, topic);
-		return mapping.findForward("uploaded");
+		return mapping.findForward("topicList");
 	}
 }
