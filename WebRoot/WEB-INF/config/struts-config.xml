@@ -77,6 +77,7 @@
       <forward name="timetable" path="/WEB-INF/logined/Teacher/timetable.jsp" />
       <forward name="uploadTopic" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
       <forward name="editTopic" path="/WEB-INF/logined/Teacher/editTopic.jsp" />
+      
     </action>
     
     <action
@@ -109,7 +110,7 @@
       scope="request"
       type="com.uic.web.struts.action.UploadFYPAction"
       cancellable="true" >
-      <forward name="uploaded" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
+      <forward name="uploadok" path="/teacherPageControl.do?flag=topicList" />
     </action>
 
 

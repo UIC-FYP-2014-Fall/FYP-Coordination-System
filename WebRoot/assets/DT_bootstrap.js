@@ -176,9 +176,35 @@ $(document).ready(function() {
 				"bSortable":false,
 				"bFilter":false
             }]
-
 		
-		
+	} );
+	
+	$('#individualTopic').dataTable( {
+		"sDom": "<'row'<'span5'l><'span7'f>r>t<'row'<'span3'i><'span9'p>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sLengthMenu": "_MENU_ records per page"
+		},
+		"aoColumnDefs": [{
+				"aTargets": [5],
+				"bSortable":false,
+				"bFilter":false
+            }]
+	
+	} );
+	
+	$('#groupTopic').dataTable( {
+		"sDom": "<'row'<'span5'l><'span7'f>r>t<'row'<'span3'i><'span9'p>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sLengthMenu": "_MENU_ records per page"
+		},
+		"aoColumnDefs": [{
+				"aTargets": [5],
+				"bSortable":false,
+				"bFilter":false
+            }]
+	
 	} );
 	
 	
