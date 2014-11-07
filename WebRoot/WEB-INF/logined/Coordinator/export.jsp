@@ -65,7 +65,7 @@
 							Set Open Time</a></li>
 					<li><a href="workload.html"><i class="icon-chevron-right"></i>
 							Set Workload</a></li>
-					<li><a href="clearProject.html"><i
+					<li><a href="${pageContext.request.contextPath }/clearProject.do?flag=goClearProjectUi"><i
 							class="icon-chevron-right"></i> Clear Project</a></li>
 					<li><a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i>
 							Change Password</a></li>

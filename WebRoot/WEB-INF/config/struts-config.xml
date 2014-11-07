@@ -126,6 +126,15 @@
       cancellable="true">
       <forward name="goPreTimeUi" path="/WEB-INF/logined/Coordinator/preTime.jsp" />
     </action>
+    <action
+      parameter="flag"
+      path="/clearProject"
+      type="com.uic.web.struts.action.ClearProjectAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goClearProjectUi" path="/WEB-INF/logined/Coordinator/clearProject.jsp" />
+    </action>
+
 
 
 
