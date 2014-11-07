@@ -18,6 +18,7 @@ import com.uic.domain.Message;
 import com.uic.domain.Users;
 import com.uic.service.imp.MessagesServiceImp;
 import com.uic.service.inter.MessagesServiceInter;
+import com.uic.util.PropertiesHelper;
 
 /** 
  * MyEclipse Struts
@@ -44,6 +45,24 @@ public class GoUIAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		//System.out.println("Using GoUIAction");
 		if(request.getSession().getAttribute("role").equals("coordinator")){
+			//preTime data prepare
+			//prepare data for the jsp page
+			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+			String startDateTime = ph.getProperties("PreStartDateTime");
+			String endDateTime = ph.getProperties("PreEndDateTime");
+			if(startDateTime!=null&&endDateTime!=null){
+				request.setAttribute("preDateTime", "true");
+				request.setAttribute("startDateTime", startDateTime);
+				request.setAttribute("endDateTime", endDateTime);
+			}else{
+				request.setAttribute("preDateTime", "false");
+			}
+			
+			
+			
+			
+			
+			
 			//pagination
 			int pageNow=1;
 			//get pageNow from the main.jsp
@@ -64,6 +83,8 @@ public class GoUIAction extends DispatchAction {
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("pageNow", pageNow);
 			return mapping.findForward("goMainUi");
+			
+			
 		}else if(request.getSession().getAttribute("role").equals("teacher")){
 			return mapping.findForward("goTeacherMain");
 		}else{

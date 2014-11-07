@@ -84,6 +84,18 @@
 							</div>
 
 							<div class="row-fluid">
+								<c:if test="${preDateTime=='true' }">
+									<div class="alert alert-info alert-block">
+										<h4 class="alert-heading">Info!</h4>
+										<p>Presentation time: from ${startDateTime } to ${endDateTime }</p>											
+									</div>
+								</c:if>
+								<c:if test="${preDateTime=='false' }">
+									<div class="alert alert-block">
+										<h4 class="alert-heading">Warning!</h4>
+										<p>Presentation time is not completed. Please check <a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi">here</a> to set up.</p>											
+									</div>
+								</c:if>
 								<c:forEach items="${messageList }" var="message">
 									<c:if test="${message.type=='info' }">
 										<div class="alert alert-info alert-block">
