@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="com.uic.domain.Teacher"%>
+<%@ page import="java.util.List;"%>
+
+
 <!DOCTYPE html>
 <html class="no-js">
     
@@ -71,7 +77,7 @@
                 <div class="span9" id="content">
                      <div class="row-fluid">
 
-                        <div class="span6">
+                   
                             <!-- block -->
 
                             <div class="block">
@@ -91,7 +97,17 @@
                                             <label class="control-label" for="multiSelect">Supervisor <span class="required">*</span></label>
                                             <div class="controls">
                                                 <select name="supervisor" multiple="multiple" id="multiSelect" class="chzn-select span4">
-                                                  <option>Judy Feng</option><option>WF Su</option><option>Dyce Zhao</option><option>Amy Zhang</option><option>Haichuan Zhou</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>District Of Columbia</option><option>Florida</option><option>Georgia</option>
+                                                  <%
+                                                  List<Teacher> teacherList = (List<Teacher>)request.getAttribute("teacherList");
+                                            	  Teacher curTeacher = (Teacher)request.getSession().getAttribute("teacherinfo");
+                                                  for(int i=0;i<teacherList.size();i++){
+                                                	  if(curTeacher.getName().equals(teacherList.get(i).getName())){
+                                                	  	out.println("<option selected=\"selected\">"+teacherList.get(i).getName()+"</option>");
+                                                	  }else{
+                                                		out.println("<option>"+teacherList.get(i).getName()+"</option>");
+                                                	  }
+                                                  }
+                                                  %>
                                                 </select>                           
                                             </div>
                                         </div>
@@ -119,9 +135,8 @@
                                         <div class="control-group">
                                             <label class="control-label">Number of students <span class="required">*</span></label>
                                             <div class="controls">
-
                                                 <select name="numOfStu" id="numofStu" disabled="false">
-                                                    <option value="1">Please select</option>               
+                                                    <option value="1">Please select</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
                                                     <option value="4">4</option>
@@ -146,7 +161,7 @@
                                     
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
 

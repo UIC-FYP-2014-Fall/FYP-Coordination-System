@@ -17,6 +17,7 @@ import org.apache.struts.actions.DispatchAction;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.service.imp.FYPServiceImp;
+import com.uic.service.imp.TeachersServiceImp;
 
 /** 
  * MyEclipse Struts
@@ -115,6 +116,9 @@ public class TeacherPageControlAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
+			TeachersServiceImp ts = new TeachersServiceImp();
+			List<Teacher> teacherList = ts.getTeachers();
+			request.setAttribute("teacherList", teacherList);
 			return mapping.findForward("uploadTopic");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
@@ -127,6 +131,13 @@ public class TeacherPageControlAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
+			FYPServiceImp fs= new FYPServiceImp();
+			String teaTopicID=request.getParameter("id");
+			List<TeaTopic> teaTopic = fs.getTeaTopicByTopicId(teaTopicID);
+			request.setAttribute("teaTopic", teaTopic);
+			TeachersServiceImp ts = new TeachersServiceImp();
+			List<Teacher> teacherList = ts.getTeachers();
+			request.setAttribute("teacherList", teacherList);
 			return mapping.findForward("editTopic");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");

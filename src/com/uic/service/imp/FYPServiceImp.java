@@ -40,5 +40,11 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		return list;
 	}
 	
-	
+	 public List<TeaTopic> getTeaTopicByTopicId(String id){
+		 String hql = "from TeaTopic where topic_id=?";
+			String[] parameters={id};
+			@SuppressWarnings("unchecked")
+			List<TeaTopic> list = HibernateUtil.executeQueryOpenInView(hql, parameters);
+			return list;
+	 }
 }
