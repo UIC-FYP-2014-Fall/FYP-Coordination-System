@@ -69,7 +69,7 @@
                             <a href="quota.html"><i class="icon-chevron-right"></i> Set Quota</a>
                         </li>
                         <li>
-                            <a href="openTime.html"><i class="icon-chevron-right"></i> Set Open Time</a>
+                            <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i class="icon-chevron-right"></i> Set Open Time</a>
                         </li>
                         <li>
                             <a href="workload.html"><i class="icon-chevron-right"></i> Set Workload</a>
@@ -126,8 +126,8 @@
                     <td>${teacher.phone }</td>
                     <td>${teacher.email }</td>
                     <td>
-                    	<a class="btn btn-primary btn-mini" data-confirm="Are you sure?" href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=reset&tid=${teacher.id}"><i class="icon-pencil icon-white"></i> Reset</a>
-                      	<a class="btn btn-danger btn-mini" data-confirm="Are you sure you want to delete the teacher?" href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=delete&tid=${teacher.id}"><i class="icon-remove icon-white"></i> Delete</a>
+                    	<a class="btn btn-primary btn-mini" data-confirm="Are you sure you reset the teacher '${teacher.name }' password?" href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=reset&tid=${teacher.id}"><i class="icon-pencil icon-white"></i> Reset</a>
+                      	<a class="btn btn-danger btn-mini" data-confirm="Are you sure you want to delete the teacher '${teacher.name }'?" href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=delete&tid=${teacher.id}"><i class="icon-remove icon-white"></i> Delete</a>
                    </td>
                   </tr>
                 </c:forEach>

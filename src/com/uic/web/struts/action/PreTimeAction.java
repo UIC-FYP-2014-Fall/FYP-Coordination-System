@@ -4,7 +4,6 @@
  */
 package com.uic.web.struts.action;
 
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +13,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-import com.uic.domain.Message;
-import com.uic.service.imp.MessagesServiceImp;
-import com.uic.service.inter.MessagesServiceInter;
+
+
+
 import com.uic.util.BaseUtil;
 import com.uic.util.PropertiesHelper;
 import com.uic.web.struts.form.PreTimeForm;
@@ -48,28 +47,63 @@ public class PreTimeAction extends DispatchAction {
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
 			//prepare data for the jsp page
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
-			String startDateTime = ph.getProperties("PreStartDateTime");
-			String endDateTime = ph.getProperties("PreEndDateTime");
-			//System.out.println(startDateTime);
-			if(startDateTime!=null&&endDateTime!=null){
-				
-				
-				String[] start = startDateTime.split(" ");
-				String[] end = endDateTime.split(" ");
-				String[] startTime = start[1].split(":");
-				String[] endTime = end[1].split(":");
-				
-				request.setAttribute("startDate", start[0]);
-				request.setAttribute("startHH", startTime[0]);
-				request.setAttribute("startMM", startTime[1]);
-				request.setAttribute("startSS", startTime[2]);
-				request.setAttribute("endDate", end[0]);
-				request.setAttribute("endHH", endTime[0]);
-				request.setAttribute("endMM", endTime[1]);
-				request.setAttribute("endSS", endTime[2]);
-			}
+			
+			String state1 = ph.getProperties("UploadTopicsDateTimeState");
+			String state2 = ph.getProperties("ChooseTopicDateTimeState");
+			String state3 = ph.getProperties("ChooseExaminersDateTimeState");
 
+			
+			if(state1!=null&&state2!=null&&state3!=null){
+				if(state1.equals("true")&&state2.equals("true")&&state3.equals("true")){
+					
+					String CEendDateTime = ph.getProperties("ChooseExaminersEndDateTime");
+					
+					String[] CEDateTime = CEendDateTime.split(" ");
+					String[] CEDate = CEDateTime[0].split("-");
+					String CEyear = CEDate[0];
+					String CEmonth = CEDate[1];
+					String CEday = CEDate[2];
+					
+					String startDateTime = ph.getProperties("PreStartDateTime");
+					String endDateTime = ph.getProperties("PreEndDateTime");
+					
+					//System.out.println(startDateTime);
+					if(startDateTime!=null&&endDateTime!=null){	
+						String[] start = startDateTime.split(" ");
+						String[] end = endDateTime.split(" ");
+						String[] startTime = start[1].split(":");
+						String[] endTime = end[1].split(":");
+						
+						request.setAttribute("startDate", start[0]);
+						request.setAttribute("startHH", startTime[0]);
+						request.setAttribute("startMM", startTime[1]);
+						request.setAttribute("startSS", startTime[2]);
+						request.setAttribute("endDate", end[0]);
+						request.setAttribute("endHH", endTime[0]);
+						request.setAttribute("endMM", endTime[1]);
+						request.setAttribute("endSS", endTime[2]);
+						
+						request.setAttribute("PreDateTime", "true");
+						
+						request.setAttribute("PreStartDateTime", startDateTime);
+						request.setAttribute("PreEndDateTime", endDateTime);
+					}else{
+						request.setAttribute("PreDateTime", "false");
+						request.setAttribute("startDate", CEDateTime[0]);
+						request.setAttribute("OpenTime", "false");
+					}
+					request.setAttribute("CEyear", CEyear);
+					request.setAttribute("CEmonth", CEmonth);
+					request.setAttribute("CEday", CEday);
+				}
+				
+			}else{
+				
+				request.setAttribute("PreDateTime", "false");
+				request.setAttribute("OpenTime", "true");
+			}
 			return mapping.findForward("goPreTimeUi");
+
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
@@ -80,6 +114,11 @@ public class PreTimeAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
+			
+			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+			String CEendDateTime = ph.getProperties("ChooseExaminersEndDateTime");
+			
+			
 			PreTimeForm preTimeForm = (PreTimeForm)form;
 			//get date and time from jsp
 			String startDate = preTimeForm.getStartDate();
@@ -96,14 +135,13 @@ public class PreTimeAction extends DispatchAction {
 			java.util.Date dStartTime = BaseUtil.StringConvertDate(startDateTime);
 			java.util.Date dEndTime = BaseUtil.StringConvertDate(endDateTime);
 			
-			java.util.Date nowDate = new java.util.Date();
+			java.util.Date nowDate = BaseUtil.StringConvertDate(CEendDateTime);
 			//System.out.println(nowDate);
 			
 			if(dStartTime.after(nowDate)&&dEndTime.after(nowDate)&&dStartTime.before(dEndTime)){
-				PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 				
 				try {
-					//save the message to database
+					/*//save the message to database
 					Message message = new Message();
 					message.setReceiver("coordinator");
 					message.setContent("Update presentation time from "+startDateTime+" to "+endDateTime);
@@ -115,7 +153,7 @@ public class PreTimeAction extends DispatchAction {
 						System.out.println("save message OK");
 					}else{
 						System.out.println("save message error");
-					}
+					}*/
 					
 					ph.setProperties("PreStartDateTime", startDateTime);
 					ph.setProperties("PreEndDateTime", endDateTime);

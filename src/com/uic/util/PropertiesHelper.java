@@ -52,10 +52,11 @@ public class PropertiesHelper {
 					fis.close();
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
-		return "";
+		return null;
 	}
 
 	public void setProperties(String key, String value) throws Exception {
@@ -93,6 +94,7 @@ public class PropertiesHelper {
 					outputFile.close();
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -132,6 +134,7 @@ public class PropertiesHelper {
 					outputFile.close();
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -142,7 +145,7 @@ public class PropertiesHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "";
+		return null;
 	}
 
 }

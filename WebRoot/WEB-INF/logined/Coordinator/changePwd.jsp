@@ -60,7 +60,7 @@
 							Set Pre Time</a></li>
 					<li><a href="quota.html"><i class="icon-chevron-right"></i>
 							Set Quota</a></li>
-					<li><a href="openTime.html"><i class="icon-chevron-right"></i>
+					<li><a href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i class="icon-chevron-right"></i>
 							Set Open Time</a></li>
 					<li><a href="workload.html"><i class="icon-chevron-right"></i>
 							Set Workload</a></li>

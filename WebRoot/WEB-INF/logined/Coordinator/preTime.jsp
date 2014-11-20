@@ -75,7 +75,7 @@
                             <a href="quota.html"><i class="icon-chevron-right"></i> Set Quota</a>
                         </li>
                         <li>
-                            <a href="openTime.html"><i class="icon-chevron-right"></i> Set Open Time</a>
+                            <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i class="icon-chevron-right"></i> Set Open Time</a>
                         </li>
                         <li>
                             <a href="workload.html"><i class="icon-chevron-right"></i> Set Workload</a>
@@ -91,7 +91,8 @@
                  <!--/span-->
     <div class="span9" id="content">
       <div class="row-fluid">
-         <c:if test="${PreTimeOperation=='success'}">
+      
+        <c:if test="${PreTimeOperation=='success'}">
       	<div class="alert alert-success SuccessInfo">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
             <h4>Success</h4>
@@ -105,6 +106,7 @@
           The operation failed! Presentation start or end time error! Please check.
        	</div>
       </c:if>
+      
           <!-- block -->
           <div class="block">
             <div class="navbar navbar-inner block-header">
@@ -112,6 +114,72 @@
             </div>
             <div class="block-content collapse in">
             <div class="span12">
+            <c:if test="${PreDateTime=='true' }">
+            	<div class="alert alert-block">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>Presentation time: from <strong>${PreStartDateTime }</strong> to <strong>${PreEndDateTime }</strong>. Click <a href="#edit" onclick="btn()">here</a> to change.</p>
+				</div>
+				<div id="edit" style="display:none;">
+					<!-- BEGIN FORM-->
+              <form class="form-horizontal" method="post" action="${pageContext.request.contextPath }/preTime.do?flag=setPreTime" id="form_sample_1">
+              <fieldset>
+                <legend>Change Presentation Time</legend>
+
+                <div class="alert alert-error hide">
+                  <button class="close" data-dismiss="alert"></button>
+                  You have some form errors. Please check below.
+                </div>
+          
+                <div class="control-group">
+                  <label class="control-label">From</label>
+                  <div class="controls">
+                  
+                  	<div class="input-prepend">
+                    	<span class="add-on"><i class="icon-calendar"></i></span>
+                    	<input type="text" name="startDate" data-required="1" class="span10" value='<c:if test="${startDate!=null }">${startDate }</c:if>' id="dpd1" readonly>
+                    </div>
+                    <div id="starttime" class="input-append">
+    					<input data-format="hh:mm:ss" name="startTime" type="text" class="span5" readonly></input>
+    					<span class="add-on">
+      						<i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      						</i>
+    					</span>
+  					</div>
+                    
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">To</label>
+                  <div class="controls">
+                 	<div class="input-prepend">
+                  		<span class="add-on"><i class="icon-calendar"></i></span>
+                    	<input type="text" name="endDate" class="span10" value="<c:if test="${endDate!=null }">${endDate }</c:if>" id="dpd2" readonly />
+                   	</div>
+                    <div id="endtime" class="input-append">
+    					<input data-format="hh:mm:ss" name="endTime" type="text" class="span5" readonly></input>
+    					<span class="add-on">
+      						<i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      						</i>
+    					</span>
+  					</div>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn">Reset</button>
+                </div>
+                </fieldset>
+              </form>
+			</div>
+            </c:if>
+            <c:if test="${PreDateTime=='false' }">
+            	<c:if test="${OpenTime=='true' }">
+            		<div class="alert alert-error alert-block">
+					<h4 class="alert-heading">Error!</h4>
+					<p>System open time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>
+				</div>
+            	</c:if>
+            <c:if test="${OpenTime=='false' }">
             <!-- BEGIN FORM-->
               <form class="form-horizontal" method="post" action="${pageContext.request.contextPath }/preTime.do?flag=setPreTime" id="form_sample_1">
               <fieldset>
@@ -162,7 +230,8 @@
                 </div>
                 </fieldset>
               </form>
-              
+              </c:if>
+              </c:if>
               </div>
             </div>
           </div>
@@ -190,7 +259,7 @@
 
 <script>
 var nowTemp = new Date();
-var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+var now = new Date(<%=request.getAttribute("CEyear")%>, <%=request.getAttribute("CEmonth")%>, <%=request.getAttribute("CEday")%>, 0, 0, 0, 0);
 <%
 	if(request.getAttribute("startHH")!=null){
 %>
@@ -239,6 +308,11 @@ $('#endtime').datetimepicker({
 
 $("#starttime").data('datetimepicker').setLocalDate(now1);
 $("#endtime").data('datetimepicker').setLocalDate(now2);
+
+var edit=document.getElementById('edit');
+function btn(){ 
+	edit.style.display='';
+}
 </script>
 </body>
 </html>

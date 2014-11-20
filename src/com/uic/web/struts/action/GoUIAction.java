@@ -18,6 +18,7 @@ import com.uic.domain.Message;
 import com.uic.domain.Users;
 import com.uic.service.imp.MessagesServiceImp;
 import com.uic.service.inter.MessagesServiceInter;
+import com.uic.util.PropertiesHelper;
 
 /** 
  * MyEclipse Struts
@@ -44,6 +45,55 @@ public class GoUIAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		//System.out.println("Using GoUIAction");
 		if(request.getSession().getAttribute("role").equals("coordinator")){
+			//preTime data prepare
+			//prepare data for the jsp page
+			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+			
+			String state1 = ph.getProperties("UploadTopicsDateTimeState");
+			String state2 = ph.getProperties("ChooseTopicDateTimeState");
+			String state3 = ph.getProperties("ChooseExaminersDateTimeState");
+			String state4 = ph.getProperties("PreDateTimeState");
+			
+			if(state1!=null){
+				if(state1.equals("true")){
+					request.setAttribute("UploadTopicsDateTimeState", "true");
+					request.setAttribute("UTstartDateTime", ph.getProperties("UploadTopicsStartDateTime"));
+					request.setAttribute("UTendDateTime", ph.getProperties("UploadTopicsEndDateTime"));
+				}else{
+					request.setAttribute("UploadTopicsDateTimeState", "false");
+				}
+			}
+			if(state2!=null){
+				if(state2.equals("true")){
+					request.setAttribute("ChooseTopicDateTimeState", "true");
+					request.setAttribute("CTstartDateTime", ph.getProperties("ChooseTopicStartDateTime"));
+					request.setAttribute("CTendDateTime", ph.getProperties("ChooseTopicEndDateTime"));
+				}else{
+					request.setAttribute("ChooseTopicDateTimeState", "false");
+				}
+			}
+			if(state3!=null){
+				if(state3.equals("true")){
+					request.setAttribute("ChooseExaminersDateTimeState", "true");
+					request.setAttribute("CEstartDateTime", ph.getProperties("ChooseExaminersStartDateTime"));
+					request.setAttribute("CEendDateTime", ph.getProperties("ChooseExaminersEndDateTime"));
+				}else{
+					request.setAttribute("ChooseExaminersDateTime", "false");
+				}
+			}
+			if(state4!=null){
+				if(state4.equals("true")){
+					request.setAttribute("PreDateTimeState", "true");
+					request.setAttribute("PstartDateTime", ph.getProperties("PreStartDateTime"));
+					request.setAttribute("PendDateTime", ph.getProperties("PreEndDateTime"));
+				}else{
+					request.setAttribute("PreDateTimeState", "false");
+				}
+			}
+			
+			
+			
+			
 			//pagination
 			int pageNow=1;
 			//get pageNow from the main.jsp
@@ -64,6 +114,8 @@ public class GoUIAction extends DispatchAction {
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("pageNow", pageNow);
 			return mapping.findForward("goMainUi");
+			
+			
 		}else if(request.getSession().getAttribute("role").equals("teacher")){
 			return mapping.findForward("goTeacherMain");
 		}else{

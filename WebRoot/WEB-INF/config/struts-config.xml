@@ -134,6 +134,19 @@
       cancellable="true" >
       <forward name="goClearProjectUi" path="/WEB-INF/logined/Coordinator/clearProject.jsp" />
     </action>
+    <action
+      attribute="preTimeForm"
+      input="/WEB-INF/logined/Coordinator/openTime.jsp"
+      name="preTimeForm"
+      parameter="flag"
+      path="/openTime"
+      scope="request"
+      type="com.uic.web.struts.action.OpenTimeAction"
+      validate="false"
+      cancellable="true">
+      <forward name="goOpenTimeUi" path="/WEB-INF/logined/Coordinator/openTime.jsp" />
+    </action>
+
 
 
 

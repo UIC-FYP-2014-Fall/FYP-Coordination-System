@@ -63,7 +63,7 @@
 							Set Pre Time</a></li>
 					<li><a href="quota.html"><i class="icon-chevron-right"></i>
 							Set Quota</a></li>
-					<li><a href="openTime.html"><i class="icon-chevron-right"></i>
+					<li><a href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i class="icon-chevron-right"></i>
 							Set Open Time</a></li>
 					<li><a href="workload.html"><i class="icon-chevron-right"></i>
 							Set Workload</a></li>
@@ -83,7 +83,67 @@
 								<div class="muted pull-left">News</div>
 							</div>
 
-							<div class="row-fluid">
+							<div class="block-content collapse in">
+								<c:choose>
+								<c:when test="${UploadTopicsDateTimeState=='true' }">
+									<div class="alert alert-success alert-block">
+										<h4 class="alert-heading">Upload Topics for Teachers Time</h4>
+										<p>From ${UTstartDateTime } to ${UTendDateTime }</p>											
+									</div>
+									<c:choose>
+									<c:when test="${ChooseTopicDateTimeState=='true' }">
+										<div class="alert alert-success alert-block">
+											<h4 class="alert-heading">Choose Topic for Students Time</h4>
+											<p>From ${CTstartDateTime } to ${CTendDateTime }</p>											
+										</div>
+										<c:choose>
+										<c:when test="${ChooseExaminersDateTimeState=='true' }">
+											<div class="alert alert-success alert-block">
+												<h4 class="alert-heading">Choose Examiners for Students Time</h4>
+												<p>From ${CEstartDateTime } to ${CEendDateTime }</p>											
+											</div>
+											<c:choose>
+											<c:when test="${PreDateTimeState=='true' }">
+												<div class="alert alert-success alert-block">
+													<h4 class="alert-heading">Presentation Time</h4>
+													<p>From ${PstartDateTime } to ${PendDateTime }</p>											
+												</div>
+											</c:when>
+											<c:otherwise>
+												<div class="alert alert-block">
+													<h4 class="alert-heading">Warning!</h4>
+													<p>Presentation time is not completed. Please check <a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi">here</a> to set up.</p>											
+												</div>
+											</c:otherwise>
+											</c:choose>
+										
+										</c:when>
+										<c:otherwise>
+											<div class="alert alert-block">
+												<h4 class="alert-heading">Warning!</h4>
+												<p>Choose examiners for students time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
+											</div>
+										</c:otherwise>
+										</c:choose>
+									</c:when>
+									<c:otherwise>
+										<div class="alert alert-block">
+											<h4 class="alert-heading">Warning!</h4>
+											<p>Choose topic for students time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
+										</div>
+									</c:otherwise>
+									</c:choose>
+									
+								</c:when>
+								
+								<c:otherwise>
+									<div class="alert alert-block">
+										<h4 class="alert-heading">Warning!</h4>
+										<p>Upload topics for teachers time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
+									</div>
+								</c:otherwise>
+								</c:choose>
+								
 								<c:forEach items="${messageList }" var="message">
 									<c:if test="${message.type=='info' }">
 										<div class="alert alert-info alert-block">
@@ -125,18 +185,13 @@
 											href="${pageContext.request.contextPath }/goUI.do?pageNow=${pageNow+1 }">Next</a></li>
 									</c:if>
 								</ul>
-
-
-							</div>
-
-						
-
+						</div>
 					</div>
 				</div>
 			</div>
 
-		</div>
-		<hr>
+	</div>
+	<hr>
 	</div>
 	<!--/.fluid-container-->
 	<script src="vendors/jquery-1.9.1.min.js"></script>
