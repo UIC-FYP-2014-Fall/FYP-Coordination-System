@@ -75,6 +75,8 @@ public class GoManageAccountUiAction extends DispatchAction {
 				teacher.setPhone(teacherForm.getPhone());
 				PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 				teacher.setPassword(ph.getProperties("DefaultTeacherPassword"));
+				teacher.setQuota(ph.getProperties("DefaultTeacherQuota"));
+				teacher.setWorkload(ph.getProperties("DefaultTeacherWorkload"));
 
 				// save the teacher
 				

@@ -25,6 +25,12 @@
         <property name="phone" type="java.lang.String">
             <column name="phone" length="11" not-null="true" />
         </property>
+        <property name="quota" type="java.lang.String">
+            <column name="quota" length="1" not-null="true" default="5" />
+        </property>
+        <property name="workload" type="java.lang.String">
+            <column name="workload" length="1" not-null="true" default="5" />
+        </property>
         <set name="teaTopic">
 			<key column="teacher_id" />
 			<one-to-many class="com.uic.domain.TeaTopic" />

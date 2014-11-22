@@ -79,5 +79,33 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 		return flag;
 	}
 
+	@Override
+	public boolean saveQuota(String id, String quota) {
+		// TODO Auto-generated method stub
+		String hql = "update Teacher set quota=? where id=?";
+		String[] parameters={quota,id};
+		try {
+			HibernateUtil.executeUpdateOpenInView(hql, parameters);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+
+	@Override
+	public boolean saveWorkload(String id, String workload) {
+		// TODO Auto-generated method stub
+		String hql = "update Teacher set workload=? where id=?";
+		String[] parameters={workload,id};
+		try {
+			HibernateUtil.executeUpdateOpenInView(hql, parameters);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+
 
 }

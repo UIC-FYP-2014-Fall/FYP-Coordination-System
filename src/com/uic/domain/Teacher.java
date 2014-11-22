@@ -2,9 +2,6 @@ package com.uic.domain;
 
 import java.util.Set;
 
-
-
-
 /**
  * Teacher entity. @author MyEclipse Persistence Tools
  */
@@ -23,10 +20,28 @@ public class Teacher implements java.io.Serializable {
 	private String name;
 	private String email;
 	private String phone;
+	private String quota;
+	private String workload;
+
 	private Set<TeaTopic> teaTopic;
 
 	// Constructors
 
+	public String getWorkload() {
+		return workload;
+	}
+
+	public void setWorkload(String workload) {
+		this.workload = workload;
+	}
+
+	public String getQuota() {
+		return quota;
+	}
+
+	public void setQuota(String quota) {
+		this.quota = quota;
+	}
 
 	public Set<TeaTopic> getTeaTopic() {
 		return teaTopic;
@@ -41,14 +56,11 @@ public class Teacher implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	/*public Teacher(String account, String password, String name, String email,
-			String phone) {
-		this.account = account;
-		this.password = password;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-	}*/
+	/*
+	 * public Teacher(String account, String password, String name, String
+	 * email, String phone) { this.account = account; this.password = password;
+	 * this.name = name; this.email = email; this.phone = phone; }
+	 */
 
 	// Property accessors
 

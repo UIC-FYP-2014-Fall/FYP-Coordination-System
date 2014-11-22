@@ -8,27 +8,25 @@ import org.apache.struts.action.ActionForm;
 
 /** 
  * MyEclipse Struts
- * Creation date: 11-04-2014
+ * Creation date: 11-22-2014
  * 
  * XDoclet definition:
- * @struts.form name="quotaForm"
+ * @struts.form name="workloadForm"
  */
-public class QuotaForm extends ActionForm {
+public class WorkloadForm extends ActionForm {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String[] quota;
+	private String[] workload;
 
-	public String[] getQuota() {
-		return quota;
+	public String[] getWorkload() {
+		return workload;
 	}
 
-	public void setQuota(String[] quota) {
-		this.quota = quota;
+	public void setWorkload(String[] workload) {
+		this.workload = workload;
 	}
-	
-	
 }

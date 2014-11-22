@@ -72,13 +72,13 @@
                             <a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi"><i class="icon-chevron-right"></i> Set Pre Time</a>
                         </li>
                         <li>
-                            <a href="quota.html"><i class="icon-chevron-right"></i> Set Quota</a>
+                            <a href="${pageContext.request.contextPath }/quota.do?flag=goUi"><i class="icon-chevron-right"></i> Set Quota</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i class="icon-chevron-right"></i> Set Open Time</a>
                         </li>
                         <li>
-                            <a href="workload.html"><i class="icon-chevron-right"></i> Set Workload</a>
+                            <a href="${pageContext.request.contextPath }/setWorkload.do?flag=goUi"><i class="icon-chevron-right"></i> Set Workload</a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath }/clearProject.do?flag=goClearProjectUi"><i class="icon-chevron-right"></i> Clear Project</a>
@@ -239,6 +239,7 @@
       </div>
     </div>
   </div>
+  <hr>
 </div>
 
 

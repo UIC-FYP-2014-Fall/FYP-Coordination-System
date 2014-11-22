@@ -15,5 +15,9 @@ public interface TeachersServiceInter extends BaseInterface{
 	
 	public boolean checkAccount(String account);
 	
+	public boolean saveQuota(String id, String quota);
+	
+	public boolean saveWorkload(String id, String workload);
+	
 
 }

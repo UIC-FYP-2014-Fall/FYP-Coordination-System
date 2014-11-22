@@ -11,6 +11,7 @@
     <form-bean name="uploadFYPForm" type="com.uic.web.struts.form.UploadFYPForm" />
     <form-bean name="preTimeForm" type="com.uic.web.struts.form.PreTimeForm" />
     <form-bean name="quotaForm" type="com.uic.web.struts.form.QuotaForm" />
+    <form-bean name="workloadForm" type="com.uic.web.struts.form.WorkloadForm" />
 
   </form-beans>
 
@@ -146,6 +147,32 @@
       cancellable="true">
       <forward name="goOpenTimeUi" path="/WEB-INF/logined/Coordinator/openTime.jsp" />
     </action>
+    <action
+      attribute="quotaForm"
+      input="/WEB-INF/logined/Coordinator/quota.jsp"
+      name="quotaForm"
+      parameter="flag"
+      path="/quota"
+      scope="request"
+      type="com.uic.web.struts.action.QuotaAction"
+      validate="false"
+      cancellable="true">
+      <forward name="goUi" path="/WEB-INF/logined/Coordinator/quota.jsp" />
+    </action>
+    <action
+      attribute="workloadForm"
+      input="/WEB-INF/logined/Coordinator/workload.jsp"
+      name="workloadForm"
+      parameter="flag"
+      path="/setWorkload"
+      scope="request"
+      type="com.uic.web.struts.action.SetWorkloadAction"
+      validate="false"
+      cancellable="true">
+      <forward name="goWorkloadUi" path="/WEB-INF/logined/Coordinator/workload.jsp" />
+    </action>
+
+
 
 
 
