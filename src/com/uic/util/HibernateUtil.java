@@ -81,7 +81,7 @@ final public class HibernateUtil {
 		return obj;
 	}
 	
-	//统一的一个修改和删除(批量 hql) hql"delete upate ...??"
+	//统一的一个修改和删除(批量 hql) hql"delete update ...??"
 		public static void executeUpdate(String hql,String[] parameters){
 			
 			Session s=null;
@@ -114,7 +114,7 @@ final public class HibernateUtil {
 			
 		}
 	
-	//统一的一个修改和删除(批量 hql) hql"delete upate ...??"
+	//统一的一个修改和删除(批量 hql) hql"delete update ...??"
 	//OpenSessionInView
 	public static void executeUpdateOpenInView(String hql,String[] parameters){
 			Session s = getCurrentSession();

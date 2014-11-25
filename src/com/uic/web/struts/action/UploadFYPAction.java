@@ -53,10 +53,10 @@ public class UploadFYPAction extends DispatchAction {
 		// declare the class
 		String[] supervisor = uploadFYPForm.getSupervisor();
 		Topic topic = new Topic();
-		ArrayList<Teacher> list = new ArrayList<Teacher>();
+		ArrayList<Teacher> teacherlist = new ArrayList<Teacher>();
 		for (int i = 0; i < supervisor.length; i++) {
 			Teacher t = teachersServiceImp.getUniqueTeacher(supervisor[i]);
-			list.add(t);
+			teacherlist.add(t);
 		}
 
 		// fetch the data from the form to the topic object
@@ -72,7 +72,13 @@ public class UploadFYPAction extends DispatchAction {
 			topic.setNumOfStudent(Integer.parseInt(uploadFYPForm.getNumOfStu()));
 		}
 		// save to database
-		fypServiceImp.uploadTopic(list, topic);
+		boolean success=fypServiceImp.uploadTopic(teacherlist, topic);
+		if(success){
+			request.setAttribute("operationInfo", "upload topic success");
+		}else{
+			request.setAttribute("operationInfo", "fail");
+		}
+		
 		return mapping.findForward("uploadok");
 	}
 }

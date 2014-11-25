@@ -29,7 +29,16 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		}
 		return true;
 	}
-
+	
+	public boolean updatetTopic(ArrayList<Teacher> teacher, Topic topic){
+		//update the topic and teatopic
+		return true;
+	}
+	
+	public boolean deleteTopic(ArrayList<Teacher> teacher, Topic topic){
+		//delete the topic and teatopic
+		return true;
+	}
 	@Override
 	public List<TeaTopic> getTeaTopic(String teacherID) {
 		// TODO Auto-generated method stub

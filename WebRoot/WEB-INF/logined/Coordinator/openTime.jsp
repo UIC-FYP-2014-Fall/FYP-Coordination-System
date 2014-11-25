@@ -509,9 +509,9 @@ if(request.getAttribute("CEendHH")!=null){
 	  
       /* jQuery(document).ready(function() {   
         FormValidation.init();
-      }); */
+      });
 	  
-	  <!--choose topic date -->
+	  choose topic date */
 	  var checkin_ct = $('#dpd3').datepicker({
            format: 'yyyy-mm-dd',
            onRender: function(date) {
@@ -540,7 +540,7 @@ if(request.getAttribute("CEendHH")!=null){
 		$('#dpd5')[0].focus();
       }).data('datepicker');
 	  
-	  <!--choose examiner -->
+	  //choose examiner 
 	  
 	  var checkin_ce = $('#dpd5').datepicker({
            format: 'yyyy-mm-dd',
