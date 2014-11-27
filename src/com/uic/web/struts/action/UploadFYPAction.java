@@ -42,9 +42,7 @@ public class UploadFYPAction extends DispatchAction {
 	public ActionForward uploadFYP(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("Using UploadFYPaction");
-		UploadFYPForm uploadFYPForm = (UploadFYPForm) form;// TODO
-															// Auto-generated
-															// method stub
+		UploadFYPForm uploadFYPForm = (UploadFYPForm) form;
 
 		// set up the data service.
 		TeachersServiceImp teachersServiceImp = new TeachersServiceImp();
@@ -62,7 +60,7 @@ public class UploadFYPAction extends DispatchAction {
 		// fetch the data from the form to the topic object
 		topic.setTitle(uploadFYPForm.getTitle());
 		topic.setCredit(Integer.parseInt(uploadFYPForm.getCredit()));
-		
+
 		topic.setDescription(uploadFYPForm.getDescription());
 		if ("individual".equals(uploadFYPForm.getIndividual())) {
 			topic.setIndividual(true);
@@ -72,13 +70,13 @@ public class UploadFYPAction extends DispatchAction {
 			topic.setNumOfStudent(Integer.parseInt(uploadFYPForm.getNumOfStu()));
 		}
 		// save to database
-		boolean success=fypServiceImp.uploadTopic(teacherlist, topic);
-		if(success){
+		boolean success = fypServiceImp.uploadTopic(teacherlist, topic);
+		if (success) {
 			request.setAttribute("operationInfo", "upload topic success");
-		}else{
+		} else {
 			request.setAttribute("operationInfo", "fail");
 		}
-		
+
 		return mapping.findForward("uploadok");
 	}
 }

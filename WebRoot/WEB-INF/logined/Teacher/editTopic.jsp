@@ -96,14 +96,15 @@
 							</div>
 
 							<div class="block-content collapse in">
-								<form action="???" method="post" class="form-horizontal">
+								<form action="${pageContext.request.contextPath }/editFYP.do?flag=editFYP" method="post" class="form-horizontal">
 									<div class="control-group">
 										<label class="control-label" for="focusedInput">Title<span
 											class="required">*</span></label>
 										<div class="controls">
 											<%
 												List<TeaTopic> teaTopic = (List<TeaTopic>)request.getAttribute("teaTopic");
-												out.println("<input class=\"input-xlarge focused\" id=\"focusedInput\"type=\"text\" value=\""+teaTopic.get(0).getTopic().getTitle()+"\">");
+												out.println("<input name=\"fid\" type=\"hidden\" value=\""+teaTopic.get(0).getTopic().getFid()+"\">");
+												out.println("<input class=\"input-xlarge focused\" name=\"title\"id=\"focusedInput\"type=\"text\" value=\""+teaTopic.get(0).getTopic().getTitle()+"\">");
 											%>
 										</div>
 									</div>
@@ -117,11 +118,11 @@
 												id="multiSelect" class="chzn-select span4">
 												<%
 													List<Teacher> teacherList = (List<Teacher>)request.getAttribute("teacherList");
-													Teacher curTeacher = (Teacher)request.getSession().getAttribute("teacherinfo");
-													for(int i=0;i<teacherList.size();i++){																															
-														if(curTeacher.getName().equals(teacherList.get(i).getName())){
-															out.println("<option selected=\"selected\">"+teacherList.get(i).getName()+"</option>");
-															teacherList.remove(i);
+													
+													for(int i=0;i<teaTopic.size();i++){
+														out.println("<option selected=\"selected\">"+teaTopic.get(i).getTeacher().getName()+"</option>");
+														if(teacherList.contains(teaTopic.get(i).getTeacher())){
+															teacherList.remove(teaTopic.get(i).getTeacher());
 														}
 													}
 													for(int i=0;i<teacherList.size();i++){
@@ -135,7 +136,7 @@
 									<div class="control-group">
 										<label class="control-label" for="select01">Credits</label>
 										<div class="controls">
-											<select id="select01" class="chzn-select">
+											<select name="credit" id="select01" class="chzn-select">
 												<%
 													if(teaTopic.get(0).getTopic().getCredit()==3){
 														out.println("<option selected=\"selected\">3</option>");
@@ -152,7 +153,7 @@
 									<div class="control-group">
 										<label class="control-label" for="select01">Group/Individual</label>
 										<div class="controls">
-											<select id="group" class="chzn-select"
+											<select id="group" name="individual" class="chzn-select"
 												onclick="javascript:doit(this);">
 												<%
 													if(teaTopic.get(0).getTopic().getIndividual()){
@@ -171,10 +172,28 @@
 										<label class="control-label" for="select01">Number of
 											students</label>
 										<div class="controls">
-											<select id="numofStu" class="chzn-select" disabled="false">
+											<select name="numOfStu" id="numofStu" class="chzn-select">
 												<%
 													if(teaTopic.get(0).getTopic().getNumOfStudent()==1){
-														out.println("<option selected=\"selected\">1<option>");
+														out.println("<option selected=\"selected\" value=\"1\">1<option>");
+														out.println("<option value=\"2\">2</option>");
+														out.println("<option value=\"3\">3</option>");
+														out.println("<option value=\"4\">4</option>"); 
+													}else if(teaTopic.get(0).getTopic().getNumOfStudent()==2){
+														out.println("<option value=\"1\">1<option>");
+														out.println("<option selected=\"selected\" value=\"2\">2</option>");
+														out.println("<option value=\"3\">3</option>");
+														out.println("<option value=\"4\">4</option>"); 
+													}else if(teaTopic.get(0).getTopic().getNumOfStudent()==3){
+														out.println("<optionvalue=\"1\">1<option>");
+														out.println("<option value=\"2\">2</option>");
+														out.println("<option selected=\"selected\" value=\"3\">3</option>");
+														out.println("<option value=\"4\">4</option>"); 
+													}else if(teaTopic.get(0).getTopic().getNumOfStudent()==4){
+														out.println("<option value=\"1\">1<option>");
+														out.println("<option value=\"2\">2</option>");
+														out.println("<option value=\"3\">3</option>");
+														out.println("<option selected=\"selected\" value=\"4\">4</option>"); 
 													}
 												%>
 											</select>
@@ -187,7 +206,7 @@
 										</label>
 										<div class="controls">
 											<%
-												out.println("<textarea class=\"input-xlarge textarea\" style=\"width: 810px; height: 200px\" >"+teaTopic.get(0).getTopic().getDescription()+"</textarea>");
+												out.println("<textarea name=\"description\" class=\"input-xlarge textarea\" style=\"width: 810px; height: 200px\" >"+teaTopic.get(0).getTopic().getDescription()+"</textarea>");
 											%>
 										</div>
 										<div class="form-actions">

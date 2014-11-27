@@ -3,6 +3,9 @@ package com.uic.service.imp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
@@ -18,42 +21,89 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		List<Topic> list = HibernateUtil.executeQueryOpenInView(hql, null);
 		return list;
 	}
-	
-	public boolean uploadTopic(ArrayList<Teacher> teacher, Topic topic){
+
+	public boolean uploadTopic(ArrayList<Teacher> teacher, Topic topic) {
 		HibernateUtil.save(topic);
-		for(int i=0;i<teacher.size();i++){
-			TeaTopic teaTopic= new TeaTopic();
+		for (int i = 0; i < teacher.size(); i++) {
+			TeaTopic teaTopic = new TeaTopic();
 			teaTopic.setTeacher(teacher.get(i));
 			teaTopic.setTopic(topic);
 			HibernateUtil.save(teaTopic);
 		}
 		return true;
 	}
-	
-	public boolean updatetTopic(ArrayList<Teacher> teacher, Topic topic){
-		//update the topic and teatopic
+	public boolean updateEditTopic(ArrayList<Teacher> teacher, Topic topic) {
+		for (int i = 0; i < teacher.size(); i++) {
+			TeaTopic teaTopic = new TeaTopic();
+			teaTopic.setTeacher(teacher.get(i));
+			teaTopic.setTopic(topic);
+			HibernateUtil.save(teaTopic);
+		}
 		return true;
 	}
-	
-	public boolean deleteTopic(ArrayList<Teacher> teacher, Topic topic){
-		//delete the topic and teatopic
+	public boolean updatetTopic(Topic topic) {
+		Session session = HibernateUtil.openSession();
+		Transaction tx = session.beginTransaction();
+		session.update(topic);
+		tx.commit();
+		session.close();
 		return true;
 	}
+
+	public boolean CheckIfTeaTopicExit(String topicId, String teacherId) {
+		String hql = "from TeaTopic where topic_id=? and teacher_id=?";
+		String[] parameters = { topicId, teacherId };
+		TeaTopic teaTopic = (TeaTopic) HibernateUtil.uniqueQueryOpenInView(hql,
+				parameters);
+		if (teaTopic == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean deleteTopic(Topic topic) {
+		// delete the topic 
+		Session session = HibernateUtil.openSession();
+		Transaction tx = session.beginTransaction();
+		session.delete(topic);
+		tx.commit();
+		session.close();
+		return true;
+	}
+
 	@Override
-	public List<TeaTopic> getTeaTopic(String teacherID) {
+	public List<TeaTopic> getTeaTopic(String teacherId) {
 		// TODO Auto-generated method stub
 		String hql = "from TeaTopic where teacher_id=?";
-		String[] parameters={teacherID};
+		String[] parameters = { teacherId };
 		@SuppressWarnings("unchecked")
-		List<TeaTopic> list = HibernateUtil.executeQueryOpenInView(hql, parameters);
+		List<TeaTopic> list = HibernateUtil.executeQueryOpenInView(hql,
+				parameters);
+		return list;
+	}
+
+	public Topic getUniqueTopic(String topicId) {
+		// TODO Auto-generated method stub
+		String hql = "from Topic where fid=?";
+		String[] parameters = { topicId };
+		@SuppressWarnings("unchecked")
+		Topic topic = (Topic) HibernateUtil.uniqueQuery(hql, parameters);
+		return topic;
+	}
+
+	public List<TeaTopic> getTeaTopicByTopicId(String id) {
+		String hql = "from TeaTopic where topic_id=?";
+		String[] parameters = { id };
+		@SuppressWarnings("unchecked")
+		List<TeaTopic> list = HibernateUtil.executeQueryOpenInView(hql,
+				parameters);
 		return list;
 	}
 	
-	 public List<TeaTopic> getTeaTopicByTopicId(String id){
-		 String hql = "from TeaTopic where topic_id=?";
-			String[] parameters={id};
-			@SuppressWarnings("unchecked")
-			List<TeaTopic> list = HibernateUtil.executeQueryOpenInView(hql, parameters);
-			return list;
-	 }
+	public void deleteTeaTopic(String topicId,String teacherId){
+		String hql = "delete from TeaTopic where topic_id=? and teacher_id=?";
+		String[] parameters={topicId,teacherId};
+		HibernateUtil.executeUpdate(hql, parameters);
+	}
 }

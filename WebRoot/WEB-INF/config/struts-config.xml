@@ -12,6 +12,7 @@
     <form-bean name="preTimeForm" type="com.uic.web.struts.form.PreTimeForm" />
     <form-bean name="quotaForm" type="com.uic.web.struts.form.QuotaForm" />
     <form-bean name="workloadForm" type="com.uic.web.struts.form.WorkloadForm" />
+    <form-bean name="editFYPForm" type="com.uic.web.struts.form.EditFYPForm" />
 
   </form-beans>
 
@@ -170,6 +171,17 @@
       validate="false"
       cancellable="true">
       <forward name="goWorkloadUi" path="/WEB-INF/logined/Coordinator/workload.jsp" />
+    </action>
+    <action
+      attribute="editFYPForm"
+      input="/WEB-INF/logined/Teacher/editTopic.jsp"
+      name="editFYPForm"
+      parameter="flag"
+      path="/editFYP"
+      scope="request"
+      type="com.uic.web.struts.action.EditFYPAction"
+      cancellable="true">
+      <forward name="editOk" path="/teacherPageControl.do?flag=topicList" /> 
     </action>
 
 
