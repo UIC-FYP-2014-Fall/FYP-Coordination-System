@@ -27,5 +27,9 @@
 			<key column="topic_id" />
 			<one-to-many class="com.uic.domain.TeaTopic" />
 		</set>
+		<set name="obsTopic">
+			<key column="topic_id" />
+			<one-to-many class="com.uic.domain.ObsTopic" />
+		</set>
 	</class>
 </hibernate-mapping>

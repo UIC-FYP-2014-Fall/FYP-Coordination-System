@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import com.uic.domain.ObsTopic;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
@@ -32,6 +34,26 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		}
 		return true;
 	}
+
+	public boolean setObserver(Teacher observer, Topic topic) {
+		//first check if exit
+		String hql="from ObsTopic where topic_id=?";
+		String[] parameters={topic.getFid().toString()};
+		ObsTopic check = (ObsTopic) HibernateUtil.uniqueQueryOpenInView(hql, parameters);
+		if (check==null){
+			ObsTopic obsTopic = new ObsTopic();
+			obsTopic.setObserver(observer);
+			obsTopic.setTopic(topic);
+			HibernateUtil.save(obsTopic);
+			return true;
+		}else{
+			hql="update ObsTopic set observer_id=? where topic_id=?";
+			String[] para={observer.getId().toString(),topic.getFid().toString()};
+			HibernateUtil.executeUpdate(hql, para);
+			return true;
+		}
+	}
+
 	public boolean updateEditTopic(ArrayList<Teacher> teacher, Topic topic) {
 		for (int i = 0; i < teacher.size(); i++) {
 			TeaTopic teaTopic = new TeaTopic();
@@ -41,6 +63,7 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		}
 		return true;
 	}
+
 	public boolean updatetTopic(Topic topic) {
 		Session session = HibernateUtil.openSession();
 		Transaction tx = session.beginTransaction();
@@ -63,7 +86,7 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 	}
 
 	public boolean deleteTopic(Topic topic) {
-		// delete the topic 
+		// delete the topic
 		Session session = HibernateUtil.openSession();
 		Transaction tx = session.beginTransaction();
 		session.delete(topic);
@@ -82,7 +105,15 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 				parameters);
 		return list;
 	}
-
+	
+	public List<ObsTopic> getObsTopicByTopicId(String topicId) {
+		String hql = "from ObsTopic where topic_id=?";
+		String[] parameters = { topicId };
+		@SuppressWarnings("unchecked")
+		List<ObsTopic> list = HibernateUtil.executeQueryOpenInView(hql,
+				parameters);
+		return list;
+	}
 	public Topic getUniqueTopic(String topicId) {
 		// TODO Auto-generated method stub
 		String hql = "from Topic where fid=?";
@@ -100,10 +131,10 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 				parameters);
 		return list;
 	}
-	
-	public void deleteTeaTopic(String topicId,String teacherId){
+
+	public void deleteTeaTopic(String topicId, String teacherId) {
 		String hql = "delete from TeaTopic where topic_id=? and teacher_id=?";
-		String[] parameters={topicId,teacherId};
+		String[] parameters = { topicId, teacherId };
 		HibernateUtil.executeUpdate(hql, parameters);
 	}
 }

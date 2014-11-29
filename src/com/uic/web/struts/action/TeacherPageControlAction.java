@@ -4,6 +4,7 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +15,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.uic.domain.ObsTopic;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
+import com.uic.domain.Topic;
 import com.uic.service.imp.FYPServiceImp;
 import com.uic.service.imp.TeachersServiceImp;
 
@@ -50,6 +53,27 @@ public class TeacherPageControlAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
+			//prepare date: teacherList and Teatopic List of the current teacher.
+			Teacher curTeacher = (Teacher) request.getSession().getAttribute("teacherinfo");
+			TeachersServiceImp teachersServiceImp=new TeachersServiceImp();
+			FYPServiceImp fypServiceImp = new FYPServiceImp();
+			ArrayList<Teacher> observerList =(ArrayList<Teacher>) teachersServiceImp.getTeachers();
+			List<TeaTopic> teaTopicList = fypServiceImp.getTeaTopic(curTeacher.getId().toString());
+			ArrayList<ObsTopic> indObsTopics=new ArrayList<ObsTopic>();
+			ArrayList<ObsTopic> groObsTopics=new ArrayList<ObsTopic>();
+			
+			for(int i =0;i<teaTopicList.size();i++){
+				if(teaTopicList.get(i).getTopic().getIndividual()){
+					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
+					indObsTopics.add(obsTopic.get(0));
+				}else{
+					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
+					groObsTopics.add(obsTopic.get(0));
+				}
+			}
+			request.setAttribute("observerList", observerList);
+			request.setAttribute("indObsTopics", indObsTopics);
+			request.setAttribute("groObsTopics", groObsTopics);
 			return mapping.findForward("chooseObserver");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");

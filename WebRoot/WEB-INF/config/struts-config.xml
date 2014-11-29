@@ -4,24 +4,19 @@
 <struts-config>
   <form-beans >
     <form-bean name="userForm" type="com.uic.web.struts.form.UserForm" />
-
     <form-bean name="teacherForm" type="com.uic.web.struts.form.TeacherForm" />
-
     <form-bean name="changePwdForm" type="com.uic.web.struts.form.ChangePwdForm" />
     <form-bean name="uploadFYPForm" type="com.uic.web.struts.form.UploadFYPForm" />
     <form-bean name="preTimeForm" type="com.uic.web.struts.form.PreTimeForm" />
     <form-bean name="quotaForm" type="com.uic.web.struts.form.QuotaForm" />
     <form-bean name="workloadForm" type="com.uic.web.struts.form.WorkloadForm" />
     <form-bean name="editFYPForm" type="com.uic.web.struts.form.EditFYPForm" />
-
+    <form-bean name="observerForm" type="com.uic.web.struts.form.ObserverForm" />
   </form-beans>
-
   <global-exceptions />
   <global-forwards >
     <forward name="goLogin" path="/index.jsp" />
-
   </global-forwards>
-
   <action-mappings >
     <action
       parameter="flag"
@@ -31,8 +26,6 @@
       cancellable="true" >
       <forward name="goMainUi" path="/WEB-INF/logined/Coordinator/main.jsp" />
       <forward name="goTeacherMain" path="/WEB-INF/logined/Teacher/teacherMain.jsp" />
-      
-      
     </action>
     <action
       attribute="teacherForm"
@@ -56,7 +49,6 @@
       validate="false"
       cancellable="true">
       <forward name="loginok" path="/goUI.do" />
-      
       <forward name="goLoginUi" path="/WEB-INF/login.jsp" />
     </action>
     <action
@@ -79,9 +71,7 @@
       <forward name="timetable" path="/WEB-INF/logined/Teacher/timetable.jsp" />
       <forward name="uploadTopic" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
       <forward name="editTopic" path="/WEB-INF/logined/Teacher/editTopic.jsp" />
-      
     </action>
-    
     <action
       parameter="flag"
       path="/export"
@@ -114,8 +104,6 @@
       cancellable="true" >
       <forward name="uploadok" path="/teacherPageControl.do?flag=topicList" />
     </action>
-
-
     <action
       attribute="preTimeForm"
       input="/WEB-INF/logined/Coordinator/preTime.jsp"
@@ -183,13 +171,19 @@
       cancellable="true">
       <forward name="editOk" path="/teacherPageControl.do?flag=topicList" /> 
     </action>
+    <action
+      attribute="observerForm"
+      input="/WEB-INF/logined/Teacher/chooseObserver.jsp"
+      name="observerForm"
+      parameter="flag"
+      path="/setObserver"
+      scope="request"
+      type="com.uic.web.struts.action.SetObserverAction"
+      cancellable="true" >
+      <forward name="obsSaved" path="/teacherPageControl.do?flag=chooseObserver" />
+    </action>
 
-
-
-
-
-
-
+    
   </action-mappings>
 
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />

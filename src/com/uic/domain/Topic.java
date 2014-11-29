@@ -23,10 +23,18 @@ public class Topic implements java.io.Serializable {
 	private Integer numOfStudent;
 	private String description;
 	private Set<TeaTopic> teaTopic;
-
+	private Set<ObsTopic> obsTopic;
 
 	// Constructors
 
+
+	public Set<ObsTopic> getObsTopic() {
+		return obsTopic;
+	}
+
+	public void setObsTopic(Set<ObsTopic> obsTopic) {
+		this.obsTopic = obsTopic;
+	}
 
 	/** default constructor */
 	public Topic() {

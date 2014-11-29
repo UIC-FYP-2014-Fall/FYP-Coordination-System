@@ -63,9 +63,6 @@ public class QuotaAction extends DispatchAction {
 			//ready teacher info for quota.jsp
 			TeachersServiceInter teachersServiceInter =  new TeachersServiceImp();
 			request.setAttribute("teacherList", teachersServiceInter.getTeachers());
-			
-			
-			
 			return mapping.findForward("goUi");
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");

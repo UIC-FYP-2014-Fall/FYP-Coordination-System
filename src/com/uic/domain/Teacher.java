@@ -24,11 +24,20 @@ public class Teacher implements java.io.Serializable {
 	private String workload;
 
 	private Set<TeaTopic> teaTopic;
+	private Set<ObsTopic> obsTopic;
 
 	// Constructors
 
 	public String getWorkload() {
 		return workload;
+	}
+
+	public Set<ObsTopic> getObsTopic() {
+		return obsTopic;
+	}
+
+	public void setObsTopic(Set<ObsTopic> obsTopic) {
+		this.obsTopic = obsTopic;
 	}
 
 	public void setWorkload(String workload) {
