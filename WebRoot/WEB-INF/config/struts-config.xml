@@ -179,7 +179,7 @@
       path="/setObserver"
       scope="request"
       type="com.uic.web.struts.action.SetObserverAction"
-      cancellable="true" >
+      cancellable="true">
       <forward name="obsSaved" path="/teacherPageControl.do?flag=chooseObserver" />
     </action>
 
