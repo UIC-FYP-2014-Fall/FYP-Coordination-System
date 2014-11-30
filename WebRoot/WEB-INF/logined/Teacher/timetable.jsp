@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html class="no-js">
-    
     <head>
         <title>FYP Coordination System</title>
         <!-- Bootstrap -->
@@ -71,88 +72,74 @@
                 <div class="span9" id="content">
                      <div class="row-fluid">
                             <!-- block -->
-                            <div class="block">
+                            <div name="week" class="block">
                                 
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Timetable</div>
+                                    <form name="selectWeek">
+                                   	<div class="muted pull-right">
+                                        <select id="select" name="week" id="week" onchange="setChange()">
+                                        <%
+                                       		String week=(String)request.getAttribute("week");
+                                        	for(int i=1;i<=Integer.parseInt(week);i++){
+                                        		out.println("<option value=\""+i+"\">Week"+i+"</option>");
+                                        	}
+                                        %>
+                                        </select>
+                                     </form>
+                                    </div>
                                 </div>
 
                                 <div class="block-content collapse in">
-                                    <form class="form-horizontal" action="" method="post">
-                                        <table class="table table-striped table-bordered">
-                                            <th></th>
-                                            <th>Mon</th>
-                                            <th>Tue</th>
-                                            <th>Wed</th>
-                                            <th>Thur</th>
-                                            <th>Fri</th>
-                                            <tr>
-                                                <td width="150px">9:00-9:50</td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>10:00-10:50</td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>11:00-11:50</td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="6"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>14:00-14:50</td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>15:00-15:50</td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>16:00-16:50</td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>17:00-17:50</td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                                <td><input type="checkbox" name="name"></td>
-                                            </tr>
-                                        </table>
-                                                                            
+                                    <form name="week" class="form-horizontal" action="${pageContext.request.contextPath }/timetable.do" method="post">
+                                    <%
+                                    	String[] timeArray={"9:00-9:50","10:00-10:50","11:00-11:50","14:00-14:50","15:00-15:50","16:00-16:50","17:00-17:50"};
+                                    	
+                                    	System.out.println(timeArray.length);
+                                    	for(int i=1;i<=Integer.parseInt(week);i++){
+                                            if(i==1){
+                                                out.println("<table id=\"week"+i+"\" border=\"0\" class=\"table table-striped table-bordered\" style='DISPLAY:block'>");
+                                            }else{
+                                    			out.println("<table id=\"week"+i+"\" border=\"0\" class=\"table table-striped table-bordered\" style='DISPLAY:none'>");
+                                            }
+                                    		//out.println("<thead>");
+                                    		out.println("<tr>");
+                                    		out.println("<th>week"+i+"</th>");
+                                    		out.println("<th>Mon</th>");
+                                    		out.println("<th>Tue</th>");
+                                    		out.println("<th>Wed</th>");
+                                    		out.println("<th>Thur</th>");
+                                    		out.println("<th>Fri</th>");
+                                    		out.println("</tr>");
+                                    		//out.println("</thead>");
+                                    		//out.println("<tbody>");
+                                    		for(int j=1;j<4;j++){
+                                    			out.println("<tr>");
+                                    			out.println("<td width=\"150px\">"+timeArray[j-1]+"</td>");
+                                    			for(int k=1;k<=5;k++){
+                                    				out.println("<td><input type=\"checkbox\" name=\"timeslot\" value=\""+i+","+j+","+k+"\"></td>");
+                                    			}
+                                    			out.println("</tr>");
+                                    		}
+                                    		out.println("<tr><td colspan=\"6\"></td></tr>");
+                                    		for(int j=4;j<8;j++){
+                                    			out.println("<tr>");
+                                    			out.println("<td width=\"150px\">"+timeArray[j-1]+"</td>");
+                                    			for(int k=1;k<=5;k++){
+                                    				out.println("<td><input type=\"checkbox\" name=\"timeslot\" value=\""+i+","+j+","+k+"\"></td>");
+                                    			}
+                                    			out.println("</tr>");
+                                    		}
+                                    		//out.println("</tbody>");
+                                    		out.println("</table>");
+                                    	}
+                                    
+                                    %>                         
 	                                    <div class="form-actions">
 		                                	<button type="submit" class="btn btn-primary">Submit</button>
 		                                    <button type="reset" class="btn">Reset</button>
 	                                    </div>
 	                                </form>
-
                                 </div>
                             </div>
 
@@ -165,7 +152,29 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="vendors/easypiechart/jquery.easy-pie-chart.js"></script>
         <script src="assets/scripts.js"></script>
-
+        <script>   
+		function setChange(){   
+			if(document.selectWeek.select.value == "1"){       
+        		document.all.week1.style.display = "block";                   
+		  	}                   
+		  	else{                           
+		     	document.all.week1.style.display = "none";                   
+		  	}   
+		  	if(document.selectWeek.select.value == "2"){  
+                document.all.week2.style.display = "block";                   
+		  	}                   
+		  	else{                           
+		   		document.all.week2.style.display = "none";                   
+		  	}  
+		  	if(document.selectWeek.select.value == "3"){       
+		  		document.all.week3.style.display = "block";                   
+		  	}                   
+		  	else{                           
+		  		document.all.week3.style.display = "none";                   
+		  	}          
+		}   
+		    
+		 </script>   
     </body>
 
 </html>

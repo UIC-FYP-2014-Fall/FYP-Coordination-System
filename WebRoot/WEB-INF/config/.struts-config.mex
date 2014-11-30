@@ -34,6 +34,7 @@
   <StrutsActivity path="/WEB-INF/logined/Coordinator/quota.jsp" location="1320,1695" dimension="150,100" />
   <StrutsActivity path="/WEB-INF/logined/Coordinator/workload.jsp" location="990,1995" dimension="150,100" />
   <StrutsActivity path="/index.jsp" location="650,1650" dimension="88,53" />
+  <StrutsActivity path="/timetable.do" location="50,1950" dimension="252,88" />
   <StrutsTransition id="/WEB-INF/logined/Teacher/uploadTopic.jsp,null,/uploadFYP.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="1250,1276" />
@@ -185,7 +186,7 @@
       <AbsolutePoint location="1425,1634" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/goUI.do,goMainUi,/WEB-INF/logined/Coordinator/main.jsp,1" routingType="0">
+  <StrutsTransition id="/goUI.do,goMainUi,/WEB-INF/logined/Coordinator/main.jsp,1" routingType="1">
     <AutomaticBendpoints>
       <AbsolutePoint location="50,102" />
       <AbsolutePoint location="-85,102" />

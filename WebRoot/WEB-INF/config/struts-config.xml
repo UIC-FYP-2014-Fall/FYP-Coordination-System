@@ -12,6 +12,7 @@
     <form-bean name="workloadForm" type="com.uic.web.struts.form.WorkloadForm" />
     <form-bean name="editFYPForm" type="com.uic.web.struts.form.EditFYPForm" />
     <form-bean name="observerForm" type="com.uic.web.struts.form.ObserverForm" />
+    <form-bean name="timeslotForm" type="com.uic.web.struts.form.TimeslotForm" />
   </form-beans>
   <global-exceptions />
   <global-forwards >
@@ -182,10 +183,17 @@
       cancellable="true">
       <forward name="obsSaved" path="/teacherPageControl.do?flag=chooseObserver" />
     </action>
+    <action
+      attribute="timeslotForm"
+      name="timeslotForm"
+      parameter="flag"
+      path="/timetable"
+      scope="request"
+      type="com.uic.web.struts.action.TimetableAction"
+      cancellable="true" />
 
     
   </action-mappings>
-
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />
 </struts-config>
 

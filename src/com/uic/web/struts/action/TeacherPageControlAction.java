@@ -128,6 +128,8 @@ public class TeacherPageControlAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
+			String week="3";
+			request.setAttribute("week", week);
 			return mapping.findForward("timetable");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
