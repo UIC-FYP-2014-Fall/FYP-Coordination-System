@@ -39,5 +39,9 @@
 			<key column="observer_id" />
 			<one-to-many class="com.uic.domain.ObsTopic" />
 		</set>
+		<set name="timeslot">
+			<key column="teacher_id" />
+			<one-to-many class="com.uic.domain.Timeslot" />
+		</set>
     </class>
 </hibernate-mapping>

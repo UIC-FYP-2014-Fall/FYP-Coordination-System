@@ -5,12 +5,16 @@
 package com.uic.web.struts.action;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+
+import com.uic.domain.ObsTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.imp.FYPServiceImp;
@@ -53,7 +57,7 @@ public class UploadFYPAction extends DispatchAction {
 		Topic topic = new Topic();
 		ArrayList<Teacher> teacherlist = new ArrayList<Teacher>();
 		for (int i = 0; i < supervisor.length; i++) {
-			Teacher t = teachersServiceImp.getUniqueTeacher(supervisor[i]);
+			Teacher t = teachersServiceImp.getUniqueTeacherByName(supervisor[i]);
 			teacherlist.add(t);
 		}
 
@@ -71,12 +75,17 @@ public class UploadFYPAction extends DispatchAction {
 		}
 		// save to database
 		boolean success = fypServiceImp.uploadTopic(teacherlist, topic);
+		
 		if (success) {
 			request.setAttribute("operationInfo", "upload topic success");
 		} else {
 			request.setAttribute("operationInfo", "fail");
 		}
-
+		//set a default observer
+		ObsTopic obsTopic=new ObsTopic();
+		obsTopic.setObserver(teacherlist.get(0));
+		obsTopic.setTopic(topic);
+		fypServiceImp.saveObject(obsTopic);
 		return mapping.findForward("uploadok");
 	}
 }

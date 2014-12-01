@@ -26,6 +26,7 @@
 	<mapping resource="com/uic/domain/Topic.hbm.xml" />
 	<mapping resource="com/uic/domain/TeaTopic.hbm.xml" />
 	<mapping resource="com/uic/domain/ObsTopic.hbm.xml" />
+	<mapping resource="com/uic/domain/Timeslot.hbm.xml" />
 
 </session-factory>
 

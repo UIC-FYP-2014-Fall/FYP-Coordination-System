@@ -8,19 +8,19 @@
 			<column name="fid" />
 			<generator class="identity" />
 		</id>
-		<property name="title" type="java.lang.String">
+		<property name="title" lazy="false" type="java.lang.String">
 			<column name="title" length="50" not-null="true" />
 		</property>
-		<property name="credit" type="java.lang.Integer">
+		<property name="credit" lazy="false" type="java.lang.Integer">
 			<column name="credit" not-null="true" />
 		</property>
-		<property name="individual" type="java.lang.Boolean">
+		<property name="individual" lazy="false" type="java.lang.Boolean">
 			<column name="individual" not-null="true" />
 		</property>
-		<property name="numOfStudent" type="java.lang.Integer">
+		<property name="numOfStudent" lazy="false"  type="java.lang.Integer">
 			<column name="numOfStudent" not-null="true" />
 		</property>
-		<property name="description" type="java.lang.String">
+		<property name="description" lazy="false" type="java.lang.String">
 			<column name="description" length="65535" not-null="true" />
 		</property>
 		<set name="teaTopic">

@@ -76,7 +76,7 @@ public class EditFYPAction extends DispatchAction {
 		
 		// assign teacher object to the array list
 		for (int i = 0; i < supervisor.length; i++) {
-			Teacher t = teachersServiceImp.getUniqueTeacher(supervisor[i]);
+			Teacher t = teachersServiceImp.getUniqueTeacherByName(supervisor[i]);
 			teacherList.add(t);
 		}
 		//get the teacher in the database.

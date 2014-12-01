@@ -107,14 +107,16 @@ final public class HibernateUtil {
 				}
 			}
 			query.executeUpdate();
+			s.flush();
+			s.clear();
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 			// TODO: handle exception
 		} finally {
-
 			if (s != null && s.isOpen()) {
+				
 				s.close();
 			}
 
@@ -135,6 +137,7 @@ final public class HibernateUtil {
 		}
 		// System.out.println("query+++++++++++++++++++++++++++++++"+query.toString());
 		query.executeUpdate();
+		s.flush();
 	}
 
 	// 统一的添加的方法
@@ -146,6 +149,7 @@ final public class HibernateUtil {
 			s = openSession();
 			tx = s.beginTransaction();
 			s.save(obj);
+			s.flush();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
@@ -166,6 +170,7 @@ final public class HibernateUtil {
 	public static void saveOpenInView(Object obj) {
 		Session s = getCurrentSession();
 		s.save(obj);
+		s.flush();
 	}
 
 	// 提供一个统一的查询方法(带分页) hql 形式 from 类 where 条件=? ..
@@ -227,10 +232,8 @@ final public class HibernateUtil {
 	// 提供一个统一的查询方法 hql 形式 from 类 where 条件=? ..
 	@SuppressWarnings("rawtypes")
 	public static List executeQuery(String hql, String[] parameters) {
-
 		Session s = null;
 		List list = null;
-
 		try {
 			s = openSession();
 			Query query = s.createQuery(hql);
@@ -259,10 +262,8 @@ final public class HibernateUtil {
 	// OpenSessionInView
 	@SuppressWarnings("rawtypes")
 	public static List executeQueryOpenInView(String hql, String[] parameters) {
-
 		Session s = getCurrentSession();
 		List list = null;
-
 		Query query = s.createQuery(hql);
 		// 先判断是否有参数要绑定
 		if (parameters != null && parameters.length > 0) {
@@ -271,7 +272,6 @@ final public class HibernateUtil {
 			}
 		}
 		list = query.list();
-
 		return list;
 	}
 

@@ -1,5 +1,7 @@
 package com.uic.domain;
 
+import java.util.Set;
+
 /**
  * Student entity. @author MyEclipse Persistence Tools
  */
@@ -20,8 +22,16 @@ public class Student implements java.io.Serializable {
 	private String telephone;
 	private String sex;
 	private String program;
-
+	private Set<Timeslot> timeslot;
 	// Constructors
+
+	public Set<Timeslot> getTimeslot() {
+		return timeslot;
+	}
+
+	public void setTimeslot(Set<Timeslot> timeslot) {
+		this.timeslot = timeslot;
+	}
 
 	/** default constructor */
 	public Student() {

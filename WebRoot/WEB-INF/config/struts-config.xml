@@ -190,8 +190,10 @@
       path="/timetable"
       scope="request"
       type="com.uic.web.struts.action.TimetableAction"
-      cancellable="true" />
-
+      cancellable="true">
+      <forward name="goTeacherPageControl_timetable" path="/teacherPageControl.do?flag=timetable" /> 
+     </action>
+	
     
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />

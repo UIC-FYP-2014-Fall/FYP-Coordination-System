@@ -25,11 +25,20 @@ public class Teacher implements java.io.Serializable {
 
 	private Set<TeaTopic> teaTopic;
 	private Set<ObsTopic> obsTopic;
+	private Set<Timeslot> timeslot;
 
 	// Constructors
 
 	public String getWorkload() {
 		return workload;
+	}
+
+	public Set<Timeslot> getTimeslot() {
+		return timeslot;
+	}
+
+	public void setTimeslot(Set<Timeslot> timeslot) {
+		this.timeslot = timeslot;
 	}
 
 	public Set<ObsTopic> getObsTopic() {

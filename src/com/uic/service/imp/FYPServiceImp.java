@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
 import com.uic.domain.ObsTopic;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
@@ -14,23 +12,23 @@ import com.uic.domain.Topic;
 import com.uic.service.inter.FYPServiceInter;
 import com.uic.util.HibernateUtil;
 
+@SuppressWarnings("unchecked")
 public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 	@Override
 	public List<Topic> getTopic(String teacherName) {
 		// TODO Auto-generated method stub
 		String hql = "from Topic";
-		@SuppressWarnings("unchecked")
-		List<Topic> list = HibernateUtil.executeQueryOpenInView(hql, null);
+		List<Topic> list = getListObject(hql, null);
 		return list;
 	}
 
 	public boolean uploadTopic(ArrayList<Teacher> teacher, Topic topic) {
-		HibernateUtil.save(topic);
+		saveObject(topic);
 		for (int i = 0; i < teacher.size(); i++) {
 			TeaTopic teaTopic = new TeaTopic();
 			teaTopic.setTeacher(teacher.get(i));
 			teaTopic.setTopic(topic);
-			HibernateUtil.save(teaTopic);
+			saveObject(teaTopic);
 		}
 		return true;
 	}
@@ -39,17 +37,17 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		//first check if exit
 		String hql="from ObsTopic where topic_id=?";
 		String[] parameters={topic.getFid().toString()};
-		ObsTopic check = (ObsTopic) HibernateUtil.uniqueQueryOpenInView(hql, parameters);
+		ObsTopic check = (ObsTopic) getUniqueObject(hql, parameters);
 		if (check==null){
 			ObsTopic obsTopic = new ObsTopic();
 			obsTopic.setObserver(observer);
 			obsTopic.setTopic(topic);
-			HibernateUtil.save(obsTopic);
+			saveObject(obsTopic);
 			return true;
 		}else{
 			hql="update ObsTopic set observer_id=? where topic_id=?";
 			String[] para={observer.getId().toString(),topic.getFid().toString()};
-			HibernateUtil.executeUpdate(hql, para);
+			updateObject(hql, para);
 			return true;
 		}
 	}
@@ -59,25 +57,21 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 			TeaTopic teaTopic = new TeaTopic();
 			teaTopic.setTeacher(teacher.get(i));
 			teaTopic.setTopic(topic);
-			HibernateUtil.save(teaTopic);
+			saveObject(teaTopic);
 		}
 		return true;
 	}
 
 	public boolean updatetTopic(Topic topic) {
-		Session session = HibernateUtil.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = HibernateUtil.getCurrentSession();
 		session.update(topic);
-		tx.commit();
-		session.close();
 		return true;
 	}
 
 	public boolean CheckIfTeaTopicExit(String topicId, String teacherId) {
 		String hql = "from TeaTopic where topic_id=? and teacher_id=?";
 		String[] parameters = { topicId, teacherId };
-		TeaTopic teaTopic = (TeaTopic) HibernateUtil.uniqueQueryOpenInView(hql,
-				parameters);
+		TeaTopic teaTopic = (TeaTopic) getUniqueObject(hql,parameters);
 		if (teaTopic == null) {
 			return false;
 		} else {
@@ -87,11 +81,8 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 
 	public boolean deleteTopic(Topic topic) {
 		// delete the topic
-		Session session = HibernateUtil.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = HibernateUtil.getCurrentSession();
 		session.delete(topic);
-		tx.commit();
-		session.close();
 		return true;
 	}
 
@@ -100,17 +91,14 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		// TODO Auto-generated method stub
 		String hql = "from TeaTopic where teacher_id=?";
 		String[] parameters = { teacherId };
-		@SuppressWarnings("unchecked")
-		List<TeaTopic> list = HibernateUtil.executeQueryOpenInView(hql,
-				parameters);
+		List<TeaTopic> list = getListObject(hql,parameters);
 		return list;
 	}
 	
 	public List<ObsTopic> getObsTopicByTopicId(String topicId) {
 		String hql = "from ObsTopic where topic_id=?";
 		String[] parameters = { topicId };
-		@SuppressWarnings("unchecked")
-		List<ObsTopic> list = HibernateUtil.executeQueryOpenInView(hql,
+		List<ObsTopic> list =(List<ObsTopic>)getListObject(hql,
 				parameters);
 		return list;
 	}
@@ -118,16 +106,14 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		// TODO Auto-generated method stub
 		String hql = "from Topic where fid=?";
 		String[] parameters = { topicId };
-		@SuppressWarnings("unchecked")
-		Topic topic = (Topic) HibernateUtil.uniqueQuery(hql, parameters);
+		Topic topic = (Topic) getUniqueObject(hql, parameters);
 		return topic;
 	}
 
 	public List<TeaTopic> getTeaTopicByTopicId(String id) {
 		String hql = "from TeaTopic where topic_id=?";
 		String[] parameters = { id };
-		@SuppressWarnings("unchecked")
-		List<TeaTopic> list = HibernateUtil.executeQueryOpenInView(hql,
+		List<TeaTopic> list = (List<TeaTopic>) getListObject(hql,
 				parameters);
 		return list;
 	}
