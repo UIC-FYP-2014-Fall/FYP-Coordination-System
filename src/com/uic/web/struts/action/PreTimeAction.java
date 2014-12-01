@@ -93,7 +93,7 @@ public class PreTimeAction extends DispatchAction {
 						request.setAttribute("OpenTime", "false");
 					}
 					request.setAttribute("CEyear", CEyear);
-					request.setAttribute("CEmonth", CEmonth);
+					request.setAttribute("CEmonth", Integer.parseInt(CEmonth)-1);
 					request.setAttribute("CEday", CEday);
 				}
 				

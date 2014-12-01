@@ -47,8 +47,8 @@ public class LoginAction extends Action {
 	 */
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("Using LoginAction");
-		
+		// System.out.println("Using LoginAction");
+
 		UserForm userForm = (UserForm) form;// TODO Auto-generated method stub
 
 		// receive login.jsp form information
@@ -56,12 +56,13 @@ public class LoginAction extends Action {
 		user.setUsername(userForm.getUsername());
 		user.setPassword(userForm.getPassword());
 		user.setType(userForm.getType());
+
 		String remember = userForm.getRemember();
 		String username = userForm.getUsername();
 		String password = userForm.getPassword();
 		String type = userForm.getType();
-		//System.out.println(type);
-		if (userForm.getType()!=null) {
+		// System.out.println(type);
+		if (userForm.getType() != null) {
 			// System.out.println(username + password + remember +
 			// "===========");
 			// check username and password
