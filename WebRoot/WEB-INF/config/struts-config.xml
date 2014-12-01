@@ -27,6 +27,7 @@
       cancellable="true" >
       <forward name="goMainUi" path="/WEB-INF/logined/Coordinator/main.jsp" />
       <forward name="goTeacherMain" path="/WEB-INF/logined/Teacher/teacherMain.jsp" />
+      <forward name="goStudentMain" path="/goStudentMain.do" />
     </action>
     <action
       attribute="teacherForm"
@@ -193,8 +194,15 @@
       cancellable="true">
       <forward name="goTeacherPageControl_timetable" path="/teacherPageControl.do?flag=timetable" /> 
      </action>
-	
-    
+
+    <action
+      parameter="flag"
+      path="/goStudentMain"
+      type="com.uic.web.struts.action.GoStudentMainAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goMainUi" path="/WEB-INF/logined/Student/studentMain.jsp" />
+    </action>
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />
 </struts-config>
