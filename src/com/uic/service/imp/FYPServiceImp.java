@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.uic.domain.ObsTopic;
@@ -118,7 +117,6 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		// TODO Auto-generated method stub
 		String hql = "from Topic where fid=?";
 		String[] parameters = { topicId };
-		@SuppressWarnings("unchecked")
 		Topic topic = (Topic) HibernateUtil.uniqueQuery(hql, parameters);
 		return topic;
 	}
