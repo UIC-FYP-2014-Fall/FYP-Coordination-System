@@ -7,8 +7,7 @@
 <title>FYP Coordination System</title>
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-       
+        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen"> 
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -32,7 +31,7 @@
                                 		<a tabindex="-1">Hello, ${coordinatorinfo.name }</a>
                                 	</li>
                                     <li>
-                                        <a tabindex="-1" href="${pageContext.request.contextPath }/logout.do">Logout</a>
+                                         <a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -42,6 +41,20 @@
                 </div>
             </div>
         </div>
+        
+        <div class="modal hide fade" id="logout">
+			<div class="modal-header">
+				<h4>Logout</h4>
+			</div>
+			<div class="modal-body">
+				Are you sure?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
+			</div>
+		</div> 
+        
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
