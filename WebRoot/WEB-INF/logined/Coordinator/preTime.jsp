@@ -45,7 +45,7 @@
                                 		<a tabindex="-1">Hello, ${coordinatorinfo.name }</a>
                                 	</li>
                                     <li>
-                                        <a tabindex="-1" href="${pageContext.request.contextPath }/logout.do">Logout</a>
+                                        <a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -55,6 +55,18 @@
                 </div>
             </div>
         </div>
+        <div class="modal hide fade" id="logout">
+			<div class="modal-header">
+				<h4>Logout</h4>
+			</div>
+			<div class="modal-body">
+				Are you sure?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
+			</div>
+		</div>
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
@@ -115,9 +127,10 @@
             <div class="block-content collapse in">
             <div class="span12">
             <c:if test="${PreDateTime=='true' }">
-            	<div class="alert alert-block">
-					<h4 class="alert-heading">Warning!</h4>
-					<p>Presentation time: from <strong>${PreStartDateTime }</strong> to <strong>${PreEndDateTime }</strong>. Click <a href="#edit" onclick="btn()">here</a> to change.</p>
+            	<div class="alert alert-info">
+					<p>From: <strong>${PreStartDateTime }</strong></p>
+					<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${PreEndDateTime }</strong>.</p>
+					<p>Click <a href="#edit" onclick="btn()">here</a> to change.</p>
 				</div>
 				<div id="edit" style="display:none;">
 					<!-- BEGIN FORM-->
@@ -127,7 +140,7 @@
 
                 <div class="alert alert-error hide">
                   <button class="close" data-dismiss="alert"></button>
-                  You have some form errors. Please check below.
+                  Error! Please check.
                 </div>
           
                 <div class="control-group">
@@ -196,7 +209,7 @@
                   
                   	<div class="input-prepend">
                     	<span class="add-on"><i class="icon-calendar"></i></span>
-                    	<input type="text" name="startDate" data-required="1" class="span10" value='<c:if test="${startDate!=null }">${startDate }</c:if>' id="dpd1" readonly>
+                    	<input type="text" name="startDate" data-required="1" class="span10" value='' id="dpd1" readonly>
                     </div>
                     <div id="starttime" class="input-append">
     					<input data-format="hh:mm:ss" name="startTime" type="text" class="span5" readonly></input>

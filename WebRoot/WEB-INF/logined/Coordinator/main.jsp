@@ -36,9 +36,11 @@
 
 						</a>
 							<ul class="dropdown-menu">
-								<li><a tabindex="-1">Hello, ${coordinatorinfo.name }</a></li>
-								<li><a tabindex="-1"
-									href="${pageContext.request.contextPath }/logout.do">Logout</a>
+								<li>
+									<a tabindex="-1">Hello, ${coordinatorinfo.name }</a>
+								</li>
+								<li>
+									<a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>
 								</li>
 							</ul></li>
 					</ul>
@@ -46,6 +48,18 @@
 				<!--/.nav-collapse -->
 			</div>
 		</div>
+	</div>
+	<div class="modal hide fade" id="logout">
+			<div class="modal-header">
+				<h4>Logout</h4>
+			</div>
+			<div class="modal-body">
+				Are you sure?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
+			</div>
 	</div>
 	<div class="container-fluid">
 		<div class="row-fluid">
