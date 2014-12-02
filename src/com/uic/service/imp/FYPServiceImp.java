@@ -102,6 +102,7 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 				parameters);
 		return list;
 	}
+
 	public Topic getUniqueTopic(String topicId) {
 		// TODO Auto-generated method stub
 		String hql = "from Topic where fid=?";
@@ -122,5 +123,10 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		String hql = "delete from TeaTopic where topic_id=? and teacher_id=?";
 		String[] parameters = { topicId, teacherId };
 		HibernateUtil.executeUpdate(hql, parameters);
+	}
+	
+	public ObsTopic refreshObsTopic(ObsTopic obsTopic){
+		obsTopic = (ObsTopic) HibernateUtil.refreshObj(obsTopic);
+		return obsTopic;
 	}
 }

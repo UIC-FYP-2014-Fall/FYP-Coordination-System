@@ -66,13 +66,17 @@ public class TeacherPageControlAction extends DispatchAction {
 			for(int i =0;i<teaTopicList.size();i++){
 				if(teaTopicList.get(i).getTopic().getIndividual()){
 					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
+					fypServiceImp.refreshObsTopic(obsTopic.get(0));
 					System.out.println("fid "+teaTopicList.get(i).getTopic().getFid().toString());
 					System.out.println("obsTopic size "+obsTopic.size());
+					System.out.println("topic: "+obsTopic.get(0).getTopic().getTitle()+" observer: "+obsTopic.get(0).getObserver().getName());
 					indObsTopics.add(obsTopic.get(0));
 				}else{
 					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
+					fypServiceImp.refreshObsTopic(obsTopic.get(0));
 					System.out.println("fid "+teaTopicList.get(i).getTopic().getFid().toString());
 					System.out.println("obsTopic size "+obsTopic.size());
+					System.out.println("topic: "+obsTopic.get(0).getTopic().getTitle()+" observer: "+obsTopic.get(0).getObserver().getName());
 					groObsTopics.add(obsTopic.get(0));
 				}
 			}

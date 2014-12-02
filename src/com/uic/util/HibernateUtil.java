@@ -29,7 +29,6 @@ final public class HibernateUtil {
 
 	// 获取和线程关联的session
 	public static Session getCurrentSession() {
-
 		Session session = threadLocal.get();
 		// 判断是否得到
 		if (session == null) {
@@ -38,12 +37,14 @@ final public class HibernateUtil {
 			threadLocal.set(session);
 		}
 		return session;
-
 	}
-
+	public static Object refreshObj(Object obj){
+		Session session=getCurrentSession();
+		session.refresh(obj);
+		return obj;
+	}
 	public static void closeCurrentSession() {
 		Session session = getCurrentSession();
-
 		if (session != null && session.isOpen()) {
 			session.close();
 			threadLocal.set(null);
@@ -53,13 +54,11 @@ final public class HibernateUtil {
 	// 这里提供一个根据id返回对象的方法
 	public static Object findById(@SuppressWarnings("rawtypes") Class clazz,
 			java.io.Serializable id) {
-
 		Session s = null;
 		Transaction tx = null;
 		Object obj = null;
 		try {
 			s = openSession();
-
 			tx = s.beginTransaction();
 			obj = s.load(clazz, id);
 			tx.commit();
@@ -68,13 +67,10 @@ final public class HibernateUtil {
 			throw new RuntimeException(e.getMessage());
 			// TODO: handle exception
 		} finally {
-
 			if (s != null && s.isOpen()) {
 				s.close();
 			}
-
 		}
-
 		return obj;
 	}
 
@@ -85,7 +81,6 @@ final public class HibernateUtil {
 		Session s = getCurrentSession();
 		Object obj = null;
 		obj = s.load(clazz, id);
-
 		return obj;
 	}
 
@@ -116,7 +111,6 @@ final public class HibernateUtil {
 			// TODO: handle exception
 		} finally {
 			if (s != null && s.isOpen()) {
-				
 				s.close();
 			}
 
@@ -144,7 +138,6 @@ final public class HibernateUtil {
 	public static void save(Object obj) {
 		Session s = null;
 		Transaction tx = null;
-
 		try {
 			s = openSession();
 			tx = s.beginTransaction();
@@ -162,7 +155,6 @@ final public class HibernateUtil {
 				s.close();
 			}
 		}
-
 	}
 
 	// 统一的添加的方法
@@ -191,7 +183,6 @@ final public class HibernateUtil {
 			}
 			query.setFirstResult((pageNow - 1) * pageSize).setMaxResults(
 					pageSize);
-
 			list = query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -223,9 +214,7 @@ final public class HibernateUtil {
 			}
 		}
 		query.setFirstResult((pageNow - 1) * pageSize).setMaxResults(pageSize);
-
 		list = query.list();
-
 		return list;
 	}
 
@@ -310,8 +299,8 @@ final public class HibernateUtil {
 	public static Object uniqueQueryOpenInView(String hql, String[] parameters) {
 
 		Session s = getCurrentSession();
+		s.flush();
 		Object obj = null;
-
 		Query query = s.createQuery(hql);
 		// 先判断是否有参数要绑定
 		if (parameters != null && parameters.length > 0) {

@@ -8,7 +8,6 @@
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -74,7 +73,6 @@
                      <div class="row-fluid">
                             <!-- block -->
                             <div class="block">
-                                
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Timetable</div>
                                     <form name="selectWeek">
@@ -100,7 +98,7 @@
                                     	System.out.println(timeArray.length);
                                     	for(int week=1;week<=Integer.parseInt(weeks);week++){
                                             if(week==1){
-                                                out.println("<table id=\"week"+week+"\" border=\"0\" class=\"table table-striped table-bordered\" style='DISPLAY:block'>");
+                                                out.println("<table id=\"week"+week+"\" border=\"0\" class=\"table table-striped table-bordered\" style='DISPLAY:'>");
                                             }else{
                                     			out.println("<table id=\"week"+week+"\" border=\"0\" class=\"table table-striped table-bordered\" style='DISPLAY:none'>");
                                             }
@@ -167,19 +165,19 @@
         <script>   
 		function setChange(){   
 			if(document.selectWeek.select.value == "1"){       
-        		document.all.week1.style.display = "block";                   
+        		document.all.week1.style.display = "";                   
 		  	}                   
 		  	else{                           
 		     	document.all.week1.style.display = "none";                   
 		  	}   
 		  	if(document.selectWeek.select.value == "2"){  
-                document.all.week2.style.display = "block";                   
+                document.all.week2.style.display = "";                   
 		  	}                   
 		  	else{                           
 		   		document.all.week2.style.display = "none";                   
 		  	}  
 		  	if(document.selectWeek.select.value == "3"){       
-		  		document.all.week3.style.display = "block";                   
+		  		document.all.week3.style.display = "";                   
 		  	}                   
 		  	else{                           
 		  		document.all.week3.style.display = "none";                   
