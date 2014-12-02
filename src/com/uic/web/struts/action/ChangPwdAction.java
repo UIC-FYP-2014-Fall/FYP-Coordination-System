@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.uic.domain.Coordinator;
+import com.uic.domain.Student;
 import com.uic.domain.Teacher;
 import com.uic.service.imp.UsersServiceImp;
 import com.uic.service.inter.UsersServiceInter;
@@ -44,7 +45,9 @@ public class ChangPwdAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
 			return mapping.findForward("goPwdUi");
-		} else {
+		}else if(request.getSession().getAttribute("role").equals("student")){
+			return mapping.findForward("goStudentChangePwdUi");
+		}else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
 		}
@@ -113,6 +116,32 @@ public class ChangPwdAction extends DispatchAction {
 				request.setAttribute("PwdError",
 						"Your original password error!");
 				return mapping.findForward("goTeacherPwdUi");
+				
+			}
+		}else if(role.equals("student")){
+			Student student = (Student)request.getSession().getAttribute("studentinfo");
+			if (oldPwd.equals(student.getPassword())) {
+				if (oldPwd.equals(newPwd)) {
+					request.setAttribute(
+							"PwdError",
+							"Your new password can't be the same as the original password. Please try again!");
+					return mapping.findForward("goTeacherPwdUi");
+				} else {
+					UsersServiceInter usersServiceInter = new UsersServiceImp();
+					if (usersServiceInter.changePwd(role, newPwd,
+							student.getId() + "")) {
+						request.setAttribute("msg", "Your password has changed. Please login again!");
+						return mapping.findForward("goLogin");
+					} else {
+						request.setAttribute("PwdError",
+								"Change password error!");
+						return mapping.findForward("goStudentChangePwdUi");
+					}
+				}
+			}else {
+				request.setAttribute("PwdError",
+						"Your original password error!");
+				return mapping.findForward("goStudentChangePwdUi");
 				
 			}
 		}

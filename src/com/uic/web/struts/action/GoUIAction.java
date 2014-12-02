@@ -118,6 +118,8 @@ public class GoUIAction extends DispatchAction {
 			
 		}else if(request.getSession().getAttribute("role").equals("teacher")){
 			return mapping.findForward("goTeacherMain");
+		}else if(request.getSession().getAttribute("role").equals("student")){
+			return mapping.findForward("goStudentMain");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");

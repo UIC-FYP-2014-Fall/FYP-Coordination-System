@@ -94,6 +94,7 @@
       cancellable="true" >
       <forward name="goPwdUi" path="/WEB-INF/logined/Coordinator/changePwd.jsp" />
       <forward name="goTeacherPwdUi" path="/WEB-INF/logined/Teacher/changePwd.jsp" />
+      <forward name="goStudentChangePwdUi" path="/WEB-INF/logined/Student/changePwd.jsp" />
     </action>
     <action
       attribute="uploadFYPForm"
@@ -202,6 +203,33 @@
       cancellable="true">
       	<forward name="obsSaved" path="/teacherPageControl.do?flag=chooseObserver" />
       </action>
+    <action
+      parameter="flag"
+      path="/chooseTopic"
+      type="com.uic.web.struts.action.ChooseTopicAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goChooseTopicUi" path="/WEB-INF/logined/Student/chooseTopic.jsp" />
+    </action>
+    <action
+      parameter="flag"
+      path="/chooseExaminer"
+      type="com.uic.web.struts.action.ChooseExaminerAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goChooseExaminerUi" path="/WEB-INF/logined/Student/chooseExaminer.jsp" />
+    </action>
+    <action
+      parameter="flag"
+      path="/choosePretime"
+      type="com.uic.web.struts.action.ChoosePretimeAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goChoosePretimeUi" path="/WEB-INF/logined/Student/choosePretime.jsp" />
+    </action>
+
+
+
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />
 </struts-config>

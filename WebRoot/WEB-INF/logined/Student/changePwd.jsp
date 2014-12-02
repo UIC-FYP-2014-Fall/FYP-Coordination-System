@@ -4,51 +4,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>FYP Coordination System</title>
-<!-- Bootstrap -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	media="screen">
-<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"
-	media="screen">
-<link href="assets/styles.css" rel="stylesheet" media="screen">
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-<script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<!-- Bootstrap -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+	<link href="assets/styles.css" rel="stylesheet" media="screen">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
 	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container-fluid">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 	 <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
-                </a>
-				<a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP Coordination System</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav pull-right">
-						<li class="dropdown"><a href="#" role="button"
-							class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="icon-user"></i> Coordinator <i class="caret"></i>
-						</a>
-							<ul class="dropdown-menu">
-								<li>
-                                	<a tabindex="-1">Hello, ${coordinatorinfo.name }</a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>
-                                </li>
-							</ul></li>
-					</ul>
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-		</div>
-	</div>
-	<div class="modal hide fade" id="logout">
+                    </a>
+                    <a class="brand" href="${pageContext.request.contextPath }/goStudentMain.do">FYP Coordination System</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right">
+                            <li class="dropdown">
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> ${studentinfo.name } <i class="caret"></i>
+
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>                       
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        <div class="modal hide fade" id="logout">
 			<div class="modal-header">
 				<h4>Logout</h4>
 			</div>
@@ -60,32 +55,28 @@
 				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
 			</div>
 		</div>
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="span3" id="sidebar">
-				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-					<li><a href="${pageContext.request.contextPath }/goUI.do"><i class="icon-chevron-right"></i>
-							Main</a></li>
-					<li><a href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=goUi"><i
-							class="icon-chevron-right"></i> Manage Account</a></li>
-					<li><a href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i class="icon-chevron-right"></i>
-							Export</a></li>
-					<li><a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi"><i class="icon-chevron-right"></i>
-							Set Pre Time</a></li>
-					<li><a href="${pageContext.request.contextPath }/quota.do?flag=goUi"><i class="icon-chevron-right"></i>
-							Set Quota</a></li>
-					<li><a href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i class="icon-chevron-right"></i>
-							Set Open Time</a></li>
-					<li><a href="${pageContext.request.contextPath }/setWorkload.do?flag=goUi"><i class="icon-chevron-right"></i>
-							Set Workload</a></li>
-					<li><a href="${pageContext.request.contextPath }/clearProject.do?flag=goClearProjectUi"><i
-							class="icon-chevron-right"></i> Clear Project</a></li>
-					<li class="active"><a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i
-							class="icon-chevron-right"></i> Change Password</a></li>
-				</ul>
-			</div>
-
-			<!--/span-->
+		<div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3" id="sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                        <li>
+                            <a href="${pageContext.request.contextPath }/goStudentMain.do"><i class="icon-chevron-right"></i> Main</a>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath }/chooseTopic.do?flag=goChooseTopic"><i class="icon-chevron-right"></i> Choose Topic</a>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath }/chooseExaminer.do?flag=goChooseExaminer"><i class="icon-chevron-right"></i> Choose Examiner</a>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath }/choosePretime.do?flag=goChoosePretime"><i class="icon-chevron-right"></i> Choose Presentation Time</a>
+                        </li>
+                        <li class="active">
+                            <a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i> Change Password</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--/span-->
 			<div class="span9" id="content">
 				<div class="row-fluid">
 				
@@ -163,5 +154,6 @@
 
 		});
 	</script>
+
 </body>
 </html>
