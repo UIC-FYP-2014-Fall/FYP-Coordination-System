@@ -9,8 +9,7 @@
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-		<link href="assets/styles.css" rel="stylesheet" media="screen">
-		
+		<link href="assets/styles.css" rel="stylesheet" media="screen">	
 		<link href="bootstrap/css/datepicker.css" rel="stylesheet" type="text/css">
 		<link href="bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -167,9 +166,10 @@
                                         </form>
                                         </c:if>
                                         <c:if test="${UploadTopicsDateTime=='true' }">
-                                        	<div class="alert alert-block">
-												<h4 class="alert-heading">Warning!</h4>
-												<p>Upload topics for teachers time: from <strong>${UploadTopicsStartDateTime }</strong> to <strong>${UploadTopicsEndDateTime }</strong>. Click <a href="#edit" onclick="btn()">here</a> to change.</p>
+                                        	<div class="alert alert-info">
+												<p>From: <strong>${UploadTopicsStartDateTime }</strong> </p>
+												<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${UploadTopicsEndDateTime }</strong>. </p>
+												<p>Click <a href="#edit" onclick="btn()"><strong>here</strong></a> to change.</p>
 											</div>                           
                                         </c:if>
                                         <div id="edit" style="display:none;">
@@ -268,9 +268,10 @@
                                             </c:if>
                                             
                                             <c:if test="${ChooseTopicDateTime=='true' }">
-                                        		<div class="alert alert-block">
-													<h4 class="alert-heading">Warning!</h4>
-													<p>Choose topic for students time: from <strong>${ChooseTopicStartDateTime }</strong> to <strong>${ChooseTopicEndDateTime }</strong>. Click <a href="#edit2" onclick="btn2()">here</a> to change.</p>
+                                        		<div class="alert alert-info">
+													<p>From: <strong>${ChooseTopicStartDateTime }</strong></p>
+													<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChooseTopicEndDateTime }</strong>.</p>
+													<p>Click <a href="#edit2" onclick="btn2()"><strong>here</strong></a> to change.</p>
 												</div>
 											</c:if>
 											
@@ -368,9 +369,10 @@
                                             </c:if>
                                             
                                             <c:if test="${ChooseExaminersDateTime=='true' }">
-                                        		<div class="alert alert-block">
-													<h4 class="alert-heading">Warning!</h4>
-													<p>Choose examiners for students time: from <strong>${ChooseExaminersStartDateTime }</strong> to <strong>${ChooseExaminersEndDateTime }</strong>. Click <a href="#edit3" onclick="btn3()">here</a> to change.</p>
+                                        		<div class="alert alert-info">
+													<p>From: <strong>${ChooseExaminersStartDateTime }</strong></p> 
+													<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChooseExaminersEndDateTime }</strong>.</p>
+													<p>Click <a href="#edit3" onclick="btn3()"><strong>here</strong></a> to change.</p>
 												</div>
 												</c:if>
 												<div id="edit3" style="display:none;">

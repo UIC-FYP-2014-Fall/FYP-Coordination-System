@@ -54,22 +54,23 @@
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-					<li><a href="${pageContext.request.contextPath }/goUI.do"><i
+					<li><a
+						href="${pageContext.request.contextPath }/goUI.do"><i
 							class="icon-chevron-right"></i> Main</a></li>
 					<li><a
-						href="${pageContext.request.contextPath }/teacherPageControl.do?flag=uploadTopic"><i
+						href="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadTopicUi"><i
 							class="icon-chevron-right"></i> Upload Topic</a></li>
 					<li class="active"><a
-						href="${pageContext.request.contextPath }/teacherPageControl.do?flag=topicList"><i
+						href="${pageContext.request.contextPath }/editFYP.do?flag=topicListUi"><i
 							class="icon-chevron-right"></i> Topic List</a></li>
 					<li><a
-						href="${pageContext.request.contextPath }/teacherPageControl.do?flag=chooseObserver"><i
+						href="${pageContext.request.contextPath }/setObserver.do?flag=chooseObserverUi"><i
 							class="icon-chevron-right"></i> Choose Observer</a></li>
 					<li><a
-						href="${pageContext.request.contextPath }/teacherPageControl.do?flag=timetable"><i
+						href="${pageContext.request.contextPath }/timetable.do?flag=timetableUi"><i
 							class="icon-chevron-right"></i> Timetable</a></li>
 					<li><a
-						href="${pageContext.request.contextPath }/teacherPageControl.do?flag=changePwd"><i
+						href="${pageContext.request.contextPath }/changPwd.do?flag=teacherChangePwdUi"><i
 							class="icon-chevron-right"></i> Change Password</a></li>
 				</ul>
 			</div>
@@ -128,7 +129,7 @@
 														+ "</td>");
 												out.println("<td><form action=\""
 														+ request.getContextPath()
-														+ "/teacherPageControl.do?flag=editTopic\" method=\"post\"><input name=\"id\" type=\"hidden\" value=\""
+														+ "/editFYP.do?flag=editTopicUi\" method=\"post\"><input name=\"id\" type=\"hidden\" value=\""
 														+ teaTopic.get(i).getTopic().getFid()
 														+ "\"><button class=\"btn btn-primary btn-mini\">Edit</button></form></td>");
 												out.println("</tr>");
@@ -141,7 +142,7 @@
 							</table>
 							<div class="table-toolbar">
 								<a class="btn btn-success"
-									herf="${pageContext.request.contextPath }/teacherPageControl.do?flag=uploadTopic">Add
+									herf="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadTopicUi">Add
 									New <i class="icon-plus icon-white"></i>
 								</a>
 							</div>
@@ -180,7 +181,7 @@
 														+ "</td>");
 												out.println("<td><form action=\""
 														+ request.getContextPath()
-														+ "/teacherPageControl.do?flag=editTopic\" method=\"post\"><input name=\"id\" type=\"hidden\" value=\""
+														+ "/editFYP.do?flag=editTopicUi\" method=\"post\"><input name=\"id\" type=\"hidden\" value=\""
 														+ teaTopic.get(i).getTopic().getFid()
 														+ "\"><button class=\"btn btn-primary btn-mini\">Edit</button></form></td>");
 												out.println("</tr>");
@@ -193,7 +194,7 @@
 							</table>
 							<div class="table-toolbar">
 								<a class="btn btn-success"
-									herf="${pageContext.request.contextPath}/teacherPageControl.do?flag=uploadTopic">Add
+									herf="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadTopicUi">Add
 									New <i class="icon-plus icon-white"></i>
 								</a>
 							</div>

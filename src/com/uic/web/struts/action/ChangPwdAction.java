@@ -40,6 +40,18 @@ public class ChangPwdAction extends DispatchAction {
 	 * @param response
 	 * @return ActionForward
 	 */
+	public ActionForward teacherChangePwdUi(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		System.out.println("Using TeacherPageControlAction");
+		if(request.getSession().getAttribute("role").equals("teacher")){
+			return mapping.findForward("goTeacherPwdUi");
+		}else{
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
 	public ActionForward goPwdUi(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
