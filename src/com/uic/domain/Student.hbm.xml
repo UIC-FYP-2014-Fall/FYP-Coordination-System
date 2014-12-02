@@ -31,5 +31,6 @@
         <property name="program" type="java.lang.String">
             <column name="program" length="128" not-null="true" />
         </property>
+       
     </class>
 </hibernate-mapping>
