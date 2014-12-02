@@ -5,6 +5,7 @@
 package com.uic.web.struts.action;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +43,25 @@ public class TimetableAction extends DispatchAction {
 	 * @param response
 	 * @return ActionForward
 	 */
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
+	public ActionForward timetableUi(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		if(request.getSession().getAttribute("role").equals("teacher")){
+			String numOfWeek="3";
+			TimetableServiceImp timetableService=new TimetableServiceImp();
+			Teacher teacher=(Teacher)request.getSession().getAttribute("teacherinfo");
+			List<String> timeslots=timetableService.getTimtableOfOneTeacher(teacher);
+			request.setAttribute("numOfWeek", numOfWeek);
+			request.setAttribute("timeslots", timeslots);
+			return mapping.findForward("timetableUi");
+		}else{
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
+	
+	public ActionForward updateTimetable(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		TimeslotForm timeslotForm = (TimeslotForm) form;// TODO Auto-generated
 														// method stub
@@ -105,6 +124,6 @@ public class TimetableAction extends DispatchAction {
 				}
 			}
 		}
-		return mapping.findForward("goTeacherPageControl_timetable");
+		return mapping.findForward("updateTimetable");
 	}
 }

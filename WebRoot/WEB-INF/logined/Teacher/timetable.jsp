@@ -47,25 +47,25 @@
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                        <li>
-                            <a href="${pageContext.request.contextPath }/goUI.do"><i class="icon-chevron-right"></i> Main</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/teacherPageControl.do?flag=uploadTopic"><i class="icon-chevron-right"></i> Upload Topic</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/teacherPageControl.do?flag=topicList"><i class="icon-chevron-right"></i> Topic List</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/teacherPageControl.do?flag=chooseObserver"><i class="icon-chevron-right"></i> Choose Observer</a>
-                        </li>
-                        <li class="active">
-                            <a href="${pageContext.request.contextPath }/teacherPageControl.do?flag=timetable"><i class="icon-chevron-right"></i> Timetable</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/teacherPageControl.do?flag=changePwd"><i class="icon-chevron-right"></i> Change Password</a>
-                        </li>
-                    </ul>
+					<li><a
+						href="${pageContext.request.contextPath }/goUI.do"><i
+							class="icon-chevron-right"></i> Main</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadTopicUi"><i
+							class="icon-chevron-right"></i> Upload Topic</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/editFYP.do?flag=topicListUi"><i
+							class="icon-chevron-right"></i> Topic List</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/setObserver.do?flag=chooseObserverUi"><i
+							class="icon-chevron-right"></i> Choose Observer</a></li>
+					<li class="active"><a
+						href="${pageContext.request.contextPath }/timetable.do?flag=timetableUi"><i
+							class="icon-chevron-right"></i> Timetable</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/changPwd.do?flag=teacherChangePwdUi"><i
+							class="icon-chevron-right"></i> Change Password</a></li>
+				</ul>
                 </div>
                 
                 <!--/span-->
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="block-content collapse in">
-                                    <form name="week" class="form-horizontal" action="${pageContext.request.contextPath }/timetable.do" method="post">
+                                    <form name="week" class="form-horizontal" action="${pageContext.request.contextPath }/timetable.do?flag=updateTimetable" method="post">
                                     <%
                                     	String[] timeArray={"9:00-9:50","10:00-10:50","11:00-11:50","14:00-14:50","15:00-15:50","16:00-16:50","17:00-17:50"};
                                     	ArrayList<String> timeslots=(ArrayList<String>)request.getAttribute("timeslots");
@@ -182,8 +182,7 @@
 		  	else{                           
 		  		document.all.week3.style.display = "none";                   
 		  	}          
-		}   
-		    
+		}	    
 		 </script>   
     </body>
 

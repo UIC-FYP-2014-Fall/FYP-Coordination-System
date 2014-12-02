@@ -66,13 +66,10 @@
       scope="request"
       type="com.uic.web.struts.action.TeacherPageControlAction"
       cancellable="true">
-      <forward name="changePwd" path="/WEB-INF/logined/Teacher/changePwd.jsp" />
-      <forward name="chooseObserver" path="/WEB-INF/logined/Teacher/chooseObserver.jsp" />
-      <forward name="topicList" path="/WEB-INF/logined/Teacher/topicList.jsp" />
+      
+      
       <forward name="mainPage" path="/WEB-INF/logined/Teacher/teacherMain.jsp" />
-      <forward name="timetable" path="/WEB-INF/logined/Teacher/timetable.jsp" />
-      <forward name="uploadTopic" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
-      <forward name="editTopic" path="/WEB-INF/logined/Teacher/editTopic.jsp" />
+     
     </action>
     <action
       parameter="flag"
@@ -104,7 +101,8 @@
       scope="request"
       type="com.uic.web.struts.action.UploadFYPAction"
       cancellable="true" >
-      <forward name="uploadok" path="/teacherPageControl.do?flag=topicList" />
+      <forward name="uploadok" path="/editFYP.do?flag=topicListUi" />
+      <forward name="uploadTopicUi" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
     </action>
     <action
       attribute="preTimeForm"
@@ -171,7 +169,9 @@
       scope="request"
       type="com.uic.web.struts.action.EditFYPAction"
       cancellable="true">
-      <forward name="editOk" path="/teacherPageControl.do?flag=topicList" /> 
+      <forward name="editOk" path="/editFYP.do?flag=topicListUi" />
+      <forward name="topicListUi" path="/WEB-INF/logined/Teacher/topicList.jsp" />
+      <forward name="editTopicUi" path="/WEB-INF/logined/Teacher/editTopic.jsp" /> 
     </action>
     <action
       attribute="timeslotForm"
@@ -181,7 +181,8 @@
       scope="request"
       type="com.uic.web.struts.action.TimetableAction"
       cancellable="true">
-      <forward name="goTeacherPageControl_timetable" path="/teacherPageControl.do?flag=timetable" /> 
+      <forward name="timetableUi" path="/WEB-INF/logined/Teacher/timetable.jsp" />
+      <forward name="updateTimetable" path="/timetable.do?flag=timetableUi" /> 
      </action>
 
     <action
@@ -200,7 +201,8 @@
       scope="request"
       type="com.uic.web.struts.action.SetOberverAction"
       cancellable="true">
-      	<forward name="obsSaved" path="/teacherPageControl.do?flag=chooseObserver" />
+      <forward name="chooseObserverUi" path="/WEB-INF/logined/Teacher/chooseObserver.jsp" />
+      <forward name="obsSaved" path="/setObserver.do?flag=chooseObserverUi" />
       </action>
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />

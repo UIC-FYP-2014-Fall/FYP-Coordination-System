@@ -50,22 +50,23 @@
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-					<li><a href="${pageContext.request.contextPath }/goUI.do"><i
+					<li><a
+						href="${pageContext.request.contextPath }/goUI.do"><i
 							class="icon-chevron-right"></i> Main</a></li>
 					<li><a
-						href="${pageContext.request.contextPath }/teacherPageControl.do?flag=uploadTopic"><i
+						href="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadTopicUi"><i
 							class="icon-chevron-right"></i> Upload Topic</a></li>
 					<li><a
-						href="${pageContext.request.contextPath }/teacherPageControl.do?flag=topicList"><i
+						href="${pageContext.request.contextPath }/editFYP.do?flag=topicListUi"><i
 							class="icon-chevron-right"></i> Topic List</a></li>
 					<li><a
-						href="${pageContext.request.contextPath }/teacherPageControl.do?flag=chooseObserver"><i
+						href="${pageContext.request.contextPath }/setObserver.do?flag=chooseObserverUi"><i
 							class="icon-chevron-right"></i> Choose Observer</a></li>
 					<li><a
-						href="${pageContext.request.contextPath }/teacherPageControl.do?flag=timetable"><i
+						href="${pageContext.request.contextPath }/timetable.do?flag=timetableUi"><i
 							class="icon-chevron-right"></i> Timetable</a></li>
 					<li class="active"><a
-						href="${pageContext.request.contextPath }/teacherPageControl.do?flag=changePwd"><i
+						href="${pageContext.request.contextPath }/changPwd.do?flag=teacherChangePwdUi"><i
 							class="icon-chevron-right"></i> Change Password</a></li>
 				</ul>
 			</div>
@@ -73,64 +74,63 @@
 			<!--/span-->
 			<div class="span9" id="content">
 				<div class="row-fluid">
-					
+
 					<c:if test="${PwdError!=null }">
 
-					<div class="alert alert-error">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<h4>Error</h4>
-						The operation failed. ${PwdError }
-					</div>
-					
-					</c:if>
-						<!-- block -->
-						<div class="block">
-
-							<div class="navbar navbar-inner block-header">
-								<div class="muted pull-left">Change Password</div>
-							</div>
-
-							<div class="block-content collapse in">
-								<form class="form-horizontal"
-									action="${pageContext.request.contextPath }/changPwd.do?flag=changePwd"
-									id="form_sample_1" method="post">
-									<div class="alert alert-error hide">
-										<button class="close" data-dismiss="alert"></button>
-										You have some form errors. Please check below.
-									</div>
-									<div class="control-group">
-										<label class="control-label">Original Password: <span
-											class="required">*</span></label>
-										<div class="controls">
-											<input type="password" name="oldPwd" class="m-wrap" />
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label">New Password: <span
-											class="required">*</span></label>
-										<div class="controls">
-											<input type="password" name="newPwd" class="m-wrap"
-												id="newPwd" />
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label">Confirm Password: <span
-											class="required">*</span></label>
-										<div class="controls">
-											<input name="confirmPwd" type="password" class="m-wrap" />
-										</div>
-									</div>
-									<div class="form-actions">
-										<button type="submit" class="btn btn-primary">Submit</button>
-										<button type="reset" class="btn">Reset</button>
-									</div>
-
-								</form>
-
-							</div>
+						<div class="alert alert-error">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Error</h4>
+							The operation failed. ${PwdError }
 						</div>
 
-					
+					</c:if>
+					<!-- block -->
+					<div class="block">
+
+						<div class="navbar navbar-inner block-header">
+							<div class="muted pull-left">Change Password</div>
+						</div>
+
+						<div class="block-content collapse in">
+							<form class="form-horizontal"
+								action="${pageContext.request.contextPath }/changPwd.do?flag=changePwd"
+								id="form_sample_1" method="post">
+								<div class="alert alert-error hide">
+									<button class="close" data-dismiss="alert"></button>
+									You have some form errors. Please check below.
+								</div>
+								<div class="control-group">
+									<label class="control-label">Original Password: <span
+										class="required">*</span></label>
+									<div class="controls">
+										<input type="password" name="oldPwd" class="m-wrap" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">New Password: <span
+										class="required">*</span></label>
+									<div class="controls">
+										<input type="password" name="newPwd" class="m-wrap"
+											id="newPwd" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Confirm Password: <span
+										class="required">*</span></label>
+									<div class="controls">
+										<input name="confirmPwd" type="password" class="m-wrap" />
+									</div>
+								</div>
+								<div class="form-actions">
+									<button type="submit" class="btn btn-primary">Submit</button>
+									<button type="reset" class="btn">Reset</button>
+								</div>
+							</form>
+
+						</div>
+					</div>
+
+
 				</div>
 			</div>
 		</div>

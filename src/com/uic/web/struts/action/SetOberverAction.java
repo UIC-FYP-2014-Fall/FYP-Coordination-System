@@ -4,6 +4,9 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +15,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.uic.domain.ObsTopic;
+import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.imp.FYPServiceImp;
@@ -38,6 +43,48 @@ public class SetOberverAction extends DispatchAction {
 	 * @param response
 	 * @return ActionForward
 	 */
+	public ActionForward chooseObserverUi(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		System.out.println("Using TeacherPageControlAction");
+		if(request.getSession().getAttribute("role").equals("teacher")){
+			//prepare date: teacherList and Teatopic List of the current teacher.
+			Teacher curTeacher = (Teacher) request.getSession().getAttribute("teacherinfo");
+			TeachersServiceImp teachersServiceImp=new TeachersServiceImp();
+			FYPServiceImp fypServiceImp = new FYPServiceImp();
+			ArrayList<Teacher> observerList =(ArrayList<Teacher>) teachersServiceImp.getTeachers();
+			List<TeaTopic> teaTopicList = fypServiceImp.getTeaTopic(curTeacher.getId().toString());
+			ArrayList<ObsTopic> indObsTopics=new ArrayList<ObsTopic>();
+			ArrayList<ObsTopic> groObsTopics=new ArrayList<ObsTopic>();
+			
+			for(int i =0;i<teaTopicList.size();i++){
+				if(teaTopicList.get(i).getTopic().getIndividual()){
+					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
+					fypServiceImp.refreshObsTopic(obsTopic.get(0));
+					System.out.println("fid "+teaTopicList.get(i).getTopic().getFid().toString());
+					System.out.println("obsTopic size "+obsTopic.size());
+					System.out.println("topic: "+obsTopic.get(0).getTopic().getTitle()+" observer: "+obsTopic.get(0).getObserver().getName());
+					indObsTopics.add(obsTopic.get(0));
+				}else{
+					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
+					fypServiceImp.refreshObsTopic(obsTopic.get(0));
+					System.out.println("fid "+teaTopicList.get(i).getTopic().getFid().toString());
+					System.out.println("obsTopic size "+obsTopic.size());
+					System.out.println("topic: "+obsTopic.get(0).getTopic().getTitle()+" observer: "+obsTopic.get(0).getObserver().getName());
+					groObsTopics.add(obsTopic.get(0));
+				}
+			}
+			request.setAttribute("observerList", observerList);
+			request.setAttribute("indObsTopics", indObsTopics);
+			request.setAttribute("groObsTopics", groObsTopics);
+			return mapping.findForward("chooseObserverUi");
+		}else{
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
+	
 	public ActionForward setObserver(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		ObserverForm observerForm = (ObserverForm) form;// TODO Auto-generated method stub

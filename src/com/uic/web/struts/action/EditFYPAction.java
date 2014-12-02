@@ -46,6 +46,43 @@ public class EditFYPAction extends DispatchAction {
 	 * @param response
 	 * @return ActionForward
 	 */
+	public ActionForward topicListUi(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		System.out.println("Using TeacherPageControlAction");
+		if(request.getSession().getAttribute("role").equals("teacher")){
+			FYPServiceImp fypServiceImp=new FYPServiceImp();
+			Teacher teacher=(Teacher)request.getSession().getAttribute("teacherinfo");
+			System.out.println("Teacher ID "+ teacher.getId());
+			List<TeaTopic> teaTopic= fypServiceImp.getTeaTopic(teacher.getId().toString());
+			System.out.println("send List size "+ teaTopic.size());
+			request.setAttribute("teaTopicList",teaTopic);
+			return mapping.findForward("topicListUi");
+		}else{
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
+	public ActionForward editTopicUi(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		System.out.println("Using TeacherPageControlAction");
+		if(request.getSession().getAttribute("role").equals("teacher")){
+			FYPServiceImp fs= new FYPServiceImp();
+			String teaTopicID=request.getParameter("id");
+			List<TeaTopic> teaTopic = fs.getTeaTopicByTopicId(teaTopicID);
+			request.setAttribute("teaTopic", teaTopic);
+			TeachersServiceImp ts = new TeachersServiceImp();
+			List<Teacher> teacherList = ts.getTeachers();
+			request.setAttribute("teacherList", teacherList);
+			return mapping.findForward("editTopicUi");
+		}else{
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
 	public ActionForward editFYP(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		EditFYPForm editFYPForm = (EditFYPForm) form;// TODO Auto-generated

@@ -129,8 +129,8 @@ public class PreTimeAction extends DispatchAction {
 			String startDateTime = startDate+" "+startTime;
 			String endDateTime = endDate+" "+endTime;
 			
-			//System.out.println(startDateTime);
-			//System.out.println(endDateTime);
+			System.out.println(startDateTime);
+			System.out.println(endDateTime);
 			
 			java.util.Date dStartTime = BaseUtil.StringConvertDate(startDateTime);
 			java.util.Date dEndTime = BaseUtil.StringConvertDate(endDateTime);

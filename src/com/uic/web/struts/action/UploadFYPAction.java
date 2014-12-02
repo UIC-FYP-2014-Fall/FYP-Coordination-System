@@ -5,6 +5,7 @@
 package com.uic.web.struts.action;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +44,21 @@ public class UploadFYPAction extends DispatchAction {
 	 * @param response
 	 * @return ActionForward
 	 */
+	public ActionForward uploadTopicUi(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		System.out.println("Using TeacherPageControlAction");
+		if(request.getSession().getAttribute("role").equals("teacher")){
+			TeachersServiceImp ts = new TeachersServiceImp();
+			List<Teacher> teacherList = ts.getTeachers();
+			request.setAttribute("teacherList", teacherList);
+			return mapping.findForward("uploadTopicUi");
+		}else{
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
 	public ActionForward uploadFYP(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("Using UploadFYPaction");

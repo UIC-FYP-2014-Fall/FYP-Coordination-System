@@ -24,5 +24,16 @@ public class BaseUtil {
 		}
 		return date;
 	}
+	
+	public static boolean todayIsInRange(String startTime,String endTime){
+		Date curDate=new Date();
+		Date startDate= BaseUtil.StringConvertDate(startTime);
+		Date endDate = BaseUtil.StringConvertDate(endTime);
+		if(curDate.after(startDate)&&curDate.before(endDate)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 }
