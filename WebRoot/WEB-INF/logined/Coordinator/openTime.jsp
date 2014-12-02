@@ -9,7 +9,8 @@
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-		<link href="assets/styles.css" rel="stylesheet" media="screen">		
+		<link href="assets/styles.css" rel="stylesheet" media="screen">
+		
 		<link href="bootstrap/css/datepicker.css" rel="stylesheet" type="text/css">
 		<link href="bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -21,7 +22,11 @@
 <body>
 <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
-                <div class="container-fluid">                   
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                    </a>
                     <a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP Coordination System</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
@@ -34,7 +39,7 @@
                                 		<a tabindex="-1">Hello, ${coordinatorinfo.name }</a>
                                 	</li>
                                     <li>
-                                         <a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>
+                                        <a tabindex="-1" href="${pageContext.request.contextPath }/logout.do">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -44,20 +49,6 @@
                 </div>
             </div>
         </div>
-        
-         <div class="modal hide fade" id="logout">
-			<div class="modal-header">
-				<h4>Logout</h4>
-			</div>
-			<div class="modal-body">
-				Are you sure?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
-			</div>
-		</div> 
-        
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
@@ -163,11 +154,9 @@
                                         </form>
                                         </c:if>
                                         <c:if test="${UploadTopicsDateTime=='true' }">
-                                        	<div class="alert alert-info">
-												<h4 class="alert-heading"></h4>
-												<p>From: <strong>${UploadTopicsStartDateTime }</strong> </p>
-												<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${UploadTopicsEndDateTime }</strong>. </p>
-												<p>Click <a href="#edit" onclick="btn()">here</a> to change.</p>
+                                        	<div class="alert alert-block">
+												<h4 class="alert-heading">Warning!</h4>
+												<p>Upload topics for teachers time: from <strong>${UploadTopicsStartDateTime }</strong> to <strong>${UploadTopicsEndDateTime }</strong>. Click <a href="#edit" onclick="btn()">here</a> to change.</p>
 											</div>                           
                                         </c:if>
                                         <div id="edit" style="display:none;">
@@ -266,11 +255,10 @@
                                             </c:if>
                                             
                                             <c:if test="${ChooseTopicDateTime=='true' }">
-                                        		<div class="alert alert-info">
-													<p>From: <strong>${ChooseTopicStartDateTime }</strong></p>
-													<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChooseTopicEndDateTime }</strong>.</p>
-													<p>Click <a href="#edit2" onclick="btn2()">here</a> to change.</p>
-												</div>												
+                                        		<div class="alert alert-block">
+													<h4 class="alert-heading">Warning!</h4>
+													<p>Choose topic for students time: from <strong>${ChooseTopicStartDateTime }</strong> to <strong>${ChooseTopicEndDateTime }</strong>. Click <a href="#edit2" onclick="btn2()">here</a> to change.</p>
+												</div>
 											</c:if>
 											
 											<div id="edit2" style="display:none;">
@@ -367,10 +355,9 @@
                                             </c:if>
                                             
                                             <c:if test="${ChooseExaminersDateTime=='true' }">
-                                        		<div class="alert alert-info">
-													<p>From: <strong>${ChooseExaminersStartDateTime }</strong></p> 
-													<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChooseExaminersEndDateTime }</strong>.</p>
-													<p>Click <a href="#edit3" onclick="btn3()">here</a> to change.</p>
+                                        		<div class="alert alert-block">
+													<h4 class="alert-heading">Warning!</h4>
+													<p>Choose examiners for students time: from <strong>${ChooseExaminersStartDateTime }</strong> to <strong>${ChooseExaminersEndDateTime }</strong>. Click <a href="#edit3" onclick="btn3()">here</a> to change.</p>
 												</div>
 												</c:if>
 												<div id="edit3" style="display:none;">

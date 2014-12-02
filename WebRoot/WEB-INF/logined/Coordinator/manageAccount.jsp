@@ -22,7 +22,11 @@
 <body>
 <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
-                <div class="container-fluid">                   
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                    </a>
                     <a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP Coordination System</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
@@ -35,7 +39,7 @@
                                 		<a tabindex="-1">Hello, ${coordinatorinfo.name }</a>
                                 	</li>
                                     <li>
-                                        <a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>
+                                        <a tabindex="-1" href="${pageContext.request.contextPath }/logout.do">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -45,19 +49,6 @@
                 </div>
             </div>
         </div>
-        
-        <div class="modal hide fade" id="logout">
-			<div class="modal-header">
-				<h4>Logout</h4>
-			</div>
-			<div class="modal-body">
-				Are you sure?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
-			</div>
-		</div> 
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span3" id="sidebar">

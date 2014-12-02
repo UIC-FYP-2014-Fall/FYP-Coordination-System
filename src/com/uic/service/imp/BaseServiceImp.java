@@ -9,9 +9,9 @@ public abstract class BaseServiceImp implements BaseInterface{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object> getListObject(String hql, String[] parameters) {
+	public List getListObject(String hql, String[] parameters) {
 		// TODO Auto-generated method stub
-		List<Object> list = null;
+		List list = null;
 		try {
 			list = HibernateUtil.executeQueryOpenInView(hql, parameters);
 		} catch (Exception e) {

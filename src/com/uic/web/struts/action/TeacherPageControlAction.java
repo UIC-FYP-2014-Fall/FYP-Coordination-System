@@ -21,6 +21,7 @@ import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.imp.FYPServiceImp;
 import com.uic.service.imp.TeachersServiceImp;
+import com.uic.service.imp.TimetableServiceImp;
 
 /** 
  * MyEclipse Struts
@@ -65,9 +66,17 @@ public class TeacherPageControlAction extends DispatchAction {
 			for(int i =0;i<teaTopicList.size();i++){
 				if(teaTopicList.get(i).getTopic().getIndividual()){
 					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
+					fypServiceImp.refreshObsTopic(obsTopic.get(0));
+					System.out.println("fid "+teaTopicList.get(i).getTopic().getFid().toString());
+					System.out.println("obsTopic size "+obsTopic.size());
+					System.out.println("topic: "+obsTopic.get(0).getTopic().getTitle()+" observer: "+obsTopic.get(0).getObserver().getName());
 					indObsTopics.add(obsTopic.get(0));
 				}else{
 					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
+					fypServiceImp.refreshObsTopic(obsTopic.get(0));
+					System.out.println("fid "+teaTopicList.get(i).getTopic().getFid().toString());
+					System.out.println("obsTopic size "+obsTopic.size());
+					System.out.println("topic: "+obsTopic.get(0).getTopic().getTitle()+" observer: "+obsTopic.get(0).getObserver().getName());
 					groObsTopics.add(obsTopic.get(0));
 				}
 			}
@@ -128,8 +137,12 @@ public class TeacherPageControlAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
-			String week="3";
-			request.setAttribute("week", week);
+			String numOfWeek="3";
+			TimetableServiceImp timetableService=new TimetableServiceImp();
+			Teacher teacher=(Teacher)request.getSession().getAttribute("teacherinfo");
+			List<String> timeslots=timetableService.getTimtableOfOneTeacher(teacher);
+			request.setAttribute("numOfWeek", numOfWeek);
+			request.setAttribute("timeslots", timeslots);
 			return mapping.findForward("timetable");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");

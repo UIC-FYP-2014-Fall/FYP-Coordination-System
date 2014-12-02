@@ -174,24 +174,16 @@
       <forward name="editOk" path="/teacherPageControl.do?flag=topicList" /> 
     </action>
     <action
-      attribute="observerForm"
-      input="/WEB-INF/logined/Teacher/chooseObserver.jsp"
-      name="observerForm"
-      parameter="flag"
-      path="/setObserver"
-      scope="request"
-      type="com.uic.web.struts.action.SetObserverAction"
-      cancellable="true">
-      <forward name="obsSaved" path="/teacherPageControl.do?flag=chooseObserver" />
-    </action>
-    <action
       attribute="timeslotForm"
       name="timeslotForm"
       parameter="flag"
       path="/timetable"
       scope="request"
       type="com.uic.web.struts.action.TimetableAction"
-      cancellable="true" />
+      cancellable="true">
+      <forward name="goTeacherPageControl_timetable" path="/teacherPageControl.do?flag=timetable" /> 
+     </action>
+
     <action
       parameter="flag"
       path="/goStudentMain"
@@ -200,9 +192,16 @@
       cancellable="true" >
       <forward name="goMainUi" path="/WEB-INF/logined/Student/studentMain.jsp" />
     </action>
-
-
-    
+    <action
+      attribute="observerForm"
+      name="observerForm"
+      parameter="flag"
+      path="/setObserver"
+      scope="request"
+      type="com.uic.web.struts.action.SetOberverAction"
+      cancellable="true">
+      	<forward name="obsSaved" path="/teacherPageControl.do?flag=chooseObserver" />
+      </action>
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />
 </struts-config>

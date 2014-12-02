@@ -100,7 +100,7 @@
 							</c:if>
 
 							<form class="form-horizontal"
-								action="${pageContext.request.contextPath }/setObserver.do"
+								action="${pageContext.request.contextPath }/setObserver.do?flag=setObserver"
 								method="post">
 								<legend>Individual Projects</legend>
 								<table class="table table-striped table-bordered">

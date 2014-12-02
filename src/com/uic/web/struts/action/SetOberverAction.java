@@ -4,17 +4,14 @@
  */
 package com.uic.web.struts.action;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.actions.DispatchAction;
 
-import com.uic.domain.ObsTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.imp.FYPServiceImp;
@@ -23,13 +20,12 @@ import com.uic.web.struts.form.ObserverForm;
 
 /** 
  * MyEclipse Struts
- * Creation date: 11-29-2014
+ * Creation date: 12-02-2014
  * 
  * XDoclet definition:
- * @struts.action path="/setObserver" name="observerForm" input="/WEB-INF/logined/Teacher/chooseObserver.jsp" parameter="flag" scope="request" validate="true"
- * @struts.action-forward name="obsSaved" path="/teacherPageControl.do?flag=chooseObserver"
+ * @struts.action path="/setOberver" name="observerForm" parameter="flag" scope="request" validate="true"
  */
-public class SetObserverAction extends Action {
+public class SetOberverAction extends DispatchAction {
 	/*
 	 * Generated Methods
 	 */
@@ -42,7 +38,7 @@ public class SetObserverAction extends Action {
 	 * @param response
 	 * @return ActionForward
 	 */
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
+	public ActionForward setObserver(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		ObserverForm observerForm = (ObserverForm) form;// TODO Auto-generated method stub
 		FYPServiceImp fypService= new FYPServiceImp();
@@ -56,6 +52,7 @@ public class SetObserverAction extends Action {
 			fypService.setObserver(observer, topic);
 		}
 		request.setAttribute("setObserverInfo", "observer changed successful!");
+		//return new ActionForward("/teacherPageControl.do?flag=chooseObserver");
 		return mapping.findForward("obsSaved");
 	}
 }

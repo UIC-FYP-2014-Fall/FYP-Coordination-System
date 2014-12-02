@@ -19,6 +19,10 @@
 <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                    </a>
                     <a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP Coordination System</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
@@ -31,30 +35,16 @@
                                 		<a tabindex="-1">Hello, ${coordinatorinfo.name }</a>
                                 	</li>
                                     <li>
-                                        <a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>                                        
+                                        <a tabindex="-1" href="${pageContext.request.contextPath }/logout.do">Logout</a>
                                     </li>
                                 </ul>
                             </li>
-                        </ul>                                             
+                        </ul>                       
                     </div>
                     <!--/.nav-collapse -->
                 </div>
             </div>
         </div>
-        
-        <div class="modal hide fade" id="logout">
-			<div class="modal-header">
-				<h4>Logout</h4>
-			</div>
-			<div class="modal-body">
-				Are you sure?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
-			</div>
-		</div> 
-        
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
@@ -103,9 +93,9 @@
 							All existing the FYP projects data on the database will be irreversibly <strong>removed</strong>.</div>
 						<div class="block-content collapse in">
 							<a href="#" class="btn btn-primary">Export</a>
-							<button data-target="#submit" data-toggle="modal" class="btn btn-danger">Clear</button>
+							<Button data-target="#submit" data-toggle="modal" class="btn btn-danger">Clear</button>
 						
-							<div class="modal hide fade" id="submit">
+							<div class="modal hide" id="submit">
 								<div class="modal-header">
 									<h4>Please Confirm</h4>
 								</div>
@@ -115,7 +105,6 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 									<a href="#" class="btn btn-danger">Clear</a>
-								</div>
 							</div>
 						</div>
 					</div>

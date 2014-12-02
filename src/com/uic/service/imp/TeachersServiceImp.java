@@ -14,17 +14,17 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 		// TODO Auto-generated method stub
 		String hql = "from Teacher";
 		@SuppressWarnings("unchecked")
-		List<Teacher> list = HibernateUtil.executeQueryOpenInView(hql, null);
+		List<Teacher> list = getListObject(hql, null);
 		return list;
 	}
 
 	@Override
-	public Teacher getUniqueTeacher(String name) {
+	public Teacher getUniqueTeacherByName(String name) {
 		// TODO Auto-generated method stub
 		String hql="from Teacher where name=?";
 		String[] parameters={name};
 		try {
-			Teacher t=(Teacher) HibernateUtil.uniqueQueryOpenInView(hql, parameters);
+			Teacher t=(Teacher) getUniqueObject(hql, parameters);
 			return t;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -37,7 +37,7 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 		String hql="from Teacher where id=?";
 		String[] parameters={id};
 		try {
-			Teacher t=(Teacher) HibernateUtil.uniqueQueryOpenInView(hql, parameters);
+			Teacher t=(Teacher) getUniqueObject(hql, parameters);
 			return t;
 		} catch (Exception e) {
 			// TODO: handle exception
