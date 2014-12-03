@@ -103,7 +103,7 @@
                                                 <td>Judy Feng</td>
                                                 <td>Group</td>
                                                 <td>
-                                                    <a class="btn btn-primary btn-mini" data-toggle="confirmation-singleton" data-placement="left" onclick="location.href='teaminfo.html'">Select</a>
+                                                    <a class="btn btn-primary btn-mini" data-placement="left" href="#groupinfo" data-toggle="modal">Select</a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -142,16 +142,237 @@
                 </div>
               </div>
               <hr>
-              </div>
+              
+              <div class="modal hide fade" id="topic1">
+              	<div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+                    <h4>FYP Coordination System</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <td>FYP Coordination System</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Supervisor</strong></td>
+                                    <td>Judy Feng</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Credits</strong></td>
+                                     <td>3 (can be extended to 6 credits)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>No. of Students</strong></td>
+                                    <td>3</td>
+                                    </tr>
+                                <tr>
+                                    <td><strong>Individual/Group</strong></td>
+                                    <td>Group</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Prerequisites</strong></td>
+                                    <td>Nil</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Description</strong></td>
+                                    <td>This project is to develop an online FYP coordination system to facilitate the management of FYP work. This system will mainly help students to select the project topics, choose examiner and mark the available time for the presentation. The teachers can use this system to input the project topics, approve students' application, mark the available time and do some set up job. The system should be able to create the presentation time for students and teachers. </td>
+                                </tr>       
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+            
+            <div class="modal hide fade" id="topic2">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+                    <h4>FYP Coordination System</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <td>C Assignments Grading System</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Supervisor</strong></td>
+                                    <td>Judy Feng</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Credits</strong></td>
+                                     <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>No. of Students</strong></td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Prerequisites</strong></td>
+                                    <td>Nil</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Individual/Group</strong></td>
+                                    <td>Individual</td>
+                                </tr> 
+                                <tr>
+                                    <td><strong>Description</strong></td>
+                                    <td>In the last semester, a student has already finished this job in using c language. In this semester. The project in this semester is to upgrade the project in C into C++ with the GUI interface. The main job is to be able to import the C assignments, compile and run and compare with the standard answer input by TA. </td>
+                                </tr>       
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+
+            <div class="modal hide fade" id="topic3">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+                    <h4>FYP Coordination System</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <td>A Test Case Management System</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Supervisor</strong></td>
+                                    <td>Judy Feng</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Credits</strong></td>
+                                     <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>No. of Students</strong></td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Prerequisites</strong></td>
+                                    <td>Nil</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Individual/Group</strong></td>
+                                    <td>Individual</td>
+                                </tr> 
+                                <tr>
+                                    <td><strong>Description</strong></td>
+                                    <td>This system is to develop a management system to manage all the test cases used in some experiments. This system should be able to add, remove and retrieve the test case and their history.  </td>
+                                </tr>       
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+
+            <div class="modal hide fade" id="topic4">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+                    <h4>FYP Coordination System</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <td>Evaluation of Commercial Testing Tools</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Supervisor</strong></td>
+                                    <td>Judy Feng</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Credits</strong></td>
+                                     <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>No. of Students</strong></td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Prerequisites</strong></td>
+                                    <td>Nil</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Individual/Group</strong></td>
+                                    <td>Individual</td>
+                                </tr> 
+                                <tr>
+                                    <td><strong>Description</strong></td>
+                                    <td>This project is to evaluate some commercial testing tools available in the market and compare them. The objective of this project is to let students have a brief view of marketing tools and learn how to choose the right tools for a company. The evaluated tools should not be chosen by previous graduate students. </td>
+                                </tr>       
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+            
+            <div class="modal hide fade" id="groupinfo">
+            	<form class="form-horizontal" id="form_sample_1">
+	                <div class="modal-header">
+	                    <a href="#" class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+	                    <h4>Team Infomation</h4>
+	                </div>
+	                <div class="modal-body">   
+	                    <div class="control-group">
+	                    	<label class="control-label"><strong>Team Leader</strong><span class="required">*</span></label>
+	  						<div class="controls">
+	  							<input name="digits" type="text" placeholder="Please input Student ID">	  							
+	  						</div>   	
+	                    </div>
+	                    <div class="control-group">
+	                    	<label class="control-label"><strong>Team Member</strong><span class="required">*</span></label>
+	  						<div class="controls">
+	  							<input name="digits" type="text" placeholder="Please input Student ID">
+	  						</div>   	
+	                    </div>   
+	                    <div class="control-group">	               
+	  						<div class="controls">
+	  							<input name="digits" type="text" placeholder="Please input Student ID">
+	  						</div>   	
+	                    </div>                             
+	                </div>
+	                <div class="modal-footer">
+	                	<button type="submit" class="btn btn-primary">Submit</button>   
+	                </div>
+	        	</form>
+            </div>
+              
+         </div>
 <!--/.fluid-container-->
         <script src="vendors/jquery-1.9.1.min.js"></script> 
-        <script src="bootstrap/js/bootstrap.min.js"></script> 
-        
-        <script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
-        
+        <script src="bootstrap/js/bootstrap.min.js"></script>       
+        <script src="vendors/datatables/js/jquery.dataTables.min.js"></script>      
         <script src="assets/scripts.js"></script> 
-        <script src="assets/DT_bootstrap.js"></script>
-         
+        <script src="assets/DT_bootstrap.js"></script>   
         <script type="text/javascript" src="vendors/jquery-validation/dist/jquery.validate.min.js"></script> 
         <script src="assets/form-validation.js"></script> 
         
