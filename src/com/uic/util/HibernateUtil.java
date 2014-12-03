@@ -1,14 +1,11 @@
 package com.uic.util;
 
 import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
-import com.uic.domain.Topic;
 
 final public class HibernateUtil {
 	private static SessionFactory sessionFactory = null;

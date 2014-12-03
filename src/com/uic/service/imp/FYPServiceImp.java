@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import com.uic.domain.ObsTopic;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;

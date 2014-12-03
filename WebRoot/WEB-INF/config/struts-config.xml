@@ -66,11 +66,7 @@
       scope="request"
       type="com.uic.web.struts.action.TeacherPageControlAction"
       cancellable="true">
-      
-      
       <forward name="mainPage" path="/WEB-INF/logined/Teacher/teacherMain.jsp" />
-      
-     
     </action>
     <action
       parameter="flag"
@@ -184,7 +180,7 @@
       type="com.uic.web.struts.action.TimetableAction"
       cancellable="true">
       <forward name="timetableUi" path="/WEB-INF/logined/Teacher/timetable.jsp" />
-       
+       <forward name="updateTimetable" path="/timetable.do?flag=timetableUi" />
      </action>
 
     <action
@@ -230,9 +226,6 @@
       cancellable="true" >
       <forward name="goChoosePretimeUi" path="/WEB-INF/logined/Student/choosePretime.jsp" />
     </action>
-
-
-
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />
 </struts-config>

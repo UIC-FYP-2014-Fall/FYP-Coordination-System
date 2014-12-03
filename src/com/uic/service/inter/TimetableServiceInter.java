@@ -1,9 +1,7 @@
 package com.uic.service.inter;
 
 import java.util.List;
-
 import com.uic.domain.Teacher;
-import com.uic.domain.Timeslot;
 
 public interface TimetableServiceInter extends BaseInterface{
 	public boolean checkIfTimetableExit(Teacher teacher);

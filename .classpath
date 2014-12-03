@@ -25,5 +25,6 @@
 			<attribute name="owner.project.facets" value="web.struts"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/hozdanny/Desktop/joda-time-2.6/joda-time-2.6.jar" sourcepath="/Users/hozdanny/Desktop/joda-time-2.6/joda-time-2.6-sources.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

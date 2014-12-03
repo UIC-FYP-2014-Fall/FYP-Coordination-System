@@ -5,6 +5,7 @@
 package com.uic.web.struts.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,8 @@ import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.imp.FYPServiceImp;
 import com.uic.service.imp.TeachersServiceImp;
+import com.uic.util.BaseUtil;
+import com.uic.util.PropertiesHelper;
 import com.uic.web.struts.form.UploadFYPForm;
 
 /**
@@ -47,21 +50,39 @@ public class UploadFYPAction extends DispatchAction {
 	public ActionForward uploadTopicUi(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		System.out.println("Using TeacherPageControlAction");
-		if(request.getSession().getAttribute("role").equals("teacher")){
-			TeachersServiceImp ts = new TeachersServiceImp();
-			List<Teacher> teacherList = ts.getTeachers();
-			request.setAttribute("teacherList", teacherList);
-			return mapping.findForward("uploadTopicUi");
-		}else{
+		if (request.getSession().getAttribute("role").equals("teacher")) {
+			// check propertises if the today is in upload period
+			PropertiesHelper ph = new PropertiesHelper(
+					"/WEB-INF/config/FYP-system.properties");
+			String start = ph.getProperties("UploadTopicsStartDateTime");
+			String end = ph.getProperties("UploadTopicsEndDateTime");
+			if (start != null && end != null) {
+				if (BaseUtil.todayIsInPeriod(start, end)) {
+					TeachersServiceImp ts = new TeachersServiceImp();
+					List<Teacher> teacherList = ts.getTeachers();
+					request.setAttribute("teacherList", teacherList);
+					request.setAttribute("uploadPeriod", start+" to "+ end);
+					request.setAttribute("uploadTopicStart", "true");
+					return mapping.findForward("uploadTopicUi");
+				} else {
+					request.setAttribute("uploadPeriod", start+" to "+ end);
+					request.setAttribute("uploadTopicStart", "false");
+					return mapping.findForward("uploadTopicUi");
+				}
+			} else {
+				request.setAttribute("uploadPeriod", "Coordinator has not set time");
+				request.setAttribute("uploadTopicStart", "false");
+				return mapping.findForward("uploadTopicUi");
+			}
+
+		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
 		}
 	}
-	
+
 	public ActionForward uploadFYP(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("Using UploadFYPaction");
 		UploadFYPForm uploadFYPForm = (UploadFYPForm) form;
 
 		// set up the data service.
@@ -73,7 +94,8 @@ public class UploadFYPAction extends DispatchAction {
 		Topic topic = new Topic();
 		ArrayList<Teacher> teacherlist = new ArrayList<Teacher>();
 		for (int i = 0; i < supervisor.length; i++) {
-			Teacher t = teachersServiceImp.getUniqueTeacherByName(supervisor[i]);
+			Teacher t = teachersServiceImp
+					.getUniqueTeacherByName(supervisor[i]);
 			teacherlist.add(t);
 		}
 
@@ -91,14 +113,14 @@ public class UploadFYPAction extends DispatchAction {
 		}
 		// save to database
 		boolean success = fypServiceImp.uploadTopic(teacherlist, topic);
-		
+
 		if (success) {
 			request.setAttribute("operationInfo", "upload topic success");
 		} else {
 			request.setAttribute("operationInfo", "fail");
 		}
-		//set a default observer
-		ObsTopic obsTopic=new ObsTopic();
+		// set a default observer
+		ObsTopic obsTopic = new ObsTopic();
 		obsTopic.setObserver(teacherlist.get(0));
 		obsTopic.setTopic(topic);
 		fypServiceImp.saveObject(obsTopic);

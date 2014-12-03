@@ -140,12 +140,6 @@
 									%>
 								</tbody>
 							</table>
-							<div class="table-toolbar">
-								<a class="btn btn-success"
-									herf="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadTopicUi">Add
-									New <i class="icon-plus icon-white"></i>
-								</a>
-							</div>
 						</div>
 					</div>
 					<div class="block">
@@ -192,13 +186,6 @@
 									%>
 								</tbody>
 							</table>
-							<div class="table-toolbar">
-								<a class="btn btn-success"
-									herf="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadTopicUi">Add
-									New <i class="icon-plus icon-white"></i>
-								</a>
-							</div>
-
 						</div>
 					</div>
 					<hr>
@@ -208,6 +195,7 @@
 				<script src="bootstrap/js/bootstrap.min.js"></script>
 				<script src="assets/scripts.js"></script>
 			</div>
+		</div>
 		</div>
 		<!--/.fluid-container-->
 		<script src="vendors/jquery-1.9.1.min.js"></script>
