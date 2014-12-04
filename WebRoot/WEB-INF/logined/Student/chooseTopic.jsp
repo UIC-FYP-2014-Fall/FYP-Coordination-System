@@ -335,6 +335,8 @@
                 </div>
             </div>
             
+            
+            
             <div class="modal hide fade" id="groupinfo">
             	<form class="form-horizontal" id="form_sample_1">
 	                <div class="modal-header">
