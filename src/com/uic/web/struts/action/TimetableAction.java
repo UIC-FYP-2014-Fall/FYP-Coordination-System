@@ -9,16 +9,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.registry.infomodel.Slot;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
-
 import com.uic.domain.Teacher;
 import com.uic.domain.Timeslot;
 import com.uic.service.imp.TimetableServiceImp;
+import com.uic.util.BaseUtil;
+import com.uic.util.PropertiesHelper;
 import com.uic.web.struts.form.TimeslotForm;
 
 /**
@@ -46,23 +46,47 @@ public class TimetableAction extends DispatchAction {
 	public ActionForward timetableUi(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		if(request.getSession().getAttribute("role").equals("teacher")){
-			String numOfWeek="3";
-			TimetableServiceImp timetableService=new TimetableServiceImp();
-			Teacher teacher=(Teacher)request.getSession().getAttribute("teacherinfo");
-			List<String> timeslots=timetableService.getTimtableOfOneTeacher(teacher);
-			request.setAttribute("numOfWeek", numOfWeek);
-			request.setAttribute("timeslots", timeslots);
-			return mapping.findForward("timetableUi");
-		}else{
+		if (request.getSession().getAttribute("role").equals("teacher")) {
+			PropertiesHelper ph = new PropertiesHelper(
+					"/WEB-INF/config/FYP-system.properties");
+			String preStart = ph.getProperties("PreStartDateTime");
+			String preEnd = ph.getProperties("PreEndDateTime");
+			String timetablePeriod = preStart+" to "+preEnd;
+			if (preStart != null && preEnd != null) {
+				String numOfWeek = BaseUtil.getNumOfWeekBetweenTwoDate(preStart,preEnd);
+				String beginWeekDay = BaseUtil.getDayOfWeek(preStart);
+				String endWeekDay = BaseUtil.getDayOfWeek(preEnd);
+				ArrayList<String> timeTableTime = BaseUtil.getEveryWeekStartAndEndDay(preStart, preEnd);
+				TimetableServiceImp timetableService = new TimetableServiceImp();
+				Teacher teacher = (Teacher) request.getSession().getAttribute(
+						"teacherinfo");
+				List<String> timeslots = timetableService
+						.getTimtableOfOneTeacher(teacher);
+				for(int i =0;i<timeTableTime.size();i++){
+					System.out.println(timeTableTime.get(i));
+				}
+				request.setAttribute("timeTableTime", timeTableTime);
+				request.setAttribute("timetablePeriod", timetablePeriod);
+				request.setAttribute("timetableStart", "true");
+				request.setAttribute("numOfWeek", numOfWeek);
+				request.setAttribute("timeslots", timeslots);
+				request.setAttribute("beginWeekDay", beginWeekDay);
+				request.setAttribute("endWeekDay", endWeekDay);
+				return mapping.findForward("timetableUi");
+			} else {
+				request.setAttribute("timetablePeriod", timetablePeriod);
+				request.setAttribute("timetableStart", "false");
+				return mapping.findForward("timetableUi");
+			}
+		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
 		}
 	}
-	
-	
-	public ActionForward updateTimetable(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) {
+
+	public ActionForward updateTimetable(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
 		TimeslotForm timeslotForm = (TimeslotForm) form;// TODO Auto-generated
 														// method stub
 		Teacher curTeacher = (Teacher) request.getSession().getAttribute(
@@ -74,27 +98,30 @@ public class TimetableAction extends DispatchAction {
 		for (int i = 0; i < timeslots.length; i++) {
 			timeslotsArrayList.add(timeslots[i]);
 		}
-		
-		
+
 		if (timetableService.checkIfTimetableExit(curTeacher)) {
-			//table exit: update the current table
+			// table exit: update the current table
 			for (int week = 1; week <= Integer.parseInt(weeks); week++) {
 				for (int time = 1; time < 8; time++) {
 					for (int day = 1; day <= 5; day++) {
-						//only update the new select date
+						// only update the new select date
 						String tempslot = week + "," + day + "," + time;
 						if (timeslotsArrayList.contains(tempslot)) {
-							boolean flag = timetableService.updateTimetable(curTeacher, tempslot);
-							System.out.println("update available true "+tempslot);
-						}else{
-							boolean flag= timetableService.cancelAvailableSlot(curTeacher, tempslot);
-							System.out.println("update available false "+tempslot);
+							boolean flag = timetableService.updateTimetable(
+									curTeacher, tempslot);
+							System.out.println("update available true "
+									+ tempslot);
+						} else {
+							boolean flag = timetableService
+									.cancelAvailableSlot(curTeacher, tempslot);
+							System.out.println("update available false "
+									+ tempslot);
 						}
 					}
 				}
 			}
-		}else{
-			//table not exit: intert a new table 
+		} else {
+			// table not exit: insert a new table
 			for (int week = 1; week <= Integer.parseInt(weeks); week++) {
 				for (int time = 1; time < 8; time++) {
 					for (int day = 1; day <= 5; day++) {
@@ -109,7 +136,8 @@ public class TimetableAction extends DispatchAction {
 							timeslot.setSelected(false);
 							timeslot.setAvailable(true);
 							timeslot.setTeacher(curTeacher);
-							boolean flag = timetableService.saveObject(timeslot);
+							boolean flag = timetableService
+									.saveObject(timeslot);
 						} else {
 							Timeslot timeslot = new Timeslot();
 							timeslot.setWeek(String.valueOf(week));
@@ -118,7 +146,8 @@ public class TimetableAction extends DispatchAction {
 							timeslot.setSelected(false);
 							timeslot.setAvailable(false);
 							timeslot.setTeacher(curTeacher);
-							boolean flag =timetableService.saveObject(timeslot);
+							boolean flag = timetableService
+									.saveObject(timeslot);
 						}
 					}
 				}
