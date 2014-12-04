@@ -4,18 +4,30 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-/** 
- * MyEclipse Struts
- * Creation date: 12-03-2014
+import com.uic.domain.Student;
+import com.uic.domain.Teacher;
+import com.uic.service.imp.StudentServiceImp;
+import com.uic.service.imp.TimetableServiceImp;
+import com.uic.util.BaseUtil;
+import com.uic.util.PropertiesHelper;
+import com.uic.web.struts.form.ChoosePreTimeForm;
+
+/**
+ * MyEclipse Struts Creation date: 12-03-2014
  * 
  * XDoclet definition:
+ * 
  * @struts.action parameter="flag"
  */
 public class ChoosePretimeAction extends DispatchAction {
@@ -23,24 +35,155 @@ public class ChoosePretimeAction extends DispatchAction {
 	 * Generated Methods
 	 */
 
-	/** 
+	/**
 	 * Method execute
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
 	 * @param response
 	 * @return ActionForward
 	 */
-	public ActionForward goChoosePretime(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) {
+	public ActionForward goChoosePretime(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("student")) {
-
-			return mapping.findForward("goChoosePretimeUi");
+			PropertiesHelper ph = new PropertiesHelper(
+					"/WEB-INF/config/FYP-system.properties");
+			String preStart = ph.getProperties("PreStartDateTime");
+			String preEnd = ph.getProperties("PreEndDateTime");
+			String timetablePeriod = preStart + " to " + preEnd;
+			if (preStart != null && preEnd != null) {
+				// check if the student have been select a time
+				Student student = (Student) request.getSession().getAttribute(
+						"studentinfo");
+				TimetableServiceImp timetableService = new TimetableServiceImp();
+				StudentServiceImp studentService = new StudentServiceImp();
+				System.out.println(timetableService.ifStudentAlreadySelectATime(student));
+				if (timetableService.ifStudentAlreadySelectATime(student)) {
+					String selectedTimeslot = timetableService
+							.getStudentSelectTime(student);
+					String selected = (String) request
+							.getAttribute("timeHaveBeenSelected");
+					String numOfWeek = BaseUtil.getNumOfWeekBetweenTwoDate(
+							preStart, preEnd);
+					String beginWeekDay = BaseUtil.getDayOfWeek(preStart);
+					String endWeekDay = BaseUtil.getDayOfWeek(preEnd);
+					ArrayList<String> timeTableTime = BaseUtil
+							.getEveryWeekStartAndEndDay(preStart, preEnd);
+					ArrayList<Teacher> supervisor = studentService
+							.getSupervisor(student);
+					Teacher observer = studentService.getObserver(student);
+					List<String> timeslots = timetableService
+							.getTeacherAndObserverAvailableTime(supervisor,
+									observer);
+					for (int i = 0; i < timeslots.size(); i++) {
+						System.out.println(timeslots.get(i));
+					}
+					request.setAttribute("selectedTimeslot", selectedTimeslot);
+					request.setAttribute("timeTableTime", timeTableTime);
+					request.setAttribute("timetablePeriod", timetablePeriod);
+					request.setAttribute("timetableStart", "true");
+					request.setAttribute("numOfWeek", numOfWeek);
+					request.setAttribute("timeslots", timeslots);
+					request.setAttribute("beginWeekDay", beginWeekDay);
+					request.setAttribute("endWeekDay", endWeekDay);
+					if (selected == null) {
+						// skip
+					} else {
+						request.setAttribute("timeHaveBeenSelected",
+								"timeHaveBeenSelected");
+					}
+					return mapping.findForward("goChoosePretimeUi");
+				} else {
+					String selected = (String) request
+							.getAttribute("timeHaveBeenSelected");
+					String numOfWeek = BaseUtil.getNumOfWeekBetweenTwoDate(
+							preStart, preEnd);
+					String beginWeekDay = BaseUtil.getDayOfWeek(preStart);
+					String endWeekDay = BaseUtil.getDayOfWeek(preEnd);
+					ArrayList<String> timeTableTime = BaseUtil
+							.getEveryWeekStartAndEndDay(preStart, preEnd);
+					ArrayList<Teacher> supervisor = studentService
+							.getSupervisor(student);
+					Teacher observer = studentService.getObserver(student);
+					List<String> timeslots = timetableService
+							.getTeacherAndObserverAvailableTime(supervisor,
+									observer);
+					for (int i = 0; i < timeslots.size(); i++) {
+						System.out.println(timeslots.get(i));
+					}
+					request.setAttribute("timeTableTime", timeTableTime);
+					request.setAttribute("timetablePeriod", timetablePeriod);
+					request.setAttribute("timetableStart", "true");
+					request.setAttribute("numOfWeek", numOfWeek);
+					request.setAttribute("timeslots", timeslots);
+					request.setAttribute("beginWeekDay", beginWeekDay);
+					request.setAttribute("endWeekDay", endWeekDay);
+					if (selected == null) {
+						// skip
+					} else {
+						request.setAttribute("timeHaveBeenSelected",
+								"timeHaveBeenSelected");
+					}
+					return mapping.findForward("goChoosePretimeUi");
+				}
+			} else {
+				request.setAttribute("timetablePeriod", timetablePeriod);
+				request.setAttribute("timetableStart", "false");
+				return mapping.findForward("goChoosePretimeUi");
+			}
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
 		}
-		
+	}
+
+	public ActionForward updateChooseTopic(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		ChoosePreTimeForm choosePreTimeForm = (ChoosePreTimeForm) form;
+		String timeslot = choosePreTimeForm.getTimeslot();
+		TimetableServiceImp timetableService = new TimetableServiceImp();
+		StudentServiceImp studentService = new StudentServiceImp();
+		// check if this time have been selected
+		Student student = (Student) request.getSession().getAttribute(
+				"studentinfo");
+		ArrayList<Teacher> supervisor = studentService.getSupervisor(student);
+		Teacher observer = studentService.getObserver(student);
+		supervisor.add(observer);
+		boolean flag = false;
+		for (int i = 0; i < supervisor.size(); i++) {
+			flag = timetableService.checkIfTimeHaveBeenSelected(observer,
+					timeslot);
+		}
+		if (flag) {
+			// time have been selected
+			request.setAttribute("timeHaveBeenSelected", "timeHaveBeenSelected");
+			return mapping
+					.findForward("updateChooseTopic");
+		} else {
+			if(timetableService.ifStudentAlreadySelectATime(student)){
+				//cancel the selected time
+				timetableService.cancelStudentSelectedTime(student);
+				//update the selected time
+				for (int i = 0; i < supervisor.size(); i++) {
+					timetableService.studentSelectTime(supervisor.get(i), student,
+							timeslot);
+				}
+				return mapping
+						.findForward("updateChooseTopic");
+			}else{
+				for (int i = 0; i < supervisor.size(); i++) {
+					timetableService.studentSelectTime(supervisor.get(i), student,
+							timeslot);
+				}
+				return mapping
+						.findForward("updateChooseTopic");
+			}
+		}
+
 	}
 }

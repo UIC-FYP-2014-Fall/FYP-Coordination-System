@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+
 import com.uic.domain.ObsTopic;
+import com.uic.domain.Student;
+import com.uic.domain.Stutopic;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
@@ -127,5 +130,14 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 	public ObsTopic refreshObsTopic(ObsTopic obsTopic){
 		obsTopic = (ObsTopic) HibernateUtil.refreshObj(obsTopic);
 		return obsTopic;
+	}
+
+	@Override
+	public List<Stutopic> getStutopicByStudent(Student student) {
+		// TODO Auto-generated method stub
+		String hql ="from Stutopic where sid=?";
+		String[] parameters={student.getId().toString()};
+		List<Stutopic> stutopic=(List<Stutopic>)getListObject(hql,parameters);
+		return stutopic;
 	}
 }

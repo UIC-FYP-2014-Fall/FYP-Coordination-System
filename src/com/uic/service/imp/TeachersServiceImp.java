@@ -2,6 +2,7 @@ package com.uic.service.imp;
 
 import java.util.List;
 
+import com.uic.domain.Student;
 import com.uic.domain.Teacher;
 import com.uic.service.inter.TeachersServiceInter;
 import com.uic.util.HibernateUtil;
@@ -119,6 +120,4 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 			return false;
 		}
 	}
-
-
 }
