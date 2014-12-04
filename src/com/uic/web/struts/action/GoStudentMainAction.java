@@ -6,10 +6,18 @@ package com.uic.web.struts.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+
+import com.uic.domain.Student;
+import com.uic.domain.Time;
+import com.uic.service.imp.StudentServiceImp;
+import com.uic.service.inter.StudentServiceInter;
+import com.uic.util.TimeChecker;
+
 
 /** 
  * MyEclipse Struts
@@ -35,6 +43,45 @@ public class GoStudentMainAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("student")) {
+			Student stu = (Student)request.getSession().getAttribute("studentinfo");
+			Time time = new Time();
+			//check now time located situation
+			time = TimeChecker.timeCheck();
+			//check whether student has chosen topic
+			StudentServiceInter studentSericeInter = new StudentServiceImp();
+			
+			
+			if(studentSericeInter.checkTopicState(stu.getSid())){
+				request.setAttribute("chooseTopic", "true");
+				//get student topic info
+				
+			}else{
+				request.setAttribute("chooseTopic", "false");
+			}
+			//check whether student choose examiner
+			if(studentSericeInter.checkExaminerState(stu.getSid())){
+				request.setAttribute("chooseExaminer", "true");
+				//get student examiner info
+				request.setAttribute("Examiner", "wufu");
+			}else{
+				request.setAttribute("chooseExaminer", "false");
+			}
+			//check whether student choose presentation time
+			if(studentSericeInter.checkPretimeState(stu.getSid())){
+				request.setAttribute("choosePretime", "true");
+				//get student examiner info
+				request.setAttribute("Pretime", "2014-12-29 09:00:00-09:30:00");
+			}else{
+				request.setAttribute("choosePretime", "false");
+			}
+			
+			//System.out.println("TimeType: "+time.getType());
+			
+			request.setAttribute("timeType", time.getType());
+			request.setAttribute("start", time.getStartTime());
+			request.setAttribute("end", time.getEndTime());
+			
+			
 			
 			return mapping.findForward("goMainUi");
 		}else{
