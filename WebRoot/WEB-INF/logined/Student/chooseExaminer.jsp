@@ -80,14 +80,45 @@
 
                 <div class="span9" id="content">
                      <div class="row-fluid">
-                        
+                     
+                     	<c:if test="${studentOperation=='success'}">
+      						<div class="alert alert-success SuccessInfo">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+            					<h4>Success</h4>
+            					The operation completed successfully
+        					</div>
+      					</c:if>
+      					<c:if test="${studentOperation=='error'}">
+      						<div class="alert alert-error ErrorInfo">
+         						 <button type="button" class="close" data-dismiss="alert">&times;</button>
+          						<h4>Error</h4>
+          						The operation failed! ${ErrorInfo}
+       						</div>
+      					</c:if>
+							
                             <!-- block -->								                   		
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Choose Examiner</div>                                   
                                 </div>
                                 <div class="block-content collapse in">
-                                    <table class="table table-striped">
+                                <c:if test="${chooseExaminer=='false'&& chooseExaminerTime=='false'}">
+                                	<div class="alert alert-error">
+          								<h4>Sorry</h4>
+          								Choose examiner has not start yet. Please come back later.
+       								</div>
+                                </c:if>
+                                <c:if test="${chooseExaminer=='true' }">
+                                	<div class="alert alert-info">
+										<p>Your examiner: <strong>Xin Feng</strong></p>
+										<c:if test="${chooseExaminerTime=='true' }">
+											<p>If you want to change your examiner, please click <button class="btn btn-primary btn-mini">Change</button>.</p>
+										</c:if>
+									</div>
+                                </c:if>
+                                
+                                <c:if test="${chooseExaminerTime=='true' }">
+                                    <table class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -100,7 +131,7 @@
                                                 <td>Xin Feng</td>
                                                 <td>xinfeng@uic.edu.hk</td>
                                                 <td>
-                                                    <button class="btn btn-primary btn-mini">Select</button>
+                                                    <span class="label">Selected</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -127,6 +158,9 @@
                                             </tr>                                      
                                         </tbody>
                                     </table>
+                                  </c:if>
+                                  
+                                  
                                 </div>
                             </div>
                         

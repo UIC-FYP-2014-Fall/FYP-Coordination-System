@@ -6,10 +6,17 @@ package com.uic.web.struts.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+
+import com.uic.domain.Student;
+import com.uic.service.imp.StudentServiceImp;
+import com.uic.service.inter.StudentServiceInter;
+import com.uic.service.inter.TimeType;
+import com.uic.util.TimeChecker;
 
 /** 
  * MyEclipse Struts
@@ -35,7 +42,35 @@ public class ChooseExaminerAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("student")) {
-
+			Student stu = (Student)request.getSession().getAttribute("studentinfo");
+			StudentServiceInter studentSericeInter = new StudentServiceImp();
+			//check whether student can choose examiner
+			if(studentSericeInter.checkExaminerState(stu.getSid())){
+				//student has chosen examiner
+				request.setAttribute("chooseExaminer", "true");
+				//display the examiner who has been chosen by the student
+				if(TimeChecker.timeCheck().equals(TimeType.choose_examiner)){
+					//student can change examiner
+					request.setAttribute("chooseExaminerTime", "true");
+					
+				}else{
+					//student only view examiner
+					request.setAttribute("chooseExaminerTime", "false");
+				}
+				
+			}else{
+				//student has not choose examiner
+				request.setAttribute("chooseExaminer", "false");
+				
+				//check now time whether should choose examiner
+				if(TimeChecker.timeCheck().equals(TimeType.choose_examiner)){
+					request.setAttribute("chooseExaminerTime", "true");
+					
+				}else{
+					request.setAttribute("chooseExaminerTime", "false");
+				}
+			}
+			
 			return mapping.findForward("goChooseExaminerUi");
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
