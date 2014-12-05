@@ -33,7 +33,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>
+                                        <a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -102,6 +102,7 @@
                                     <div class="muted pull-left">Choose Examiner</div>                                   
                                 </div>
                                 <div class="block-content collapse in">
+                                
                                 <c:if test="${chooseExaminer=='false'&& chooseExaminerTime=='false'}">
                                 	<div class="alert alert-error">
           								<h4>Sorry</h4>
@@ -127,35 +128,24 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Xin Feng</td>
-                                                <td>xinfeng@uic.edu.hk</td>
-                                                <td>
-                                                    <span class="label">Selected</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gigi</td>
-                                                <td>chunyanji@uic.edu.hk</td>
-                                                <td>
-                                                    <button class="btn btn-primary btn-mini">Select</button>   
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Weifeng Su</td>
-                                                <td>wfsu@uic.edu.hk</td>                                               
-                                                <td>
-                                                    <span class="label label-important">Full</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Amy Zhang</td>
-                                                <td>amyzhang@uic.edu.hk</td>
-                                                
-                                                <td>
-                                                    <button class="btn btn-primary btn-mini">Select</button>
-                                                </td>
-                                            </tr>                                      
+                                        	<c:forEach items="${teacherList }" var="teacher">
+                								<tr>
+                   						 			<td>${teacher.name }</td>            								
+                    								<td>${teacher.email }</td>
+                    							<td>
+                    								<c:if test="${teacher.state=='0' }">
+                    									<span class="label label-important">Full</span>
+                    								</c:if>
+                    								<c:if test="${teacher.state=='1' }">
+                    									<button class="btn btn-primary btn-mini">Select</button>
+                    								</c:if>
+                    								<!-- <span class="label">Selected</span>
+                    								<button class="btn btn-primary btn-mini">Select</button>
+                    								<span class="label label-important">Full</span> -->
+                    							</td>
+                    	
+                  								</tr>
+                							</c:forEach>                              
                                         </tbody>
                                     </table>
                                   </c:if>

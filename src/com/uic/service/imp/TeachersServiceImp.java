@@ -120,5 +120,19 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 		}
 	}
 
+	@Override
+	public Integer getWorkload(String id) {
+		// TODO Auto-generated method stub
+		Integer count = 0;
+		String hql = "select count(*) from Stuexaminer where teacher.id = ?";
+		String[] parameters={id};
+		try{
+			count=Integer.parseInt(HibernateUtil.uniqueQueryOpenInView(hql, parameters).toString());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 
 }
