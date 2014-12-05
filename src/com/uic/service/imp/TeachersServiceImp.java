@@ -13,9 +13,13 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 	public List<Teacher> getTeachers() {
 		// TODO Auto-generated method stub
 		String hql = "from Teacher";
-		@SuppressWarnings("unchecked")
-		List<Teacher> list = getListObject(hql, null);
-		return list;
+		try{
+			List<Teacher> list = getListObject(hql, null);
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -119,6 +123,7 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 			return false;
 		}
 	}
+
 
 	@Override
 	public Integer getWorkload(String id) {

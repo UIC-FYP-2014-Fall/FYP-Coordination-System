@@ -13,6 +13,7 @@
     <form-bean name="editFYPForm" type="com.uic.web.struts.form.EditFYPForm" />
     <form-bean name="observerForm" type="com.uic.web.struts.form.ObserverForm" />
     <form-bean name="timeslotForm" type="com.uic.web.struts.form.TimeslotForm" />
+    <form-bean name="choosePreTimeForm" type="com.uic.web.struts.form.ChoosePreTimeForm" />
   </form-beans>
   <global-exceptions />
   <global-forwards >
@@ -200,7 +201,7 @@
       type="com.uic.web.struts.action.SetOberverAction"
       cancellable="true">
       <forward name="chooseObserverUi" path="/WEB-INF/logined/Teacher/chooseObserver.jsp" />
-      
+      <forward name="obsSaved" path="/setObserver.do?flag=chooseObserverUi" />
       </action>
     <action
       parameter="flag"
@@ -219,12 +220,16 @@
       <forward name="goChooseExaminerUi" path="/WEB-INF/logined/Student/chooseExaminer.jsp" />
     </action>
     <action
+      attribute="choosePreTimeForm"
+      name="choosePreTimeForm"
       parameter="flag"
       path="/choosePretime"
+      scope="request"
       type="com.uic.web.struts.action.ChoosePretimeAction"
       validate="false"
-      cancellable="true" >
+      cancellable="true">
       <forward name="goChoosePretimeUi" path="/WEB-INF/logined/Student/choosePretime.jsp" />
+      <forward name="updateChooseTopic" path="/choosePretime.do?flag=goChoosePretime" />
     </action>
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />
