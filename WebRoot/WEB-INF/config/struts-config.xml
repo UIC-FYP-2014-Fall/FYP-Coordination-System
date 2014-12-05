@@ -201,7 +201,7 @@
       type="com.uic.web.struts.action.SetOberverAction"
       cancellable="true">
       <forward name="chooseObserverUi" path="/WEB-INF/logined/Teacher/chooseObserver.jsp" />
-      
+      <forward name="obsSaved" path="/setObserver.do?flag=chooseObserverUi" />
       </action>
     <action
       parameter="flag"

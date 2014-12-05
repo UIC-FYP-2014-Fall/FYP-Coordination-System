@@ -16,24 +16,34 @@ public class StudentServiceImp extends BaseServiceImp implements
 	public Teacher getObserver(Student student) {
 		// TODO Auto-generated method stub
 		FYPServiceImp fypService = new FYPServiceImp();
-		List<Stutopic> stutopic = fypService.getStutopicByStudent(student);
-		List<ObsTopic> obsTopic = fypService.getObsTopicByTopicId(stutopic
-				.get(0).getTopic().getFid().toString());
-		return obsTopic.get(0).getObserver();
+		try{
+			List<Stutopic> stutopic = fypService.getStutopicByStudent(student);
+			List<ObsTopic> obsTopic = fypService.getObsTopicByTopicId(stutopic
+					.get(0).getTopic().getFid().toString());
+			return obsTopic.get(0).getObserver();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public ArrayList<Teacher> getSupervisor(Student student) {
 		// TODO Auto-generated method stub
 		FYPServiceImp fypService = new FYPServiceImp();
-		List<Stutopic> stutopic = fypService.getStutopicByStudent(student);
-		List<TeaTopic> teaTopic = fypService.getTeaTopicByTopicId(stutopic
-				.get(0).getTopic().getFid().toString());
-		ArrayList<Teacher> supervisors = new ArrayList<Teacher>();
-		for (int i = 0; i < teaTopic.size(); i++) {
-			supervisors.add(teaTopic.get(i).getTeacher());
+		try{
+			List<Stutopic> stutopic = fypService.getStutopicByStudent(student);
+			List<TeaTopic> teaTopic = fypService.getTeaTopicByTopicId(stutopic
+					.get(0).getTopic().getFid().toString());
+			ArrayList<Teacher> supervisors = new ArrayList<Teacher>();
+			for (int i = 0; i < teaTopic.size(); i++) {
+				supervisors.add(teaTopic.get(i).getTeacher());
+			}
+			return supervisors;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
 		}
-		return supervisors;
 	}
 
 	@Override

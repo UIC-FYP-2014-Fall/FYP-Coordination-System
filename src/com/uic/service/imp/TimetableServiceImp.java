@@ -14,11 +14,16 @@ public class TimetableServiceImp  extends BaseServiceImp implements TimetableSer
 		String hql="from Timeslot where teacher_id=?";
 		String[] parameters={teacherId};
 		System.out.println("ddd"+teacherId);
-		List<Object> timeslotList=getListObject(hql,parameters);
-		System.out.print("timeslotList "+timeslotList.size());
-		if(timeslotList.size()!=0){
-			return true;
-		}else{
+		try{
+			List<Object> timeslotList=getListObject(hql,parameters);
+			System.out.print("timeslotList "+timeslotList.size());
+			if(timeslotList.size()!=0){
+				return true;
+			}else{
+				return false;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -29,8 +34,14 @@ public class TimetableServiceImp  extends BaseServiceImp implements TimetableSer
 		String hql="update Timeslot set available=1 where week=? and day=? and time=? and teacher_id=?";
 		String[] tempslot=timeslot.split(",");
 		String[] parameters={tempslot[0],tempslot[1],tempslot[2],teacher.getId().toString()};
-		boolean flag=updateObject(hql,parameters);
-		return flag;
+		try{
+			boolean flag=updateObject(hql,parameters);
+			return flag;
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Can not update the timetable in updateTimetable");
+			return false;
+		}
 	}
 
 	@Override
@@ -39,8 +50,14 @@ public class TimetableServiceImp  extends BaseServiceImp implements TimetableSer
 		String hql="update Timeslot set available=0 where week=? and day=? and time=? and teacher_id=?";
 		String[] tempslot=timeslot.split(",");
 		String[] parameters={tempslot[0],tempslot[1],tempslot[2],teacher.getId().toString()};
-		boolean flag=updateObject(hql,parameters);
-		return flag;
+		try{
+			boolean flag=updateObject(hql,parameters);
+			return flag;
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Can not cancelAvailableSlot");
+			return false;
+		}
 	}
 
 	@Override
@@ -48,16 +65,20 @@ public class TimetableServiceImp  extends BaseServiceImp implements TimetableSer
 		// TODO Auto-generated method stub
 		String hql="from Timeslot where teacher_id=? and available=1";
 		String[] parameters={teacher.getId().toString()};
-		List<Timeslot> list= (List<Timeslot>)getListObject(hql,parameters);
-		ArrayList<String> timeslotList=new ArrayList<String>();
-		
-		for(int i =0;i<list.size();i++){
-			String temp;
-			Timeslot timeslot=list.get(i);
-			temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
-			timeslotList.add(temp);
+		try{
+			List<Timeslot> list= (List<Timeslot>)getListObject(hql,parameters);
+			ArrayList<String> timeslotList=new ArrayList<String>();
+			for(int i =0;i<list.size();i++){
+				String temp;
+				Timeslot timeslot=list.get(i);
+				temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
+				timeslotList.add(temp);
+			}
+			return timeslotList;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
 		}
-		return timeslotList;
 	}
 	
 	
@@ -65,23 +86,35 @@ public class TimetableServiceImp  extends BaseServiceImp implements TimetableSer
 		String hql="From Timeslot where teacher_id=? and available=1 and selected=0";
 		String[] pareOfSup={supervisor.get(0).getId().toString()};
 		String[] pareOfObs={observer.getId().toString()};
-		List<Timeslot> obsTimeslot=(List<Timeslot>)getListObject(hql,pareOfObs);
-		List<Timeslot> supTimeslot0=(List<Timeslot>)getListObject(hql,pareOfSup);
-		ArrayList<String> tempTimeslotList=new ArrayList<String>();
-		ArrayList<String> mergedTimeslotList=new ArrayList<String>();
-		for(int i =0;i<supTimeslot0.size();i++){
-			String temp;
-			Timeslot timeslot=supTimeslot0.get(i);
-			temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
-			tempTimeslotList.add(temp);
-		}
-		
-		for(int i =1;i<supervisor.size();i++){
-			pareOfSup[0]=supervisor.get(i).getId().toString();
-			List<Timeslot> supTimeslot=(List<Timeslot>)getListObject(hql,pareOfSup);
-			for(int j =0;j<obsTimeslot.size();j++){
+		try{
+			List<Timeslot> obsTimeslot=(List<Timeslot>)getListObject(hql,pareOfObs);
+			List<Timeslot> supTimeslot0=(List<Timeslot>)getListObject(hql,pareOfSup);
+			ArrayList<String> tempTimeslotList=new ArrayList<String>();
+			ArrayList<String> mergedTimeslotList=new ArrayList<String>();
+			for(int i =0;i<supTimeslot0.size();i++){
 				String temp;
-				Timeslot timeslot=obsTimeslot.get(j);
+				Timeslot timeslot=supTimeslot0.get(i);
+				temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
+				tempTimeslotList.add(temp);
+			}
+			
+			for(int i =1;i<supervisor.size();i++){
+				pareOfSup[0]=supervisor.get(i).getId().toString();
+				List<Timeslot> supTimeslot=(List<Timeslot>)getListObject(hql,pareOfSup);
+				for(int j =0;j<obsTimeslot.size();j++){
+					String temp;
+					Timeslot timeslot=obsTimeslot.get(j);
+					temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
+					if(tempTimeslotList.contains(temp)){
+						mergedTimeslotList.add(temp);
+					}else{
+						//skip
+					}
+				}
+			}
+			for(int i =0;i<obsTimeslot.size();i++){
+				String temp;
+				Timeslot timeslot=obsTimeslot.get(i);
 				temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
 				if(tempTimeslotList.contains(temp)){
 					mergedTimeslotList.add(temp);
@@ -89,18 +122,12 @@ public class TimetableServiceImp  extends BaseServiceImp implements TimetableSer
 					//skip
 				}
 			}
+			return mergedTimeslotList;
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("error in getTeacherAndObserverAvailableTime");
+			return null;
 		}
-		for(int i =0;i<obsTimeslot.size();i++){
-			String temp;
-			Timeslot timeslot=obsTimeslot.get(i);
-			temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
-			if(tempTimeslotList.contains(temp)){
-				mergedTimeslotList.add(temp);
-			}else{
-				//skip
-			}
-		}
-		return mergedTimeslotList;
 	}
 	
 	public boolean checkIfTimeHaveBeenSelected(Teacher teacher,String timeslot){

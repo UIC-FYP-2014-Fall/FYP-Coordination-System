@@ -93,6 +93,12 @@
       <AbsolutePoint location="450,-30" />
     </AutomaticBendpoints>
   </StrutsTransition>
+  <StrutsTransition id="/setObserver.do,obsSaved,/setObserver.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="30,398" />
+      <AbsolutePoint location="30,398" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="/choosePretime.do,updateChooseTopic,/choosePretime.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="1200,135" />

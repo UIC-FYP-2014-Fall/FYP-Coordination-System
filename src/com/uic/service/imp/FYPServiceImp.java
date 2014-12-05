@@ -20,19 +20,38 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 	public List<Topic> getTopic(String teacherName) {
 		// TODO Auto-generated method stub
 		String hql = "from Topic";
-		List<Topic> list = getListObject(hql, null);
-		return list;
+		try{
+			List<Topic> list = getListObject(hql, null);
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public boolean uploadTopic(ArrayList<Teacher> teacher, Topic topic) {
-		saveObject(topic);
+		boolean flag=true;
+		try{
+			saveObject(topic);
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Can not save the topic.");
+			flag=false;
+			return flag;
+		}
 		for (int i = 0; i < teacher.size(); i++) {
 			TeaTopic teaTopic = new TeaTopic();
 			teaTopic.setTeacher(teacher.get(i));
 			teaTopic.setTopic(topic);
-			saveObject(teaTopic);
+			try{
+				saveObject(teaTopic);
+			}catch(Exception e){
+				e.printStackTrace();
+				flag=false;
+				return flag;
+			}
 		}
-		return true;
+		return flag;
 	}
 
 	public boolean setObserver(Teacher observer, Topic topic) {
@@ -44,12 +63,24 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 			ObsTopic obsTopic = new ObsTopic();
 			obsTopic.setObserver(observer);
 			obsTopic.setTopic(topic);
-			saveObject(obsTopic);
+			try{
+				saveObject(obsTopic);
+			}catch(Exception e){
+				System.out.println("Can not update the observer");
+				e.printStackTrace();
+				return false;
+			}
 			return true;
 		}else{
 			hql="update ObsTopic set observer_id=? where topic_id=?";
 			String[] para={observer.getId().toString(),topic.getFid().toString()};
-			updateObject(hql, para);
+			try{
+				updateObject(hql, para);
+			}catch(Exception e){
+				System.out.println("Can not update the observer");
+				e.printStackTrace();
+				return false;
+			}
 			return true;
 		}
 	}
@@ -59,14 +90,24 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 			TeaTopic teaTopic = new TeaTopic();
 			teaTopic.setTeacher(teacher.get(i));
 			teaTopic.setTopic(topic);
-			saveObject(teaTopic);
+			try{
+				saveObject(teaTopic);
+			}catch(Exception e){
+				e.printStackTrace();
+				return false;
+			}
 		}
 		return true;
 	}
 
 	public boolean updatetTopic(Topic topic) {
 		Session session = HibernateUtil.getCurrentSession();
-		session.update(topic);
+		try{
+			session.update(topic);
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
 		return true;
 	}
 
@@ -84,7 +125,12 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 	public boolean deleteTopic(Topic topic) {
 		// delete the topic
 		Session session = HibernateUtil.getCurrentSession();
-		session.delete(topic);
+		try{
+			session.delete(topic);
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
 		return true;
 	}
 
@@ -93,32 +139,52 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		// TODO Auto-generated method stub
 		String hql = "from TeaTopic where teacher_id=?";
 		String[] parameters = { teacherId };
-		List<TeaTopic> list = getListObject(hql,parameters);
-		return list;
+		try{
+			List<TeaTopic> list = getListObject(hql,parameters);
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public List<ObsTopic> getObsTopicByTopicId(String topicId) {
 		String hql = "from ObsTopic where topic_id=?";
 		String[] parameters = { topicId };
-		List<ObsTopic> list =(List<ObsTopic>)getListObject(hql,
-				parameters);
-		return list;
+		try{
+			List<ObsTopic> list =(List<ObsTopic>)getListObject(hql,
+					parameters);
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public Topic getUniqueTopic(String topicId) {
 		// TODO Auto-generated method stub
 		String hql = "from Topic where fid=?";
 		String[] parameters = { topicId };
-		Topic topic = (Topic) getUniqueObject(hql, parameters);
-		return topic;
+		try{
+			Topic topic = (Topic) getUniqueObject(hql, parameters);
+			return topic;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public List<TeaTopic> getTeaTopicByTopicId(String id) {
 		String hql = "from TeaTopic where topic_id=?";
 		String[] parameters = { id };
-		List<TeaTopic> list = (List<TeaTopic>) getListObject(hql,
-				parameters);
-		return list;
+		try{
+			List<TeaTopic> list = (List<TeaTopic>) getListObject(hql,
+					parameters);
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public void deleteTeaTopic(String topicId, String teacherId) {
@@ -129,7 +195,12 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 	
 	public ObsTopic refreshObsTopic(ObsTopic obsTopic){
 		obsTopic = (ObsTopic) HibernateUtil.refreshObj(obsTopic);
-		return obsTopic;
+		try{
+			return obsTopic;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -137,7 +208,13 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		// TODO Auto-generated method stub
 		String hql ="from Stutopic where sid=?";
 		String[] parameters={student.getId().toString()};
-		List<Stutopic> stutopic=(List<Stutopic>)getListObject(hql,parameters);
-		return stutopic;
+		try{
+			List<Stutopic> stutopic=(List<Stutopic>)getListObject(hql,parameters);
+			return stutopic;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 }
