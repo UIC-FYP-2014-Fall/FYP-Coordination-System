@@ -96,6 +96,10 @@
 								<h4>Success</h4>
 								${requestScope.updateTableInfo }
 							</div>
+							<%
+								request.removeAttribute("ifUpdateTableSuccess");
+								request.removeAttribute("updateTableInfo");
+							%>
 						</c:if>
 						<c:if test="${requestScope.ifUpdateTableSuccess=='false' }">
 							<div class="alert alert-error ErrorInfo">
@@ -133,7 +137,7 @@
 									action="${pageContext.request.contextPath }/timetable.do?flag=updateTimetable"
 									method="post">
 									<%
-										String[] timeArray={"9:00-9:50","10:00-10:50","11:00-11:50","14:00-14:50","15:00-15:50","16:00-16:50","17:00-17:50"};
+									String[] timeArray={"9:00-9:30","9:30-10:00","10:00-10:30","10:30-11:00","11:00-11:30","11:30-12:00","14:00-14:30","14:30-15:00","15:00-15:30","15:30-16:00","16:00-16:30","16:30-17:00","17:00-17:30","17:30-18:00"};
                                     	ArrayList<String> timeslots=(ArrayList<String>)request.getAttribute("timeslots");
                                     	System.out.println(timeArray.length);
                                     	String beginWeekDay = (String)request.getAttribute("beginWeekDay");
@@ -143,9 +147,9 @@
                                     	System.out.println("endWeekDay"+endWeekDay);
                                     	for(int week=1;week<=Integer.parseInt(weeks);week++){
                                             if(week==1){
-                                                out.println("<table id=\"week"+week+"\" border=\"0\" class=\"table table-striped table-bordered\" style='DISPLAY:'>");
+                                                out.println("<table id=\"week"+week+"\" border=\"0\" class=\"table table-bordered\" style='DISPLAY:'>");
                                             }else{
-                                    			out.println("<table id=\"week"+week+"\" border=\"0\" class=\"table table-striped table-bordered\" style='DISPLAY:none'>");
+                                    			out.println("<table id=\"week"+week+"\" border=\"0\" class=\"table table-bordered\" style='DISPLAY:none'>");
                                             }
                                     		out.println("<thead>");
                                     		out.println("<tr>");
@@ -158,7 +162,7 @@
                                     		out.println("</tr>");
                                     		out.println("</thead>");
                                     		out.println("<tbody>");
-                                    		for(int time=1;time<4;time++){
+                                    		for(int time=1;time<7;time++){
                                     			out.println("<tr>");
                                     			out.println("<td width=\"150px\">"+timeArray[time-1]+"</td>");
                                     			for(int day=1;day<=5;day++){
@@ -167,9 +171,9 @@
                                     					out.println("<td><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\" checked=\"checked\"></td>");
                                     				}else{
                                     					if(week==1&&day<Integer.parseInt(beginWeekDay)){
-                                							out.println("<td><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\" disabled=\"disabled\"></td>");
+                                							out.println("<td bgcolor=\"#F0F0F0\"><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\" disabled=\"disabled\"></td>");
                                 						}else if(week==Integer.parseInt(weeks)&&day>Integer.parseInt(endWeekDay)){
-                                							out.println("<td><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\" disabled=\"disabled\"></td>");
+                                							out.println("<td bgcolor=\"#F0F0F0\"><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\" disabled=\"disabled\"></td>");
                                 						}else{
                                 							out.println("<td><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\"></td>");
                                 						}
@@ -178,7 +182,7 @@
                                     			out.println("</tr>");
                                     		}
                                     		out.println("<tr><td colspan=\"6\"></td></tr>");
-                                    		for(int time=4;time<8;time++){
+                                    		for(int time=7;time<14;time++){
                                     			out.println("<tr>");
                                     			out.println("<td width=\"150px\">"+timeArray[time-1]+"</td>");
                                     			for(int day=1;day<=5;day++){
@@ -187,9 +191,9 @@
                                     					out.println("<td><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\" checked=\"checked\"></td>");
                                     				}else{
                                     					if(week==1&&day<Integer.parseInt(beginWeekDay)){
-                                							out.println("<td><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\" disabled=\"disabled\"></td>");
+                                							out.println("<td bgcolor=\"#F0F0F0\"><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\" disabled=\"disabled\"></td>");
                                 						}else if(week==Integer.parseInt(weeks)&&day>Integer.parseInt(endWeekDay)){
-                                							out.println("<td><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\" disabled=\"disabled\"></td>");
+                                							out.println("<td bgcolor=\"#F0F0F0\"><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\" disabled=\"disabled\"></td>");
                                 						}else{
                                 							out.println("<td><input type=\"checkbox\" name=\"timeslot\" value=\""+tempslot+"\"></td>");
                                 						}
@@ -197,7 +201,7 @@
                                     			}
                                     			out.println("</tr>");
                                     		}
-                                    		//out.println("</tbody>");
+                                    		
                                     		out.println("</table>");
                                     	}
 									%>

@@ -92,8 +92,8 @@ public class ChoosePretimeAction extends DispatchAction {
 					if (selected == null) {
 						// skip
 					} else {
-						request.setAttribute("timeHaveBeenSelected",
-								"timeHaveBeenSelected");
+						request.setAttribute("timeHaveBeenSelected", "true");
+						request.setAttribute("timetableSelectInfo", "Time have been selected. Please select another time.");
 					}
 					return mapping.findForward("goChoosePretimeUi");
 				} else {
@@ -124,8 +124,8 @@ public class ChoosePretimeAction extends DispatchAction {
 					if (selected == null) {
 						// skip
 					} else {
-						request.setAttribute("timeHaveBeenSelected",
-								"timeHaveBeenSelected");
+						request.setAttribute("timeHaveBeenSelected", "true");
+						request.setAttribute("timetableSelectInfo", "Time have been selected. Please select another time.");
 					}
 					return mapping.findForward("goChoosePretimeUi");
 				}
@@ -148,6 +148,7 @@ public class ChoosePretimeAction extends DispatchAction {
 		String timeslot = choosePreTimeForm.getTimeslot();
 		TimetableServiceImp timetableService = new TimetableServiceImp();
 		StudentServiceImp studentService = new StudentServiceImp();
+		boolean ifUpdateSuccess=false;
 		// check if this time have been selected
 		Student student = (Student) request.getSession().getAttribute(
 				"studentinfo");
@@ -159,9 +160,11 @@ public class ChoosePretimeAction extends DispatchAction {
 			flag = timetableService.checkIfTimeHaveBeenSelected(observer,
 					timeslot);
 		}
+		
 		if (flag) {
 			// time have been selected
-			request.setAttribute("timeHaveBeenSelected", "timeHaveBeenSelected");
+			request.setAttribute("timeHaveBeenSelected", "true");
+			request.setAttribute("timeHaveBeenSelectedInfo", "Time have been selected. Please select another time.");
 			return mapping
 					.findForward("updateChooseTopic");
 		} else {
@@ -170,15 +173,29 @@ public class ChoosePretimeAction extends DispatchAction {
 				timetableService.cancelStudentSelectedTime(student);
 				//update the selected time
 				for (int i = 0; i < supervisor.size(); i++) {
-					timetableService.studentSelectTime(supervisor.get(i), student,
+					ifUpdateSuccess = timetableService.studentSelectTime(supervisor.get(i), student,
 							timeslot);
+				}
+				if(ifUpdateSuccess){
+					request.setAttribute("timetableSelected", "true");
+					request.setAttribute("timetableSelectInfo", "Presentation time select successed.");
+				}else{
+					request.setAttribute("timetableSelected", "false");
+					request.setAttribute("timetableSelectInfo", "Presentation time select failed.");
 				}
 				return mapping
 						.findForward("updateChooseTopic");
 			}else{
 				for (int i = 0; i < supervisor.size(); i++) {
-					timetableService.studentSelectTime(supervisor.get(i), student,
+					ifUpdateSuccess = timetableService.studentSelectTime(supervisor.get(i), student,
 							timeslot);
+				}
+				if(ifUpdateSuccess){
+					request.setAttribute("timetableSelected", "true");
+					request.setAttribute("timetableSelectInfo", "Presentation time select successed.");
+				}else{
+					request.setAttribute("timetableSelected", "false");
+					request.setAttribute("timetableSelectInfo", "Presentation time select failed.");
 				}
 				return mapping
 						.findForward("updateChooseTopic");
