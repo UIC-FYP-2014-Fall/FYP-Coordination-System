@@ -73,26 +73,42 @@
 			<div class="span9" id="content">
 				<div class="row-fluid">
 					<!-- block -->
-					<div class="block">
-						<c:if test="${requestScope.timetableStart=='false' }">
-							<div class="alert alert-error ErrorInfo">
-								<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-								<h4>Note:</h4>
-								It is not in the select time
-								period.(${requestScope.timetablePeriod })
+					<c:if test="${requestScope.timetableStart=='false' }">
+						<div class="alert alert-error ErrorInfo">
+							<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+							<h4>Note:</h4>
+							It is not in the select time
+							period.(${requestScope.timetablePeriod })
+						</div>
+						<%
+							request.removeAttribute("timetableStart");
+						%>
+					</c:if>
+					<c:if test="${requestScope.timetableStart=='true' }">
+						<div class="alert alert-error ErrorInfo">
+							<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+							<h4>Note:</h4>
+							the select time period is(${requestScope.timetablePeriod }).
+						</div>
+						<c:if test="${requestScope.ifUpdateTableSuccess=='true' }">
+							<div class="alert alert-success SuccessInfo">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>Success</h4>
+								${requestScope.updateTableInfo }
 							</div>
-							<%
-								request.removeAttribute("timetableStart");
-							%>
 						</c:if>
-
-
-						<c:if test="${requestScope.timetableStart=='true' }">
+						<c:if test="${requestScope.ifUpdateTableSuccess=='false' }">
 							<div class="alert alert-error ErrorInfo">
-								<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-								<h4>Note:</h4>
-								the select time period is(${requestScope.timetablePeriod }).
-							</div>
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>Success</h4>
+								${requestScope.updateTableInfo }
+							</div> 
+						<%
+							request.removeAttribute("timetableStart");
+							request.removeAttribute("updateTableInfo");
+						%>
+						</c:if>
+						<div class="block">
 							<div class="navbar navbar-inner block-header">
 								<div class="muted pull-left">Timetable</div>
 								<form name="selectWeek">
@@ -191,10 +207,8 @@
 									</div>
 								</form>
 							</div>
-
-						</c:if>
-					</div>
-
+						</div>
+					</c:if>
 				</div>
 			</div>
 		</div>

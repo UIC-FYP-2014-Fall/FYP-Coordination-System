@@ -79,27 +79,34 @@
 
 			<div class="span9" id="content">
 				<div class="row-fluid">
-
-
+					<c:if test="${requestScope.setObserverSuccess=='true' }">
+						<div class="alert alert-success SuccessInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Success</h4>
+							${requestScope.setObserverInfo}
+						</div>
+						<%
+							request.removeAttribute("setObserverSuccess");
+							request.removeAttribute("setObserverInfo");
+						%>
+					</c:if>
+					<c:if test="${requestScope.setObserverSuccess=='false' }">
+						<div class="alert alert-error">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Success</h4>
+							${requestScope.setObserverInfo}
+						</div>
+						<%
+							request.removeAttribute("setObserverSuccess");
+							request.removeAttribute("setObserverInfo");
+						%>
+					</c:if>
 					<!-- block -->
-
-
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">Choose Observer</div>
 						</div>
 						<div class="block-content collapse in">
-							<c:if test="${requestScope.setObserverInfo!=null }">
-								<div class="alert alert-success SuccessInfo">
-									<button type="button" class="close" data-dismiss="alert">&times;</button>
-									<h4>Success</h4>
-									${requestScope.setObserverInfo}
-								</div>
-								<%
-									request.removeAttribute("setObserverInfo");
-								%>
-							</c:if>
-
 							<form class="form-horizontal"
 								action="${pageContext.request.contextPath }/setObserver.do?flag=setObserver"
 								method="post">

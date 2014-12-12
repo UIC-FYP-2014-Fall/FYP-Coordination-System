@@ -78,6 +78,7 @@
 			<!--/span-->
 
 			<div class="span9" id="content">
+				
 				<div class="row-fluid">
 					<div class="span6">
 						<!--/span-->

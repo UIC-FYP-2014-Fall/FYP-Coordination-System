@@ -39,6 +39,24 @@ public class BaseUtil {
 			return false;
 		}
 	}
+	public static boolean todayIsAfter(String time){
+		Date curDate=new Date();
+		Date dateTime= BaseUtil.StringConvertDate(time);
+		if(curDate.after(dateTime)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public static boolean todayIsBefore(String time){
+		Date curDate=new Date();
+		Date dateTime= BaseUtil.StringConvertDate(time);
+		if(curDate.before(dateTime)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
 	public static String getNumOfWeekBetweenTwoDate(String startTime,String endTime){
 		Date startDate=StringConvertDate(startTime);

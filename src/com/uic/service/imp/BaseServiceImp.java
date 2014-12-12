@@ -6,8 +6,6 @@ import com.uic.service.inter.BaseInterface;
 import com.uic.util.HibernateUtil;
 
 public abstract class BaseServiceImp implements BaseInterface{
-
-	@SuppressWarnings("unchecked")
 	@Override
 	public List getListObject(String hql, String[] parameters) {
 		// TODO Auto-generated method stub

@@ -46,7 +46,7 @@ public class SetOberverAction extends DispatchAction {
 	public ActionForward chooseObserverUi(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		System.out.println("Using TeacherPageControlAction");
+
 		if(request.getSession().getAttribute("role").equals("teacher")){
 			//prepare date: teacherList and Teatopic List of the current teacher.
 			Teacher curTeacher = (Teacher) request.getSession().getAttribute("teacherinfo");
@@ -60,14 +60,22 @@ public class SetOberverAction extends DispatchAction {
 			for(int i =0;i<teaTopicList.size();i++){
 				if(teaTopicList.get(i).getTopic().getIndividual()){
 					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
-					fypServiceImp.refreshObsTopic(obsTopic.get(0));
+					if(obsTopic.size()==0){
+						
+					}else{
+						fypServiceImp.refreshObsTopic(obsTopic.get(0));
+					}
 					System.out.println("fid "+teaTopicList.get(i).getTopic().getFid().toString());
 					System.out.println("obsTopic size "+obsTopic.size());
 					System.out.println("topic: "+obsTopic.get(0).getTopic().getTitle()+" observer: "+obsTopic.get(0).getObserver().getName());
 					indObsTopics.add(obsTopic.get(0));
 				}else{
 					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
-					fypServiceImp.refreshObsTopic(obsTopic.get(0));
+					if(obsTopic.size()==0){
+						
+					}else{
+						fypServiceImp.refreshObsTopic(obsTopic.get(0));
+					}
 					System.out.println("fid "+teaTopicList.get(i).getTopic().getFid().toString());
 					System.out.println("obsTopic size "+obsTopic.size());
 					System.out.println("topic: "+obsTopic.get(0).getTopic().getTitle()+" observer: "+obsTopic.get(0).getObserver().getName());
@@ -90,16 +98,21 @@ public class SetOberverAction extends DispatchAction {
 		ObserverForm observerForm = (ObserverForm) form;// TODO Auto-generated method stub
 		FYPServiceImp fypService= new FYPServiceImp();
 		TeachersServiceImp teacherService= new TeachersServiceImp();
-		
+		boolean flag=false;
 		String[] obsTopic=observerForm.getObsTopic();
 		for(int i=0;i<obsTopic.length;i++){
 			String[] temp=obsTopic[i].split(",");
 			Topic topic = fypService.getUniqueTopic(temp[0]);
 			Teacher observer= teacherService.getUniqueTeacherById(temp[1]);
-			fypService.setObserver(observer, topic);
+			flag=fypService.setObserver(observer, topic);
 		}
-		request.setAttribute("setObserverInfo", "observer changed successful!");
-		//return new ActionForward("/teacherPageControl.do?flag=chooseObserver");
+		if(flag){
+			request.setAttribute("setObserverSuccess", "true");
+			request.setAttribute("setObserverInfo", "Observer changed successful!");
+		}else{
+			request.setAttribute("setObserverSuccess", "false");
+			request.setAttribute("setObserverInfo", "Observer changed successful!");
+		}
 		return mapping.findForward("obsSaved");
 	}
 }

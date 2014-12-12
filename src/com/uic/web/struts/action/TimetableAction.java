@@ -98,7 +98,7 @@ public class TimetableAction extends DispatchAction {
 		for (int i = 0; i < timeslots.length; i++) {
 			timeslotsArrayList.add(timeslots[i]);
 		}
-
+		boolean flag = false;
 		if (timetableService.checkIfTimetableExit(curTeacher)) {
 			// table exit: update the current table
 			for (int week = 1; week <= Integer.parseInt(weeks); week++) {
@@ -107,15 +107,11 @@ public class TimetableAction extends DispatchAction {
 						// only update the new select date
 						String tempslot = week + "," + day + "," + time;
 						if (timeslotsArrayList.contains(tempslot)) {
-							boolean flag = timetableService.updateTimetable(
+							flag = timetableService.updateTimetable(
 									curTeacher, tempslot);
-							System.out.println("update available true "
-									+ tempslot);
 						} else {
-							boolean flag = timetableService
+							flag = timetableService
 									.cancelAvailableSlot(curTeacher, tempslot);
-							System.out.println("update available false "
-									+ tempslot);
 						}
 					}
 				}
@@ -136,7 +132,7 @@ public class TimetableAction extends DispatchAction {
 							timeslot.setSelected(false);
 							timeslot.setAvailable(true);
 							timeslot.setTeacher(curTeacher);
-							boolean flag = timetableService
+							flag = timetableService
 									.saveObject(timeslot);
 						} else {
 							Timeslot timeslot = new Timeslot();
@@ -146,12 +142,19 @@ public class TimetableAction extends DispatchAction {
 							timeslot.setSelected(false);
 							timeslot.setAvailable(false);
 							timeslot.setTeacher(curTeacher);
-							boolean flag = timetableService
+							flag = timetableService
 									.saveObject(timeslot);
 						}
 					}
 				}
 			}
+		}
+		if(flag){
+			request.setAttribute("ifUpdateTableSuccess", "true");
+			request.setAttribute("updateTableInfo", "The new timetable is updated.");
+		}else{
+			request.setAttribute("ifUpdateTableSuccess", "false");
+			request.setAttribute("updateTableInfo", "Update operation failed.");
 		}
 		return mapping.findForward("updateTimetable");
 	}

@@ -65,12 +65,21 @@ public class UploadFYPAction extends DispatchAction {
 					request.setAttribute("uploadTopicStart", "true");
 					return mapping.findForward("uploadTopicUi");
 				} else {
+					if(BaseUtil.todayIsBefore(start)){
+						System.out.println("before");
+						request.setAttribute("todayIsBeforeUploadTime", "true");
+					}else if(BaseUtil.todayIsAfter(end)){
+						System.out.println("after");
+						request.setAttribute("todayIsAfterUploadTime", "true");
+					}
+					System.out.println("end ");
 					request.setAttribute("uploadPeriod", start+" to "+ end);
 					request.setAttribute("uploadTopicStart", "false");
 					return mapping.findForward("uploadTopicUi");
 				}
 			} else {
-				request.setAttribute("uploadPeriod", "Coordinator has not set time");
+				request.setAttribute("noUploadTime", "true");
+				request.setAttribute("noUploadTimeInfo", "Coordinator does not set the upload topic time.");
 				request.setAttribute("uploadTopicStart", "false");
 				return mapping.findForward("uploadTopicUi");
 			}
@@ -115,9 +124,11 @@ public class UploadFYPAction extends DispatchAction {
 		boolean success = fypServiceImp.uploadTopic(teacherlist, topic);
 
 		if (success) {
-			request.setAttribute("operationInfo", "upload topic success");
+			request.setAttribute("ifTopicUploadSuccess", "true");
+			request.setAttribute("operationInfo", "Upload topic success.");
 		} else {
-			request.setAttribute("operationInfo", "fail");
+			request.setAttribute("ifTopicUploadSuccess", "false");
+			request.setAttribute("operationInfo", "Upload topic faile.");
 		}
 		// set a default observer
 		ObsTopic obsTopic = new ObsTopic();

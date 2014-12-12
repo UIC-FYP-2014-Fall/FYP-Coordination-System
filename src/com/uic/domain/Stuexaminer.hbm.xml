@@ -8,7 +8,7 @@
     <class name="com.uic.domain.Stuexaminer" table="stuexaminer" catalog="fyp">
         <id name="id" type="java.lang.Integer">
             <column name="Id" />
-            <generator class="increment" />
+            <generator class="identity" />
         </id>
         <many-to-one name="student" class="com.uic.domain.Student" fetch="select">
             <column name="sid" not-null="true" />

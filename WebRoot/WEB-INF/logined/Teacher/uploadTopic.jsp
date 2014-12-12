@@ -73,92 +73,121 @@
 			</div>
 
 			<!--/span-->
-
 			<div class="span9" id="content">
 				<div class="row-fluid">
-					<!-- block -->
-					<div class="block">
-						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">Upload Topic</div>
-						</div>
-						<c:if test="${requestScope.uploadTopicStart=='false' }">
+					<c:if test="${requestScope.uploadTopicStart=='false' }">
+						<c:if test="${requestScope.todayIsBeforeUploadTime=='true' }">
 							<div class="alert alert-error ErrorInfo">
 								<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
 								<h4>Note:</h4>
-								It is not in the upload period.(${requestScope.uploadPeriod })
+								Today is before the upload topic state. The upload topic time is start from ${requestScope.uploadPeriod }
 							</div>
 							<%
 								request.removeAttribute("uploadTopicStart");
+								request.removeAttribute("todayIsBeforeUploadTime");
 							%>
 						</c:if>
-						<c:if test="${requestScope.uploadTopicStart=='true' }">
-						<div class="alert alert-error ErrorInfo">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<c:if test="${requestScope.todayIsAfterUploadTime=='true' }">
+							<div class="alert alert-error ErrorInfo">
+								<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
 								<h4>Note:</h4>
-								Please upload your topic during ${requestScope.uploadPeriod }.
+								Upload topic is end.
 							</div>
-						<div class="block-content collapse in">
-							<form
-								action="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadFYP"
-								method="post" class="form-horizontal">
-								<div class="control-group">
-									<label class="control-label" for="focusedInput">Title <span
-										class="required">*</span></label>
-									<div class="controls">
-										<input name="title" class="input-xlarge focused"
-											id="focusedInput" type="text" value="">
-									</div>
-								</div>
+							<%
+								request.removeAttribute("uploadTopicStart");
+								request.removeAttribute("todayIsAfterUploadTime");
+							%>
+						</c:if>
+						<c:if test="${requestScope.noUploadTime=='true'}">
+							<div class="alert alert-error ErrorInfo">
+								<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+								<h4>Note:</h4>
+								${requestScope.noUploadTimeInfo }
+							</div>
+							<%
+								request.removeAttribute("uploadTopicStart");
+								request.removeAttribute("noUploadTime");
+								request.removeAttribute("noUploadTimeInfo");
+							%>
+						</c:if>
+					</c:if>
+					<c:if test="${requestScope.uploadTopicStart=='true' }">
+						<div class="alert alert-error ErrorInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Note:</h4>
+							Please upload your topic during ${requestScope.uploadPeriod }.
+						</div>
+					
+						<!-- block -->
+						<div class="block">
 
-								<div class="control-group">
-									<label class="control-label" for="multiSelect">Supervisor
-										<span class="required">*</span>
-									</label>
-									<div class="controls">
-										<select name="supervisor" multiple="multiple" id="multiSelect"
-											class="chzn-select span4">
-											<%
-												List<Teacher> teacherList = (List<Teacher>)request.getAttribute("teacherList");
-	                                           	  Teacher curTeacher = (Teacher)request.getSession().getAttribute("teacherinfo");
-	                                                 for(int i=0;i<teacherList.size();i++){
-	                                               	  if(curTeacher.getName().equals(teacherList.get(i).getName())){
-	                                               	  	out.println("<option selected=\"selected\">"+teacherList.get(i).getName()+"</option>");
-	                                               	  }else{
-	                                               		out.println("<option>"+teacherList.get(i).getName()+"</option>");
-	                                               	  }
-	                                             }
-											%>
-										</select>
-									</div>
-								</div>
+							<div class="navbar navbar-inner block-header">
+								<div class="muted pull-left">Upload Topic</div>
+							</div>
 
-								<div class="control-group">
-									<label class="control-label" for="select01">Credits <span
-										class="required">*</span></label>
-									<div class="controls">
-										<select name="credit" id="select01">
-											<option>3</option>
-											<option>6</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="control-group">
-									<label class="control-label">Group/Individual <span
-										class="required">*</span></label>
-									<div class="controls">
-										<select name="individual" id="group"
-											onclick="javascript:doit(this);">
-											<option value="individual">Individual</option>
-											<option value="group">Group</option>
-										</select>
+							<div class="block-content collapse in">
+								<form
+									action="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadFYP"
+									method="post" class="form-horizontal">
+									<div class="control-group">
+										<label class="control-label" for="focusedInput">Title
+											<span class="required">*</span>
+										</label>
+										<div class="controls">
+											<input name="title" class="input-xlarge focused"
+												id="focusedInput" type="text" value="">
+										</div>
 									</div>
 
-								</div>
-								<div class="control-group">
-									<label class="control-label">Number of students <span
-										class="required">*</span></label>
-									<div class="controls">
+									<div class="control-group">
+										<label class="control-label" for="multiSelect">Supervisor
+											<span class="required">*</span>
+										</label>
+										<div class="controls">
+											<select name="supervisor" multiple="multiple"
+												id="multiSelect" class="chzn-select span4">
+												<%
+													List<Teacher> teacherList = (List<Teacher>)request.getAttribute("teacherList");
+		                                           	  Teacher curTeacher = (Teacher)request.getSession().getAttribute("teacherinfo");
+		                                                 for(int i=0;i<teacherList.size();i++){
+		                                               	  if(curTeacher.getName().equals(teacherList.get(i).getName())){
+		                                               	  	out.println("<option selected=\"selected\">"+teacherList.get(i).getName()+"</option>");
+		                                               	  }else{
+		                                               		out.println("<option>"+teacherList.get(i).getName()+"</option>");
+		                                               	  }
+		                                             }
+												%>
+											</select>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label" for="select01">Credits <span
+											class="required">*</span></label>
+										<div class="controls">
+											<select name="credit" id="select01">
+												<option>3</option>
+												<option>6</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label">Group/Individual <span
+											class="required">*</span></label>
+										<div class="controls">
+											<select name="individual" id="group"
+												onclick="javascript:doit(this);">
+												<option value="individual">Individual</option>
+												<option value="group">Group</option>
+											</select>
+										</div>
+
+									</div>
+									<div class="control-group">
+										<label class="control-label">Number of students <span
+											class="required">*</span></label>
+										<div class="controls">
 										<select name="numOfStu" id="numofStu" disabled="false">
 											<option value="1">Please select</option>
 											<option value="2">2</option>
@@ -166,32 +195,28 @@
 											<option value="4">4</option>
 										</select>
 									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label" for="textarea2">Description
-										<span class="required">*</span>
-									</label>
-									<div class="controls">
-										<textarea name="description" class="input-xlarge textarea"
-											placeholder="Enter text ..."
-											style="width: 810px; height: 200px"></textarea>
 									</div>
-								</div>
-								<div class="form-actions">
-									<button type="submit" class="btn btn-primary">Submit</button>
-									<button type="button" class="btn">Reset</button>
+									<div class="control-group">
+										<label class="control-label" for="textarea2">Description
+											<span class="required">*</span>
+										</label>
+										<div class="controls">
+											<textarea name="description" class="input-xlarge textarea"
+												placeholder="Enter text ..."
+												style="width: 810px; height: 200px"></textarea>
+										</div>
+									</div>
+									<div class="form-actions">
+										<button type="submit" class="btn btn-primary">Submit</button>
+										<button type="button" class="btn">Reset</button>
 
-								</div>
-							</form>
+									</div>
+								</form>
+							</div>
 						</div>
 					</c:if>
-
-
-
-					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 

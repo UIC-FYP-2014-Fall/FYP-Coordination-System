@@ -79,17 +79,61 @@
 
 			<div class="span9" id="content">
 				<div class="row-fluid">
-					<c:if test="${requestScope.operationInfo!=null }">
-						<div class="alert alert-success SuccessInfo">
-							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<h4>Success</h4>
-							${requestScope.operationInfo}
-						</div>
-						<%
-							request.removeAttribute("operationInfo");
-						%>
-					</c:if>
-
+				<c:if test="${requestScope.ifTopicUploadSuccess=='true' }">
+					<div class="alert alert-success SuccessInfo">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<h4>Success</h4>
+						${requestScope.operationInfo}
+					</div>
+					<%
+						request.removeAttribute("ifTopicUploadSuccess");
+						request.removeAttribute("operationInfo");
+					%>
+				</c:if>
+				<c:if test="${requestScope.ifTopicUploadSuccess=='false' }">
+					<div class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<h4>Error</h4>
+						${requestScope.operationInfo }
+					</div>
+					<%
+						request.removeAttribute("ifTopicUploadSuccess");
+						request.removeAttribute("operationInfo");
+					%>
+				</c:if>
+				<c:if test="${requestScope.ifEditSuccess=='true' }">
+					<div class="alert alert-success SuccessInfo">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<h4>Success</h4>
+						${requestScope.operationInfo }
+					</div>
+					<%
+						request.removeAttribute("ifEditSuccess");
+						request.removeAttribute("operationInfo");
+					%>
+				</c:if>
+				<c:if test="${requestScope.ifRemoveSuccess=='true' }">
+					<div class="alert alert-success SuccessInfo">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<h4>Success</h4>
+						${requestScope.operationInfo }
+					</div>
+					<%
+						request.removeAttribute("ifRemoveSuccess");
+						request.removeAttribute("operationInfo");
+					%>
+				</c:if>
+				<c:if test="${requestScope.ifRemoveSuccess=='false' }">
+					<div class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<h4>Error</h4>
+						${requestScope.operationInfo }
+					</div>
+					<%
+						request.removeAttribute("ifRemoveSuccess");
+						request.removeAttribute("operationInfo");
+					%>
+				</c:if>
 
 					<!-- block -->
 					<div class="block">
@@ -106,11 +150,18 @@
 										<th>Supervisor</th>
 										<th>Group/Individual</th>
 										<th>Credits</th>
+										<c:if test="${requestScope.isUploadTopicDate=='true' }">
 										<th></th>
+										</c:if>
+										<c:if test="${requestScope.isUploadTopicDate=='false' }">
+										<th>Students</th>
+										</c:if>
 									</tr>
 								</thead>
 								<tbody>
 									<%
+										String uploadState=(String)request.getAttribute("isUploadTopicDate");
+										System.out.println("upload topic state "+uploadState);
 										List<TeaTopic> teaTopic = (List<TeaTopic>) request
 												.getAttribute("teaTopicList");
 										System.out.println("get List size " + teaTopic.size());
@@ -122,16 +173,35 @@
 														+ "</td>");
 												out.println("<td>" + teaTopic.get(i).getTeacher().getName()
 														+ "</td>");
-												out.println("<td>"
-														+ teaTopic.get(i).getTopic().getIndividual()
-														+ "</td>");
+												if(teaTopic.get(i).getTopic().getIndividual()){
+													out.println("<td>"
+															+ "Individual"
+															+ "</td>");
+												}else{
+													out.println("<td>"
+															+ "Group"
+															+ "</td>");
+												}
 												out.println("<td>" + teaTopic.get(i).getTopic().getCredit()
 														+ "</td>");
-												out.println("<td><form action=\""
-														+ request.getContextPath()
-														+ "/editFYP.do?flag=editTopicUi\" method=\"post\"><input name=\"id\" type=\"hidden\" value=\""
-														+ teaTopic.get(i).getTopic().getFid()
-														+ "\"><button class=\"btn btn-primary btn-mini\">Edit</button></form></td>");
+												out.println("<td>");
+												if(uploadState!=null){
+													if(uploadState.equals("true")){
+														out.println("<form action=\""
+																+ request.getContextPath()
+																+ "/editFYP.do?flag=editTopicUi\" method=\"post\"><input name=\"eid\" type=\"hidden\" value=\""
+																+ teaTopic.get(i).getTopic().getFid()
+																+ "\"><button type=\"submit\" class=\"btn btn-primary btn-mini\">Edit</button></form>");
+														out.println("<form action=\""
+																+ request.getContextPath()
+																+ "/editFYP.do?flag=removeTopic\" method=\"post\"><input name=\"rid\" type=\"hidden\" value=\""
+																+ teaTopic.get(i).getTopic().getFid()
+																+ "\"><button type=\"submit\" class=\"btn btn btn-danger btn-mini\">delete</button></form>");
+													}else{
+														out.println("Student who choose this project");
+													}
+												}
+												out.println("</td>");
 												out.println("</tr>");
 											} else {
 												//do nothing
@@ -168,16 +238,35 @@
 														+ "</td>");
 												out.println("<td>" + teaTopic.get(i).getTeacher().getName()
 														+ "</td>");
-												out.println("<td>"
-														+ teaTopic.get(i).getTopic().getIndividual()
-														+ "</td>");
+												if(teaTopic.get(i).getTopic().getIndividual()){
+													out.println("<td>"
+															+ "Individual"
+															+ "</td>");
+												}else{
+													out.println("<td>"
+															+ "Group"
+															+ "</td>");
+												}
 												out.println("<td>" + teaTopic.get(i).getTopic().getCredit()
 														+ "</td>");
-												out.println("<td><form action=\""
-														+ request.getContextPath()
-														+ "/editFYP.do?flag=editTopicUi\" method=\"post\"><input name=\"id\" type=\"hidden\" value=\""
-														+ teaTopic.get(i).getTopic().getFid()
-														+ "\"><button class=\"btn btn-primary btn-mini\">Edit</button></form></td>");
+												out.println("<td>");
+												if(uploadState!=null){
+													if(uploadState.equals("true")){
+														out.println("<form action=\""
+																+ request.getContextPath()
+																+ "/editFYP.do?flag=editTopicUi\" method=\"post\"><input name=\"eid\" type=\"hidden\" value=\""
+																+ teaTopic.get(i).getTopic().getFid()
+																+ "\"><button type=\"submit\"class=\"btn btn-primary btn-mini\">Edit</button></form>");
+														out.println("<form action=\""
+																+ request.getContextPath()
+																+ "/editFYP.do?flag=removeTopic\" method=\"post\"><input name=\"rid\" type=\"hidden\" value=\""
+																+ teaTopic.get(i).getTopic().getFid()
+																+ "\"><button type=\"submit\"class=\"btn btn btn-danger btn-mini\">delete</button></form>");
+													}else{
+														out.println("Student who choose this project");
+													}
+												}
+												out.println("<td>");
 												out.println("</tr>");
 											} else {
 												//do nothing

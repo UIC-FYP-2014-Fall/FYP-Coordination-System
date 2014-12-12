@@ -17,6 +17,8 @@ import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.imp.FYPServiceImp;
 import com.uic.service.imp.TeachersServiceImp;
+import com.uic.util.BaseUtil;
+import com.uic.util.PropertiesHelper;
 import com.uic.web.struts.form.EditFYPForm;
 
 import java.util.ArrayList;
@@ -49,11 +51,22 @@ public class EditFYPAction extends DispatchAction {
 	public ActionForward topicListUi(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
 			FYPServiceImp fypServiceImp=new FYPServiceImp();
 			Teacher teacher=(Teacher)request.getSession().getAttribute("teacherinfo");
+			PropertiesHelper ph = new PropertiesHelper(
+					"/WEB-INF/config/FYP-system.properties");
+			String start = ph.getProperties("UploadTopicsStartDateTime");
+			String end = ph.getProperties("UploadTopicsEndDateTime");
+			
 			System.out.println("Teacher ID "+ teacher.getId());
+			if (start != null && end != null) {
+				if (BaseUtil.todayIsInPeriod(start, end)) {
+					request.setAttribute("isUploadTopicDate", "true");
+				}else{
+					request.setAttribute("isUploadTopicDate", "false");
+				}
+			}
 			List<TeaTopic> teaTopic= fypServiceImp.getTeaTopic(teacher.getId().toString());
 			System.out.println("send List size "+ teaTopic.size());
 			request.setAttribute("teaTopicList",teaTopic);
@@ -61,16 +74,35 @@ public class EditFYPAction extends DispatchAction {
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
+			
+		}
+	}
+	
+	
+	public ActionForward removeTopic(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response){
+		String fid=request.getParameter("rid");
+		FYPServiceImp fs= new FYPServiceImp();
+		//delete teatopic via fid
+		//delete topic via fid
+		boolean flag=fs.deleteTopic(fid);
+		if(flag){
+			request.setAttribute("ifRemoveSuccess", "true");
+			request.setAttribute("operationInfo", "Remove topic success.");
+			return mapping.findForward("deleteTopic");
+		}else{
+			request.setAttribute("ifRemoveSuccess", "false");
+			request.setAttribute("operationInfo", "Remove topic fail.");
+			return mapping.findForward("deleteTopic");
 		}
 	}
 	
 	public ActionForward editTopicUi(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
 			FYPServiceImp fs= new FYPServiceImp();
-			String teaTopicID=request.getParameter("id");
+			String teaTopicID=request.getParameter("eid");
 			List<TeaTopic> teaTopic = fs.getTeaTopicByTopicId(teaTopicID);
 			request.setAttribute("teaTopic", teaTopic);
 			TeachersServiceImp ts = new TeachersServiceImp();
@@ -86,7 +118,6 @@ public class EditFYPAction extends DispatchAction {
 	public ActionForward editFYP(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		EditFYPForm editFYPForm = (EditFYPForm) form;// TODO Auto-generated
-														// method stub
 
 		// fetch all data from the form
 		String fid = editFYPForm.getFid();
@@ -132,9 +163,6 @@ public class EditFYPAction extends DispatchAction {
 			}
 		}
 		
-		//System.out.println("update array:"+update.size());
-		//System.out.println("delete array:"+delete.size());
-		
 		for(int index =0;index<teacherList.size();index++){
 			if(update.contains(new Integer(index))){
 				
@@ -152,14 +180,10 @@ public class EditFYPAction extends DispatchAction {
 				teacherNeedToDelete.add(teaTopic.get(index).getTeacher());
 			}
 		}
-		//System.out.println("need update:"+teacherNeedToUpdate.size());
-		//System.out.println("need delete:"+teacherNeedToDelete.size());
-		//System.out.println("exit:"+teacherAlreadyExit.size());
-		
+
 		teacherList.clear();
 		teaTopic.clear();
-		
-		
+
 		//prepare the new topic object
 		topic.setTitle(title);
 		topic.setCredit(Integer.parseInt(credit));
@@ -189,6 +213,7 @@ public class EditFYPAction extends DispatchAction {
 			System.out.println("update teatopic");
 			fypServiceImp.updateEditTopic(teacherNeedToUpdate,topic);
 		}
+		request.setAttribute("ifEditSuccess", "true");
 		request.setAttribute("operationInfo", "edit topic success");
 		return mapping.findForward("editOk");
 	}

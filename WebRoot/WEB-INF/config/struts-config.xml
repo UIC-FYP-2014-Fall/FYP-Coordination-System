@@ -168,7 +168,8 @@
       scope="request"
       type="com.uic.web.struts.action.EditFYPAction"
       cancellable="true">
-      
+      <forward name="deleteTopic" path="/editFYP.do?flag=topicListUi" />
+      <forward name="editOk" path="/editFYP.do?flag=topicListUi" />
       <forward name="topicListUi" path="/WEB-INF/logined/Teacher/topicList.jsp" />
       <forward name="editTopicUi" path="/WEB-INF/logined/Teacher/editTopic.jsp" /> 
     </action>
