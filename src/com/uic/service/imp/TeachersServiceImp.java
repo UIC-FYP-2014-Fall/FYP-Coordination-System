@@ -2,7 +2,6 @@ package com.uic.service.imp;
 
 import java.util.List;
 
-import com.uic.domain.Student;
 import com.uic.domain.Teacher;
 import com.uic.service.inter.TeachersServiceInter;
 import com.uic.util.HibernateUtil;
@@ -124,4 +123,21 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 			return false;
 		}
 	}
+
+
+	@Override
+	public Integer getWorkload(String id) {
+		// TODO Auto-generated method stub
+		Integer count = 0;
+		String hql = "select count(*) from Stuexaminer where teacher.id = ?";
+		String[] parameters={id};
+		try{
+			count=Integer.parseInt(HibernateUtil.uniqueQueryOpenInView(hql, parameters).toString());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+
 }

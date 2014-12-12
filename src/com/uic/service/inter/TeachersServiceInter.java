@@ -19,5 +19,7 @@ public interface TeachersServiceInter extends BaseInterface{
 	
 	public boolean saveWorkload(String id, String workload);
 	
+	public Integer getWorkload(String id);
+	
 
 }

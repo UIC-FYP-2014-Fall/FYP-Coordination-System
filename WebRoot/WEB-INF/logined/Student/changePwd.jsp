@@ -33,7 +33,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>
+                                        <a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a>
                                     </li>
                                 </ul>
                             </li>

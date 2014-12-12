@@ -4,6 +4,9 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,8 +16,13 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.uic.domain.Student;
+import com.uic.domain.Teacher;
+import com.uic.domain.TeacherState;
 import com.uic.service.imp.StudentServiceImp;
+import com.uic.service.imp.TeachersServiceImp;
 import com.uic.service.inter.StudentServiceInter;
+import com.uic.service.inter.TeacherStateType;
+import com.uic.service.inter.TeachersServiceInter;
 import com.uic.service.inter.TimeType;
 import com.uic.util.TimeChecker;
 
@@ -61,15 +69,50 @@ public class ChooseExaminerAction extends DispatchAction {
 			}else{
 				//student has not choose examiner
 				request.setAttribute("chooseExaminer", "false");
-				
 				//check now time whether should choose examiner
-				if(TimeChecker.timeCheck().equals(TimeType.choose_examiner)){
+				if(TimeChecker.timeCheck().getType().equals(TimeType.choose_examiner)){
 					request.setAttribute("chooseExaminerTime", "true");
+					//get student supervisor
+					Teacher supervisor = studentSericeInter.getSupervisor(stu.getSid());
+					Integer supervisorId = supervisor.getId();
+					Teacher observer = studentSericeInter.getObserver(stu.getSid());
+					Integer observerId = observer.getId();
+					
+					//rewrap the teacher list which will add state
+					List<TeacherState> teacherStateList = new ArrayList<TeacherState>();
+					
+					TeachersServiceInter teachersServiceInter =  new TeachersServiceImp();
+					List<Teacher> listTeacher = teachersServiceInter.getTeachers();
+					//loop the teacher list to add the new list, teacherStateList.
+					for(Teacher t : listTeacher){
+						
+						TeacherState ts = new TeacherState();						
+						
+						ts.setTid(t.getId());
+						ts.setName(t.getName());
+						ts.setEmail(t.getEmail());
+						if(t.getId().equals(supervisorId)){
+							continue;
+						}else if(t.getId().equals(observerId)){
+							continue;
+						}else{
+							if(teachersServiceInter.getWorkload(t.getId().toString())<Integer.parseInt(t.getWorkload())){
+								ts.setState(TeacherStateType.can_select);
+							}else{
+								ts.setState(TeacherStateType.full);
+							}
+							teacherStateList.add(ts);
+						}
+					}
+					request.setAttribute("teacherList", teacherStateList);
+					
 					
 				}else{
 					request.setAttribute("chooseExaminerTime", "false");
 				}
 			}
+			
+			System.out.println(TimeChecker.timeCheck().getType());
 			
 			return mapping.findForward("goChooseExaminerUi");
 		} else {

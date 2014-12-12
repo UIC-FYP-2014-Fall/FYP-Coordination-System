@@ -34,7 +34,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a>
+									<a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a>
 								</li>
 							</ul>
 						</li>
@@ -233,9 +233,9 @@
 																<span class="label">Start Later</span>
 															</c:if>
 															<c:if test="${timeType==5 }">
-																<span class="label label-success">
-																	<a href="#">choose</a>
-																</span>
+																<a href="${pageContext.request.contextPath }/chooseExaminer.do?flag=goChooseExaminer">
+																	<button class="btn btn-primary btn-mini">Choose</button>
+																</a>
 															</c:if>
 														</c:if>
 													</td>
