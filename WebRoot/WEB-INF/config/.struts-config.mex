@@ -51,6 +51,12 @@
       <AbsolutePoint location="480,-89" />
     </AutomaticBendpoints>
   </StrutsTransition>
+  <StrutsTransition id="/editFYP.do,deleteTopic,/editFYP.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="-359,-112" />
+      <AbsolutePoint location="-359,-112" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="/WEB-INF/logined/Coordinator/workload.jsp,null,/setWorkload.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="-1049,870" />
@@ -93,12 +99,6 @@
       <AbsolutePoint location="450,-30" />
     </AutomaticBendpoints>
   </StrutsTransition>
-  <StrutsTransition id="/setObserver.do,obsSaved,/setObserver.do,1" routingType="0">
-    <AutomaticBendpoints>
-      <AbsolutePoint location="30,398" />
-      <AbsolutePoint location="30,398" />
-    </AutomaticBendpoints>
-  </StrutsTransition>
   <StrutsTransition id="/choosePretime.do,updateChooseTopic,/choosePretime.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="1200,135" />
@@ -114,6 +114,12 @@
       <AbsolutePoint location="330,361" />
     </AutomaticBendpoints>
   </StrutsTransition>
+  <StrutsTransition id="/setObserver.do,obsSaved,/setObserver.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="30,398" />
+      <AbsolutePoint location="30,398" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
   <StrutsTransition id="/WEB-INF/logined/Coordinator/changePwd.jsp,null,/changPwd.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="-337,480" />
@@ -126,6 +132,12 @@
       <AbsolutePoint location="256,-112" />
       <AbsolutePoint location="256,136" />
       <AbsolutePoint location="330,136" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/editFYP.do,editOk,/editFYP.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="-359,-112" />
+      <AbsolutePoint location="-359,-112" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/uploadFYP.do,uploadok,/editFYP.do,1" routingType="0">
