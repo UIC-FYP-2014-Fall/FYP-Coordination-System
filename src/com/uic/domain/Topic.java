@@ -117,4 +117,12 @@ public class Topic implements java.io.Serializable {
 		this.description = description;
 	}
 
+	public Set<StuTopic> getStuTopic() {
+		return stuTopic;
+	}
+
+	public void setStuTopic(Set<StuTopic> stuTopic) {
+		this.stuTopic = stuTopic;
+	}
+
 }

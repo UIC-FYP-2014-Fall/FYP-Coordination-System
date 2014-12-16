@@ -73,7 +73,7 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 	public Topic getStudentTopic(String sid) {
 		// TODO Auto-generated method stub
 		Topic topic = new Topic();
-		String hql = "from Stutopic where student.sid=?";
+		String hql = "from StuTopic where student.sid=?";
 		String[] parameters={sid};
 		try {
 			topic = (Topic)getUniqueObject(hql, parameters);
@@ -89,7 +89,7 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 	public Teacher getSupervisor(String sid) {
 		// TODO Auto-generated method stub
 		Teacher teacher = new Teacher();
-		String hql = "select t.teacher from TeaTopic as t, Stutopic as s where s.topic.fid=t.topic.fid and s.student.sid=?";
+		String hql = "select t.teacher from TeaTopic as t, StuTopic as s where s.topic.fid=t.topic.fid and s.student.sid=?";
 		String[] parameters={sid};
 		try {
 			teacher = (Teacher)getUniqueObject(hql, parameters);
@@ -105,7 +105,7 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 	public Teacher getObserver(String sid) {
 		// TODO Auto-generated method stub
 		Teacher teacher = new Teacher();
-		String hql = "select o.observer from ObsTopic as o, Stutopic as s where s.topic.fid=o.topic.fid and s.student.sid=?";
+		String hql = "select o.observer from ObsTopic as o, StuTopic as s where s.topic.fid=o.topic.fid and s.student.sid=?";
 		String[] parameters={sid};
 		try {
 			teacher = (Teacher)getUniqueObject(hql, parameters);
