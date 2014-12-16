@@ -4,12 +4,21 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+
+import com.uic.domain.Student;
+import com.uic.domain.TeaTopic;
+import com.uic.domain.Topic;
+import com.uic.service.imp.FYPServiceImp;
+import com.uic.service.imp.StudentServiceImp;
 
 /**
  * MyEclipse Struts Creation date: 12-03-2014
@@ -22,7 +31,6 @@ public class ChooseTopicAction extends DispatchAction {
 	/*
 	 * Generated Methods
 	 */
-
 	/**
 	 * Method execute
 	 * 
@@ -36,7 +44,67 @@ public class ChooseTopicAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("student")) {
-
+			FYPServiceImp fypServiceImp=new FYPServiceImp();
+			ArrayList<Topic> topicList = (ArrayList<Topic>) fypServiceImp.getAllTopic();
+			ArrayList<String> supervisorList = new ArrayList<String>();
+			for(int i=0;i<topicList.size();i++){
+				ArrayList<TeaTopic> teaTopicList = (ArrayList<TeaTopic>) fypServiceImp.getTeaTopicByTopicId(topicList.get(i).getFid().toString());
+				StringBuffer supervisor = new StringBuffer();
+				for(int j=0;j<teaTopicList.size();j++){
+					supervisor.append(teaTopicList.get(j).getTeacher().getName()+" ");
+				}
+				supervisorList.add(supervisor.toString());
+			}
+			
+			request.setAttribute("supervisorList", supervisorList);
+			request.setAttribute("allTopicList", topicList);
+			return mapping.findForward("goChooseTopicUi");
+		} else {
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
+	public ActionForward goChooseGroupTopicUi(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		if (request.getSession().getAttribute("role").equals("student")) {
+			FYPServiceImp fypService=new FYPServiceImp();
+			StudentServiceImp studentService = new StudentServiceImp();
+			String topicId=request.getParameter("topicId");
+			Topic topic = fypService.getUniqueTopic(topicId);
+			Student curStudent = (Student) request.getSession().getAttribute("studentinfo");
+			ArrayList<Student> allStudentList=studentService.getAllStudent();
+			request.setAttribute("curStudent", curStudent);
+			request.setAttribute("allStudentList", allStudentList);
+			request.setAttribute("topic", topic);
+			
+			return mapping.findForward("goChooseGroupTopicUi");
+		} else {
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
+	public ActionForward selectIndividualTopic(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		if (request.getSession().getAttribute("role").equals("student")) {
+			//check if selected
+			//check teacher quota
+			//select topic
+			
+			return mapping.findForward("goChooseTopicUi");
+		} else {
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
+	public ActionForward selectGroupTopic(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		if (request.getSession().getAttribute("role").equals("student")) {
 			return mapping.findForward("goChooseTopicUi");
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");

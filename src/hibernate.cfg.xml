@@ -27,8 +27,8 @@
 	<mapping resource="com/uic/domain/TeaTopic.hbm.xml" />
 	<mapping resource="com/uic/domain/ObsTopic.hbm.xml" />
 	<mapping resource="com/uic/domain/Timeslot.hbm.xml" />
-	<mapping resource="com/uic/domain/Stutopic.hbm.xml" />
 	<mapping resource="com/uic/domain/Stuexaminer.hbm.xml" />
+	<mapping resource="com/uic/domain/StuTopic.hbm.xml" />
 
 </session-factory>
 

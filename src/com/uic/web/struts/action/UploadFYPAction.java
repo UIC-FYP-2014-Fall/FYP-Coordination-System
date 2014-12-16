@@ -111,7 +111,7 @@ public class UploadFYPAction extends DispatchAction {
 		// fetch the data from the form to the topic object
 		topic.setTitle(uploadFYPForm.getTitle());
 		topic.setCredit(Integer.parseInt(uploadFYPForm.getCredit()));
-
+		topic.setIsfull(false);
 		topic.setDescription(uploadFYPForm.getDescription());
 		if ("individual".equals(uploadFYPForm.getIndividual())) {
 			topic.setIndividual(true);

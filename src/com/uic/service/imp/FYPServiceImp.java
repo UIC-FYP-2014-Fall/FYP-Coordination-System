@@ -7,7 +7,7 @@ import org.hibernate.Session;
 
 import com.uic.domain.ObsTopic;
 import com.uic.domain.Student;
-import com.uic.domain.Stutopic;
+import com.uic.domain.StuTopic;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
@@ -16,8 +16,7 @@ import com.uic.util.HibernateUtil;
 
 @SuppressWarnings("unchecked")
 public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
-	@Override
-	public List<Topic> getTopic(String teacherName) {
+	public List<Topic> getAllTopic() {
 		// TODO Auto-generated method stub
 		String hql = "from Topic";
 		try {
@@ -206,12 +205,12 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 	}
 
 	@Override
-	public List<Stutopic> getStutopicByStudent(Student student) {
+	public List<StuTopic> getStuTopicByStudent(Student student) {
 		// TODO Auto-generated method stub
-		String hql = "from Stutopic where sid=?";
+		String hql = "from StuTopic where sid=?";
 		String[] parameters = { student.getId().toString() };
 		try {
-			List<Stutopic> stutopic = (List<Stutopic>) getListObject(hql,
+			List<StuTopic> stutopic = (List<StuTopic>) getListObject(hql,
 					parameters);
 			return stutopic;
 		} catch (Exception e) {
@@ -224,25 +223,27 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 	public boolean deleteTopic(String topicId) {
 		System.out.println(topicId);
 		String hql = "delete from TeaTopic where topic_id=?";
-		String hql2 = "delete from Topic where fid=?";
-		//String hql3 = "delete from ObsTopic where topic_id=?";
+		String hql2 = "delete from ObsTopic where topic_id=?";
+		String hql3 = "delete from Topic where fid=?";
 		String[] parameters = { topicId };
 		boolean flag = false;
 		try {
 			if (updateObject(hql, parameters)) {
 				if (updateObject(hql2, parameters)) {
-					return true;
-				} else {
-					return false;
+					if(updateObject(hql3,parameters)){
+						return true;
+					}else{
+						return false;
+					}
 				}
 			}
-
 			return false;
-			// flag = updateObject(hql3,parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return flag;
 		}
 	}
+
+	
 
 }
