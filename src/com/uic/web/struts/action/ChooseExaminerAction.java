@@ -5,6 +5,7 @@
 package com.uic.web.struts.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.uic.domain.Student;
+import com.uic.domain.Stuexaminer;
 import com.uic.domain.Teacher;
 import com.uic.domain.TeacherState;
+import com.uic.domain.Time;
 import com.uic.service.imp.StudentServiceImp;
 import com.uic.service.imp.TeachersServiceImp;
 import com.uic.service.inter.StudentServiceInter;
@@ -50,9 +53,13 @@ public class ChooseExaminerAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("student")) {
+			
 			Student stu = (Student)request.getSession().getAttribute("studentinfo");
 			StudentServiceInter studentSericeInter = new StudentServiceImp();
+			
 			//check whether student can choose examiner
+			
+			//student has chosen a examiner
 			if(studentSericeInter.checkExaminerState(stu.getSid())){
 				//student has chosen examiner
 				request.setAttribute("chooseExaminer", "true");
@@ -67,14 +74,22 @@ public class ChooseExaminerAction extends DispatchAction {
 				}
 				
 			}else{
-				//student has not choose examiner
+				//student has not choose a examiner yet
 				request.setAttribute("chooseExaminer", "false");
 				//check now time whether should choose examiner
 				if(TimeChecker.timeCheck().getType().equals(TimeType.choose_examiner)){
 					request.setAttribute("chooseExaminerTime", "true");
+					
 					//get student supervisor
-					Teacher supervisor = studentSericeInter.getSupervisor(stu.getSid());
-					Integer supervisorId = supervisor.getId();
+					List<Teacher> supervisor = studentSericeInter.getSupervisor(stu.getSid());
+					//ArrayList<Integer> supervisorId = new ArrayList<>();
+					
+					HashMap<Integer, Teacher> hm = new HashMap<>();
+					
+					for(int i=0;i<supervisor.size();i++){
+						hm.put(supervisor.get(i).getId(), supervisor.get(i));
+					}
+					
 					Teacher observer = studentSericeInter.getObserver(stu.getSid());
 					Integer observerId = observer.getId();
 					
@@ -86,23 +101,25 @@ public class ChooseExaminerAction extends DispatchAction {
 					//loop the teacher list to add the new list, teacherStateList.
 					for(Teacher t : listTeacher){
 						
-						TeacherState ts = new TeacherState();						
-						
-						ts.setTid(t.getId());
-						ts.setName(t.getName());
-						ts.setEmail(t.getEmail());
-						if(t.getId().equals(supervisorId)){
-							continue;
-						}else if(t.getId().equals(observerId)){
-							continue;
-						}else{
-							if(teachersServiceInter.getWorkload(t.getId().toString())<Integer.parseInt(t.getWorkload())){
-								ts.setState(TeacherStateType.can_select);
+						TeacherState ts = new TeacherState();
+
+							if(hm.containsKey(t.getId())){
+								continue;
+							}else if(t.getId().equals(observerId)){
+								continue;
 							}else{
-								ts.setState(TeacherStateType.full);
+								ts.setTid(t.getId());
+								ts.setName(t.getName());
+								ts.setEmail(t.getEmail());
+								if(teachersServiceInter.getWorkload(t.getId().toString())<Integer.parseInt(t.getWorkload())){
+									ts.setState(TeacherStateType.can_select);
+								}else{
+									ts.setState(TeacherStateType.full);
+								}
+								teacherStateList.add(ts);
 							}
-							teacherStateList.add(ts);
-						}
+						
+						
 					}
 					request.setAttribute("teacherList", teacherStateList);
 					
@@ -112,10 +129,53 @@ public class ChooseExaminerAction extends DispatchAction {
 				}
 			}
 			
-			System.out.println(TimeChecker.timeCheck().getType());
+			//System.out.println(TimeChecker.timeCheck().getType());
 			
 			return mapping.findForward("goChooseExaminerUi");
 		} else {
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
+	public ActionForward chooseExaminer(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		
+		if (request.getSession().getAttribute("role").equals("student")) {
+			
+			String examinerId = request.getParameter("tid");
+			
+			Time time = new Time();
+			//check now time located situation
+			time = TimeChecker.timeCheck();
+			
+			if(examinerId.trim()!=null && time.getType().equals(TimeType.choose_examiner)){
+				
+				
+				StudentServiceInter studentSericeInter = new StudentServiceImp();
+				TeachersServiceInter teacherServiceInter = new TeachersServiceImp();
+				
+				Student stu = (Student)request.getSession().getAttribute("studentinfo");
+				Teacher examiner = teacherServiceInter.getUniqueTeacherById(examinerId);
+				
+				Stuexaminer stuExaminer = new Stuexaminer();
+				stuExaminer.setStudent(stu);
+				stuExaminer.setTeacher(examiner);
+				//add the examiner for the student
+				if(studentSericeInter.saveObject(stuExaminer)){
+					request.setAttribute("studentOperation", "true");
+				}else{
+					request.setAttribute("studentOperation", "false");
+				}
+					
+			}else{
+				request.setAttribute("studentOperation", "false");
+				request.setAttribute("ErrorInfo", "Illegal operation!");
+			}
+
+			
+			return new ActionForward("/chooseExaminer.do?flag=goChooseExaminer");
+		}else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
 		}

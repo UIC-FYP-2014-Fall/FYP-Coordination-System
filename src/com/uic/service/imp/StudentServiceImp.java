@@ -73,7 +73,7 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 	public Topic getStudentTopic(String sid) {
 		// TODO Auto-generated method stub
 		Topic topic = new Topic();
-		String hql = "from Stutopic where student.sid=?";
+		String hql = "select s.topic from Stutopic as s where s.student.sid=?";
 		String[] parameters={sid};
 		try {
 			topic = (Topic)getUniqueObject(hql, parameters);
@@ -86,19 +86,18 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 	}
 
 	@Override
-	public Teacher getSupervisor(String sid) {
+	public List<Teacher> getSupervisor(String sid) {
 		// TODO Auto-generated method stub
-		Teacher teacher = new Teacher();
+		List<Teacher> list = null;
 		String hql = "select t.teacher from TeaTopic as t, Stutopic as s where s.topic.fid=t.topic.fid and s.student.sid=?";
 		String[] parameters={sid};
-		try {
-			teacher = (Teacher)getUniqueObject(hql, parameters);
-			
-		} catch (Exception e) {
+		try{
+			list = getListObject(hql, parameters);
+		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return teacher;
+		return list;
 	}
 
 	@Override
@@ -172,6 +171,13 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public boolean addExaminer(String sid, String tid) {
+		// TODO Auto-generated method stub
+		
+		return false;
 	}
 
 	

@@ -137,7 +137,7 @@
                     									<span class="label label-important">Full</span>
                     								</c:if>
                     								<c:if test="${teacher.state=='1' }">
-                    									<button class="btn btn-primary btn-mini">Select</button>
+                    									<a href="${pageContext.request.contextPath }/chooseExaminer.do?flag=chooseExaminer&tid=${teacher.tid}"><button class="btn btn-primary btn-mini">Select</button></a>
                     								</c:if>
                     								<!-- <span class="label">Selected</span>
                     								<button class="btn btn-primary btn-mini">Select</button>

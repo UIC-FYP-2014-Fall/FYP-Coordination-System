@@ -21,5 +21,6 @@ public interface TeachersServiceInter extends BaseInterface{
 	
 	public Integer getWorkload(String id);
 	
+	public Teacher getUniqueTeacherById(String id);
 
 }

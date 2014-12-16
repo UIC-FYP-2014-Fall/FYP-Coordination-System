@@ -4,6 +4,7 @@ import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.uic.domain.Student;
 
@@ -18,10 +19,12 @@ public interface StudentServiceInter extends BaseInterface {
 	public boolean checkExaminerState(String sid);
 
 	public boolean checkPretimeState(String sid);
+	
+	public boolean addExaminer(String sid, String tid);
 
 	public Topic getStudentTopic(String sid);
 
-	public Teacher getSupervisor(String sid); // return supervisor
+	public List<Teacher> getSupervisor(String sid); // return supervisor
 
 	public Teacher getObserver(String sid);
 

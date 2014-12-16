@@ -4,6 +4,8 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,7 +15,9 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.uic.domain.Student;
+import com.uic.domain.Teacher;
 import com.uic.domain.Time;
+import com.uic.domain.Topic;
 import com.uic.service.imp.StudentServiceImp;
 import com.uic.service.inter.StudentServiceInter;
 import com.uic.util.TimeChecker;
@@ -43,6 +47,7 @@ public class GoStudentMainAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("student")) {
+			
 			Student stu = (Student)request.getSession().getAttribute("studentinfo");
 			Time time = new Time();
 			//check now time located situation
@@ -54,15 +59,34 @@ public class GoStudentMainAction extends DispatchAction {
 			if(studentSericeInter.checkTopicState(stu.getSid())){
 				request.setAttribute("chooseTopic", "true");
 				//get student topic info
+				Topic topic = studentSericeInter.getStudentTopic(stu.getSid());
+				
+				request.setAttribute("stuTopic", topic.getTitle());
+				
+				List<Teacher> supervisor = studentSericeInter.getSupervisor(stu.getSid());
+				String supervisorString = "";
+				if(supervisor!=null){
+					supervisorString = supervisor.get(0).getName();
+					if(supervisor.size()>1){
+						for(int i=1;i<supervisor.size();i++){
+							supervisorString=supervisor.get(i).getName()+", "+supervisorString;
+						}
+					}
+				}
+				request.setAttribute("stuSupervisor", supervisorString);
 				
 			}else{
 				request.setAttribute("chooseTopic", "false");
 			}
 			//check whether student choose examiner
 			if(studentSericeInter.checkExaminerState(stu.getSid())){
+				
 				request.setAttribute("chooseExaminer", "true");
 				//get student examiner info
-				request.setAttribute("Examiner", "wufu");
+				Teacher examiner = studentSericeInter.getExaminer(stu.getSid());
+				
+				request.setAttribute("Examiner", examiner.getName());
+				
 			}else{
 				request.setAttribute("chooseExaminer", "false");
 			}
