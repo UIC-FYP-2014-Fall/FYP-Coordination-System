@@ -23,6 +23,9 @@
 		<property name="description" lazy="false" type="java.lang.String">
 			<column name="description" length="65535" not-null="true" />
 		</property>
+		<property name="isfull" lazy="false" type="java.lang.Boolean">
+			<column name="isfull" not-null="true"/>
+		</property>
 		<set name="teaTopic">
 			<key column="topic_id" />
 			<one-to-many class="com.uic.domain.TeaTopic" />
@@ -30,6 +33,10 @@
 		<set name="obsTopic">
 			<key column="topic_id" />
 			<one-to-many class="com.uic.domain.ObsTopic" />
+		</set>
+		<set name="stuTopic">
+			<key column="topic_id" />
+			<one-to-many class="com.uic.domain.StuTopic" />
 		</set>
 	</class>
 </hibernate-mapping>

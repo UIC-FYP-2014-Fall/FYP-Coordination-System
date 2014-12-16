@@ -14,6 +14,7 @@
     <form-bean name="observerForm" type="com.uic.web.struts.form.ObserverForm" />
     <form-bean name="timeslotForm" type="com.uic.web.struts.form.TimeslotForm" />
     <form-bean name="choosePreTimeForm" type="com.uic.web.struts.form.ChoosePreTimeForm" />
+    <form-bean name="selectTopicForm" type="com.uic.web.struts.form.SelectTopicForm" />
   </form-beans>
   <global-exceptions />
   <global-forwards >
@@ -211,6 +212,7 @@
       validate="false"
       cancellable="true" >
       <forward name="goChooseTopicUi" path="/WEB-INF/logined/Student/chooseTopic.jsp" />
+      <forward name="goChooseGroupTopicUi" path="/WEB-INF/logined/Student/teamTopicSelection.jsp" />
     </action>
     <action
       parameter="flag"
@@ -232,6 +234,7 @@
       <forward name="goChoosePretimeUi" path="/WEB-INF/logined/Student/choosePretime.jsp" />
       <forward name="updateChooseTopic" path="/choosePretime.do?flag=goChoosePretime" />
     </action>
+    
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />
 </struts-config>

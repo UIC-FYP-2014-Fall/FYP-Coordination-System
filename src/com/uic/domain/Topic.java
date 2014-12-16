@@ -22,9 +22,18 @@ public class Topic implements java.io.Serializable {
 	private Boolean individual;
 	private Integer numOfStudent;
 	private String description;
+	private Boolean isfull;
+	public Boolean getIsfull() {
+		return isfull;
+	}
+
+	public void setIsfull(Boolean isfull) {
+		this.isfull = isfull;
+	}
+
 	private Set<TeaTopic> teaTopic;
 	private Set<ObsTopic> obsTopic;
-
+	private Set<StuTopic> stuTopic;
 	// Constructors
 
 
@@ -106,6 +115,14 @@ public class Topic implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<StuTopic> getStuTopic() {
+		return stuTopic;
+	}
+
+	public void setStuTopic(Set<StuTopic> stuTopic) {
+		this.stuTopic = stuTopic;
 	}
 
 }

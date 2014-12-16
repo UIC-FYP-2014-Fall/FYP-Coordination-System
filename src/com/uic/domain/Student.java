@@ -23,7 +23,16 @@ public class Student implements java.io.Serializable {
 	private String sex;
 	private String program;
 	private Set<Timeslot> timeslot;
+	private Set<StuTopic> stuTopic;
 	// Constructors
+
+	public Set<StuTopic> getStuTopic() {
+		return stuTopic;
+	}
+
+	public void setStuTopic(Set<StuTopic> stuTopic) {
+		this.stuTopic = stuTopic;
+	}
 
 	public Set<Timeslot> getTimeslot() {
 		return timeslot;
