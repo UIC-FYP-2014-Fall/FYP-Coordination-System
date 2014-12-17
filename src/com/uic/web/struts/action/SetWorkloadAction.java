@@ -4,6 +4,9 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +15,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.uic.domain.Teacher;
+import com.uic.domain.TeacherState;
 import com.uic.service.imp.TeachersServiceImp;
 import com.uic.service.inter.TeachersServiceInter;
 import com.uic.web.struts.form.WorkloadForm;
@@ -42,7 +47,22 @@ public class SetWorkloadAction extends DispatchAction {
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
 			//ready teacher info for quota.jsp
 			TeachersServiceInter teachersServiceInter =  new TeachersServiceImp();
-			request.setAttribute("teacherList", teachersServiceInter.getTeachers());
+			List<Teacher> list = teachersServiceInter.getTeachers();
+			//rewrap the teacher list
+			ArrayList<TeacherState> al = new ArrayList<>();
+			
+			for(int i=0;i<list.size();i++){
+				TeacherState ts = new TeacherState();
+				ts.setTid(list.get(i).getId());
+				ts.setName(list.get(i).getName());
+				ts.setNumOfsupervisor(teachersServiceInter.getCountSupervisor(list.get(i).getId().toString()));
+				ts.setNumOfobserver(teachersServiceInter.getCountObserver(list.get(i).getId().toString()));
+				ts.setWorkload(list.get(i).getWorkload());
+				
+				al.add(ts);
+			}
+			
+			request.setAttribute("teacherList", al);
 			
 			return mapping.findForward("goWorkloadUi");
 		} else {
