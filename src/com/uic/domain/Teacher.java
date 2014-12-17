@@ -26,8 +26,17 @@ public class Teacher implements java.io.Serializable {
 	private Set<TeaTopic> teaTopic;
 	private Set<ObsTopic> obsTopic;
 	private Set<Timeslot> timeslot;
+	private Set<Stuexaminer> stuExaminer;
 
 	// Constructors
+
+	public Set<Stuexaminer> getStuExaminer() {
+		return stuExaminer;
+	}
+
+	public void setStuExaminer(Set<Stuexaminer> stuExaminer) {
+		this.stuExaminer = stuExaminer;
+	}
 
 	public String getWorkload() {
 		return workload;

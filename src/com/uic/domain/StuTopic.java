@@ -8,6 +8,9 @@ public class StuTopic implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+	private Student student;
+	private Topic topic;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -26,6 +29,5 @@ public class StuTopic implements Serializable{
 	public void setTopic(Topic topic) {
 		this.topic = topic;
 	}
-	private Student student;
-	private Topic topic;
+	
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import com.uic.domain.Student;
 
 public interface StudentServiceInter extends BaseInterface {
-	
+
 	public Teacher getObserver(Student student);
 
 	public ArrayList<Teacher> getSupervisor(Student student);
@@ -19,8 +19,6 @@ public interface StudentServiceInter extends BaseInterface {
 	public boolean checkExaminerState(String sid);
 
 	public boolean checkPretimeState(String sid);
-	
-	public boolean addExaminer(String sid, String tid);
 
 	public Topic getStudentTopic(String sid);
 
@@ -29,5 +27,9 @@ public interface StudentServiceInter extends BaseInterface {
 	public Teacher getObserver(String sid);
 
 	public Teacher getExaminer(String sid);
+	
+	public Student getStudentById(String sid);
+	
+	public boolean updateExaminer(String sid, String tid);
 
 }

@@ -10,11 +10,7 @@
             <column name="Id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="student" class="com.uic.domain.Student" fetch="select">
-            <column name="sid" not-null="true" />
-        </many-to-one>
-        <many-to-one name="teacher" class="com.uic.domain.Teacher" fetch="select">
-            <column name="teacherid" not-null="true" />
-        </many-to-one>
+        <many-to-one name="student" column="student_id"></many-to-one>
+        <many-to-one name="teacher" column="teacher_id"></many-to-one>
     </class>
 </hibernate-mapping>
