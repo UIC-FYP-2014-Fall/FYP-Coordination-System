@@ -163,6 +163,7 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 		}
 		return count;
 	}
+
 	public boolean minusTeacherQuotaLeft(String topicId){
 		FYPServiceImp fypService = new FYPServiceImp();
 		boolean flag= false;
@@ -200,4 +201,35 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 		}
 		return flag;
 	}
+
+
+	@Override
+	public Integer getCountSupervisor(String id) {
+		// TODO Auto-generated method stub
+		Integer count = 0;
+		String hql = "select count(*) from TeaTopic as t, StuTopic as s where s.topic.fid=t.topic.fid and t.teacher.id=?";
+		String[] parameters={id};
+		try{
+			count=Integer.parseInt(HibernateUtil.uniqueQueryOpenInView(hql, parameters).toString());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	@Override
+	public Integer getCountObserver(String id) {
+		// TODO Auto-generated method stub
+		Integer count = 0;
+		String hql = "select count(*) from ObsTopic as o, StuTopic as s where s.topic.fid=o.topic.fid and o.observer.id=?";
+		String[] parameters={id};
+		try{
+			count=Integer.parseInt(HibernateUtil.uniqueQueryOpenInView(hql, parameters).toString());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+
 }

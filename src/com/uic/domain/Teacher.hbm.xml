@@ -46,5 +46,9 @@
 			<key column="teacher_id" />
 			<one-to-many class="com.uic.domain.Timeslot" />
 		</set>
+		<set name="stuExaminer">
+			<key column="teacher_id" />
+			<one-to-many class="com.uic.domain.Stuexaminer" />
+		</set>
     </class>
 </hibernate-mapping>

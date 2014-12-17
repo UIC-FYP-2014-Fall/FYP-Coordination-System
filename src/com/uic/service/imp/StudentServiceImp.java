@@ -11,7 +11,9 @@ import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.inter.StudentServiceInter;
 
-public class StudentServiceImp extends BaseServiceImp implements StudentServiceInter {
+
+public class StudentServiceImp extends BaseServiceImp implements
+		StudentServiceInter {
 
 	@Override
 	public boolean checkTopicState(String sid) {
@@ -49,18 +51,6 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 		return flag;
 	}
 
-	public Student getUniqueStudent(String studentId) {
-		String hql = "from Student where id=?";
-		String[] parameters = { studentId };
-		try {
-			Student student = (Student) getUniqueObject(hql, parameters);
-			return student;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
 	@Override
 	public boolean checkPretimeState(String sid) {
 		// TODO Auto-generated method stub
@@ -83,7 +73,8 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 	public Topic getStudentTopic(String sid) {
 		// TODO Auto-generated method stub
 		Topic topic = new Topic();
-		String hql = "from StuTopic where student.sid=?";
+		String hql = "select s.topic from StuTopic as s where s.student.sid=?";
+
 		String[] parameters = { sid };
 		try {
 			topic = (Topic) getUniqueObject(hql, parameters);
@@ -96,19 +87,19 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 	}
 
 	@Override
-	public Teacher getSupervisor(String sid) {
+	public List<Teacher> getSupervisor(String sid) {
 		// TODO Auto-generated method stub
-		Teacher teacher = new Teacher();
+		List<Teacher> list = null;
 		String hql = "select t.teacher from TeaTopic as t, StuTopic as s where s.topic.fid=t.topic.fid and s.student.sid=?";
 		String[] parameters = { sid };
 		try {
-			teacher = (Teacher) getUniqueObject(hql, parameters);
-
+			list = getListObject(hql, parameters);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+
 		}
-		return teacher;
+		return list;
 	}
 
 	@Override
@@ -131,7 +122,7 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 	public Teacher getExaminer(String sid) {
 		// TODO Auto-generated method stub
 		Teacher teacher = new Teacher();
-		String hql = "select teacher from Stuexaminer where student.sid=?";
+		String hql = "select s.teacher from Stuexaminer as s where s.student.sid=?";
 		String[] parameters = { sid };
 		try {
 			teacher = (Teacher) getUniqueObject(hql, parameters);
@@ -141,6 +132,22 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 			e.printStackTrace();
 		}
 		return teacher;
+	}
+
+
+
+
+
+	public Student getUniqueStudent(String studentId) {
+		String hql = "from Student where id=?";
+		String[] parameters = { studentId };
+		try {
+			Student student = (Student) getUniqueObject(hql, parameters);
+			return student;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public ArrayList<Student> getAllStudent() {
@@ -187,6 +194,7 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 		}
 	}
 
+
 	public boolean checkIfStudentHasChoosedTopic(String studentId) {
 		String hql = "from StuTopic where student_id=?";
 		String[] parameters = { studentId };
@@ -202,4 +210,35 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 			return false;
 		}
 	}
+
+	@Override
+	public Student getStudentById(String sid) {
+		// TODO Auto-generated method stub
+		Student stu = new  Student();
+		String hql = "from Student where sid=?";
+		String[] parameters = { sid };
+		try {
+			stu = (Student)getUniqueObject(hql, parameters);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return stu;
+	}
+
+	@Override
+	public boolean updateExaminer(String sid, String tid) {
+		// TODO Auto-generated method stub
+		String hql = "update Stuexaminer set teacher_id=? where student_id=?";
+		String[] parameters = { tid, sid};
+		try {
+			updateObject(hql, parameters);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }

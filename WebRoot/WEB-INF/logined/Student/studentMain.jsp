@@ -205,13 +205,13 @@
 													<td>
 														<strong>Project Name</strong>
 													</td>
-													<td>FYP Coordination System</td>
+													<td>${stuTopic }</td>
 												</tr>
 												<tr>
 													<td>
 														<strong>Supervisor</strong>
 													</td>
-													<td>Judy Feng</td>
+													<td>${stuSupervisor }</td>
 												</tr>
 												<tr>
 													<td>

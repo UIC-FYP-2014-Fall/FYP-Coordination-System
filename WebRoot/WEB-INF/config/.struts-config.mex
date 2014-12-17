@@ -45,7 +45,11 @@
   <StrutsActivity path="/WEB-INF/logined/Student/chooseExaminer.jsp" location="1605,-30" dimension="211,100" />
   <StrutsActivity path="/WEB-INF/logined/Student/choosePretime.jsp" location="1605,135" dimension="211,100" />
   <StrutsActivity path="/index.jsp" location="-690,-675" dimension="146,81" />
+<<<<<<< HEAD
   <StrutsActivity path="/timetable" location="350,650" dimension="84,49" />
+=======
+  <StrutsActivity path="/WEB-INF/logined/Student/teamTopicSelection.jsp" location="675,-180" dimension="196,91" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
   <StrutsTransition id="/WEB-INF/logined/Teacher/uploadTopic.jsp,null,/uploadFYP.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="480,-30" />
@@ -146,9 +150,14 @@
   </StrutsTransition>
   <StrutsTransition id="/chooseTopic.do,goChooseGroupTopicUi,/WEB-INF/logined/Student/teamTopicSelection.jsp,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="1200,-91" />
       <AbsolutePoint location="1200,-74" />
       <AbsolutePoint location="1605,-74" />
+=======
+      <AbsolutePoint location="1050,-134" />
+      <AbsolutePoint location="871,-134" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/editFYP.do,editOk,/editFYP.do,1" routingType="0">

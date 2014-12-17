@@ -111,9 +111,9 @@
                                 </c:if>
                                 <c:if test="${chooseExaminer=='true' }">
                                 	<div class="alert alert-info">
-										<p>Your examiner: <strong>Xin Feng</strong></p>
+										<p>Your examiner: <strong>${StudentExaminer }</strong></p>
 										<c:if test="${chooseExaminerTime=='true' }">
-											<p>If you want to change your examiner, please click <button class="btn btn-primary btn-mini">Change</button>.</p>
+											<p>If you want to change your examiner, please reselect a examiner.</p>
 										</c:if>
 									</div>
                                 </c:if>
@@ -137,7 +137,11 @@
                     									<span class="label label-important">Full</span>
                     								</c:if>
                     								<c:if test="${teacher.state=='1' }">
-                    									<button class="btn btn-primary btn-mini">Select</button>
+                    									<a href="${pageContext.request.contextPath }/chooseExaminer.do?flag=chooseExaminer&tid=${teacher.tid}"><button class="btn btn-primary btn-mini">Select</button></a>
+                    								</c:if>
+                    								
+                    								<c:if test="${teacher.state=='2' }">
+                    									<span class="label label-success">Selected</span>
                     								</c:if>
                     								<!-- <span class="label">Selected</span>
                     								<button class="btn btn-primary btn-mini">Select</button>

@@ -21,5 +21,10 @@ public interface TeachersServiceInter extends BaseInterface{
 	
 	public Integer getWorkload(String id);
 	
+	public Integer getCountSupervisor(String id);
+	
+	public Integer getCountObserver(String id);
+	
+	public Teacher getUniqueTeacherById(String id);
 
 }

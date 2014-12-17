@@ -129,15 +129,15 @@
                                         <tr>
                                         	<td>${status.index + 1}</td>
                                             <td>${teacher.name }</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>${teacher.numOfsupervisor}</td>
+                                            <td>${teacher.numOfobserver }</td>
                                             <td>
                                             	<select name="workload" class="input-small">                                       	
-                                                          <option value="${teacher.id },1" <c:if test="${teacher.workload=='1' }">selected</c:if> >1</option>
-                                                          <option value="${teacher.id },2" <c:if test="${teacher.workload=='2' }">selected</c:if> >2</option>
-                                                          <option value="${teacher.id },3" <c:if test="${teacher.workload=='3' }">selected</c:if> >3</option>
-                                                          <option value="${teacher.id },4" <c:if test="${teacher.workload=='4' }">selected</c:if> >4</option>
-                                                          <option value="${teacher.id },5" <c:if test="${teacher.workload=='5' }">selected</c:if> >5</option>
+                                                          <option value="${teacher.tid },1" <c:if test="${teacher.workload=='1' }">selected</c:if> >1</option>
+                                                          <option value="${teacher.tid },2" <c:if test="${teacher.workload=='2' }">selected</c:if> >2</option>
+                                                          <option value="${teacher.tid },3" <c:if test="${teacher.workload=='3' }">selected</c:if> >3</option>
+                                                          <option value="${teacher.tid },4" <c:if test="${teacher.workload=='4' }">selected</c:if> >4</option>
+                                                          <option value="${teacher.tid },5" <c:if test="${teacher.workload=='5' }">selected</c:if> >5</option>
                                                 </select>
                                            	</td>
                                         </tr>
