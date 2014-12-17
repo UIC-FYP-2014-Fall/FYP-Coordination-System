@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="block-content collapse in">
                                     <div class="span12">
-                                        <form action="" method="post" form-horizontal">
+                                        <form action="${pageContext.request.contextPath }/chooseTopic.do?flag=selectGroupTopic" method="post" form-horizontal">
                                         <%
                                         	Topic topic = (Topic)request.getAttribute("topic");
                                        		ArrayList<Student> allStudentList= (ArrayList<Student>)request.getAttribute("allStudentList");
@@ -98,8 +98,10 @@
                                         	out.println("<legend>"+topic.getTitle()+"</legend>");
                                         	out.println("<div class=\"control-group\">");
                                         	out.println("<label class=\"control-label\" for=\"select01\">Member</label>");
-                                        	out.println("<div class=\"controls\"><input name=\"member\" value=\""+curStu.getSid()+"\"type=\"text\" class=\"m-wrap\" readonly=\"readonly\"></div>");
+                                        	out.println("<div class=\"controls\"><input value=\""+curStu.getSid()+"\"type=\"text\" class=\"m-wrap\" readonly=\"readonly\"></div>");
+                                        	out.println("<input type=\"hidden\" name=\"member\"value=\""+curStu.getId()+"\"/>");
                                         	out.println("</div>");
+                                        	out.println("<input type=\"hidden\" name=\"topicId\"value=\""+topic.getFid()+"\"/>");
                                         	for(int i=0;i<topic.getNumOfStudent();i++){
                                         		out.println("<div class=\"control-group\">");
                                         		out.println("<label class=\"control-label\" for=\"select01\">Member</label>");
@@ -109,7 +111,7 @@
                                         			if(allStudentList.get(j).getSid().equals(curStu.getSid())){
                                         				//do not print
                                         			}else{
-                                        				out.println("<option value=\""+allStudentList.get(j).getSid()+"\">"+allStudentList.get(j).getSid()+" "+allStudentList.get(j).getName()+"</option>");
+                                        				out.println("<option value=\""+allStudentList.get(j).getId()+"\">"+allStudentList.get(j).getSid()+" "+allStudentList.get(j).getName()+"</option>");
                                         			}
                                         		}
                                         		out.println("</select></div></div>");

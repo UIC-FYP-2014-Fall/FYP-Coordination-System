@@ -22,7 +22,16 @@ public class SelectTopicForm extends ActionForm {
 	 */
 
 	/** teamMenber property */
-	private String teamMenber;
+	private String topicId;
+	public String getTopicId() {
+		return topicId;
+	}
+
+	public void setTopicId(String topicId) {
+		this.topicId = topicId;
+	}
+
+	private String[] member;
 
 	/*
 	 * Generated Methods
@@ -53,15 +62,15 @@ public class SelectTopicForm extends ActionForm {
 	 * Returns the teamMenber.
 	 * @return String
 	 */
-	public String getTeamMenber() {
-		return teamMenber;
+	public String[] getMember() {
+		return member;
 	}
 
 	/** 
 	 * Set the teamMenber.
 	 * @param teamMenber The teamMenber to set
 	 */
-	public void setTeamMenber(String teamMenber) {
-		this.teamMenber = teamMenber;
+	public void setMember(String[] member) {
+		this.member = member;
 	}
 }

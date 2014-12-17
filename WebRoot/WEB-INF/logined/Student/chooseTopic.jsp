@@ -4,6 +4,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.uic.domain.Topic"%>
 <%@ page import="com.uic.domain.Student"%>
+<%@ page import="com.uic.domain.StuTopic"%>
 <!DOCTYPE html>
 <html class="no-js">
 <head>
@@ -59,6 +60,8 @@
 				class="btn btn-danger">Logout</a>
 		</div>
 	</div>
+
+
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
@@ -89,105 +92,169 @@
 							<div class="muted pull-left">Choose Topic</div>
 						</div>
 						<div class="block-content collapse in">
-							<table cellpadding="0" cellspacing="0" border="0"
-								class="table table-striped table-bordered" id="topicTable">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Title</th>
-										<th>Supervisor</th>
-										<th>Group/Individual</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									<%
-										ArrayList<Topic> topicList = (ArrayList<Topic>) request
-												.getAttribute("allTopicList");
-										ArrayList<String> supervisorList = (ArrayList<String>) request
-												.getAttribute("supervisorList");
-										
-										System.out.println("topicList size " + topicList.size());
-										for (int i = 0; i < topicList.size(); i++) {
-											int index = i + 1;
-											out.println("<tr>");
-											out.println("<td>" + index + "</td>");
-											out.println("<td><a href=\"#topic" + index
-													+ "\" data-toggle=\"modal\">"
-													+ topicList.get(i).getTitle() + "</a></td>");
-											out.println("<td>" + supervisorList.get(i) + "</td>");
-											if (topicList.get(i).getIndividual()) {
-												out.println("<td>Individual</td>");
-											} else {
-												out.println("<td>Group</td>");
-											}
-											if (topicList.get(i).getIsfull()) {
-												out.println("<td><span class=\"label label-important\">Full</span></td>");
-											} else {
-												if (topicList.get(i).getIndividual()) {
-													out.println("<td><form action=\""+ request.getContextPath()+ "/chooseTopic.do?flag=selectIndividualTopic\" method=\"post\">");
-													out.println("<input type=\"hidden\" name=\"topicId\" value=\""+topicList.get(i).getFid()+"\"/>");
-													out.println("<input type=\"submit\" value=\"select\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
-													out.println("</form></td>");
+							<c:if test="${requestScope.ifStudentHasChoosedTopic=='true' }">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="table table-striped table-bordered" id="topicTable">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Title</th>
+											<th>Supervisor</th>
+											<th>Group/Individual</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+												ArrayList<String> supervisorList = (ArrayList<String>) request.getAttribute("supervisorList");
+												StuTopic stuTopic = (StuTopic) request.getAttribute("stuTopic");
+												out.println("<tr>");
+												out.println("<td>#</td>");
+												out.println("<td><a href=\"#topic1\" data-toggle=\"modal\">" + stuTopic.getTopic().getTitle() + "</a></td>");
+												out.println("<td>" + supervisorList.get(0) + "</td>");
+												if (stuTopic.getTopic().getIndividual()) {
+													out.println("<td>Individual</td>");
 												} else {
-													out.println("<td><form action=\""+ request.getContextPath()+ "/chooseTopic.do?flag=goChooseGroupTopicUi\" method=\"post\">");
-													out.println("<input type=\"hidden\" name=\"topicId\" value=\""+topicList.get(i).getFid()+"\"/>");
-													out.println("<input type=\"submit\" value=\"select\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
-													out.println("</form></td>");
+													out.println("<td>Group</td>");
 												}
-											}
-											out.println("</tr>");
-										}
-									%>
+												out.println("<td><form action=\"" + request.getContextPath() + "/chooseTopic.do?flag=dropTopic\" method=\"post\">");
+												out.println("<input type=\"hidden\" name=\"topicId\" value=\"" + stuTopic.getTopic().getFid() + "\"/>");
+												out.println("<input type=\"submit\" value=\"Drop\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
+												out.println("</form></td>");
+												out.println("</tr>");
+										%>
+									</tbody>
+								</table>
+								
+							</c:if>
 
-								</tbody>
-							</table>
+
+							<c:if test="${requestScope.ifStudentHasChoosedTopic=='false' }">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="table table-striped table-bordered" id="topicTable">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Title</th>
+											<th>Supervisor</th>
+											<th>Group/Individual</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+												ArrayList<Topic> topicList = (ArrayList<Topic>) request.getAttribute("allTopicList");
+												ArrayList<String> supervisorList = (ArrayList<String>) request.getAttribute("supervisorList");
+												System.out.println("topicList size " + topicList.size());
+												for (int i = 0; i < topicList.size(); i++) {
+													int index = i + 1;
+													out.println("<tr>");
+													out.println("<td>" + index + "</td>");
+													out.println("<td><a href=\"#topic" + index + "\" data-toggle=\"modal\">" + topicList.get(i).getTitle() + "</a></td>");
+													out.println("<td>" + supervisorList.get(i) + "</td>");
+													if (topicList.get(i).getIndividual()) {
+														out.println("<td>Individual</td>");
+													} else {
+														out.println("<td>Group</td>");
+													}
+													if (topicList.get(i).getIsfull()) {
+														out.println("<td><span class=\"label label-important\">Full</span></td>");
+													} else {
+														if (topicList.get(i).getIndividual()) {
+															out.println("<td><form action=\"" + request.getContextPath() + "/chooseTopic.do?flag=selectIndividualTopic\" method=\"post\">");
+															out.println("<input type=\"hidden\" name=\"topicId\" value=\"" + topicList.get(i).getFid() + "\"/>");
+															out.println("<input type=\"submit\" value=\"select\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
+															out.println("</form></td>");
+														} else {
+															out.println("<td><form action=\"" + request.getContextPath() + "/chooseTopic.do?flag=goChooseGroupTopicUi\" method=\"post\">");
+															out.println("<input type=\"hidden\" name=\"topicId\" value=\"" + topicList.get(i).getFid() + "\"/>");
+															out.println("<input type=\"submit\" value=\"select\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
+															out.println("</form></td>");
+														}
+													}
+													out.println("</tr>");
+												}
+										%>
+									</tbody>
+								</table>
+							</c:if>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
 		<hr>
-		<%
-			for (int i = 0; i < topicList.size(); i++) {
-				int index = i + 1;
-				out.println("<div class=\"modal hide fade\" id=\"topic" + index
-						+ "\">");
-				out.println("<div class=\"modal-header\">");
-				out.println("<a href=\"#\" class=\"close\" data-dismiss=\"modal\"><i class=\"icon-remove\"></i></a>");
-				out.println("<h4>" + topicList.get(i).getTitle() + "</h4>");
-				out.println("</div>");
-				out.println("<div class=\"modal-body\">");
-				out.println("<form class=\"form-horizontal\">");
-				out.println("<table class=\"table\">");
-				out.println("<thead>");
-				out.println("<tr>");
-				out.println("<th>Title</th>");
-				out.println("<td>" + topicList.get(i).getTitle() + "</td>");
-				out.println("</tr>");
-				out.println("</thead>");
-				out.println("<tbody>");
-				out.println("<tr>");
-				out.println("<td><strong>Supervisor</strong></td>");
-				out.println("<td>" + supervisorList.get(i) + "</td>");
-				out.println("<tr><td><strong>Credits</strong></td><td>"
-						+ topicList.get(i).getCredit() + "</td></tr>");
-				out.println("<tr><td><strong>No. of Students</strong></td><td>"
-						+ topicList.get(i).getNumOfStudent() + "</td></tr><tr>");
-				if (topicList.get(i).getIndividual()) {
-					out.println("<tr><td><strong>Individual/Group</strong></td><td>Individual</td></tr>");
-				} else {
-					out.println("<tr><td><strong>Individual/Group</strong></td><td>Group</td></tr>");
-				}
-				out.println("<tr><td><strong>Description</strong></td><td>"
-						+ topicList.get(i).getDescription() + "</td></tr>");
-				out.println("</tbody></table></form></div><div class=\"modal-footer\"></div></div>");
-			}
-		%>
-
-
+		<c:if test="${requestScope.ifStudentHasChoosedTopic=='false' }">
+			<%
+					ArrayList<Topic> topicList2 = (ArrayList<Topic>) request.getAttribute("allTopicList");
+					ArrayList<String> supervisorList2 = (ArrayList<String>) request.getAttribute("supervisorList");
+					for (int i = 0; i < topicList2.size(); i++) {
+						int index = i + 1;
+						out.println("<div class=\"modal hide fade\" id=\"topic" + index + "\">");
+						out.println("<div class=\"modal-header\">");
+						out.println("<a href=\"#\" class=\"close\" data-dismiss=\"modal\"><i class=\"icon-remove\"></i></a>");
+						out.println("<h4>" + topicList2.get(i).getTitle() + "</h4>");
+						out.println("</div>");
+						out.println("<div class=\"modal-body\">");
+						out.println("<form class=\"form-horizontal\">");
+						out.println("<table class=\"table\">");
+						out.println("<thead>");
+						out.println("<tr>");
+						out.println("<th>Title</th>");
+						out.println("<td>" + topicList2.get(i).getTitle() + "</td>");
+						out.println("</tr>");
+						out.println("</thead>");
+						out.println("<tbody>");
+						out.println("<tr>");
+						out.println("<td><strong>Supervisor</strong></td>");
+						out.println("<td>" + supervisorList2.get(i) + "</td>");
+						out.println("<tr><td><strong>Credits</strong></td><td>" + topicList2.get(i).getCredit() + "</td></tr>");
+						out.println("<tr><td><strong>No. of Students</strong></td><td>" + topicList2.get(i).getNumOfStudent() + "</td></tr><tr>");
+						if (topicList2.get(i).getIndividual()) {
+							out.println("<tr><td><strong>Individual/Group</strong></td><td>Individual</td></tr>");
+						} else {
+							out.println("<tr><td><strong>Individual/Group</strong></td><td>Group</td></tr>");
+						}
+						out.println("<tr><td><strong>Description</strong></td><td>" + topicList2.get(i).getDescription() + "</td></tr>");
+						out.println("</tbody></table></form></div><div class=\"modal-footer\"></div></div>");
+					}
+			%>
+		</c:if>
+		<c:if test="${requestScope.ifStudentHasChoosedTopic=='true' }">
+			<%
+					ArrayList<String> supervisorList = (ArrayList<String>) request.getAttribute("supervisorList");
+					StuTopic stuTopic = (StuTopic) request.getAttribute("stuTopic");
+					out.println("<div class=\"modal hide fade\" id=\"topic1\">");
+					out.println("<div class=\"modal-header\">");
+					out.println("<a href=\"#\" class=\"close\" data-dismiss=\"modal\"><i class=\"icon-remove\"></i></a>");
+					out.println("<h4>" + stuTopic.getTopic().getTitle() + "</h4>");
+					out.println("</div>");
+					out.println("<div class=\"modal-body\">");
+					out.println("<form class=\"form-horizontal\">");
+					out.println("<table class=\"table\">");
+					out.println("<thead>");
+					out.println("<tr>");
+					out.println("<th>Title</th>");
+					out.println("<td>" + stuTopic.getTopic().getTitle() + "</td>");
+					out.println("</tr>");
+					out.println("</thead>");
+					out.println("<tbody>");
+					out.println("<tr>");
+					out.println("<td><strong>Supervisor</strong></td>");
+					out.println("<td>" + supervisorList.get(0) + "</td>");
+					out.println("<tr><td><strong>Credits</strong></td><td>" + stuTopic.getTopic().getCredit() + "</td></tr>");
+					out.println("<tr><td><strong>No. of Students</strong></td><td>" + stuTopic.getTopic().getNumOfStudent() + "</td></tr><tr>");
+					if (stuTopic.getTopic().getIndividual()) {
+						out.println("<tr><td><strong>Individual/Group</strong></td><td>Individual</td></tr>");
+					} else {
+						out.println("<tr><td><strong>Individual/Group</strong></td><td>Group</td></tr>");
+					}
+					out.println("<tr><td><strong>Description</strong></td><td>" + stuTopic.getTopic().getDescription() + "</td></tr>");
+					out.println("</tbody></table></form></div><div class=\"modal-footer\"></div></div>");
+			%>
+		</c:if>
 	</div>
+
 	<!--/.fluid-container-->
 	<script src="vendors/jquery-1.9.1.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>

@@ -1,6 +1,4 @@
-
 package com.uic.service.imp;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +11,17 @@ import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.inter.StudentServiceInter;
 
-public class StudentServiceImp extends BaseServiceImp implements StudentServiceInter{
+public class StudentServiceImp extends BaseServiceImp implements StudentServiceInter {
 
 	@Override
 	public boolean checkTopicState(String sid) {
 		// TODO Auto-generated method stub
 		boolean flag = false;
-		String hql = "from Stutopic where student.sid=?";
-		String[] parameters={sid};
+		String hql = "from StuTopic where student.sid=?";
+		String[] parameters = { sid };
 		try {
 			Object obj = getUniqueObject(hql, parameters);
-			if(obj!=null){
+			if (obj != null) {
 				flag = true;
 			}
 		} catch (Exception e) {
@@ -38,10 +36,10 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		String hql = "from Stuexaminer where student.sid=?";
-		String[] parameters={sid};
+		String[] parameters = { sid };
 		try {
 			Object obj = getUniqueObject(hql, parameters);
-			if(obj!=null){
+			if (obj != null) {
 				flag = true;
 			}
 		} catch (Exception e) {
@@ -51,15 +49,27 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 		return flag;
 	}
 
+	public Student getUniqueStudent(String studentId) {
+		String hql = "from Student where id=?";
+		String[] parameters = { studentId };
+		try {
+			Student student = (Student) getUniqueObject(hql, parameters);
+			return student;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	@Override
 	public boolean checkPretimeState(String sid) {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		String hql = "from Timeslot where student.sid=?";
-		String[] parameters={sid};
+		String[] parameters = { sid };
 		try {
 			Object obj = getUniqueObject(hql, parameters);
-			if(obj!=null){
+			if (obj != null) {
 				flag = true;
 			}
 		} catch (Exception e) {
@@ -74,10 +84,10 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 		// TODO Auto-generated method stub
 		Topic topic = new Topic();
 		String hql = "from StuTopic where student.sid=?";
-		String[] parameters={sid};
+		String[] parameters = { sid };
 		try {
-			topic = (Topic)getUniqueObject(hql, parameters);
-			
+			topic = (Topic) getUniqueObject(hql, parameters);
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -90,10 +100,10 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 		// TODO Auto-generated method stub
 		Teacher teacher = new Teacher();
 		String hql = "select t.teacher from TeaTopic as t, StuTopic as s where s.topic.fid=t.topic.fid and s.student.sid=?";
-		String[] parameters={sid};
+		String[] parameters = { sid };
 		try {
-			teacher = (Teacher)getUniqueObject(hql, parameters);
-			
+			teacher = (Teacher) getUniqueObject(hql, parameters);
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -106,10 +116,10 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 		// TODO Auto-generated method stub
 		Teacher teacher = new Teacher();
 		String hql = "select o.observer from ObsTopic as o, StuTopic as s where s.topic.fid=o.topic.fid and s.student.sid=?";
-		String[] parameters={sid};
+		String[] parameters = { sid };
 		try {
-			teacher = (Teacher)getUniqueObject(hql, parameters);
-			
+			teacher = (Teacher) getUniqueObject(hql, parameters);
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -122,43 +132,38 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 		// TODO Auto-generated method stub
 		Teacher teacher = new Teacher();
 		String hql = "select teacher from Stuexaminer where student.sid=?";
-		String[] parameters={sid};
+		String[] parameters = { sid };
 		try {
-			teacher = (Teacher)getUniqueObject(hql, parameters);
-			
+			teacher = (Teacher) getUniqueObject(hql, parameters);
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return teacher;
 	}
-	
-	public ArrayList<Student> getAllStudent(){
-		String hql="from Student";
+
+	public ArrayList<Student> getAllStudent() {
+		String hql = "from Student";
 		ArrayList<Student> studentList = new ArrayList<Student>();
-		try{
-			studentList = (ArrayList<Student>) getListObject(hql,null);
-		}catch(Exception e){
+		try {
+			studentList = (ArrayList<Student>) getListObject(hql, null);
+			return studentList;
+		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return studentList;
 	}
-	
-
-
-
-
 
 	@Override
 	public Teacher getObserver(Student student) {
 		// TODO Auto-generated method stub
 		FYPServiceImp fypService = new FYPServiceImp();
-		try{
+		try {
 			List<StuTopic> stutopic = fypService.getStuTopicByStudent(student);
-			List<ObsTopic> obsTopic = fypService.getObsTopicByTopicId(stutopic
-					.get(0).getTopic().getFid().toString());
+			List<ObsTopic> obsTopic = fypService.getObsTopicByTopicId(stutopic.get(0).getTopic().getFid().toString());
 			return obsTopic.get(0).getObserver();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -168,19 +173,33 @@ public class StudentServiceImp extends BaseServiceImp implements StudentServiceI
 	public ArrayList<Teacher> getSupervisor(Student student) {
 		// TODO Auto-generated method stub
 		FYPServiceImp fypService = new FYPServiceImp();
-		try{
+		try {
 			List<StuTopic> stutopic = fypService.getStuTopicByStudent(student);
-			List<TeaTopic> teaTopic = fypService.getTeaTopicByTopicId(stutopic
-					.get(0).getTopic().getFid().toString());
+			List<TeaTopic> teaTopic = fypService.getTeaTopicByTopicId(stutopic.get(0).getTopic().getFid().toString());
 			ArrayList<Teacher> supervisors = new ArrayList<Teacher>();
 			for (int i = 0; i < teaTopic.size(); i++) {
 				supervisors.add(teaTopic.get(i).getTeacher());
 			}
 			return supervisors;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-}
 
+	public boolean checkIfStudentHasChoosedTopic(String studentId) {
+		String hql = "from StuTopic where student_id=?";
+		String[] parameters = { studentId };
+		try {
+			List stuTopic = getListObject(hql, parameters);
+			if (stuTopic.size() == 0) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+}

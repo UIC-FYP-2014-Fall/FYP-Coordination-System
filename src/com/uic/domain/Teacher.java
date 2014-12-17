@@ -21,6 +21,15 @@ public class Teacher implements java.io.Serializable {
 	private String email;
 	private String phone;
 	private String quota;
+	private String quotaLeft;
+	public String getQuotaLeft() {
+		return quotaLeft;
+	}
+
+	public void setQuotaLeft(String quotaLeft) {
+		this.quotaLeft = quotaLeft;
+	}
+
 	private String workload;
 
 	private Set<TeaTopic> teaTopic;

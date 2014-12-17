@@ -207,7 +207,7 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 	@Override
 	public List<StuTopic> getStuTopicByStudent(Student student) {
 		// TODO Auto-generated method stub
-		String hql = "from StuTopic where sid=?";
+		String hql = "from StuTopic where id=?";
 		String[] parameters = { student.getId().toString() };
 		try {
 			List<StuTopic> stutopic = (List<StuTopic>) getListObject(hql,
@@ -220,6 +220,19 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 
 	}
 
+	public StuTopic getUniqueStuTopicByStudent(Student student) {
+		// TODO Auto-generated method stub
+		String hql = "from StuTopic where student_id=?";
+		String[] parameters = { student.getId().toString() };
+		try {
+			StuTopic stutopic = (StuTopic) getUniqueObject(hql,parameters);
+			return stutopic;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
 	public boolean deleteTopic(String topicId) {
 		System.out.println(topicId);
 		String hql = "delete from TeaTopic where topic_id=?";
@@ -244,6 +257,48 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		}
 	}
 
-	
-
+	public boolean checkIfTopicSelected(String topicId){
+		String hql="from StuTopic where topic_id=?";
+		String[] parameters={topicId};
+		try{
+			List list = getListObject(hql,parameters);
+			if(list.size()==0){
+				return false;
+			}else{
+				return true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public boolean selectIndividualTopic(String topicId, String studentId){
+		StudentServiceImp studentService = new StudentServiceImp();
+		StuTopic stuTopic=new StuTopic();
+		stuTopic.setStudent(studentService.getUniqueStudent(studentId));
+		stuTopic.setTopic(getUniqueTopic(topicId));
+		String hql2="update Topic set isfull=1 where fid=?";
+		String[] parameters2={topicId};
+		try{
+			saveObject(stuTopic);
+			updateObject(hql2,parameters2); 
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public boolean deleteStuTopicByTopicId(String topicId){
+		String hql="delete StuTopic where topic_id=?";
+		String hql2="update Topic set isfull=0 where fid=?";
+		String[] parameters={topicId};
+		try{
+			updateObject(hql,parameters);
+			updateObject(hql2,parameters);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

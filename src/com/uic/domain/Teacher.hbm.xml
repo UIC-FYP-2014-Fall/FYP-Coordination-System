@@ -28,6 +28,9 @@
         <property name="quota" lazy="false" type="java.lang.String">
             <column name="quota" length="1" not-null="true" default="5" />
         </property>
+        <property name="quotaLeft" lazy="false" type="java.lang.String">
+            <column name="quotaLeft" length="1" not-null="true" default="5" />
+        </property>
         <property name="workload" lazy="false" type="java.lang.String">
             <column name="workload" length="1" not-null="true" default="5" />
         </property>

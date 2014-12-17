@@ -208,11 +208,13 @@
     <action
       parameter="flag"
       path="/chooseTopic"
+      name="selectTopicForm"
       type="com.uic.web.struts.action.ChooseTopicAction"
       validate="false"
       cancellable="true" >
       <forward name="goChooseTopicUi" path="/WEB-INF/logined/Student/chooseTopic.jsp" />
       <forward name="goChooseGroupTopicUi" path="/WEB-INF/logined/Student/teamTopicSelection.jsp" />
+      <forward name="goChooseTopic" path="/chooseTopic.do?flag=goChooseTopic" />
     </action>
     <action
       parameter="flag"
