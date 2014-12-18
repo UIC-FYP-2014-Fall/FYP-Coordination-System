@@ -83,7 +83,7 @@ public class TimetableServiceImp  extends BaseServiceImp implements TimetableSer
 	
 	
 	public ArrayList<String> getTeacherAndObserverAvailableTime(ArrayList<Teacher> supervisor,Teacher observer){
-		String hql="From Timeslot where teacher_id=? and available=1 and selected=0";
+		String hql="from Timeslot where teacher_id=? and available=1 and selected=0";
 		String[] pareOfSup={supervisor.get(0).getId().toString()};
 		String[] pareOfObs={observer.getId().toString()};
 		try{

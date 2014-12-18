@@ -58,8 +58,8 @@ public class StudentServiceImp extends BaseServiceImp implements
 		String hql = "from Timeslot where student.sid=?";
 		String[] parameters = { sid };
 		try {
-			Object obj = getUniqueObject(hql, parameters);
-			if (obj != null) {
+			List obj = getListObject(hql, parameters);
+			if (obj.size()>0) {
 				flag = true;
 			}
 		} catch (Exception e) {

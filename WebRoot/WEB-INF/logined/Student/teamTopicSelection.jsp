@@ -75,6 +75,18 @@
 
                 <div class="span9" id="content">
                     <div class="row-fluid">
+                    
+                    <c:if test="${requestScope.memberAreTheSame=='true' }">
+					<div class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<h4>Error</h4>
+						You have select two same members, please select again.
+					</div>
+					<%
+						request.removeAttribute("memberAreTheSame");
+					%>
+					</c:if>
+					
                         <div class="span6">
                             <!-- block -->								                   		
                             <div class="block">
@@ -83,7 +95,7 @@
                                         <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
                                         <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
                                         <li>
-                                            <a href="chooseTopic.html">Choose Topic</a> <span class="divider">/</span>    
+                                            <a href="${pageContext.request.contextPath }/chooseTopic.do?flag=goChooseTopic">Choose Topic</a> <span class="divider">/</span>    
                                         </li>                                       
                                         <li class="active">Group Member Information</li>
                                     </ul>                                   
@@ -102,7 +114,7 @@
                                         	out.println("<input type=\"hidden\" name=\"member\"value=\""+curStu.getId()+"\"/>");
                                         	out.println("</div>");
                                         	out.println("<input type=\"hidden\" name=\"topicId\"value=\""+topic.getFid()+"\"/>");
-                                        	for(int i=0;i<topic.getNumOfStudent();i++){
+                                        	for(int i=1;i<topic.getNumOfStudent();i++){
                                         		out.println("<div class=\"control-group\">");
                                         		out.println("<label class=\"control-label\" for=\"select01\">Member</label>");
                                         		out.println("<div class=\"controls\">");

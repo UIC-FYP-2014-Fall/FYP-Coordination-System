@@ -215,6 +215,7 @@
       <forward name="goChooseTopicUi" path="/WEB-INF/logined/Student/chooseTopic.jsp" />
       <forward name="goChooseGroupTopicUi" path="/WEB-INF/logined/Student/teamTopicSelection.jsp" />
       <forward name="goChooseTopic" path="/chooseTopic.do?flag=goChooseTopic" />
+      <forward name="gochooseGroupTopic" path="/chooseTopic.do?flag=goChooseGroupTopicUi"/>
     </action>
     <action
       parameter="flag"

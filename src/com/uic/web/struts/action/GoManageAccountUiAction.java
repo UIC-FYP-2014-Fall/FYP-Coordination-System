@@ -77,7 +77,7 @@ public class GoManageAccountUiAction extends DispatchAction {
 				teacher.setPassword(ph.getProperties("DefaultTeacherPassword"));
 				teacher.setQuota(ph.getProperties("DefaultTeacherQuota"));
 				teacher.setWorkload(ph.getProperties("DefaultTeacherWorkload"));
-
+				teacher.setQuotaLeft(ph.getProperties("DefaultTeacherQuota"));
 				// save the teacher
 				
 				if (teachersServiceInter.saveObject(teacher)) {

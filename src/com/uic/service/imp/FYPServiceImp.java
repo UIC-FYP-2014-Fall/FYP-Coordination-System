@@ -207,7 +207,7 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 	@Override
 	public List<StuTopic> getStuTopicByStudent(Student student) {
 		// TODO Auto-generated method stub
-		String hql = "from StuTopic where id=?";
+		String hql = "from StuTopic where student_id=?";
 		String[] parameters = { student.getId().toString() };
 		try {
 			List<StuTopic> stutopic = (List<StuTopic>) getListObject(hql,
@@ -288,6 +288,30 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 			return false;
 		}
 	}
+	public boolean selectGroupTopic(String topicId,String[] member){
+		StudentServiceImp studentService = new StudentServiceImp();
+		String hql2="update Topic set isfull=1 where fid=?";
+		String[] parameters2={topicId};
+		try{
+			updateObject(hql2,parameters2);
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		for(int i=0; i < member.length; i++){
+			StuTopic stuTopic=new StuTopic();
+			stuTopic.setStudent(studentService.getUniqueStudent(member[i]));
+			stuTopic.setTopic(getUniqueTopic(topicId));
+			try{
+				saveObject(stuTopic);
+			}catch(Exception e){
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public boolean deleteStuTopicByTopicId(String topicId){
 		String hql="delete StuTopic where topic_id=?";
 		String hql2="update Topic set isfull=0 where fid=?";
