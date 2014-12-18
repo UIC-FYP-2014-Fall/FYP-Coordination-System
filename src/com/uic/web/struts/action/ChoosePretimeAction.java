@@ -67,7 +67,8 @@ public class ChoosePretimeAction extends DispatchAction {
 						ArrayList<String> timeTableTime = BaseUtil.getEveryWeekStartAndEndDay(preStart, preEnd);
 						ArrayList<Teacher> supervisor = studentService.getSupervisor(student);
 						Teacher observer = studentService.getObserver(student);
-						List<String> timeslots = timetableService.getTeacherAndObserverAvailableTime(supervisor, observer);
+						Teacher examiner = studentService.getExaminer(student.getSid());
+						List<String> timeslots = timetableService.getTeacherAndObserverAvailableTime(supervisor, observer,examiner);
 						for (int i = 0; i < timeslots.size(); i++) {
 							System.out.println(timeslots.get(i));
 						}
@@ -94,7 +95,8 @@ public class ChoosePretimeAction extends DispatchAction {
 						ArrayList<String> timeTableTime = BaseUtil.getEveryWeekStartAndEndDay(preStart, preEnd);
 						ArrayList<Teacher> supervisor = studentService.getSupervisor(student);
 						Teacher observer = studentService.getObserver(student);
-						List<String> timeslots = timetableService.getTeacherAndObserverAvailableTime(supervisor, observer);
+						Teacher examiner = studentService.getExaminer(student.getSid());
+						List<String> timeslots = timetableService.getTeacherAndObserverAvailableTime(supervisor, observer,examiner);
 						for (int i = 0; i < timeslots.size(); i++) {
 							System.out.println(timeslots.get(i));
 						}

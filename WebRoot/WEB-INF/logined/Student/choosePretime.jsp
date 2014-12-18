@@ -126,7 +126,7 @@
 					</c:if>
 					<!-- block -->
 					
-						<c:if test="${requestScope.timetableStart=='true' }">
+					<c:if test="${requestScope.timetableStart=='true' }">
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
 								<div class="muted pull-left">Timetable</div>

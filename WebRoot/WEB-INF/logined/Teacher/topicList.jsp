@@ -196,7 +196,7 @@
 																+ request.getContextPath()
 																+ "/editFYP.do?flag=removeTopic\" method=\"post\"><input name=\"rid\" type=\"hidden\" value=\""
 																+ teaTopic.get(i).getTopic().getFid()
-																+ "\"><button type=\"submit\" class=\"btn btn btn-danger btn-mini\">delete</button></form>");
+																+ "\"><button type=\"submit\" class=\"btn btn btn-danger btn-mini\">Delete</button></form>");
 													}else{
 														out.println("Student who choose this project");
 													}
@@ -261,7 +261,7 @@
 																+ request.getContextPath()
 																+ "/editFYP.do?flag=removeTopic\" method=\"post\"><input name=\"rid\" type=\"hidden\" value=\""
 																+ teaTopic.get(i).getTopic().getFid()
-																+ "\"><button type=\"submit\"class=\"btn btn btn-danger btn-mini\">delete</button></form>");
+																+ "\"><button type=\"submit\"class=\"btn btn btn-danger btn-mini\">Delete</button></form>");
 													}else{
 														out.println("Student who choose this project");
 													}

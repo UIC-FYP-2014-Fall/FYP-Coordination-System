@@ -82,28 +82,32 @@ public class TimetableServiceImp  extends BaseServiceImp implements TimetableSer
 	}
 	
 	
-	public ArrayList<String> getTeacherAndObserverAvailableTime(ArrayList<Teacher> supervisor,Teacher observer){
+	public ArrayList<String> getTeacherAndObserverAvailableTime(ArrayList<Teacher> supervisor,Teacher observer,Teacher examiner){
 		String hql="from Timeslot where teacher_id=? and available=1 and selected=0";
 		String[] pareOfSup={supervisor.get(0).getId().toString()};
 		String[] pareOfObs={observer.getId().toString()};
+		String[] pareOfExa={examiner.getId().toString()};
 		try{
+			//get the first supervisor, observer, examiner timeslot
 			List<Timeslot> obsTimeslot=(List<Timeslot>)getListObject(hql,pareOfObs);
 			List<Timeslot> supTimeslot0=(List<Timeslot>)getListObject(hql,pareOfSup);
+			List<Timeslot> exaTimeslot=(List<Timeslot>)getListObject(hql,pareOfExa);
 			ArrayList<String> tempTimeslotList=new ArrayList<String>();
 			ArrayList<String> mergedTimeslotList=new ArrayList<String>();
+			//add the first supervisor's timeslot to the tempTimeslot
 			for(int i =0;i<supTimeslot0.size();i++){
 				String temp;
 				Timeslot timeslot=supTimeslot0.get(i);
 				temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
 				tempTimeslotList.add(temp);
 			}
-			
+			//all other supervisor's timeslot 
 			for(int i =1;i<supervisor.size();i++){
 				pareOfSup[0]=supervisor.get(i).getId().toString();
 				List<Timeslot> supTimeslot=(List<Timeslot>)getListObject(hql,pareOfSup);
-				for(int j =0;j<obsTimeslot.size();j++){
+				for(int j =0;j<supTimeslot.size();j++){
 					String temp;
-					Timeslot timeslot=obsTimeslot.get(j);
+					Timeslot timeslot=supTimeslot.get(j);
 					temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
 					if(tempTimeslotList.contains(temp)){
 						mergedTimeslotList.add(temp);
@@ -115,6 +119,16 @@ public class TimetableServiceImp  extends BaseServiceImp implements TimetableSer
 			for(int i =0;i<obsTimeslot.size();i++){
 				String temp;
 				Timeslot timeslot=obsTimeslot.get(i);
+				temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
+				if(tempTimeslotList.contains(temp)){
+					mergedTimeslotList.add(temp);
+				}else{
+					//skip
+				}
+			}
+			for(int i =0;i<exaTimeslot.size();i++){
+				String temp;
+				Timeslot timeslot=exaTimeslot.get(i);
 				temp=timeslot.getWeek()+","+timeslot.getDay()+","+timeslot.getTime();
 				if(tempTimeslotList.contains(temp)){
 					mergedTimeslotList.add(temp);

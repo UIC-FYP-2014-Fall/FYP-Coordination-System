@@ -85,10 +85,10 @@
 						%>
 					</c:if>
 					<c:if test="${requestScope.timetableStart=='true' }">
-						<div class="alert alert-error ErrorInfo">
-							<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-							<h4>Note:</h4>
-							the select time period is(${requestScope.timetablePeriod }).
+						<div class="alert alert-info alert-block">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4 class="alert-heading">Info</h4>
+							You can select available time from ${requestScope.timetablePeriod }.
 						</div>
 						<c:if test="${requestScope.ifUpdateTableSuccess=='true' }">
 							<div class="alert alert-success SuccessInfo">
@@ -98,7 +98,7 @@
 							</div>
 							<%
 								request.removeAttribute("ifUpdateTableSuccess");
-								request.removeAttribute("updateTableInfo");
+													request.removeAttribute("updateTableInfo");
 							%>
 						</c:if>
 						<c:if test="${requestScope.ifUpdateTableSuccess=='false' }">
@@ -106,11 +106,11 @@
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
 								<h4>Success</h4>
 								${requestScope.updateTableInfo }
-							</div> 
-						<%
-							request.removeAttribute("timetableStart");
-							request.removeAttribute("updateTableInfo");
-						%>
+							</div>
+							<%
+								request.removeAttribute("timetableStart");
+												request.removeAttribute("updateTableInfo");
+							%>
 						</c:if>
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
@@ -137,7 +137,7 @@
 									action="${pageContext.request.contextPath }/timetable.do?flag=updateTimetable"
 									method="post">
 									<%
-									String[] timeArray={"9:00-9:30","9:30-10:00","10:00-10:30","10:30-11:00","11:00-11:30","11:30-12:00","14:00-14:30","14:30-15:00","15:00-15:30","15:30-16:00","16:00-16:30","16:30-17:00","17:00-17:30","17:30-18:00"};
+										String[] timeArray={"9:00-9:30","9:30-10:00","10:00-10:30","10:30-11:00","11:00-11:30","11:30-12:00","14:00-14:30","14:30-15:00","15:00-15:30","15:30-16:00","16:00-16:30","16:30-17:00","17:00-17:30","17:30-18:00"};
                                     	ArrayList<String> timeslots=(ArrayList<String>)request.getAttribute("timeslots");
                                     	System.out.println(timeArray.length);
                                     	String beginWeekDay = (String)request.getAttribute("beginWeekDay");

@@ -254,12 +254,12 @@
 														if (topicList.get(i).getIndividual()) {
 															out.println("<td><form action=\"" + request.getContextPath() + "/chooseTopic.do?flag=selectIndividualTopic\" method=\"post\">");
 															out.println("<input type=\"hidden\" name=\"topicId\" value=\"" + topicList.get(i).getFid() + "\"/>");
-															out.println("<input type=\"submit\" value=\"select\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
+															out.println("<input type=\"submit\" value=\"Select\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
 															out.println("</form></td>");
 														} else {
 															out.println("<td><form action=\"" + request.getContextPath() + "/chooseTopic.do?flag=goChooseGroupTopicUi\" method=\"post\">");
 															out.println("<input type=\"hidden\" name=\"topicId\" value=\"" + topicList.get(i).getFid() + "\"/>");
-															out.println("<input type=\"submit\" value=\"select\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
+															out.println("<input type=\"submit\" value=\"Select\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
 															out.println("</form></td>");
 														}
 													}
