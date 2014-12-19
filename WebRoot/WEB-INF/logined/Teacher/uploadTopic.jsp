@@ -115,7 +115,7 @@
 						<div class="alert alert-error ErrorInfo">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 							<h4>Note:</h4>
-							Please upload your topic during ${requestScope.uploadPeriod }.
+							Please upload your topic from ${requestScope.uploadPeriod }.
 						</div>
 					
 						<!-- block -->
