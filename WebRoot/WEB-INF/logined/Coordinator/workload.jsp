@@ -60,33 +60,24 @@
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                         <li>
-                            <a href="${pageContext.request.contextPath }/goUI.do"><i class="icon-chevron-right"></i> Main</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=goUi"><i class="icon-chevron-right"></i> Manage Account</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i class="icon-chevron-right"></i> Export</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi"><i class="icon-chevron-right"></i> Set Pre Time</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/quota.do?flag=goUi"><i class="icon-chevron-right"></i> Set Quota</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i class="icon-chevron-right"></i> Set Open Time</a>
-                        </li>
-                        <li class="active">
-                            <a href="${pageContext.request.contextPath }/setWorkload.do?flag=goUi"><i class="icon-chevron-right"></i> Set Workload</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/clearProject.do?flag=goClearProjectUi"><i class="icon-chevron-right"></i> Clear Project</a>
-                        </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i> Change Password</a>
-                        </li>
+                        <li><a href="${pageContext.request.contextPath }/goUI.do"><i class="icon-chevron-right"></i> Main</a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=goUi"><i
+								class="icon-chevron-right"></i> Manage Account</a></li>
+						<li><a href="${pageContext.request.contextPath }/quota.do?flag=goUi"><i class="icon-chevron-right"></i>
+								Set Quota</a></li>
+						<li><a href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i class="icon-chevron-right"></i>
+								Set Open Time</a></li>
+						<li class="active"><a href="${pageContext.request.contextPath }/setWorkload.do?flag=goUi"><i class="icon-chevron-right"></i>
+								Set Workload</a></li>
+						<li><a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi"><i class="icon-chevron-right"></i>
+								Set Pre Time</a></li>
+						<li><a href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i class="icon-chevron-right"></i>
+								Export</a></li>				
+						<li><a href="${pageContext.request.contextPath }/clearProject.do?flag=goClearProjectUi"><i
+								class="icon-chevron-right"></i> Clear Project</a></li>
+						<li><a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i>
+								Change Password</a></li>
                     </ul>
                 </div>
                  <!--/span-->
