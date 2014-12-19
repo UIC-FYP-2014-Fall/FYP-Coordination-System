@@ -213,8 +213,8 @@
 										</div>
 										<div class="form-actions">
 											<button type="submit" class="btn btn-primary">Submit</button>
+											<button type="button" href="${pageContext.request.contextPath }/editFYP.do?flag=topicListUi" class="btn">Cancel</button>
 										</div>
-
 									</div>
 								</form>
 							</div>
