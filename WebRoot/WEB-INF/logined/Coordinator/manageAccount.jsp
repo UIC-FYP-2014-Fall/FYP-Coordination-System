@@ -79,8 +79,6 @@
 								Set Pre Time</a></li>
 						<li><a href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i class="icon-chevron-right"></i>
 								Export</a></li>				
-						<li><a href="${pageContext.request.contextPath }/clearProject.do?flag=goClearProjectUi"><i
-								class="icon-chevron-right"></i> Clear Project</a></li>
 						<li><a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i>
 								Change Password</a></li>
                     </ul>
