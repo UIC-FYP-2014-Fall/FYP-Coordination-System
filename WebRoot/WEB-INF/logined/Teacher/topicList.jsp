@@ -34,22 +34,32 @@
 				</a> <a class="brand" href="index.html">FYP Coordination System</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li class="dropdown"><a href="#" role="button"
-							class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="icon-user"></i> Teacher <i class="caret"></i>
-
-						</a>
-							<ul class="dropdown-menu">
-								<li><a tabindex="-1"
-									href="${pageContext.request.contextPath }/logout.do">Logout</a>
-								</li>
-							</ul></li>
+						<li class="dropdown">
+                        	<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i></a>
+                            <ul class="dropdown-menu">
+                            	<li><a tabindex="-1" data-target="#logout" data-toggle="modal">Logout</a></li>
+                            </ul>
+                        </li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal hide fade" id="logout">
+			<div class="modal-header">
+				<h4>Logout</h4>
+			</div>
+			<div class="modal-body">
+				Are you sure?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
+			</div>
+	</div>
+	
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
@@ -141,8 +151,7 @@
 							<div class="muted pull-left">Individual Topic List</div>
 						</div>
 						<div class="block-content collapse in">
-							<table class="table table-striped table-bordered"
-								id="individualTopic">
+							<table class="table table-striped table-bordered" id="individualTopic">
 								<thead>
 									<tr>
 										<th>#</th>
@@ -279,24 +288,18 @@
 					</div>
 					<hr>
 				</div>
-				<!--/.fluid-container-->
-				<script src="vendors/jquery-1.9.1.min.js"></script>
-				<script src="bootstrap/js/bootstrap.min.js"></script>
-				<script src="assets/scripts.js"></script>
 			</div>
-		</div>
-		</div>
-		<!--/.fluid-container-->
-		<script src="vendors/jquery-1.9.1.min.js"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
-		<script src="assets/scripts.js"></script>
-		<script src="assets/DT_bootstrap.js"></script>
-		<script type="text/javascript"
-			src="vendors/jquery-validation/dist/jquery.validate.min.js"></script>
-		<script src="assets/form-validation.js"></script>
-		<script src="js/bootstrap-confirmation.js"></script>
-		<script src="js/bootstrap-tooltip.js"></script>
+				<!--/.fluid-container-->
+
+			<script src="vendors/jquery-1.9.1.min.js"></script>
+			<script src="bootstrap/js/bootstrap.min.js"></script>
+			<script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
+			<script src="assets/scripts.js"></script>
+			<script src="assets/DT_bootstrap.js"></script>
+			<script type="text/javascript" src="vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+			<script src="assets/form-validation.js"></script>
+			<script src="js/bootstrap-confirmation.js"></script>
+			<script src="js/bootstrap-tooltip.js"></script>
 </body>
 
 </html>

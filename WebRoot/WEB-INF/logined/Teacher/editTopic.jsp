@@ -30,26 +30,36 @@
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
-
-				</a> <a class="brand" href="index.html">FYP Coordination System</a>
+				</a> 
+				<a class="brand" href="index.html">FYP Coordination System</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li class="dropdown"><a href="#" role="button"
-							class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="icon-user"></i> Teacher <i class="caret"></i>
-
-						</a>
-							<ul class="dropdown-menu">
-								<li><a tabindex="-1"
-									href="${pageContext.request.contextPath }/logout.do">Logout</a>
-								</li>
-							</ul></li>
+						<li class="dropdown">
+                        	<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i></a>
+                            <ul class="dropdown-menu">
+                            	<li><a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a></li>
+                            </ul>
+                        </li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal hide fade" id="logout">
+			<div class="modal-header">
+				<h4>Logout</h4>
+			</div>
+			<div class="modal-body">
+				Are you sure?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
+			</div>
+	</div>
+	
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
@@ -86,11 +96,8 @@
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
 								<ul class="breadcrumb">
-									<i class="icon-chevron-left hide-sidebar"><a href='#'
-										title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-									<i class="icon-chevron-right show-sidebar"
-										style="display: none;"><a href='#' title="Show Sidebar"
-										rel='tooltip'>&nbsp;</a></i>
+									<i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+									<i class="icon-chevron-right show-sidebar" style="display: none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
 									<li><a href="topicList.html">Topic List</a> <span
 										class="divider">/</span></li>
 									<li class="active">Edit Topic</li>
@@ -138,7 +145,7 @@
 									<div class="control-group">
 										<label class="control-label" for="select01">Credits</label>
 										<div class="controls">
-											<select name="credit" id="select01" class="chzn-select">
+											<select name="credit" id="select01">
 												<%
 													if(teaTopic.get(0).getTopic().getCredit()==3){
 														out.println("<option selected=\"selected\">3</option>");
@@ -155,8 +162,7 @@
 									<div class="control-group">
 										<label class="control-label" for="select01">Group/Individual</label>
 										<div class="controls">
-											<select id="group" name="individual" class="chzn-select"
-												onclick="javascript:doit(this);">
+											<select id="group" name="individual" onclick="javascript:doit(this);">
 												<%
 													if(teaTopic.get(0).getTopic().getIndividual()){
 														out.println("<option selected=\"selected\" value=\"individual\">Individual</option>");
@@ -174,7 +180,7 @@
 										<label class="control-label" for="select01">Number of
 											students</label>
 										<div class="controls">
-											<select name="numOfStu" id="numofStu" class="chzn-select">
+											<select name="numOfStu" id="numofStu">
 												<%
 													if(teaTopic.get(0).getTopic().getNumOfStudent()==1){
 														out.println("<option selected=\"selected\" value=\"1\">1<option>");
@@ -213,7 +219,7 @@
 										</div>
 										<div class="form-actions">
 											<button type="submit" class="btn btn-primary">Submit</button>
-											<button type="button" href="${pageContext.request.contextPath }/editFYP.do?flag=topicListUi" class="btn">Cancel</button>
+											<button href="${pageContext.request.contextPath }/editFYP.do?flag=topicListUi" class="btn">Cancel</button>
 										</div>
 									</div>
 								</form>
