@@ -186,7 +186,7 @@ public class ChooseTopicAction extends DispatchAction {
 			for (int i = 0; i < members.length; i++) {
 				if (studentService.checkIfStudentHasChoosedTopic(members[i])) {
 					request.setAttribute("someOneHaveAlreadySelectAProject", "true");
-					return mapping.findForward("goChooseTopic");
+					return mapping.findForward("gochooseGroupTopic");
 				}
 			}
 			// check if topic have select

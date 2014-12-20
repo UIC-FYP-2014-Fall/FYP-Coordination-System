@@ -54,8 +54,7 @@
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-					<li><a
-						href="${pageContext.request.contextPath }/goUI.do"><i
+					<li><a href="${pageContext.request.contextPath }/goUI.do"><i
 							class="icon-chevron-right"></i> Main</a></li>
 					<li><a
 						href="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadTopicUi"><i
@@ -79,61 +78,61 @@
 
 			<div class="span9" id="content">
 				<div class="row-fluid">
-				<c:if test="${requestScope.ifTopicUploadSuccess=='true' }">
-					<div class="alert alert-success SuccessInfo">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<h4>Success</h4>
-						${requestScope.operationInfo}
-					</div>
-					<%
-						request.removeAttribute("ifTopicUploadSuccess");
-						request.removeAttribute("operationInfo");
-					%>
-				</c:if>
-				<c:if test="${requestScope.ifTopicUploadSuccess=='false' }">
-					<div class="alert alert-error">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<h4>Error</h4>
-						${requestScope.operationInfo }
-					</div>
-					<%
-						request.removeAttribute("ifTopicUploadSuccess");
-						request.removeAttribute("operationInfo");
-					%>
-				</c:if>
-				<c:if test="${requestScope.ifEditSuccess=='true' }">
-					<div class="alert alert-success SuccessInfo">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<h4>Success</h4>
-						${requestScope.operationInfo }
-					</div>
-					<%
-						request.removeAttribute("ifEditSuccess");
-						request.removeAttribute("operationInfo");
-					%>
-				</c:if>
-				<c:if test="${requestScope.ifRemoveSuccess=='true' }">
-					<div class="alert alert-success SuccessInfo">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<h4>Success</h4>
-						${requestScope.operationInfo }
-					</div>
-					<%
-						request.removeAttribute("ifRemoveSuccess");
-						request.removeAttribute("operationInfo");
-					%>
-				</c:if>
-				<c:if test="${requestScope.ifRemoveSuccess=='false' }">
-					<div class="alert alert-error">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<h4>Error</h4>
-						${requestScope.operationInfo }
-					</div>
-					<%
-						request.removeAttribute("ifRemoveSuccess");
-						request.removeAttribute("operationInfo");
-					%>
-				</c:if>
+					<c:if test="${requestScope.ifTopicUploadSuccess=='true' }">
+						<div class="alert alert-success SuccessInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Success</h4>
+							${requestScope.operationInfo}
+						</div>
+						<%
+							request.removeAttribute("ifTopicUploadSuccess");
+								request.removeAttribute("operationInfo");
+						%>
+					</c:if>
+					<c:if test="${requestScope.ifTopicUploadSuccess=='false' }">
+						<div class="alert alert-error">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Error</h4>
+							${requestScope.operationInfo }
+						</div>
+						<%
+							request.removeAttribute("ifTopicUploadSuccess");
+								request.removeAttribute("operationInfo");
+						%>
+					</c:if>
+					<c:if test="${requestScope.ifEditSuccess=='true' }">
+						<div class="alert alert-success SuccessInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Success</h4>
+							${requestScope.operationInfo }
+						</div>
+						<%
+							request.removeAttribute("ifEditSuccess");
+								request.removeAttribute("operationInfo");
+						%>
+					</c:if>
+					<c:if test="${requestScope.ifRemoveSuccess=='true' }">
+						<div class="alert alert-success SuccessInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Success</h4>
+							${requestScope.operationInfo }
+						</div>
+						<%
+							request.removeAttribute("ifRemoveSuccess");
+								request.removeAttribute("operationInfo");
+						%>
+					</c:if>
+					<c:if test="${requestScope.ifRemoveSuccess=='false' }">
+						<div class="alert alert-error">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Error</h4>
+							${requestScope.operationInfo }
+						</div>
+						<%
+							request.removeAttribute("ifRemoveSuccess");
+								request.removeAttribute("operationInfo");
+						%>
+					</c:if>
 
 					<!-- block -->
 					<div class="block">
@@ -151,53 +150,37 @@
 										<th>Group/Individual</th>
 										<th>Credits</th>
 										<c:if test="${requestScope.isUploadTopicDate=='true' }">
-										<th></th>
+											<th></th>
 										</c:if>
 										<c:if test="${requestScope.isUploadTopicDate=='false' }">
-										<th>Students</th>
+											<th>Students</th>
 										</c:if>
 									</tr>
 								</thead>
 								<tbody>
 									<%
-										String uploadState=(String)request.getAttribute("isUploadTopicDate");
-										System.out.println("upload topic state "+uploadState);
-										List<TeaTopic> teaTopic = (List<TeaTopic>) request
-												.getAttribute("teaTopicList");
+										String uploadState = (String) request.getAttribute("isUploadTopicDate");
+										System.out.println("upload topic state " + uploadState);
+										List<TeaTopic> teaTopic = (List<TeaTopic>) request.getAttribute("teaTopicList");
 										System.out.println("get List size " + teaTopic.size());
 										for (int i = 0; i < teaTopic.size(); i++) {
 											if (teaTopic.get(i).getTopic().getIndividual()) {
 												out.println("<tr>");
 												out.println("<td>" + i + "</td>");
-												out.println("<td>" + teaTopic.get(i).getTopic().getTitle()
-														+ "</td>");
-												out.println("<td>" + teaTopic.get(i).getTeacher().getName()
-														+ "</td>");
-												if(teaTopic.get(i).getTopic().getIndividual()){
-													out.println("<td>"
-															+ "Individual"
-															+ "</td>");
-												}else{
-													out.println("<td>"
-															+ "Group"
-															+ "</td>");
+												out.println("<td>" + teaTopic.get(i).getTopic().getTitle() + "</td>");
+												out.println("<td>" + teaTopic.get(i).getTeacher().getName() + "</td>");
+												if (teaTopic.get(i).getTopic().getIndividual()) {
+													out.println("<td>" + "Individual" + "</td>");
+												} else {
+													out.println("<td>" + "Group" + "</td>");
 												}
-												out.println("<td>" + teaTopic.get(i).getTopic().getCredit()
-														+ "</td>");
+												out.println("<td>" + teaTopic.get(i).getTopic().getCredit() + "</td>");
 												out.println("<td>");
-												if(uploadState!=null){
-													if(uploadState.equals("true")){
-														out.println("<form action=\""
-																+ request.getContextPath()
-																+ "/editFYP.do?flag=editTopicUi\" method=\"post\"><input name=\"eid\" type=\"hidden\" value=\""
-																+ teaTopic.get(i).getTopic().getFid()
-																+ "\"><button type=\"submit\" class=\"btn btn-primary btn-mini\">Edit</button></form>");
-														out.println("<form action=\""
-																+ request.getContextPath()
-																+ "/editFYP.do?flag=removeTopic\" method=\"post\"><input name=\"rid\" type=\"hidden\" value=\""
-																+ teaTopic.get(i).getTopic().getFid()
-																+ "\"><button type=\"submit\" class=\"btn btn btn-danger btn-mini\">Delete</button></form>");
-													}else{
+												if (uploadState != null) {
+													if (uploadState.equals("true")) {
+														out.println("<a class=\"btn btn-primary btn-mini\" href=\"" + request.getContextPath() + "/editFYP.do?flag=editTopicUi&eid=" + teaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-pencil icon-white\"></i> Edit</a>");
+														out.println("<a class=\"btn btn-danger btn-mini\" data-confirm=\"Are you sure to delete the topic?\" href=\"" + request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + teaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-remove icon-white\"></i> Delete</a>");
+													} else {
 														out.println("Student who choose this project");
 													}
 												}
@@ -234,35 +217,20 @@
 											if (!teaTopic.get(i).getTopic().getIndividual()) {
 												out.println("<tr>");
 												out.println("<td>" + i + "</td>");
-												out.println("<td>" + teaTopic.get(i).getTopic().getTitle()
-														+ "</td>");
-												out.println("<td>" + teaTopic.get(i).getTeacher().getName()
-														+ "</td>");
-												if(teaTopic.get(i).getTopic().getIndividual()){
-													out.println("<td>"
-															+ "Individual"
-															+ "</td>");
-												}else{
-													out.println("<td>"
-															+ "Group"
-															+ "</td>");
+												out.println("<td>" + teaTopic.get(i).getTopic().getTitle() + "</td>");
+												out.println("<td>" + teaTopic.get(i).getTeacher().getName() + "</td>");
+												if (teaTopic.get(i).getTopic().getIndividual()) {
+													out.println("<td>" + "Individual" + "</td>");
+												} else {
+													out.println("<td>" + "Group" + "</td>");
 												}
-												out.println("<td>" + teaTopic.get(i).getTopic().getCredit()
-														+ "</td>");
+												out.println("<td>" + teaTopic.get(i).getTopic().getCredit() + "</td>");
 												out.println("<td>");
-												if(uploadState!=null){
-													if(uploadState.equals("true")){
-														out.println("<form action=\""
-																+ request.getContextPath()
-																+ "/editFYP.do?flag=editTopicUi\" method=\"post\"><input name=\"eid\" type=\"hidden\" value=\""
-																+ teaTopic.get(i).getTopic().getFid()
-																+ "\"><button type=\"submit\"class=\"btn btn-primary btn-mini\">Edit</button></form>");
-														out.println("<form action=\""
-																+ request.getContextPath()
-																+ "/editFYP.do?flag=removeTopic\" method=\"post\"><input name=\"rid\" type=\"hidden\" value=\""
-																+ teaTopic.get(i).getTopic().getFid()
-																+ "\"><button type=\"submit\"class=\"btn btn btn-danger btn-mini\">Delete</button></form>");
-													}else{
+												if (uploadState != null) {
+													if (uploadState.equals("true")) {
+														out.println("<a class=\"btn btn-primary btn-mini\" href=\"" + request.getContextPath() + "/editFYP.do?flag=editTopicUi&eid=" + teaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-pencil icon-white\"></i> Edit</a>");
+														out.println("<a class=\"btn btn-danger btn-mini\" data-confirm=\"Are you sure to delete the topic?\" href=\"" + request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + teaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-remove icon-white\"></i> Delete</a>");
+													} else {
 														out.println("Student who choose this project");
 													}
 												}
@@ -285,18 +253,18 @@
 				<script src="assets/scripts.js"></script>
 			</div>
 		</div>
-		</div>
-		<!--/.fluid-container-->
-		<script src="vendors/jquery-1.9.1.min.js"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
-		<script src="assets/scripts.js"></script>
-		<script src="assets/DT_bootstrap.js"></script>
-		<script type="text/javascript"
-			src="vendors/jquery-validation/dist/jquery.validate.min.js"></script>
-		<script src="assets/form-validation.js"></script>
-		<script src="js/bootstrap-confirmation.js"></script>
-		<script src="js/bootstrap-tooltip.js"></script>
+	</div>
+	<!--/.fluid-container-->
+	<script src="vendors/jquery-1.9.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="assets/scripts.js"></script>
+	<script src="assets/DT_bootstrap.js"></script>
+	<script type="text/javascript"
+		src="vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="assets/form-validation.js"></script>
+	<script src="js/bootstrap-confirmation.js"></script>
+	<script src="js/bootstrap-tooltip.js"></script>
 </body>
 
 </html>

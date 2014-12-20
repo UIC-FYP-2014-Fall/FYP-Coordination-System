@@ -85,17 +85,7 @@
 			</div>
 			<div class="span9" id="content">
 				<div class="row-fluid">
-					<c:if
-						test="${requestScope.someOneHaveAlreadySelectAProject=='true' }">
-						<div class="alert alert-error">
-							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<h4>Error</h4>
-							Someone in the group have chosen a topic.
-						</div>
-						<%
-							request.removeAttribute("someOneHaveAlreadySelectAProject");
-						%>
-					</c:if>
+					
 					<c:if test="${requestScope.FYPHasBeenSelected=='true' }">
 						<div class="alert alert-error">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
