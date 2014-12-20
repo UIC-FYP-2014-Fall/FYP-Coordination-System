@@ -46,43 +46,80 @@ public class SetOberverAction extends DispatchAction {
 	public ActionForward chooseObserverUi(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-
+		// first get TeaTopic where teacher_id   *Topic*
+		// then get student topic 知道有没有选过
+		// then get get Supervisorlist
+		
 		if(request.getSession().getAttribute("role").equals("teacher")){
 			//prepare date: teacherList and Teatopic List of the current teacher.
 			Teacher curTeacher = (Teacher) request.getSession().getAttribute("teacherinfo");
 			TeachersServiceImp teachersServiceImp=new TeachersServiceImp();
 			FYPServiceImp fypServiceImp = new FYPServiceImp();
-			ArrayList<Teacher> observerList =(ArrayList<Teacher>) teachersServiceImp.getTeachers();
+			ArrayList<Teacher> teacherList =(ArrayList<Teacher>) teachersServiceImp.getTeachers();
 			List<TeaTopic> teaTopicList = fypServiceImp.getTeaTopic(curTeacher.getId().toString());
 			ArrayList<ObsTopic> indObsTopics=new ArrayList<ObsTopic>();
 			ArrayList<ObsTopic> groObsTopics=new ArrayList<ObsTopic>();
-			
+			ArrayList<String> indObserverList = new ArrayList<String>();
+			ArrayList<String> groObserverList = new ArrayList<String>();
+			//有没有学生选过
+			ArrayList<TeaTopic> removeObj= new ArrayList<TeaTopic>();
 			for(int i =0;i<teaTopicList.size();i++){
-				if(teaTopicList.get(i).getTopic().getIndividual()){
-					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
-					if(obsTopic.size()==0){
-						
-					}else{
-						fypServiceImp.refreshObsTopic(obsTopic.get(0));
-					}
-					System.out.println("fid "+teaTopicList.get(i).getTopic().getFid().toString());
-					System.out.println("obsTopic size "+obsTopic.size());
-					System.out.println("topic: "+obsTopic.get(0).getTopic().getTitle()+" observer: "+obsTopic.get(0).getObserver().getName());
-					indObsTopics.add(obsTopic.get(0));
+				if(fypServiceImp.ifTopicHasBeenChoosenByStu(teaTopicList.get(i).getTopic().getFid().toString())){
+					//do nothings
+					System.out.println("topic choosen "+teaTopicList.get(i).getTopic().getTitle());
 				}else{
-					List<ObsTopic> obsTopic=fypServiceImp.getObsTopicByTopicId(teaTopicList.get(i).getTopic().getFid().toString());
-					if(obsTopic.size()==0){
-						
-					}else{
-						fypServiceImp.refreshObsTopic(obsTopic.get(0));
-					}
-					System.out.println("fid "+teaTopicList.get(i).getTopic().getFid().toString());
-					System.out.println("obsTopic size "+obsTopic.size());
-					System.out.println("topic: "+obsTopic.get(0).getTopic().getTitle()+" observer: "+obsTopic.get(0).getObserver().getName());
-					groObsTopics.add(obsTopic.get(0));
+					System.out.println("topic remove "+teaTopicList.get(i).getTopic().getTitle());
+					removeObj.add(teaTopicList.get(i));
 				}
 			}
-			request.setAttribute("observerList", observerList);
+			for(TeaTopic t :removeObj){
+				teaTopicList.remove(t);
+			}
+			//分类
+			for(TeaTopic teaTopic: teaTopicList){
+				if(teaTopic.getTopic().getIndividual()){
+					indObsTopics.add(fypServiceImp.getObsTopicByTopicId(teaTopic.getTopic().getFid().toString()));
+				}else{
+					groObsTopics.add(fypServiceImp.getObsTopicByTopicId(teaTopic.getTopic().getFid().toString()));
+				}
+			}
+			//添加
+			boolean bool=true;
+			for(int i = 0; i<indObsTopics.size();i++){
+				StringBuffer buff = new StringBuffer();
+				ObsTopic obsTopic=fypServiceImp.refreshObsTopic(indObsTopics.get(i));
+				for(int j=0;j<teacherList.size();j++){
+					if(fypServiceImp.checkIfTeacherIsTheSupervisor(obsTopic.getTopic().getFid().toString(),teacherList.get(j))){
+						if(bool){
+							buff.append(teaTopicList.get(i).getTeacher().getId()+",Please Select;");
+							bool=false;
+						}
+					}else{
+						buff.append(teacherList.get(j).getId()+","+teacherList.get(j).getName()+";");
+					}
+				}
+				indObserverList.add(buff.toString());
+			}
+			bool=true;
+			for(int i = 0; i<groObsTopics.size();i++){
+				StringBuffer buff = new StringBuffer();
+				ObsTopic obsTopic=fypServiceImp.refreshObsTopic(groObsTopics.get(i));
+				for(int j=0;j<teacherList.size();j++){
+					if(fypServiceImp.checkIfTeacherIsTheSupervisor(obsTopic.getTopic().getFid().toString(),teacherList.get(j))){
+						if(bool){
+							buff.append(teaTopicList.get(i).getTeacher().getId()+",Please Select;");
+							bool=false;
+						}
+					}else{
+						buff.append(teacherList.get(j).getId()+","+teacherList.get(j).getName()+";");
+					}
+				}
+				groObserverList.add(buff.toString());
+			}
+			
+			
+			request.setAttribute("indObserverList", indObserverList);
+			request.setAttribute("groObserverList", groObserverList);
 			request.setAttribute("indObsTopics", indObsTopics);
 			request.setAttribute("groObsTopics", groObsTopics);
 			return mapping.findForward("chooseObserverUi");
@@ -111,7 +148,7 @@ public class SetOberverAction extends DispatchAction {
 			request.setAttribute("setObserverInfo", "Observer changed successful!");
 		}else{
 			request.setAttribute("setObserverSuccess", "false");
-			request.setAttribute("setObserverInfo", "Observer changed successful!");
+			request.setAttribute("setObserverInfo", "Observer changed failed!");
 		}
 		return mapping.findForward("obsSaved");
 	}
