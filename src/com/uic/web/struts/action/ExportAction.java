@@ -12,6 +12,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.uic.domain.Time;
+import com.uic.service.inter.TimeType;
+import com.uic.util.TimeChecker;
+
 
 /**
  * MyEclipse Struts Creation date: 10-29-2014
@@ -38,6 +42,18 @@ public class ExportAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
+			
+			//check time whether student has finished the presentation choose
+			Time checker = TimeChecker.timeCheck();
+			if(checker.getType().equals(TimeType.system_done)){
+				//can export presentation timetable
+				request.setAttribute("TimetableState", "true");
+				
+				
+			}else{
+				request.setAttribute("TimetableState", "false");
+			}
+			
 
 			
 			return mapping.findForward("goExportUi");

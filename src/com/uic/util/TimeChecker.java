@@ -20,7 +20,8 @@ public class TimeChecker {
 		String state1 = ph.getProperties("UploadTopicsDateTimeState");
 		String state2 = ph.getProperties("ChooseTopicDateTimeState");
 		String state3 = ph.getProperties("ChooseExaminersDateTimeState");
-		String state4 = ph.getProperties("PreDateTimeState");
+		//String state4 = ph.getProperties("PreDateTimeState");
+		String state4 = ph.getProperties("ChoosePresentationStartDateTime");
 
 		if (state1 != null) {
 			String UTstartDateTime = ph
@@ -75,8 +76,8 @@ public class TimeChecker {
 						}
 						if (state4 != null) {
 							
-							String PstartDateTime = ph.getProperties("PreStartDateTime");
-							String PendDateTime = ph.getProperties("PreEndDateTime");
+							String PstartDateTime = ph.getProperties("ChoosePresentationStartDateTime");
+							String PendDateTime = ph.getProperties("ChoosePresentationEndDateTime");
 							
 							if (compareTime(CEendDateTime, PstartDateTime)) {
 								returnTime.setType(TimeType.examiner_to_pretime_choose);

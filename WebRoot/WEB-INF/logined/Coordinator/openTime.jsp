@@ -417,8 +417,8 @@
 	                                    <div class="span4">                                        
 	                                        <fieldset>
 	                                            <legend>Choose Presentation Time</legend>
-	                                            <c:if test="${ChooseExaminersDateTime=='false' }">
-	                                            <form class="form-inline" method="post" action="${pageContext.request.contextPath }/openTime.do?flag=saveChooseExaminersDateTime" id="form_sample_4">
+	                                            <c:if test="${ChoosePresentationDateTime=='false' }">
+	                                            <form class="form-inline" method="post" action="${pageContext.request.contextPath }/openTime.do?flag=saveChoosePresentationDateTime" id="form_sample_4">
 	                                            <div class="alert alert-error hide">
 	                                                <button class="close" data-dismiss="alert"></button>
 	                                                You must complete your selection. Please check.
@@ -428,10 +428,10 @@
 	                                                <div class="controls">
 	                                                    <div class="input-prepend">
 	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CE_startDate" style="width:100px" value="<c:if test="${CEstartDate!=null }">${CEstartDate }</c:if>" id="dpd7" readonly>
+	                                                        <input type="text" name="CP_startDate" style="width:100px" value="<c:if test="${CPstartDate!=null }">${CPstartDate }</c:if>" id="dpd7" readonly>
 	                                                    </div>
-	                                                    <div id="ce_starttime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CE_startTime" type="text" style="width:60px" readonly></input>
+	                                                    <div id="cp_starttime" class="input-append">
+	                                                        <input data-format="hh:mm:ss" name="CP_startTime" type="text" style="width:60px" readonly></input>
 	                                                        <span class="add-on">
 	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 	                                                        </span>
@@ -443,10 +443,10 @@
 	                                                <div class="controls">
 	                                                    <div class="input-prepend">
 	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CE_endDate" style="width:100px" value="<c:if test="${CEendDate!=null }">${CEendDate }</c:if>" id="dpd8" readonly>
+	                                                        <input type="text" name="CP_endDate" style="width:100px" value="<c:if test="${CPendDate!=null }">${CPendDate }</c:if>" id="dpd8" readonly>
 	                                                    </div>
-	                                                    <div id="ce_endtime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CE_endTime" type="text" style="width:60px" readonly></input>
+	                                                    <div id="cp_endtime" class="input-append">
+	                                                        <input data-format="hh:mm:ss" name="CP_endTime" type="text" style="width:60px" readonly></input>
 	                                                        <span class="add-on">
 	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 	                                                        </span>
@@ -460,15 +460,15 @@
 	                                            </form>
 	                                            </c:if>
 	                                            
-	                                            <c:if test="${ChooseExaminersDateTime=='true' }">
+	                                            <c:if test="${ChoosePresentationDateTime=='true' }">
 	                                        		<div class="alert alert-info">
-														<p>From: <strong>${ChooseExaminersStartDateTime }</strong></p> 
-														<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChooseExaminersEndDateTime }</strong>.</p>
-														<p>Click <a href="#edit3" onclick="btn3()"><strong>here</strong></a> to change.</p>
+														<p>From: <strong>${ChoosePresentationStartDateTime }</strong></p> 
+														<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChoosePresentationEndDateTime }</strong>.</p>
+														<p>Click <a href="#edit4" onclick="btn4()"><strong>here</strong></a> to change.</p>
 													</div>
 													</c:if>
-													<div id="edit3" style="display:none;">
-														<form class="form-inline" method="post" action="${pageContext.request.contextPath }/openTime.do?flag=saveChooseExaminersDateTime" id="form_sample_4">
+													<div id="edit4" style="display:none;">
+														<form class="form-inline" method="post" action="${pageContext.request.contextPath }/openTime.do?flag=saveChoosePresentationDateTime" id="form_sample_4">
 	                                            <div class="alert alert-error hide">
 	                                                <button class="close" data-dismiss="alert"></button>
 	                                                You must complete your selection. Please check.
@@ -478,10 +478,10 @@
 	                                                <div class="controls">
 	                                                    <div class="input-prepend">
 	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CE_startDate" style="width:100px" value="<c:if test="${CEstartDate!=null }">${CEstartDate }</c:if>" id="dpd7" readonly>
+	                                                        <input type="text" name="CP_startDate" style="width:100px" value="<c:if test="${CPstartDate!=null }">${CPstartDate }</c:if>" id="dpd7" readonly>
 	                                                    </div>
-	                                                    <div id="ce_starttime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CE_startTime" type="text" style="width:60px" readonly></input>
+	                                                    <div id="cp_starttime" class="input-append">
+	                                                        <input data-format="hh:mm:ss" name="CP_startTime" type="text" style="width:60px" readonly></input>
 	                                                        <span class="add-on">
 	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 	                                                        </span>
@@ -493,10 +493,10 @@
 	                                                <div class="controls">
 	                                                    <div class="input-prepend">
 	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CE_endDate" style="width:100px" value="<c:if test="${CEendDate!=null }">${CEendDate }</c:if>" id="dpd8" readonly>
+	                                                        <input type="text" name="CP_endDate" style="width:100px" value="<c:if test="${CPendDate!=null }">${CPendDate }</c:if>" id="dpd8" readonly>
 	                                                    </div>
-	                                                    <div id="ce_endtime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CE_endTime" type="text" style="width:60px" readonly></input>
+	                                                    <div id="cp_endtime" class="input-append">
+	                                                        <input data-format="hh:mm:ss" name="CP_endTime" type="text" style="width:60px" readonly></input>
 	                                                        <span class="add-on">
 	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 	                                                        </span>
@@ -539,11 +539,12 @@
 <script src="bootstrap/js/bootstrap-datetimepicker.min.js"></script>
 
 <script>
-	var nowTemp = new Date();
-	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+var nowTemp = new Date();
+
+var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 		  
-          <%
-	if(request.getAttribute("UTstartHH")!=null){
+<%
+if(request.getAttribute("UTstartHH")!=null){
 %>
 var now1 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), <%=request.getAttribute("UTstartHH")%>, <%=request.getAttribute("UTstartMM")%>, <%=request.getAttribute("UTstartSS")%>, 0);
 <%}else{%>
@@ -582,11 +583,25 @@ var now5 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
 <%}%>
 <%
 if(request.getAttribute("CEendHH")!=null){
-	%>
-	var now6 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), <%=request.getAttribute("CEendHH")%>, <%=request.getAttribute("CEendMM")%>, <%=request.getAttribute("CEendSS")%>, 0);
-	<%}else{%>
-	var now6 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 18, 0, 0, 0);
-	<%}%>
+%>
+var now6 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), <%=request.getAttribute("CEendHH")%>, <%=request.getAttribute("CEendMM")%>, <%=request.getAttribute("CEendSS")%>, 0);
+<%}else{%>
+var now6 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 18, 0, 0, 0);
+<%}%>
+<%
+if(request.getAttribute("CPstartHH")!=null){
+%>
+var now7 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), <%=request.getAttribute("CPstartHH")%>, <%=request.getAttribute("CPstartMM")%>, <%=request.getAttribute("CPstartSS")%>, 0);
+<%}else{%>
+var now7 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 9, 0, 0, 0);
+<%}%>
+<%
+if(request.getAttribute("CPendHH")!=null){
+%>
+var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), <%=request.getAttribute("CPendHH")%>, <%=request.getAttribute("CPendMM")%>, <%=request.getAttribute("CPendSS")%>, 0);
+<%}else{%>
+var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 18, 0, 0, 0);
+<%}%>
 
           var checkin = $('#dpd1').datepicker({
            format: 'yyyy-mm-dd',
@@ -670,11 +685,40 @@ if(request.getAttribute("CEendHH")!=null){
           return date.valueOf() <= checkin_ce.date.valueOf() ? 'disabled' : '';
         }
       }).on('changeDate', function(ev) {
-		 
+    	var newDate3 = new Date(ev.date)
+        newDate3.setDate(newDate3.getDate() + 1);
+    	checkin_cp.setValue(newDate3);
+    	
         checkout_ce.hide();
+        $('#dpd7')[0].focus();
       }).data('datepicker');
 		
-	  
+	//choose presentation
+	
+	var checkin_cp = $('#dpd7').datepicker({
+           format: 'yyyy-mm-dd',
+           onRender: function(date) {
+            return date.valueOf() < checkout_ce.date.valueOf() ? 'disabled' : '';
+          }
+        }).on('changeDate', function(ev) {
+          if (ev.date.valueOf() > checkout_cp.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout_cp.setValue(newDate);
+          }
+          checkin_cp.hide();
+          $('#dpd8')[0].focus();
+        }).data('datepicker');
+		 var checkout_cp = $('#dpd8').datepicker({
+         format: 'yyyy-mm-dd',
+         onRender: function(date) {
+          return date.valueOf() <= checkin_cp.date.valueOf() ? 'disabled' : '';
+        }
+      }).on('changeDate', function(ev) {		 
+        checkout_cp.hide();
+      }).data('datepicker');
+	
+	  ///////////////////////////
 	  
       $('#starttime').datetimepicker({
         pickDate: false
@@ -685,6 +729,9 @@ if(request.getAttribute("CEendHH")!=null){
 	  $('#ce_starttime').datetimepicker({
         pickDate: false
       });
+	  $('#cp_starttime').datetimepicker({
+	        pickDate: false
+	      });
       $('#endtime').datetimepicker({
         pickDate: false
       });
@@ -694,6 +741,9 @@ if(request.getAttribute("CEendHH")!=null){
 	   $('#ce_endtime').datetimepicker({
         pickDate: false
       });
+	   $('#cp_endtime').datetimepicker({
+	        pickDate: false
+	      });
 
       $("#starttime").data('datetimepicker').setLocalDate(now1);
       $("#endtime").data('datetimepicker').setLocalDate(now2);
@@ -704,24 +754,38 @@ if(request.getAttribute("CEendHH")!=null){
 	  $("#ce_starttime").data('datetimepicker').setLocalDate(now5);
 	  $("#ce_endtime").data('datetimepicker').setLocalDate(now6);
 	  
+	  $("#cp_starttime").data('datetimepicker').setLocalDate(now7);
+	  $("#cp_endtime").data('datetimepicker').setLocalDate(now8);
+	  
 	  
 	  var edit=document.getElementById('edit');
 	  var edit2=document.getElementById('edit2');
 	  var edit3=document.getElementById('edit3');
+	  var edit4=document.getElementById('edit4');
+	  
 	  function btn(){ 
 	  	edit.style.display='';
 	  	edit2.style.display='none';
 	  	edit3.style.display='none';
+	  	edit4.style.display='none';
 	  }
 	  function btn2(){ 
 		  	edit.style.display='none';
 		  	edit2.style.display='';
 		  	edit3.style.display='none';
+		  	edit4.style.display='none';
 		  }
 	  function btn3(){ 
 		  	edit.style.display='none';
 		  	edit2.style.display='none';
 		  	edit3.style.display='';
+		  	edit4.style.display='none';
+		  }
+	  function btn4(){ 
+		  	edit.style.display='none';
+		  	edit2.style.display='none';
+		  	edit3.style.display='none';
+		  	edit4.style.display='';
 		  }
       </script>
 </body>

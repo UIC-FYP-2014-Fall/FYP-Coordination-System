@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -84,11 +85,13 @@
 			<!--/span-->
 			<div class="span9" id="content">
 				<div class="row-fluid">
-					<div class="alert alert-error">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<h4>Error!</h4>
-						The Presentation Timetable is not available!
-					</div>
+					<c:if test="${TimetableState=='false' }">
+						<div class="alert alert-error">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Error!</h4>
+							The Presentation Timetable is not available!
+						</div>
+					</c:if>
 
 					<!-- block -->
 					<div class="block">
@@ -97,9 +100,16 @@
 						</div>
 
 						<div class="block-content collapse in">
-							<button type="submit" class="btn btn-primary">
-								<i class="icon-share icon-white"></i> Export
-							</button>
+							<c:if test="${TimetableState=='false' }">
+								<button type="submit" class="btn btn-primary" disabled="disabled">
+									<i class="icon-share icon-white"></i> Export
+								</button>
+							</c:if>
+							<c:if test="${TimetableState=='true' }">
+								<button type="submit" class="btn btn-primary">
+									<i class="icon-share icon-white"></i> Export
+								</button>
+							</c:if>
 						</div>
 					</div>
 
