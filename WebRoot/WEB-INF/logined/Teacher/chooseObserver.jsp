@@ -14,8 +14,6 @@
 	media="screen">
 <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"
 	media="screen">
-<link href="vendors/easypiechart/jquery.easy-pie-chart.css"
-	rel="stylesheet" media="screen">
 <link href="assets/styles.css" rel="stylesheet" media="screen">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -34,22 +32,32 @@
 				</a> <a class="brand" href="index.html">FYP Coordination System</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li class="dropdown"><a href="#" role="button"
-							class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="icon-user"></i> Teacher <i class="caret"></i>
-
-						</a>
-							<ul class="dropdown-menu">
-								<li><a tabindex="-1"
-									href="${pageContext.request.contextPath }/logout.do">Logout</a>
-								</li>
-							</ul></li>
+						<li class="dropdown">
+                        	<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i></a>
+                            <ul class="dropdown-menu">
+                            	<li><a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a></li>
+                            </ul>
+                        </li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal hide fade" id="logout">
+			<div class="modal-header">
+				<h4>Logout</h4>
+			</div>
+			<div class="modal-body">
+				Are you sure?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
+			</div>
+	</div>
+	
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
