@@ -149,13 +149,12 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		}
 	}
 
-	public List<ObsTopic> getObsTopicByTopicId(String topicId) {
+	public ObsTopic getObsTopicByTopicId(String topicId) {
 		String hql = "from ObsTopic where topic_id=?";
 		String[] parameters = { topicId };
 		try {
-			List<ObsTopic> list = (List<ObsTopic>) getListObject(hql,
-					parameters);
-			return list;
+			ObsTopic obsTopic =  (ObsTopic) getUniqueObject(hql,parameters);
+			return obsTopic;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -219,7 +218,24 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		}
 
 	}
-
+	public boolean ifTopicHasBeenChoosenByStu(String topicId) {
+		// TODO Auto-generated method stub
+		String hql = "from StuTopic where topic_id=?";
+		String[] parameters = { topicId };
+		boolean flag=false;
+		try {
+			List<StuTopic> stutopic = (List<StuTopic>) getListObject(hql,parameters);
+			if(stutopic.size()==0){
+				flag = false;
+			}else{
+				flag = true;
+			}
+			return flag;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return flag;
+		}
+	}
 	public StuTopic getUniqueStuTopicByStudent(Student student) {
 		// TODO Auto-generated method stub
 		String hql = "from StuTopic where student_id=?";
@@ -323,6 +339,27 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		}catch(Exception e){
 			e.printStackTrace();
 			return false;
+		}
+	}
+	public boolean checkIfTeacherIsTheSupervisor(String topicId,Teacher teacher){
+		List<TeaTopic> teaTopic = getTeaTopicByTopicId(topicId);
+		for(TeaTopic t: teaTopic){
+			if(t.getTeacher().equals(teacher)){
+				return true;
+			}
+		}
+		return false;
+	}
+	public List<ObsTopic> getObsTopicByTeacherId(String teacherId) {
+		String hql = "from ObsTopic where observer_id=?";
+		String[] parameters = { teacherId };
+		try {
+			List<ObsTopic> list = (List<ObsTopic>) getListObject(hql,
+					parameters);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

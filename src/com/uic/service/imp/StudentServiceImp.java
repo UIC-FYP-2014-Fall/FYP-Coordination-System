@@ -172,8 +172,8 @@ public class StudentServiceImp extends BaseServiceImp implements
 		FYPServiceImp fypService = new FYPServiceImp();
 		try {
 			List<StuTopic> stutopic = fypService.getStuTopicByStudent(student);
-			List<ObsTopic> obsTopic = fypService.getObsTopicByTopicId(stutopic.get(0).getTopic().getFid().toString());
-			return obsTopic.get(0).getObserver();
+			ObsTopic obsTopic = fypService.getObsTopicByTopicId(stutopic.get(0).getTopic().getFid().toString());
+			return obsTopic.getObserver();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

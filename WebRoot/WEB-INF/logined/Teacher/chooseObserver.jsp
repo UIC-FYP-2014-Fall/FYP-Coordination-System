@@ -62,8 +62,7 @@
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-					<li><a
-						href="${pageContext.request.contextPath }/goUI.do"><i
+					<li><a href="${pageContext.request.contextPath }/goUI.do"><i
 							class="icon-chevron-right"></i> Main</a></li>
 					<li><a
 						href="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadTopicUi"><i
@@ -95,7 +94,7 @@
 						</div>
 						<%
 							request.removeAttribute("setObserverSuccess");
-							request.removeAttribute("setObserverInfo");
+								request.removeAttribute("setObserverInfo");
 						%>
 					</c:if>
 					<c:if test="${requestScope.setObserverSuccess=='false' }">
@@ -106,7 +105,7 @@
 						</div>
 						<%
 							request.removeAttribute("setObserverSuccess");
-							request.removeAttribute("setObserverInfo");
+								request.removeAttribute("setObserverInfo");
 						%>
 					</c:if>
 					<!-- block -->
@@ -129,28 +128,22 @@
 									</thead>
 									<tbody>
 										<%
-											ArrayList<ObsTopic> indObsTopics = (ArrayList<ObsTopic>) request
-													.getAttribute("indObsTopics");
-											ArrayList<Teacher> observerList = (ArrayList<Teacher>) request
-													.getAttribute("observerList");
+											ArrayList<ObsTopic> indObsTopics = (ArrayList<ObsTopic>) request.getAttribute("indObsTopics");
+											ArrayList<String> indObserverList = (ArrayList<String>) request.getAttribute("indObserverList");
+											int index=0;
 											for (int i = 0; i < indObsTopics.size(); i++) {
+												index=i+1;
 												out.println("<tr>");
-												out.println("<td>" + i + "</td>");
-												out.println("<td>" + indObsTopics.get(i).getTopic().getTitle()
-														+ "</td>");
+												out.println("<td>" + index + "</td>");
+												out.println("<td>" + indObsTopics.get(i).getTopic().getTitle() + "</td>");
 												out.println("<td><select name=\"obsTopic\" class=\"chzn-select\">");
-												for (int j = 0; j < observerList.size(); j++) {
-													if (indObsTopics.get(i).getObserver().getId().intValue() == observerList
-															.get(j).getId().intValue()) {
-														out.println("<option value=\""
-																+ indObsTopics.get(i).getTopic().getFid() + ","
-																+ observerList.get(j).getId() + "\" selected>"
-																+ observerList.get(j).getName() + "</option>");
-													} else {
-														out.println("<option value=\""
-																+ indObsTopics.get(i).getTopic().getFid() + ","
-																+ observerList.get(j).getId() + "\">"
-																+ observerList.get(j).getName() + "</option>");
+												String[] tempObserver1 = indObserverList.get(i).split(";");
+												for(int j = 0; j<tempObserver1.length;j++){
+													String[] temp=tempObserver1[j].split(",");
+													if(indObsTopics.get(i).getObserver().getName().equals(temp[1])){
+														out.println("<option value=\"" + indObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\" selected>" + temp[1] + "</option>");
+													}else{
+														out.println("<option value=\"" + indObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\">" + temp[1] + "</option>");
 													}
 												}
 												out.println("</select></td>");
@@ -171,29 +164,25 @@
 									</thead>
 									<tbody>
 										<%
-											ArrayList<ObsTopic> groObsTopics = (ArrayList<ObsTopic>) request
-													.getAttribute("groObsTopics");
+											ArrayList<ObsTopic> groObsTopics = (ArrayList<ObsTopic>) request.getAttribute("groObsTopics");
+											ArrayList<String> groObserverList = (ArrayList<String>) request.getAttribute("groObserverList");
+											index=0;
 											for (int i = 0; i < groObsTopics.size(); i++) {
+												index=i+1;
 												out.println("<tr>");
-												out.println("<td>" + i + "</td>");
-												out.println("<td>" + groObsTopics.get(i).getTopic().getTitle()
-														+ "</td>");
+												out.println("<td>" + index + "</td>");
+												out.println("<td>" + groObsTopics.get(i).getTopic().getTitle() + "</td>");
 												out.println("<td><select name=\"obsTopic\" class=\"chzn-select\">");
-												for (int j = 0; j < observerList.size(); j++) {
-													if (groObsTopics.get(i).getObserver().getId().intValue() == observerList
-															.get(j).getId().intValue()) {
-														out.println("<option value=\""
-																+ groObsTopics.get(i).getTopic().getFid() + ","
-																+ observerList.get(j).getId()
-																+ "\" selected=\"selected\">"
-																+ observerList.get(j).getName() + "</option>");
-													} else {
-														out.println("<option value=\""
-																+ groObsTopics.get(i).getTopic().getFid() + ","
-																+ observerList.get(j).getId() + "\">"
-																+ observerList.get(j).getName() + "</option>");
+												String[] tempObserver2 = groObserverList.get(i).split(";");
+												for(int j = 0; j<tempObserver2.length;j++){
+													String[] temp=tempObserver2[j].split(",");
+													if(groObsTopics.get(i).getObserver().getName().equals(temp[1])){
+														out.println("<option value=\"" + groObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\" selected>" + temp[1] + "</option>");
+													}else{
+														out.println("<option value=\"" + groObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\">" + temp[1] + "</option>");
 													}
 												}
+												
 												out.println("</select></td>");
 												out.println("</tr>");
 											}
@@ -202,7 +191,6 @@
 								</table>
 								<div class="form-actions">
 									<button type="submit" class="btn btn-primary">Submit</button>
-									<button type="reset" class="btn">Reset</button>
 								</div>
 							</form>
 						</div>
