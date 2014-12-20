@@ -39,6 +39,7 @@ public class BaseUtil {
 			return false;
 		}
 	}
+	
 	public static boolean todayIsAfter(String time){
 		Date curDate=new Date();
 		Date dateTime= BaseUtil.StringConvertDate(time);
@@ -48,6 +49,7 @@ public class BaseUtil {
 			return false;
 		}
 	}
+	
 	public static boolean todayIsBefore(String time){
 		Date curDate=new Date();
 		Date dateTime= BaseUtil.StringConvertDate(time);
@@ -74,6 +76,7 @@ public class BaseUtil {
 		DateTime dt=new DateTime(d);
 		return String.valueOf(dt.getDayOfWeek());
 	}
+	
 	public static ArrayList<String> getEveryWeekStartAndEndDay(String startTime, String endTime){
 		ArrayList<String> timeTableTime = new ArrayList<String>();
 		Date startDate=StringConvertDate(startTime);
@@ -91,5 +94,12 @@ public class BaseUtil {
 		    end=start.dayOfWeek().withMaximumValue();
 	    }
 		return timeTableTime;
+	}
+	
+	public static DateTime getStartWeekDate(String time){
+		Date startDate=StringConvertDate(time);
+		DateTime startWeekDate = new DateTime(startDate);
+		startWeekDate = startWeekDate.dayOfWeek().withMinimumValue();
+		return startWeekDate;
 	}
 }

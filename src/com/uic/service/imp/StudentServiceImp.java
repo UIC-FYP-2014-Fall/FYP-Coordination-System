@@ -3,6 +3,8 @@ package com.uic.service.imp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import com.uic.domain.ObsTopic;
 import com.uic.domain.Student;
 import com.uic.domain.StuTopic;
@@ -10,6 +12,8 @@ import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.inter.StudentServiceInter;
+import com.uic.util.BaseUtil;
+import com.uic.util.PropertiesHelper;
 
 
 public class StudentServiceImp extends BaseServiceImp implements
@@ -239,6 +243,25 @@ public class StudentServiceImp extends BaseServiceImp implements
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public String getStudentPreTime(String week, String day, String time) {
+		// TODO Auto-generated method stub
+		//get start week date
+		PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+		String PreStartDate = ph.getProperties("PreStartDateTime");
+		//String PreEndDateTime = ph.getProperties("PreEndDateTime");
+		DateTime startWeekDay=BaseUtil.getStartWeekDate(PreStartDate);
+		startWeekDay = startWeekDay.plusWeeks(Integer.parseInt(week)-1);
+		startWeekDay = startWeekDay.plusDays(Integer.parseInt(day)-1);
+		String[] timeArray={"9:00-9:30","9:30-10:00","10:00-10:30","10:30-11:00","11:00-11:30","11:30-12:00","14:00-14:30","14:30-15:00","15:00-15:30","15:30-16:00","16:00-16:30","16:30-17:00","17:00-17:30","17:30-18:00"};
+		StringBuffer returnTime= new StringBuffer();
+		returnTime.append(startWeekDay.getYear()+"-");
+		returnTime.append(startWeekDay.getMonthOfYear()+"-");
+		returnTime.append(startWeekDay.getDayOfMonth()+ " ");
+		returnTime.append(timeArray[Integer.parseInt(time)-1]);
+		return returnTime.toString();
 	}
 
 }

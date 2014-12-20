@@ -22,8 +22,6 @@ public interface StudentServiceInter extends BaseInterface {
 
 	public Topic getStudentTopic(String sid);
 	
-
-	
 	public List<Teacher> getSupervisor(String sid); // return supervisor
 
 	public Teacher getObserver(String sid);
@@ -33,5 +31,7 @@ public interface StudentServiceInter extends BaseInterface {
 	public Student getStudentById(String sid);
 	
 	public boolean updateExaminer(String sid, String tid);
+	
+	public String getStudentPreTime(String week, String day, String time);
 
 }
