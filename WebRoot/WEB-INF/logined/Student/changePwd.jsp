@@ -101,7 +101,7 @@
 									method="post">
 									<div class="alert alert-error hide">
 										<button class="close" data-dismiss="alert"></button>
-										You have some form errors. Please check below.
+										Input error. Please check below.
 									</div>
 									<div class="control-group">
 										<label class="control-label">Original Password: <span

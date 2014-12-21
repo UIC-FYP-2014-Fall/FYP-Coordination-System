@@ -47,8 +47,7 @@ public class SetOberverAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		// first get TeaTopic where teacher_id   *Topic*
-		// then get student topic 知道有没有选过
-		// then get get Supervisorlist
+		// then get student topic 鐭ラ亾鏈夋病鏈夐�杩�		// then get get Supervisorlist
 		
 		if(request.getSession().getAttribute("role").equals("teacher")){
 			//prepare date: teacherList and Teatopic List of the current teacher.
@@ -61,7 +60,7 @@ public class SetOberverAction extends DispatchAction {
 			ArrayList<ObsTopic> groObsTopics=new ArrayList<ObsTopic>();
 			ArrayList<String> indObserverList = new ArrayList<String>();
 			ArrayList<String> groObserverList = new ArrayList<String>();
-			//有没有学生选过
+			//鏈夋病鏈夊鐢熼�杩�			
 			ArrayList<TeaTopic> removeObj= new ArrayList<TeaTopic>();
 			for(int i =0;i<teaTopicList.size();i++){
 				if(fypServiceImp.ifTopicHasBeenChoosenByStu(teaTopicList.get(i).getTopic().getFid().toString())){
@@ -75,7 +74,7 @@ public class SetOberverAction extends DispatchAction {
 			for(TeaTopic t :removeObj){
 				teaTopicList.remove(t);
 			}
-			//分类
+			//鍒嗙被
 			for(TeaTopic teaTopic: teaTopicList){
 				if(teaTopic.getTopic().getIndividual()){
 					indObsTopics.add(fypServiceImp.getObsTopicByTopicId(teaTopic.getTopic().getFid().toString()));
@@ -83,7 +82,7 @@ public class SetOberverAction extends DispatchAction {
 					groObsTopics.add(fypServiceImp.getObsTopicByTopicId(teaTopic.getTopic().getFid().toString()));
 				}
 			}
-			//添加
+			//娣诲姞
 			boolean bool=true;
 			for(int i = 0; i<indObsTopics.size();i++){
 				StringBuffer buff = new StringBuffer();
