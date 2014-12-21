@@ -4,6 +4,8 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +14,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.uic.domain.PreTimetable;
+import com.uic.domain.Student;
+import com.uic.domain.Teacher;
 import com.uic.domain.Time;
+import com.uic.service.imp.StudentServiceImp;
+import com.uic.service.inter.StudentServiceInter;
 import com.uic.service.inter.TimeType;
 import com.uic.util.TimeChecker;
 
@@ -48,6 +55,28 @@ public class ExportAction extends DispatchAction {
 			if(checker.getType().equals(TimeType.system_done)){
 				//can export presentation timetable
 				request.setAttribute("TimetableState", "true");
+				//ready data for the view
+				StudentServiceInter studentServiceInter = new StudentServiceImp();
+				ArrayList<Student> stuAl = studentServiceInter.getAllStudent();
+				ArrayList<PreTimetable> preList = new ArrayList<>();
+				
+				for(int i=0;i<stuAl.size();i++){
+					PreTimetable tb = new PreTimetable();
+					
+					tb.setSid(stuAl.get(i).getSid());
+					tb.setsName(stuAl.get(i).getName());
+					
+					String supervisors = "";
+					ArrayList<Teacher> al = studentServiceInter.getSupervisor(stuAl.get(i));
+					for(int j=0;j<al.size();j++){
+						supervisors = al.get(j).getName()+", "+supervisors;
+					}
+					tb.setSupervisor(supervisors);
+					tb.setObserver(studentServiceInter.getObserver(stuAl.get(i).getSid()).getName());
+					
+					//tb.setDatetime();
+					
+				}
 				
 				
 			}else{
