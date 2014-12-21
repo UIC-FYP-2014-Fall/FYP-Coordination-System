@@ -53,6 +53,7 @@ public class EditFYPAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		if(request.getSession().getAttribute("role").equals("teacher")){
 			FYPServiceImp fypServiceImp=new FYPServiceImp();
+			
 			Teacher teacher=(Teacher)request.getSession().getAttribute("teacherinfo");
 			PropertiesHelper ph = new PropertiesHelper(
 					"/WEB-INF/config/FYP-system.properties");
@@ -66,10 +67,41 @@ public class EditFYPAction extends DispatchAction {
 				}else{
 					request.setAttribute("isUploadTopicDate", "false");
 				}
+			}else{
+				System.out.println("1111111111111111111");
+				request.setAttribute("noUpLoadTime", "true");
+				return mapping.findForward("topicListUi");
 			}
-			List<TeaTopic> teaTopic= fypServiceImp.getTeaTopic(teacher.getId().toString());
-			System.out.println("send List size "+ teaTopic.size());
-			request.setAttribute("teaTopicList",teaTopic);
+			List<TeaTopic> teaTopicList= fypServiceImp.getTeaTopic(teacher.getId().toString());
+			System.out.println("send List size "+ teaTopicList.size());
+			ArrayList<TeaTopic> indTeaTopic = new ArrayList<TeaTopic>();
+			ArrayList<TeaTopic> groTeaTopic = new ArrayList<TeaTopic>();
+			
+			for(TeaTopic teaTopic: teaTopicList){
+				if(teaTopic.getTopic().getIndividual()){
+					indTeaTopic.add(teaTopic);
+				}else{
+					groTeaTopic.add(teaTopic);
+				}
+			}
+			
+			ArrayList<String> indSupervisor=new ArrayList<String>();
+			ArrayList<String> groSupervisor=new ArrayList<String>();
+			
+			for(TeaTopic indTopic:indTeaTopic ){
+				String indSuperv=fypServiceImp.getSupervisorsByTopicId(indTopic.getTopic().getFid().toString());
+				indSupervisor.add(indSuperv);
+			}
+			for(TeaTopic groTopic:groTeaTopic ){
+				String groSuperv=fypServiceImp.getSupervisorsByTopicId(groTopic.getTopic().getFid().toString());
+				groSupervisor.add(groSuperv);
+			}
+			System.out.println("22222222222222222222222");
+			request.setAttribute("noUpLoadTime", "false");
+			request.setAttribute("indTeaTopic", indTeaTopic);
+			request.setAttribute("groTeaTopic", groTeaTopic);
+			request.setAttribute("indSupervisor", indSupervisor);
+			request.setAttribute("groSupervisor", groSupervisor);
 			return mapping.findForward("topicListUi");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
@@ -187,7 +219,11 @@ public class EditFYPAction extends DispatchAction {
 		//prepare the new topic object
 		topic.setTitle(title);
 		topic.setCredit(Integer.parseInt(credit));
-		topic.setNumOfStudent(Integer.parseInt(numOfStu));
+		if(numOfStu==null){
+			topic.setNumOfStudent(Integer.parseInt("1"));
+		}else{
+			topic.setNumOfStudent(Integer.parseInt(numOfStu));
+		}
 		if (individual.equals("individual")) {
 			topic.setIndividual(true);
 		} else {

@@ -121,6 +121,17 @@
 							%>
 						</c:if>
 					</c:if>
+					<c:if test="${requestScope.didNotContainSupervisor=='true' }">
+							<div class="alert alert-error ErrorInfo">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>Error :</h4>
+								You only can upload your topic.
+							</div>
+							<%
+								request.removeAttribute("didNotContainSupervisor");
+								
+							%>
+						</c:if>
 					<c:if test="${requestScope.uploadTopicStart=='true' }">
 						<div class="alert alert-info alert-block">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -218,8 +229,6 @@
 									</div>
 									<div class="form-actions">
 										<button type="submit" class="btn btn-primary">Submit</button>
-										<button type="button" class="btn">Reset</button>
-
 									</div>
 								</form>
 							</div>

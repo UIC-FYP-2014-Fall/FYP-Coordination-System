@@ -350,6 +350,23 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		}
 		return false;
 	}
+	
+	public String getSupervisorsByTopicId(String topicId){
+		TeachersServiceImp teacherService = new TeachersServiceImp();
+		StringBuffer buff = new StringBuffer();
+		try{
+			List<TeaTopic> list = getTeaTopicByTopicId(topicId);
+			for(TeaTopic teaTopic: list){
+				Teacher t = teacherService.getUniqueTeacherById(teaTopic.getTeacher().getId().toString());
+				buff.append(t.getName()+" ");
+			}
+		}catch(Exception e){
+			System.out.print("Can not get supervisor by topic id");
+			e.printStackTrace();
+			return null;
+		}
+		return buff.toString();
+	}
 	public List<ObsTopic> getObsTopicByTeacherId(String teacherId) {
 		String hql = "from ObsTopic where observer_id=?";
 		String[] parameters = { teacherId };

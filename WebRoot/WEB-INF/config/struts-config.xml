@@ -102,6 +102,7 @@
       type="com.uic.web.struts.action.UploadFYPAction"
       cancellable="true" >
       <forward name="uploadok" path="/editFYP.do?flag=topicListUi" />
+      <forward name="uploaderr" path="/uploadFYP.do?flag=uploadTopicUi" />
       <forward name="uploadTopicUi" path="/WEB-INF/logined/Teacher/uploadTopic.jsp" />
     </action>
     <action
