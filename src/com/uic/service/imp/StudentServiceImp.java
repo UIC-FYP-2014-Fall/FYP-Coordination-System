@@ -303,11 +303,12 @@ public class StudentServiceImp extends BaseServiceImp implements
 	public String getPreTimeByStudentId(String sid) {
 		// TODO Auto-generated method stub
 		String stuTime="";
-		Student student = getStudentById(sid);
-		
+		//Student student = getStudentById(sid);
 		String hql="from Timeslot where student_id=?";
-		String[] parameters={student.getId().toString()};
+		String[] parameters={sid};
+		
 		Timeslot time= (Timeslot)getUniqueObject(hql, parameters);
+		//System.out.println(time.getStudent().getName());
 		stuTime=getStudentPreTime(time.getWeek(), time.getDay(), time.getTime());
 		
 		return stuTime;

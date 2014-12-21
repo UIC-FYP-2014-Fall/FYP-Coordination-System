@@ -35,8 +35,10 @@ public class testStudentService {
 			e.printStackTrace();
 		}*/
 		
-		stu.updateExaminer("1", "5");
+		//stu.updateExaminer("1", "5");
 		//System.out.println(t.getName());
+		String time = stu.getPreTimeByStudentId("1");
+		System.out.println(time);
 
 	}
 

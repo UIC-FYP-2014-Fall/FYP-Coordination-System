@@ -238,9 +238,11 @@
 																<span class="label">To be announced. Please come back later.</span>
 															</c:if>
 															<c:if test="${timeType==7 }">
-																<span class="label label-success">
-																	<a href="#">choose</a>
-																</span>
+																				
+																	<a href="${pageContext.request.contextPath }/choosePretime.do?flag=goChoosePretime">
+																		<button class="btn btn-primary btn-mini">Choose</button>
+																	</a>
+																
 															</c:if>
 														</c:if>
 													</td>
