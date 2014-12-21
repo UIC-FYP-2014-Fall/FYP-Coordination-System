@@ -52,6 +52,9 @@ public class OpenTimeAction extends DispatchAction {
 			//choose examiners for students time
 			String CEstartDateTime = ph.getProperties("ChooseExaminersStartDateTime");
 			String CEendDateTime = ph.getProperties("ChooseExaminersEndDateTime");
+			//choose presentation for student time
+			String CPstartDateTime = ph.getProperties("ChoosePresentationStartDateTime");
+			String CPendDateTime = ph.getProperties("ChoosePresentationEndDateTime");
 			
 			//System.out.println(startDateTime);
 			//upload topics time load
@@ -119,6 +122,28 @@ public class OpenTimeAction extends DispatchAction {
 				request.setAttribute("ChooseExaminersEndDateTime", CEendDateTime);
 			}else{
 				request.setAttribute("ChooseExaminersDateTime", "false");
+			}
+			//choose presentation time load
+			if(CPstartDateTime!=null&&CPendDateTime!=null){			
+				String[] start = CPstartDateTime.split(" ");
+				String[] end = CPendDateTime.split(" ");
+				String[] startTime = start[1].split(":");
+				String[] endTime = end[1].split(":");
+				
+				request.setAttribute("CPstartDate", start[0]);
+				request.setAttribute("CPstartHH", startTime[0]);
+				request.setAttribute("CPstartMM", startTime[1]);
+				request.setAttribute("CPstartSS", startTime[2]);
+				request.setAttribute("CPendDate", end[0]);
+				request.setAttribute("CPendHH", endTime[0]);
+				request.setAttribute("CPendMM", endTime[1]);
+				request.setAttribute("CPendSS", endTime[2]);
+				
+				request.setAttribute("ChoosePresentationDateTime", "true");
+				request.setAttribute("ChoosePresentationStartDateTime", CPstartDateTime);
+				request.setAttribute("ChoosePresentationEndDateTime", CPendDateTime);
+			}else{
+				request.setAttribute("ChoosePresentationDateTime", "false");
 			}
 
 			return mapping.findForward("goOpenTimeUi");
@@ -276,6 +301,63 @@ public class OpenTimeAction extends DispatchAction {
 			}else{
 				request.setAttribute("TimeOperation", "error");
 				request.setAttribute("message", "Choose topic for students or Upload topics for teachers time state is error! Please check.");
+			}
+			
+			return new ActionForward("/openTime.do?flag=goUi");
+		}else {
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	public ActionForward saveChoosePresentationDateTime(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		if (request.getSession().getAttribute("role").equals("coordinator")) {
+			//get upload topics end time
+			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+			
+			String state1 = ph.getProperties("UploadTopicsDateTimeState");
+			String state2 = ph.getProperties("ChooseTopicDateTimeState");
+			String state3 = ph.getProperties("ChooseExaminersDateTimeState");
+			
+			if(state1.equals("true")&&state2.equals("true")&&state3.equals("true")){
+				
+				String CEendDateTime = ph.getProperties("ChooseExaminersEndDateTime");
+				
+				PreTimeForm dateTimeForm = (PreTimeForm)form;
+				
+				//get date and time from jsp
+				String startDate = dateTimeForm.getCP_startDate();
+				String startTime = dateTimeForm.getCP_startTime();
+				String endDate = dateTimeForm.getCP_endDate();
+				String endTime = dateTimeForm.getCP_endTime();
+				
+				//format conversion
+				String startDateTime = startDate+" "+startTime;
+				String endDateTime = endDate+" "+endTime;
+				
+				java.util.Date dStartTime = BaseUtil.StringConvertDate(startDateTime);
+				java.util.Date dEndTime = BaseUtil.StringConvertDate(endDateTime);
+				
+				java.util.Date CETime = BaseUtil.StringConvertDate(CEendDateTime);
+				
+				if(dStartTime.after(CETime)&&dEndTime.after(CETime)&&dStartTime.before(dEndTime)){
+					try {
+						ph.setProperties("ChoosePresentationStartDateTime", startDateTime);
+						ph.setProperties("ChoosePresentationEndDateTime", endDateTime);
+						ph.setProperties("ChoosePresentationDateTimeState", "true");
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+					request.setAttribute("TimeOperation", "success");
+					request.setAttribute("message", "Save choose presentation for students time: from "+startDateTime+" to "+endDateTime+".");
+				}else{
+					request.setAttribute("TimeOperation", "error");
+					request.setAttribute("message", "Choose presentation for students start or end time error! Please check.");
+				}
+			}else{
+				request.setAttribute("TimeOperation", "error");
+				request.setAttribute("message", "Choose examiner or Choose topic or Upload topics time state is error! Please check.");
 			}
 			
 			return new ActionForward("/openTime.do?flag=goUi");

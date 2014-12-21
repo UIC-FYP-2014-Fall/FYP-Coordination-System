@@ -52,6 +52,7 @@ public class GoUIAction extends DispatchAction {
 			String state1 = ph.getProperties("UploadTopicsDateTimeState");
 			String state2 = ph.getProperties("ChooseTopicDateTimeState");
 			String state3 = ph.getProperties("ChooseExaminersDateTimeState");
+			String state5 = ph.getProperties("ChoosePresentationDateTimeState");
 			String state4 = ph.getProperties("PreDateTimeState");
 			
 			if(state1!=null){
@@ -88,6 +89,15 @@ public class GoUIAction extends DispatchAction {
 					request.setAttribute("PendDateTime", ph.getProperties("PreEndDateTime"));
 				}else{
 					request.setAttribute("PreDateTimeState", "false");
+				}
+			}
+			if(state5!=null){
+				if(state5.equals("true")){
+					request.setAttribute("ChoosePresentationDateTimeState", "true");
+					request.setAttribute("CPstartDateTime", ph.getProperties("ChoosePresentationStartDateTime"));
+					request.setAttribute("CPendDateTime", ph.getProperties("ChoosePresentationEndDateTime"));
+				}else{
+					request.setAttribute("ChoosePresentationDateTimeState", "false");
 				}
 			}
 			

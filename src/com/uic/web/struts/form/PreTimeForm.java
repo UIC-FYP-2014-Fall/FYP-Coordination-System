@@ -34,7 +34,46 @@ public class PreTimeForm extends ActionForm {
 	private String CE_endDate;
 	private String CE_endTime;
 	
+	private String CP_startDate;
+	private String CP_startTime;
+	private String CP_endDate;
+	private String CP_endTime;
 	
+	
+	
+	
+
+	public String getCP_startDate() {
+		return CP_startDate;
+	}
+
+	public void setCP_startDate(String cP_startDate) {
+		CP_startDate = cP_startDate;
+	}
+
+	public String getCP_startTime() {
+		return CP_startTime;
+	}
+
+	public void setCP_startTime(String cP_startTime) {
+		CP_startTime = cP_startTime;
+	}
+
+	public String getCP_endDate() {
+		return CP_endDate;
+	}
+
+	public void setCP_endDate(String cP_endDate) {
+		CP_endDate = cP_endDate;
+	}
+
+	public String getCP_endTime() {
+		return CP_endTime;
+	}
+
+	public void setCP_endTime(String cP_endTime) {
+		CP_endTime = cP_endTime;
+	}
 
 	public String getCE_startDate() {
 		return CE_startDate;

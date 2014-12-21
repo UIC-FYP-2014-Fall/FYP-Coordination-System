@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlowViewLayout Version="1.2">
-  <StrutsActivity path="/goUI.do" location="50,50" dimension="228,88" />
-  <StrutsActivity path="/goManageAccountUi.do" location="350,50" dimension="310,88" />
+  <StrutsActivity path="/goUI.do" location="50,50" dimension="228,116" />
+  <StrutsActivity path="/goManageAccountUi.do" location="-165,240" dimension="316,116" />
   <StrutsActivity path="/login.do" location="950,50" dimension="230,88" />
   <StrutsActivity path="/logout.do" location="1250,50" dimension="238,88" />
   <StrutsActivity path="/teacherPageControl.do" location="1550,50" dimension="304,88" />
-  <StrutsActivity path="/export.do" location="50,250" dimension="235,88" />
+  <StrutsActivity path="/export.do" location="-165,390" dimension="316,121" />
   <StrutsActivity path="/changPwd.do" location="350,250" dimension="258,88" />
   <StrutsActivity path="/preTime.do" location="1550,250" dimension="244,88" />
-  <StrutsActivity path="/clearProject.do" location="50,450" dimension="264,88" />
+  <StrutsActivity path="/clearProject.do" location="-165,555" dimension="316,121" />
   <StrutsActivity path="/openTime.do" location="650,450" dimension="254,88" />
   <StrutsActivity path="/quota.do" location="1250,450" dimension="233,88" />
   <StrutsActivity path="/setWorkload.do" location="1550,450" dimension="266,88" />
-  <StrutsActivity path="/editFYP.do" location="50,650" dimension="242,88" />
+  <StrutsActivity path="/editFYP.do" location="390,510" dimension="242,88" />
   <StrutsActivity path="/timetable.do" location="350,650" dimension="252,88" />
   <StrutsActivity path="/goStudentMain.do" location="950,650" dimension="281,88" />
   <StrutsActivity path="/setObserver.do" location="1550,650" dimension="259,88" />
   <StrutsActivity path="/chooseTopic.do" location="50,850" dimension="268,88" />
   <StrutsActivity path="/chooseExaminer.do" location="650,850" dimension="288,88" />
   <StrutsActivity path="/choosePretime.do" location="1250,850" dimension="279,88" />
-  <StrutsActivity path="goLogin;6" location="50,1050" dimension="88,75" />
+  <StrutsActivity path="goLogin;6" location="0,975" dimension="121,75" />
   <StrutsActivity path="/WEB-INF/logined/Teacher/teacherMain.jsp" location="350,1050" dimension="246,49" />
   <StrutsActivity path="/WEB-INF/logined/Coordinator/main.jsp" location="650,1050" dimension="229,49" />
   <StrutsActivity path="/WEB-INF/logined/Coordinator/manageAccount.jsp" location="950,1050" dimension="286,49" />
@@ -63,11 +63,21 @@
   </StrutsTransition>
   <StrutsTransition id="/editFYP.do,deleteTopic,/editFYP.do,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="185,738" />
       <AbsolutePoint location="185,759" />
       <AbsolutePoint location="299,759" />
       <AbsolutePoint location="299,694" />
       <AbsolutePoint location="292,694" />
+=======
+      <AbsolutePoint location="623,510" />
+      <AbsolutePoint location="623,-412" />
+      <AbsolutePoint location="2235,-412" />
+      <AbsolutePoint location="2235,753" />
+      <AbsolutePoint location="725,753" />
+      <AbsolutePoint location="725,583" />
+      <AbsolutePoint location="632,583" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/WEB-INF/logined/Coordinator/workload.jsp,null,/setWorkload.do,2" routingType="0">
@@ -124,10 +134,10 @@
   </StrutsTransition>
   <StrutsTransition id="/uploadFYP.do,uploadTopicUi,/WEB-INF/logined/Teacher/uploadTopic.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="1090,338" />
-      <AbsolutePoint location="1090,353" />
-      <AbsolutePoint location="-55,353" />
-      <AbsolutePoint location="-55,1274" />
+      <AbsolutePoint location="1195,250" />
+      <AbsolutePoint location="1195,-175" />
+      <AbsolutePoint location="-205,-175" />
+      <AbsolutePoint location="-205,1274" />
       <AbsolutePoint location="50,1274" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -159,12 +169,21 @@
   </StrutsTransition>
   <StrutsTransition id="/WEB-INF/logined/Coordinator/changePwd.jsp,null,/changPwd.do,2" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="1382,1150" />
       <AbsolutePoint location="1382,1013" />
       <AbsolutePoint location="1899,1013" />
       <AbsolutePoint location="1899,613" />
       <AbsolutePoint location="509,613" />
       <AbsolutePoint location="509,338" />
+=======
+      <AbsolutePoint location="1382,1199" />
+      <AbsolutePoint location="1382,1242" />
+      <AbsolutePoint location="2145,1242" />
+      <AbsolutePoint location="2145,-337" />
+      <AbsolutePoint location="457,-337" />
+      <AbsolutePoint location="457,250" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/chooseTopic.do,gochooseGroupTopic,/chooseTopic.do,1" routingType="0">
@@ -187,11 +206,19 @@
   </StrutsTransition>
   <StrutsTransition id="/editFYP.do,topicListUi,/WEB-INF/logined/Teacher/topicList.jsp,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="171,650" />
       <AbsolutePoint location="171,643" />
       <AbsolutePoint location="941,643" />
       <AbsolutePoint location="941,1374" />
       <AbsolutePoint location="950,1374" />
+=======
+      <AbsolutePoint location="390,540" />
+      <AbsolutePoint location="-535,540" />
+      <AbsolutePoint location="-535,1854" />
+      <AbsolutePoint location="1063,1854" />
+      <AbsolutePoint location="1063,1399" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/chooseTopic.do,goChooseGroupTopicUi,/WEB-INF/logined/Student/teamTopicSelection.jsp,1" routingType="0">
@@ -205,28 +232,43 @@
   </StrutsTransition>
   <StrutsTransition id="/editFYP.do,editOk,/editFYP.do,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="160,650" />
       <AbsolutePoint location="160,559" />
       <AbsolutePoint location="299,559" />
       <AbsolutePoint location="299,680" />
       <AbsolutePoint location="292,680" />
+=======
+      <AbsolutePoint location="511,510" />
+      <AbsolutePoint location="511,477" />
+      <AbsolutePoint location="641,477" />
+      <AbsolutePoint location="641,535" />
+      <AbsolutePoint location="632,535" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/uploadFYP.do,uploadok,/editFYP.do,1" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="1060,338" />
       <AbsolutePoint location="1060,553" />
-      <AbsolutePoint location="171,553" />
-      <AbsolutePoint location="171,650" />
+      <AbsolutePoint location="632,553" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/changPwd.do,goStudentChangePwdUi,/WEB-INF/logined/Student/changePwd.jsp,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="449,338" />
       <AbsolutePoint location="449,383" />
       <AbsolutePoint location="-85,383" />
       <AbsolutePoint location="-85,1214" />
       <AbsolutePoint location="772,1214" />
+=======
+      <AbsolutePoint location="479,250" />
+      <AbsolutePoint location="479,-250" />
+      <AbsolutePoint location="-250,-250" />
+      <AbsolutePoint location="-250,1236" />
+      <AbsolutePoint location="772,1236" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
       <AbsolutePoint location="772,1199" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -242,10 +284,18 @@
   </StrutsTransition>
   <StrutsTransition id="/goManageAccountUi.do,goManageAccountUi,/WEB-INF/logined/Coordinator/manageAccount.jsp,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="623,138" />
       <AbsolutePoint location="623,783" />
       <AbsolutePoint location="1123,783" />
       <AbsolutePoint location="1123,1050" />
+=======
+      <AbsolutePoint location="-165,298" />
+      <AbsolutePoint location="-385,298" />
+      <AbsolutePoint location="-385,1764" />
+      <AbsolutePoint location="1208,1764" />
+      <AbsolutePoint location="1208,1099" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/choosePretime.do,goChoosePretimeUi,/WEB-INF/logined/Student/choosePretime.jsp,1" routingType="0">
@@ -278,14 +328,15 @@
   </StrutsTransition>
   <StrutsTransition id="/goUI.do,goTeacherMain,/WEB-INF/logined/Teacher/teacherMain.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="278,94" />
-      <AbsolutePoint location="333,94" />
-      <AbsolutePoint location="333,1074" />
+      <AbsolutePoint location="50,108" />
+      <AbsolutePoint location="-610,108" />
+      <AbsolutePoint location="-610,1074" />
       <AbsolutePoint location="350,1074" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/WEB-INF/logined/Teacher/editTopic.jsp,null,/editFYP.do,2" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="880,1384" />
       <AbsolutePoint location="931,1384" />
       <AbsolutePoint location="931,1035" />
@@ -293,6 +344,13 @@
       <AbsolutePoint location="413,819" />
       <AbsolutePoint location="171,819" />
       <AbsolutePoint location="171,738" />
+=======
+      <AbsolutePoint location="765,1399" />
+      <AbsolutePoint location="765,1402" />
+      <AbsolutePoint location="-175,1402" />
+      <AbsolutePoint location="-175,522" />
+      <AbsolutePoint location="390,522" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/WEB-INF/logined/Coordinator/preTime.jsp,null,/preTime.do,2" routingType="0">
@@ -317,21 +375,39 @@
   </StrutsTransition>
   <StrutsTransition id="/goUI.do,goMainUi,/WEB-INF/logined/Coordinator/main.jsp,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="50,94" />
       <AbsolutePoint location="-25,94" />
       <AbsolutePoint location="-25,983" />
       <AbsolutePoint location="764,983" />
+=======
+      <AbsolutePoint location="278,108" />
+      <AbsolutePoint location="334,108" />
+      <AbsolutePoint location="334,926" />
+      <AbsolutePoint location="545,926" />
+      <AbsolutePoint location="545,1005" />
+      <AbsolutePoint location="764,1005" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
       <AbsolutePoint location="764,1050" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/editFYP.do,editTopicUi,/WEB-INF/logined/Teacher/editTopic.jsp,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="157,738" />
       <AbsolutePoint location="157,835" />
       <AbsolutePoint location="1243,835" />
       <AbsolutePoint location="1243,1420" />
       <AbsolutePoint location="765,1420" />
       <AbsolutePoint location="765,1399" />
+=======
+      <AbsolutePoint location="511,598" />
+      <AbsolutePoint location="511,605" />
+      <AbsolutePoint location="2025,605" />
+      <AbsolutePoint location="2025,1306" />
+      <AbsolutePoint location="804,1306" />
+      <AbsolutePoint location="804,1350" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/chooseTopic.do,goChooseTopicUi,/WEB-INF/logined/Student/chooseTopic.jsp,1" routingType="0">
@@ -344,19 +420,26 @@
   </StrutsTransition>
   <StrutsTransition id="goLogin;6,null,/index.jsp,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="94,1125" />
       <AbsolutePoint location="94,1236" />
       <AbsolutePoint location="11,1236" />
       <AbsolutePoint location="11,1534" />
       <AbsolutePoint location="689,1534" />
       <AbsolutePoint location="689,1550" />
+=======
+      <AbsolutePoint location="35,1050" />
+      <AbsolutePoint location="35,1944" />
+      <AbsolutePoint location="689,1944" />
+      <AbsolutePoint location="689,1599" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/export.do,goExportUi,/WEB-INF/logined/Coordinator/export.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="50,294" />
-      <AbsolutePoint location="5,294" />
-      <AbsolutePoint location="5,1174" />
+      <AbsolutePoint location="-165,450" />
+      <AbsolutePoint location="-460,450" />
+      <AbsolutePoint location="-460,1174" />
       <AbsolutePoint location="350,1174" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -371,11 +454,19 @@
   </StrutsTransition>
   <StrutsTransition id="/changPwd.do,goTeacherPwdUi,/WEB-INF/logined/Teacher/changePwd.jsp,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="479,338" />
       <AbsolutePoint location="479,613" />
       <AbsolutePoint location="35,613" />
       <AbsolutePoint location="35,1314" />
       <AbsolutePoint location="1071,1314" />
+=======
+      <AbsolutePoint location="501,250" />
+      <AbsolutePoint location="501,25" />
+      <AbsolutePoint location="2067,25" />
+      <AbsolutePoint location="2067,1206" />
+      <AbsolutePoint location="1071,1206" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
       <AbsolutePoint location="1071,1199" />
     </AutomaticBendpoints>
   </StrutsTransition>
@@ -393,10 +484,17 @@
   <StrutsTransition id="/WEB-INF/logined/Coordinator/manageAccount.jsp,null,/goManageAccountUi.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="1093,1050" />
+<<<<<<< HEAD
       <AbsolutePoint location="1093,813" />
       <AbsolutePoint location="919,813" />
       <AbsolutePoint location="919,94" />
       <AbsolutePoint location="660,94" />
+=======
+      <AbsolutePoint location="1093,789" />
+      <AbsolutePoint location="911,789" />
+      <AbsolutePoint location="911,345" />
+      <AbsolutePoint location="151,345" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/WEB-INF/logined/Coordinator/openTime.jsp,null,/openTime.do,2" routingType="0">
@@ -430,14 +528,23 @@
   </StrutsTransition>
   <StrutsTransition id="/goUI.do,goStudentMain,/goStudentMain.do,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="164,138" />
       <AbsolutePoint location="164,214" />
       <AbsolutePoint location="1095,214" />
       <AbsolutePoint location="1095,650" />
+=======
+      <AbsolutePoint location="278,130" />
+      <AbsolutePoint location="300,130" />
+      <AbsolutePoint location="300,383" />
+      <AbsolutePoint location="1090,383" />
+      <AbsolutePoint location="1090,650" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/clearProject.do,goClearProjectUi,/WEB-INF/logined/Coordinator/clearProject.jsp,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="182,538" />
       <AbsolutePoint location="182,583" />
       <AbsolutePoint location="785,583" />
@@ -446,14 +553,27 @@
       <AbsolutePoint location="485,953" />
       <AbsolutePoint location="909,953" />
       <AbsolutePoint location="909,1250" />
+=======
+      <AbsolutePoint location="-3,676" />
+      <AbsolutePoint location="-3,1306" />
+      <AbsolutePoint location="782,1306" />
+      <AbsolutePoint location="782,1299" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/login.do,loginok,/goUI.do,1" routingType="0">
     <AutomaticBendpoints>
+<<<<<<< HEAD
       <AbsolutePoint location="1035,138" />
       <AbsolutePoint location="1035,154" />
       <AbsolutePoint location="194,154" />
       <AbsolutePoint location="194,138" />
+=======
+      <AbsolutePoint location="1035,50" />
+      <AbsolutePoint location="1035,-100" />
+      <AbsolutePoint location="164,-100" />
+      <AbsolutePoint location="164,50" />
+>>>>>>> branch 'master' of https://github.com/UIC-FYP-2014-Fall/FYP-Coordination-System
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/changPwd.do,goPwdUi,/WEB-INF/logined/Coordinator/changePwd.jsp,1" routingType="0">

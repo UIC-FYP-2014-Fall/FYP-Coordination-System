@@ -207,18 +207,24 @@ public class ChooseExaminerAction extends DispatchAction {
 
 			String examinerId = request.getParameter("tid");
 			//System.out.println(examinerId);
+			Student stu = (Student) request.getSession().getAttribute("studentinfo");
 
 			Time time = new Time();
 			// check now time located situation
 			time = TimeChecker.timeCheck();
+			
+			TeachersServiceInter teacherServiceInter = new TeachersServiceImp();
+			StudentServiceInter studentSericeInter = new StudentServiceImp();
+			//check examinerId 
+			HashMap<String, Teacher> hm = new HashMap<>();
+			ArrayList<Teacher> canChooseExaminers = studentSericeInter.getCanChooseExaminer(stu.getSid());
+			for(int i=0;i<canChooseExaminers.size();i++){
+				hm.put(canChooseExaminers.get(i).getId().toString(), canChooseExaminers.get(i));
+			}
+			
 
-			if (examinerId.trim() != null && time.getType().equals(TimeType.choose_examiner)) {
+			if (examinerId.trim() != null && time.getType().equals(TimeType.choose_examiner)&&hm.containsKey(examinerId)) {
 
-				StudentServiceInter studentSericeInter = new StudentServiceImp();
-				TeachersServiceInter teacherServiceInter = new TeachersServiceImp();
-				
-				Student stu = (Student) request.getSession().getAttribute("studentinfo");
-				
 				// the student has chosen a examiner
 				// update the student's examiner
 				if (studentSericeInter.checkExaminerState(stu.getSid())) {

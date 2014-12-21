@@ -96,27 +96,42 @@
 								<c:choose>
 								<c:when test="${UploadTopicsDateTimeState=='true' }">
 									<div class="alert alert-success alert-block">
-										<h4 class="alert-heading">Upload Topics for Teachers Time</h4>
+										<h4 class="alert-heading">Upload Topics for Teacher Time</h4>
 										<p>From ${UTstartDateTime } to ${UTendDateTime }</p>											
 									</div>
 									<c:choose>
 									<c:when test="${ChooseTopicDateTimeState=='true' }">
 										<div class="alert alert-success alert-block">
-											<h4 class="alert-heading">Choose Topic for Students Time</h4>
+											<h4 class="alert-heading">Choose Topic for Student Time</h4>
 											<p>From ${CTstartDateTime } to ${CTendDateTime }</p>											
 										</div>
 										<c:choose>
 										<c:when test="${ChooseExaminersDateTimeState=='true' }">
 											<div class="alert alert-success alert-block">
-												<h4 class="alert-heading">Choose Examiners for Students Time</h4>
+												<h4 class="alert-heading">Choose Examiner for Student Time</h4>
 												<p>From ${CEstartDateTime } to ${CEendDateTime }</p>											
 											</div>
 											<c:choose>
 											<c:when test="${PreDateTimeState=='true' }">
-												<div class="alert alert-success alert-block">
+												<div class="alert alert-info alert-block">
 													<h4 class="alert-heading">Presentation Time</h4>
 													<p>From ${PstartDateTime } to ${PendDateTime }</p>											
 												</div>
+											
+												<c:choose>
+													<c:when test="${ChoosePresentationDateTimeState=='true' }">
+														<div class="alert alert-success alert-block">
+															<h4 class="alert-heading">Choose Presentation for Students Time</h4>
+															<p>From ${CPstartDateTime } to ${CPendDateTime }</p>											
+														</div>
+													</c:when>
+													<c:otherwise>
+													<div class="alert alert-block">
+														<h4 class="alert-heading">Warning!</h4>
+														<p>Choose presentation for student time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
+													</div>
+												</c:otherwise>
+												</c:choose>
 											</c:when>
 											<c:otherwise>
 												<div class="alert alert-block">
@@ -130,7 +145,7 @@
 										<c:otherwise>
 											<div class="alert alert-block">
 												<h4 class="alert-heading">Warning!</h4>
-												<p>Choose examiners for students time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
+												<p>Choose examiner for student time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
 											</div>
 										</c:otherwise>
 										</c:choose>
@@ -138,7 +153,7 @@
 									<c:otherwise>
 										<div class="alert alert-block">
 											<h4 class="alert-heading">Warning!</h4>
-											<p>Choose topic for students time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
+											<p>Choose topic for student time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
 										</div>
 									</c:otherwise>
 									</c:choose>
@@ -148,7 +163,7 @@
 								<c:otherwise>
 									<div class="alert alert-block">
 										<h4 class="alert-heading">Warning!</h4>
-										<p>Upload topics for teachers time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
+										<p>Upload topics for teacher time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
 									</div>
 								</c:otherwise>
 								</c:choose>

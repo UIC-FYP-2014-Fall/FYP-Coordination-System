@@ -33,5 +33,7 @@ public interface StudentServiceInter extends BaseInterface {
 	public boolean updateExaminer(String sid, String tid);
 	
 	public String getStudentPreTime(String week, String day, String time);
+	
+	public ArrayList<Teacher> getCanChooseExaminer(String sid);
 
 }

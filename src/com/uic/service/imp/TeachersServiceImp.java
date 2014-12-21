@@ -1,6 +1,5 @@
 package com.uic.service.imp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.uic.domain.TeaTopic;

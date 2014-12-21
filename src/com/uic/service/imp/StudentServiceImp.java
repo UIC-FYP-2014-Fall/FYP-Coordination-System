@@ -1,6 +1,7 @@
 package com.uic.service.imp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -12,6 +13,7 @@ import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.inter.StudentServiceInter;
+import com.uic.service.inter.TeachersServiceInter;
 import com.uic.util.BaseUtil;
 import com.uic.util.PropertiesHelper;
 
@@ -262,6 +264,38 @@ public class StudentServiceImp extends BaseServiceImp implements
 		returnTime.append(startWeekDay.getDayOfMonth()+ " ");
 		returnTime.append(timeArray[Integer.parseInt(time)-1]);
 		return returnTime.toString();
+	}
+
+	@Override
+	public ArrayList<Teacher> getCanChooseExaminer(String sid) {
+		// TODO Auto-generated method stub
+		ArrayList<Teacher> al = new ArrayList<>();
+		List<Teacher> supervisor = getSupervisor(sid);
+		Teacher observer = getObserver(sid);
+		Integer observerId = observer.getId();
+		TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
+		List<Teacher> listTeacher = teachersServiceInter.getTeachers();
+		
+		HashMap<Integer, Teacher> hm = new HashMap<>();
+		
+		for (int i = 0; i < supervisor.size(); i++) {
+			hm.put(supervisor.get(i).getId(), supervisor.get(i));
+		}
+		
+		for (Teacher t : listTeacher) {
+			if (hm.containsKey(t.getId())) {
+				continue;
+			} else if (t.getId().equals(observerId)) {
+				continue;
+			} else {
+				if (teachersServiceInter.getWorkload(t.getId().toString()) < Integer.parseInt(t.getWorkload())){
+					al.add(t);
+				}
+			}
+		}
+		
+		
+		return al;
 	}
 
 }
