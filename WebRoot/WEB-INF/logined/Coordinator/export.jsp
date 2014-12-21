@@ -192,5 +192,42 @@
 
 	<script src="assets/DT_bootstrap.js"></script>
 	<script src="assets/scripts.js"></script>
+	
+	<script>
+	$(document).ready(function() {
+		var table = $('#preTable').dataTable({
+			"sDom": "<'row'<'span5'l><'span7'f>r>t<'row'<'span3'i><'span9'p>>",
+			"sPaginationType": "bootstrap",
+			"oLanguage": {
+				"sLengthMenu": "_MENU_ records per page"
+			}
+		} );
+		var tableTools = new $.fn.dataTable.TableTools( table, {
+			
+				"sSwfPath":  "../FYP_system/vendors/datatables/swf/copy_csv_xls_pdf.swf",
+	           	"aButtons": [
+	                "copy",
+	                {
+						"sExtends": "csv",
+						"sTitle": "FYP Presentation Timetable"
+					},
+	                {
+						"sExtends": "xls",
+						"sTitle": "FYP Presentation Timetable",
+					},
+	                {
+	                    "sExtends": "pdf",
+						"sTitle": "FYP Presentation Timetable",
+	                    "sPdfOrientation": "landscape",
+	                    "sPdfMessage": ""
+	                },
+	                "print"
+	        	],
+				
+	    } );
+		$( tableTools.fnContainer() ).insertAfter('div.table-toolbar');
+
+	} );
+	</script>
 </body>
 </html>

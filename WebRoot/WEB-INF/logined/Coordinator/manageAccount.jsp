@@ -207,10 +207,9 @@
 <script type="text/javascript" src="vendors/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="assets/form-validation.js"></script>
     
-<script>
+<script type="text/javascript">
 jQuery(document).ready(function() {   
 	   FormValidation.init();
-	   
 	});
 $(document).ready(function() {
     $('a[data-confirm]').click(function(ev) {
