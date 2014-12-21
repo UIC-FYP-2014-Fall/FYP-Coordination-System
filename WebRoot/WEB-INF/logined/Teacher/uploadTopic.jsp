@@ -171,8 +171,8 @@
 													List<Teacher> teacherList = (List<Teacher>)request.getAttribute("teacherList");
 		                                           	  Teacher curTeacher = (Teacher)request.getSession().getAttribute("teacherinfo");
 		                                                 for(int i=0;i<teacherList.size();i++){
-		                                               	  if(curTeacher.getName().equals(teacherList.get(i).getName())){
-		                                               	  	out.println("<option selected=\"selected\">"+teacherList.get(i).getName()+"</option>");
+		                                               	  if(curTeacher.getId().equals(teacherList.get(i).getId())){
+		                                               	  	out.println("<option selected=\"selected\" value=\""+teacherList.get(i).getName()+"\">"+teacherList.get(i).getName()+"</option>");
 		                                               	  }else{
 		                                               		out.println("<option>"+teacherList.get(i).getName()+"</option>");
 		                                               	  }

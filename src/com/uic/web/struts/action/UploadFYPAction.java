@@ -98,15 +98,18 @@ public class UploadFYPAction extends DispatchAction {
 		TeachersServiceImp teachersServiceImp = new TeachersServiceImp();
 		FYPServiceImp fypServiceImp = new FYPServiceImp();
 		Teacher teacher=(Teacher)request.getSession().getAttribute("teacherinfo");
+		System.out.println("cur teacher name "+teacher.getName());
 		// declare the class
 		String[] supervisor = uploadFYPForm.getSupervisor();
 		Topic topic = new Topic();
 		ArrayList<Teacher> teacherlist = new ArrayList<Teacher>();
 		for (int i = 0; i < supervisor.length; i++) {
+			System.out.println("get sup"+supervisor[i]);
 			Teacher t = teachersServiceImp
 					.getUniqueTeacherByName(supervisor[i]);
 			teacherlist.add(t);
 		}
+		
 		//if the supervisor contain current teacher
 		if(!teacherlist.contains(teacher)){
 			System.out.println("do not contain");

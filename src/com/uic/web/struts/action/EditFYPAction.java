@@ -68,7 +68,6 @@ public class EditFYPAction extends DispatchAction {
 					request.setAttribute("isUploadTopicDate", "false");
 				}
 			}else{
-				System.out.println("1111111111111111111");
 				request.setAttribute("noUpLoadTime", "true");
 				return mapping.findForward("topicListUi");
 			}
@@ -96,7 +95,6 @@ public class EditFYPAction extends DispatchAction {
 				String groSuperv=fypServiceImp.getSupervisorsByTopicId(groTopic.getTopic().getFid().toString());
 				groSupervisor.add(groSuperv);
 			}
-			System.out.println("22222222222222222222222");
 			request.setAttribute("noUpLoadTime", "false");
 			request.setAttribute("indTeaTopic", indTeaTopic);
 			request.setAttribute("groTeaTopic", groTeaTopic);

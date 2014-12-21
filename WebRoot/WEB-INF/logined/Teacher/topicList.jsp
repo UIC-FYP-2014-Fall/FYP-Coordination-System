@@ -218,11 +218,10 @@
 						</div>
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
-								<div class="muted pull-left">Group Topic List</div>
+								<div class="muted pull-left">Grop Topic List</div>
 							</div>
 							<div class="block-content collapse in">
-								<table class="table table-striped table-bordered"
-									id="groupTopic">
+								<table class="table table-striped table-bordered" id="groupTopic">
 									<thead>
 										<tr>
 											<th>#</th>

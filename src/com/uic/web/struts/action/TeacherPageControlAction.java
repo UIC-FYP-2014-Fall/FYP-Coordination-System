@@ -6,10 +6,14 @@ package com.uic.web.struts.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+
+import com.uic.util.BaseUtil;
+import com.uic.util.PropertiesHelper;
 /** 
  * MyEclipse Struts
  * Creation date: 10-26-2014
@@ -41,6 +45,44 @@ public class TeacherPageControlAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
+			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+			//upload topic time
+			String uploadTopicStart = ph.getProperties("UploadTopicsStartDateTime");
+			String uploadTopicEnd = ph.getProperties("UploadTopicsEndDateTime");
+			if(uploadTopicStart!=null&&uploadTopicEnd!=null){
+				if(BaseUtil.todayIsInPeriod(uploadTopicStart, uploadTopicEnd)){
+					request.setAttribute("uploadTopicTime", "Now");
+				}else{
+					request.setAttribute("uploadTopicTime", uploadTopicStart+" to "+ uploadTopicEnd);
+				}
+			}else{
+				request.setAttribute("uploadTopicTime", "To Be Determined.");
+			}
+			//choose topic time : View Student's choice & Choose Observer
+			String chooseTopicStart = ph.getProperties("ChooseTopicStartDateTime");
+			String chooseTopicEnd = ph.getProperties("ChooseTopicEndDateTime");
+			if(chooseTopicStart!=null&&chooseTopicEnd!=null){
+				if(BaseUtil.todayIsInPeriod(chooseTopicStart, chooseTopicEnd)){
+					request.setAttribute("chooseTopicTime", "Now");
+				}else{
+					request.setAttribute("chooseTopicTime", chooseTopicStart+" to "+ chooseTopicStart);
+				}
+			}else{
+				request.setAttribute("chooseTopicTime", "To Be Determined.");
+			}
+			
+			//select available time
+			String choosePreTimeStart = ph.getProperties("ChoosePresentationStartDateTime");
+			String choosePreTimeEnd = ph.getProperties("ChoosePresentationEndDateTime");
+			if(choosePreTimeStart!=null&&choosePreTimeEnd!=null){
+				if(BaseUtil.todayIsInPeriod(choosePreTimeStart, choosePreTimeEnd)){
+					request.setAttribute("choosePreTime", "Now");
+				}else{
+					request.setAttribute("choosePreTime", choosePreTimeStart+" to "+ choosePreTimeEnd);
+				}
+			}else{
+				request.setAttribute("choosePreTime", "To Be Determined.");
+			}
 			return mapping.findForward("mainPage");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");

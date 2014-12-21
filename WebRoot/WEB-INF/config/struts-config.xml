@@ -28,7 +28,7 @@
       validate="false"
       cancellable="true" >
       <forward name="goMainUi" path="/WEB-INF/logined/Coordinator/main.jsp" />
-      <forward name="goTeacherMain" path="/WEB-INF/logined/Teacher/teacherMain.jsp" />
+      <forward name="goTeacherMain" path="/teacherPageControl.do?flag=mainPage" />
       <forward name="goStudentMain" path="/goStudentMain.do" />
     </action>
     <action
