@@ -116,37 +116,29 @@
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
 								<h4 class="alert-heading">News!</h4>
 								<c:if test="${timeType==1 }">
-									Open time for view FYP topics will start on <strong>${end }</strong>
-									.
+									The FYP topics are still in preparation.You can view all the FYP topics information from <strong> ${end } </strong>.
 								</c:if>
 								<c:if test="${timeType==2 }">
-									You can view all topics information now! Select topic time will start from <strong>${start }</strong>
-									to
-									<strong>${end }</strong>
-									.
+									You can view all the FYP topics information now! Open time for Select Topic period:<strong> ${start } </strong>to<strong> ${end } </strong>.
 								</c:if>
 								<c:if test="${timeType==3 }">
-									You can select your topic now! Open time for select topic:
-									<strong>${start }</strong>
-									to
-									<strong>${end }</strong>
-									.
+									You can select your topic now! Open time for Select Topic period:<strong> ${start } </strong>to<strong> ${end } </strong>.
 								</c:if>
-								<c:if test="${timeType==4 }">Choose examiner time will start from ${start } to ${end }.</c:if>
+								<c:if test="${timeType==4 }">Open time for Choose Examiner period: <strong>${start }</strong> to<strong> ${end }</strong>.</c:if>
 								<c:if test="${timeType==5 }">
-									You can choose your examiner now! Open time for choose examiner: ${start } to ${end }.
+									You can choose your examiner now! Open time for Choose Examiner period: <strong>${start }</strong> to<strong> ${end }</strong>.
 								</c:if>
 								<c:if test="${timeType==6 }">
-									Choose presentation time will start from ${start } to ${end }.
+									Open time for Choose Presentation Time period:<strong> ${start }</strong> to <strong>${end }</strong>.
 								</c:if>
 								<c:if test="${timeType==7 }">
-									You can choose your presentation time now! Choose presentation time will start from ${start } to ${end }.
+									You can choose your Presentation Time now! Open time for Choose Presentation Time period:<strong> ${start } </strong>to<strong> ${end } </strong>.
 								</c:if>
 								<c:if test="${timeType==9 }">
-									You can view all topics information now! Select topic time: to be continued.
+									You can view all topics information now! Open time for Select Topic period: To be continued.
 								</c:if>
-								<c:if test="${timeType==10 }">Choose examiner time: to be continued.</c:if>
-								<c:if test="${timeType==11 }">Choose presentation time: to be continued.</c:if>
+								<c:if test="${timeType==10 }">Open time for Choose Examiner period: To be continued.</c:if>
+								<c:if test="${timeType==11 }">Open time for Choose Presentation Time: To be continued.</c:if>
 							</div>
 						</c:otherwise>
 					</c:choose>
@@ -162,25 +154,19 @@
 									<c:if test="${timeType==0 }">
 										<div class="alert alert-error alert-block">
 											<h4 class="alert-heading">Sorry!</h4>
-											The FYP Coordination System has not open yet. Please come back later.
+											The FYP Coordination System has not open yet. Please come back later.									
 										</div>
 									</c:if>
 									<c:if test="${timeType==1||timeType==9 }">
 										<div class="alert alert-error alert-block">
 											<h4 class="alert-heading">Sorry!</h4>
-											The final year project topics are still in preparation. You can view topic on
-											<stong>${end }</stong>
-											. Please come back later.
+											The final year project topics are still in preparation. You can view topic on <stong>${end }</stong>. Please come back later.
 										</div>
 									</c:if>
 									<c:if test="${timeType==2 }">
 										<div class="alert alert-block">
 											<h4 class="alert-heading">Sorry!</h4>
-											Select topic time has not start yet. Please pay attention to select topic time will start from
-											<strong>${start }</strong>
-											to
-											<strong>${end }</strong>
-											.
+											Select topic time has not start yet. Please pay attention to select topic time will start from <strong>${start }</strong> to <strong>${end }</strong>.
 										</div>
 									</c:if>
 								</c:when>
@@ -189,12 +175,8 @@
 
 									<c:if test="${timeType==3 && chooseTopic=='false' }">
 										<div class="alert alert-info alert-block">
-											<h4 class="alert-heading">Select Topic!</h4>
-											Select topic time has started. Please click
-											<a href="#">
-												<strong>here</strong>
-											</a>
-											to select your FYP topic.
+											<h4 class="alert-heading">News!</h4>
+											You can select your FYP topic now! Please click<a href="#"> <strong>here</strong> </a>to select.
 										</div>
 									</c:if>
 
@@ -227,7 +209,7 @@
 														<c:if test="${chooseExaminer=='true' }">${Examiner }</c:if>
 														<c:if test="${chooseExaminer=='false' }">
 															<c:if test="${timeType==4 }">
-																<span class="label label-info">Choose examiner time will start from ${start } to ${end }</span>
+																<span class="label label-info">Open time for Choose Examiner period: ${start } to ${end }</span>
 															</c:if>
 															<c:if test="${timeType==10 }">
 																<span class="label">Start Later</span>
@@ -253,7 +235,7 @@
 																</span>
 															</c:if>
 															<c:if test="${timeType==11 }">
-																<span class="label">Start Later</span>
+																<span class="label">To be announced. Please come back later.</span>
 															</c:if>
 															<c:if test="${timeType==7 }">
 																<span class="label label-success">

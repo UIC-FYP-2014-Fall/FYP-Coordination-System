@@ -239,6 +239,20 @@ $(document).ready(function() {
 	
 	} );
 	
+	$('#topicTable').dataTable( {
+		"sDom": "<'row'<'span5'l><'span7'f>r>t<'row'<'span3'i><'span9'p>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sLengthMenu": "_MENU_ records per page"
+		},
+		"aoColumnDefs": [{
+				"aTargets": [4],
+				"bSortable":false,
+				"bFilter":false
+            }]
+	
+	} );
+	
 	
 
 } );
