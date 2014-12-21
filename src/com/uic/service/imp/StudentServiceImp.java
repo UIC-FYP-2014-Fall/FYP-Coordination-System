@@ -11,6 +11,7 @@ import com.uic.domain.Student;
 import com.uic.domain.StuTopic;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
+import com.uic.domain.Timeslot;
 import com.uic.domain.Topic;
 import com.uic.service.inter.StudentServiceInter;
 import com.uic.service.inter.TeachersServiceInter;
@@ -296,6 +297,20 @@ public class StudentServiceImp extends BaseServiceImp implements
 		
 		
 		return al;
+	}
+
+	@Override
+	public String getPreTimeByStudentId(String sid) {
+		// TODO Auto-generated method stub
+		String stuTime="";
+		Student student = getStudentById(sid);
+		
+		String hql="from Timeslot where student_id=?";
+		String[] parameters={student.getId().toString()};
+		Timeslot time= (Timeslot)getUniqueObject(hql, parameters);
+		stuTime=getStudentPreTime(time.getWeek(), time.getDay(), time.getTime());
+		
+		return stuTime;
 	}
 
 }

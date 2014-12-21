@@ -74,9 +74,13 @@ public class ExportAction extends DispatchAction {
 					tb.setSupervisor(supervisors);
 					tb.setObserver(studentServiceInter.getObserver(stuAl.get(i).getSid()).getName());
 					
-					//tb.setDatetime();
+					tb.setDatetime(studentServiceInter.getPreTimeByStudentId(stuAl.get(i).getSid()));
+					tb.setExaminer(studentServiceInter.getObserver(stuAl.get(i).getSid()).getName());
+					
+					preList.add(tb);
 					
 				}
+				request.setAttribute("PreTimeList", preList);
 				
 				
 			}else{

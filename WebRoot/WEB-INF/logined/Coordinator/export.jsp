@@ -143,7 +143,7 @@
 										Export
 									</button>
 								</c:if>
-								<c:if test="${TimetableState=='false' }">
+								<c:if test="${TimetableState=='true' }">
 									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="preTable">
 										<thead>
 											<tr>
@@ -157,15 +157,18 @@
 											</tr>
 										</thead>
 										<tbody>
+										<c:forEach items="${PreTimeList }" var="preStudent">
 											<tr>
-												<td>g130300035</td>
-												<td>Sam</td>
-												<td>Judy</td>
-												<td>Gigi</td>
-												<td>2014-12-24 14:30:00-15:00:00</td>
-												<td>ZhouHaiChuan</td>
-												<td>E204</td>
+												<td>${preStudent.sid }</td>
+												<td>${preStudent.sName }</td>
+												<td>${preStudent.supervisor }</td>
+												<td>${preStudent.observer }</td>
+												<td>${preStudent.datetime }</td>
+												<td>${preStudent.examiner }</td>
+												<td>${preStudent.classroom }</td>
 											</tr>
+										</c:forEach>
+											
 											
 										</tbody>
 									</table>

@@ -1,6 +1,7 @@
 package com.uic.service.inter;
 
 import com.uic.domain.Teacher;
+import com.uic.domain.Timeslot;
 import com.uic.domain.Topic;
 
 import java.util.ArrayList;
@@ -37,5 +38,7 @@ public interface StudentServiceInter extends BaseInterface {
 	public ArrayList<Teacher> getCanChooseExaminer(String sid);
 	
 	public ArrayList<Student> getAllStudent();
+	
+	public String getPreTimeByStudentId(String sid);
 
 }
