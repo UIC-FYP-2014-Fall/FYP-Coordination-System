@@ -66,30 +66,24 @@ public class ExportAction extends DispatchAction {
 					tb.setSid(stuAl.get(i).getSid());
 					tb.setsName(stuAl.get(i).getName());
 					
-					String supervisors = "";
-					ArrayList<Teacher> al = studentServiceInter.getSupervisor(stuAl.get(i));
-					
-					if(al.size()>1){
-						for(int j=0;j<al.size();j++){
-							supervisors = al.get(j).getName()+", "+supervisors;
-						}
-					}else{
-						supervisors = al.get(0).getName();
-					}
-					
-					
-					
-					tb.setSupervisor(supervisors);
-					
-					tb.setObserver(studentServiceInter.getObserver(stuAl.get(i).getSid()).getName());
-					
-					tb.setDatetime(studentServiceInter.getPreTimeByStudentId(stuAl.get(i).getId().toString()));
-					
+					String supervisors = "";										
 					//tb.setExaminer(studentServiceInter.getExaminer(stuAl.get(i).getSid()).getName());
 					String examiner = "";
 					try {
-						 examiner = studentServiceInter.getExaminer(stuAl.get(i).getSid()).getName();
-						 tb.setExaminer(examiner);
+						ArrayList<Teacher> al = studentServiceInter.getSupervisor(stuAl.get(i));
+						
+						if(al.size()>1){
+							for(int j=0;j<al.size();j++){
+								supervisors = al.get(j).getName()+", "+supervisors;
+							}
+						}else{
+							supervisors = al.get(0).getName();
+						}
+						tb.setSupervisor(supervisors);
+						tb.setObserver(studentServiceInter.getObserver(stuAl.get(i).getSid()).getName());
+						tb.setDatetime(studentServiceInter.getPreTimeByStudentId(stuAl.get(i).getId().toString()));
+						examiner = studentServiceInter.getExaminer(stuAl.get(i).getSid()).getName();
+						tb.setExaminer(examiner);
 
 					} catch (Exception e) {
 						// TODO: handle exception

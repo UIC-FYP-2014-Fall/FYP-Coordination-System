@@ -93,8 +93,9 @@ public class GoStudentMainAction extends DispatchAction {
 			//check whether student choose presentation time
 			if(studentSericeInter.checkPretimeState(stu.getSid())){
 				request.setAttribute("choosePretime", "true");
+				String timePre = studentSericeInter.getPreTimeByStudentId(stu.getId().toString());
 				//get student examiner info
-				request.setAttribute("Pretime", "2014-12-29 09:00:00-09:30:00");
+				request.setAttribute("Pretime", timePre);
 			}else{
 				request.setAttribute("choosePretime", "false");
 			}
