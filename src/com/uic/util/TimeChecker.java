@@ -21,7 +21,7 @@ public class TimeChecker {
 		String state2 = ph.getProperties("ChooseTopicDateTimeState");
 		String state3 = ph.getProperties("ChooseExaminersDateTimeState");
 		//String state4 = ph.getProperties("PreDateTimeState");
-		String state4 = ph.getProperties("ChoosePresentationStartDateTime");
+		String state4 = ph.getProperties("ChoosePresentationDateTimeState");
 
 		if (state1 != null) {
 			String UTstartDateTime = ph
