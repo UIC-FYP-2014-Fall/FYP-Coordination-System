@@ -4,6 +4,9 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +15,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.uic.domain.ObsTopic;
+import com.uic.domain.Stuexaminer;
+import com.uic.domain.Teacher;
+import com.uic.service.imp.FYPServiceImp;
+import com.uic.service.imp.StudentServiceImp;
 import com.uic.util.BaseUtil;
 import com.uic.util.PropertiesHelper;
 /** 
@@ -46,6 +54,9 @@ public class TeacherPageControlAction extends DispatchAction {
 		System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+			FYPServiceImp fypService=new FYPServiceImp();
+			StudentServiceImp studentService = new StudentServiceImp();
+			Teacher teacher = (Teacher)request.getSession().getAttribute("teacherinfo");
 			//upload topic time
 			String uploadTopicStart = ph.getProperties("UploadTopicsStartDateTime");
 			String uploadTopicEnd = ph.getProperties("UploadTopicsEndDateTime");
@@ -82,6 +93,22 @@ public class TeacherPageControlAction extends DispatchAction {
 				}
 			}else{
 				request.setAttribute("choosePreTime", "To Be Determined.");
+			}
+			
+			
+				String showObserver = ph.getProperties("ChooseExaminersStartDateTime");
+				String showExaminer = ph.getProperties("ChooseExaminersEndDateTime");
+			if(showObserver!=null&&showExaminer!=null){
+				if(BaseUtil.todayIsAfter(showObserver)){
+					request.setAttribute("showObserver", "true");
+					List<ObsTopic> obsTopicList = fypService.getObsTopicByTeacherId(teacher.getId().toString());
+					request.setAttribute("obsTopicList", obsTopicList);
+				}
+				if(BaseUtil.todayIsAfter(showExaminer)){
+					request.setAttribute("showExaminer", "true");
+					List<Stuexaminer> stuExaminerList=studentService.getExaminerByTeacherId(teacher.getId().toString());
+					request.setAttribute("stuExaminerList", stuExaminerList);
+				}
 			}
 			return mapping.findForward("mainPage");
 		}else{

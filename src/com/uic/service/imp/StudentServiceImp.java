@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import com.uic.domain.ObsTopic;
 import com.uic.domain.Student;
 import com.uic.domain.StuTopic;
+import com.uic.domain.Stuexaminer;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Timeslot;
@@ -140,7 +141,20 @@ public class StudentServiceImp extends BaseServiceImp implements
 		}
 		return teacher;
 	}
-
+	public List<Stuexaminer> getExaminerByTeacherId(String teacherId) {
+		// TODO Auto-generated method stub
+		String hql = "from Stuexaminer where teacher_id=?";
+		String[] parameters = { teacherId };
+		try {
+			List<Stuexaminer> stuexaminerList = getListObject(hql, parameters);
+			return stuexaminerList;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 
 
 
@@ -302,14 +316,19 @@ public class StudentServiceImp extends BaseServiceImp implements
 	@Override
 	public String getPreTimeByStudentId(String sid) {
 		// TODO Auto-generated method stub
-		String stuTime="";
+		String stuTime="";		
 		//Student student = getStudentById(sid);
 		String hql="from Timeslot where student_id=?";
 		String[] parameters={sid};
 		
-		Timeslot time= (Timeslot)getUniqueObject(hql, parameters);
+		List<Timeslot> tl= getListObject(hql, parameters);
+		Timeslot time = new Timeslot();
+		if(tl.size()>0){
+			time = tl.get(0);
+			stuTime=getStudentPreTime(time.getWeek(), time.getDay(), time.getTime());
+		}
 		//System.out.println(time.getStudent().getName());
-		stuTime=getStudentPreTime(time.getWeek(), time.getDay(), time.getTime());
+		
 		
 		return stuTime;
 	}
