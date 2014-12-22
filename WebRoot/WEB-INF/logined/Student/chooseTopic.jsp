@@ -218,7 +218,11 @@
 												}else{
 													out.println("<td><form action=\"" + request.getContextPath() + "/chooseTopic.do?flag=dropTopic\" method=\"post\">");
 													out.println("<input type=\"hidden\" name=\"topicId\" value=\"" + stuTopic.getTopic().getFid() + "\"/>");
-													out.println("<input type=\"submit\" value=\"Drop\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
+													//out.println("<input type=\"submit\" value=\"Drop\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
+													out.println("<a class=\"btn btn-danger btn-mini\" data-target=\"#confirm\" data-toggle=\"modal\"> <i class=\"icon-remove icon-white\"></i> Drop</a>");
+													out.println("<div class=\"modal hide fade\" id=\"confirm\"><div class=\"modal-header\"><h4>Drop</h4></div>");
+													out.println("<div class=\"modal-body\">Are you sure?</div>");
+													out.println("<div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cancel</button><a href=\""+request.getContextPath() + "/chooseTopic.do?flag=dropTopic&topicId="+stuTopic.getTopic().getFid()+"\" class=\"btn btn-danger\">Drop</a></div></div>");
 													out.println("</form></td>");
 													
 												}
