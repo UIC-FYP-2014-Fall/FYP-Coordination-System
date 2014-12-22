@@ -123,8 +123,8 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 	@Override
 	public boolean saveQuota(String id, String quota) {
 		// TODO Auto-generated method stub
-		String hql = "update Teacher set quota=? where id=?";
-		String[] parameters={quota,id};
+		String hql = "update Teacher set quota=?,quotaleft=? where id=?";
+		String[] parameters={quota,quota,id};
 		try {
 			HibernateUtil.executeUpdateOpenInView(hql, parameters);
 			return true;

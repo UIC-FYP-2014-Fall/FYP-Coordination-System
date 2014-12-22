@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js">
-
+<%@ page import="com.uic.domain.ObsTopic"%>
+<%@ page import="com.uic.domain.Stuexaminer" %>
+<%@ page import="java.util.List;"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <title>FYP Coordination System</title>
 <!-- Bootstrap -->
@@ -81,21 +84,12 @@
 				</ul>
 			</div>
 
-			<!--/span-->
+	
 
 			<div class="span9" id="content">
 				<div class="row-fluid">
 
 					<!-- block -->
-
-					<div class="alert alert-info alert-block">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<h4 class="alert-heading">Info!</h4>
-						Best check yo self, you're not looking too good. Nulla vitae elit
-						libero, a pharetra augue. Praesent commodo cursus magna, vel
-						scelerisque nisl consectetur et.
-					</div>
-
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">Schedule</div>
@@ -109,26 +103,77 @@
 									</tr>
 								</thead>
 								<tbody>
-								<tr>
-									<td>Upload/Edit Topic</td>
-									<td>${requestScope.uploadTopicTime}</td>
-								</tr>
-							
-								<tr>
-									<td>View Student's choice & Choose Observer</td>
-									<td>${requestScope.chooseTopicTime}</td>
-								</tr>
-								<tr>
-									<td>Select Available Time</td>
-									<td>${requestScope.choosePreTime}</td>
-								</tr>
+									<tr>
+										<td>Upload/Edit Topic</td>
+										<td>${requestScope.uploadTopicTime}</td>
+									</tr>
+
+									<tr>
+										<td>View Student's choice & Choose Observer</td>
+										<td>${requestScope.chooseTopicTime}</td>
+									</tr>
+									<tr>
+										<td>Select Available Time</td>
+										<td>${requestScope.choosePreTime}</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
+					
+					
+					<c:if test="${requestScope.showObserver=='true' }">
+					<div class="block">
+						<div class="navbar navbar-inner block-header">
+							<div class="muted pull-left">Observation</div>
+						</div>
+						<div class="block-content collapse in">
+							<table class="table table-striped table-bordered" id="groupTopic">
+								<thead>
+									<tr>
+										<th>Project</th>
+									</tr>
+								</thead>
+								<tbody>
+								<%
+									List<ObsTopic> obsTopicList = (List<ObsTopic>)request.getAttribute("obsTopicList");
+									for(ObsTopic obsTopic:obsTopicList){
+										out.println("<tr><td>"+obsTopic.getTopic().getTitle()+"</td></tr>");
+									}
+								%>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					</c:if>
+					<c:if test="${requestScope.showExaminer=='true' }">
+					<div class="block">
+						<div class="navbar navbar-inner block-header">
+							<div class="muted pull-left">Examination</div>
+						</div>
+						<div class="block-content collapse in">
+							<table class="table table-striped table-bordered" id="groupTopic">
+								<thead>
+									<tr>
+										<th>Student</th>
+									</tr>
+								</thead>
+								<tbody>
+									<%
+										List<Stuexaminer> stuExaminerList = (List<Stuexaminer>)request.getAttribute("stuExaminerList");
+										for(Stuexaminer stuExaminer:stuExaminerList){
+											out.println("<tr><td>"+stuExaminer.getStudent().getSid()+" "+stuExaminer.getStudent().getName()+"</td></tr>");
+										}
+									%>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					</c:if>
+					
+					
 				</div>
 			</div>
-
 		</div>
 		<hr>
 	</div>
