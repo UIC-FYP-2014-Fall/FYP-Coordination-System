@@ -151,7 +151,7 @@
 												<th>English Name</th>
 												<th>Supervisor</th>
 												<th>Observer</th>
-												<th>Date</th>
+												<th>Date Time</th>
 												<th>Examiner</th>
 												<th>Classroom</th>
 											</tr>
