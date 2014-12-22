@@ -199,7 +199,9 @@
 													<td>
 														<strong>Observer</strong>
 													</td>
-													<td>WF Su</td>
+													<td
+														<c:if test="${chooseObserver=='true' }">${Observer }</c:if>
+													</td>
 												</tr>
 												<tr>
 													<td>

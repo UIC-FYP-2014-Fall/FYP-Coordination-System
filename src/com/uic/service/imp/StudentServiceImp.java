@@ -333,4 +333,23 @@ public class StudentServiceImp extends BaseServiceImp implements
 		return stuTime;
 	}
 
+	@Override
+	public boolean checkObserverState(String sid) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		String hql = "select o.observer from ObsTopic as o, StuTopic as s where s.topic.fid=o.topic.fid and s.student.sid=?";
+		String[] parameters = { sid };
+		try {
+			Object obj = getUniqueObject(hql, parameters);
+			if (obj != null) {
+				flag = true;
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }

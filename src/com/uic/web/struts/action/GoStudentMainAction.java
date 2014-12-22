@@ -78,6 +78,15 @@ public class GoStudentMainAction extends DispatchAction {
 			}else{
 				request.setAttribute("chooseTopic", "false");
 			}
+			//check whether student has observer
+			if(studentSericeInter.checkObserverState(stu.getSid())){
+				request.setAttribute("chooseObserver", "true");
+				//get student observer info
+				Teacher observer = studentSericeInter.getObserver(stu.getSid());
+				request.setAttribute("Observer", observer.getName());
+			}else{
+				request.setAttribute("chooseObserver", "false");
+			}
 			//check whether student choose examiner
 			if(studentSericeInter.checkExaminerState(stu.getSid())){
 				

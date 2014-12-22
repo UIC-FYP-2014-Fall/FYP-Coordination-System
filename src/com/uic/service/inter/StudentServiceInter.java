@@ -19,6 +19,8 @@ public interface StudentServiceInter extends BaseInterface {
 	public boolean checkExaminerState(String sid);
 
 	public boolean checkPretimeState(String sid);
+	
+	public boolean checkObserverState(String sid);
 
 	public Topic getStudentTopic(String sid);
 	
