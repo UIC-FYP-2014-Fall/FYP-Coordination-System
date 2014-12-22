@@ -50,11 +50,12 @@ public class ChooseTopicAction extends DispatchAction {
 		if (request.getSession().getAttribute("role").equals("student")) {
 			// first check if the student choose the topic
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
-			String preStart = ph.getProperties("ChooseTopicStartDateTime");
-			String preEnd = ph.getProperties("ChooseTopicEndDateTime");
-			String timetablePeriod = preStart + " to " + preEnd;
-			if (preStart != null && preEnd != null) {
-				if (BaseUtil.todayIsInPeriod(preStart, preEnd)) {
+			String viewTopicStart = ph.getProperties("UploadTopicsEndDateTime");
+			String chooseTopicStart = ph.getProperties("ChooseTopicStartDateTime");
+			String chooseTopicEnd = ph.getProperties("ChooseTopicEndDateTime");
+			String timetablePeriod = chooseTopicStart + " to " + chooseTopicEnd;
+			if (viewTopicStart != null && chooseTopicEnd != null) {
+				if (BaseUtil.todayIsInPeriod(viewTopicStart, chooseTopicEnd)) {
 					Student curStudent = (Student) request.getSession().getAttribute("studentinfo");
 					FYPServiceImp fypServiceImp = new FYPServiceImp();
 					StudentServiceImp studentService = new StudentServiceImp();
@@ -69,6 +70,7 @@ public class ChooseTopicAction extends DispatchAction {
 						}
 						supervisorList.add(supervisor.toString());
 						request.setAttribute("chooseTopicStart", "true");
+						request.setAttribute("afterChooseTopic", "false");
 						request.setAttribute("supervisorList", supervisorList);
 						request.setAttribute("stuTopic", stuTopic);
 						request.setAttribute("ifStudentHasChoosedTopic", "true");
@@ -84,10 +86,42 @@ public class ChooseTopicAction extends DispatchAction {
 							}
 							supervisorList.add(supervisor.toString());
 						}
-						request.setAttribute("chooseTopicStart", "true");
+						if(BaseUtil.todayIsAfter(chooseTopicStart)){
+							request.setAttribute("state", "chooseTopic");
+							request.setAttribute("chooseTopicStart", "true");
+						}else{
+							request.setAttribute("chooseTopicStart", "true");
+							request.setAttribute("state", "viewTopic");
+						}
+						request.setAttribute("afterChooseTopic", "false");
 						request.setAttribute("ifStudentHasChoosedTopic", "false");
 						request.setAttribute("supervisorList", supervisorList);
 						request.setAttribute("allTopicList", topicList);
+						return mapping.findForward("goChooseTopicUi");
+					}
+				}else if(BaseUtil.todayIsAfter(chooseTopicEnd)){
+					Student curStudent = (Student) request.getSession().getAttribute("studentinfo");
+					FYPServiceImp fypServiceImp = new FYPServiceImp();
+					StudentServiceImp studentService = new StudentServiceImp();
+					if (studentService.checkIfStudentHasChoosedTopic(curStudent.getId().toString())) {
+						StuTopic stuTopic = fypServiceImp.getUniqueStuTopicByStudent(curStudent);
+						System.out.println(stuTopic.getTopic().getFid());
+						ArrayList<String> supervisorList = new ArrayList<String>();
+						ArrayList<TeaTopic> teaTopicList = (ArrayList<TeaTopic>) fypServiceImp.getTeaTopicByTopicId(stuTopic.getTopic().getFid().toString());
+						StringBuffer supervisor = new StringBuffer();
+						for (int j = 0; j < teaTopicList.size(); j++) {
+							supervisor.append(teaTopicList.get(j).getTeacher().getName() + " ");
+						}
+						supervisorList.add(supervisor.toString());
+						request.setAttribute("afterChooseTopic", "true");
+						request.setAttribute("chooseTopicStart", "true");
+						request.setAttribute("supervisorList", supervisorList);
+						request.setAttribute("stuTopic", stuTopic);
+						request.setAttribute("ifStudentHasChoosedTopic", "true");
+						return mapping.findForward("goChooseTopicUi");
+					}else{
+						request.setAttribute("chooseTopicStart", "false");
+						request.setAttribute("timetablePeriod", timetablePeriod);
 						return mapping.findForward("goChooseTopicUi");
 					}
 				}else{
@@ -117,7 +151,6 @@ public class ChooseTopicAction extends DispatchAction {
 			request.setAttribute("curStudent", curStudent);
 			request.setAttribute("allStudentList", allStudentList);
 			request.setAttribute("topic", topic);
-
 			return mapping.findForward("goChooseGroupTopicUi");
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");

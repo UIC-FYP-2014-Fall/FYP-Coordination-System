@@ -166,6 +166,20 @@
 							request.removeAttribute("coordinatorHasNotSetOpenTime");
 						%>
 					</c:if>
+					<c:if test="${requestScope.state=='viewTopic' }">
+						<div class="alert alert-info alert-block">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4 class="alert-heading">Info!</h4>
+							You could view Topic now.
+						</div>
+					</c:if>
+					<c:if test="${requestScope.state=='chooseTopic' }">
+						<div class="alert alert-info alert-block">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4 class="alert-heading">Info!</h4>
+							You could choose Topic now.
+						</div>
+					</c:if>
 					<!-- block -->
 					<c:if test="${requestScope.chooseTopicStart=='true' }">
 					<div class="block">
@@ -188,6 +202,7 @@
 									<tbody>
 										<%
 												ArrayList<String> supervisorList = (ArrayList<String>) request.getAttribute("supervisorList");
+												String afterChooseTopic = (String)request.getAttribute("afterChooseTopic");
 												StuTopic stuTopic = (StuTopic) request.getAttribute("stuTopic");
 												out.println("<tr>");
 												out.println("<td>#</td>");
@@ -198,10 +213,15 @@
 												} else {
 													out.println("<td>Group</td>");
 												}
-												out.println("<td><form action=\"" + request.getContextPath() + "/chooseTopic.do?flag=dropTopic\" method=\"post\">");
-												out.println("<input type=\"hidden\" name=\"topicId\" value=\"" + stuTopic.getTopic().getFid() + "\"/>");
-												out.println("<input type=\"submit\" value=\"Drop\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
-												out.println("</form></td>");
+												if(afterChooseTopic.equals("true")){
+													out.println("<td></td>");
+												}else{
+													out.println("<td><form action=\"" + request.getContextPath() + "/chooseTopic.do?flag=dropTopic\" method=\"post\">");
+													out.println("<input type=\"hidden\" name=\"topicId\" value=\"" + stuTopic.getTopic().getFid() + "\"/>");
+													out.println("<input type=\"submit\" value=\"Drop\" class=\"btn btn-primary btn-mini\" data-toggle=\"confirmation-singleton\" data-placement=\"left\"/>");
+													out.println("</form></td>");
+													
+												}
 												out.println("</tr>");
 										%>
 									</tbody>
@@ -225,19 +245,24 @@
 									<tbody>
 										<%
 											ArrayList<Topic> topicList = (ArrayList<Topic>) request.getAttribute("allTopicList");
-												ArrayList<String> supervisorList = (ArrayList<String>) request.getAttribute("supervisorList");
-												System.out.println("topicList size " + topicList.size());
-												for (int i = 0; i < topicList.size(); i++) {
-													int index = i + 1;
-													out.println("<tr>");
-													out.println("<td>" + index + "</td>");
-													out.println("<td><a href=\"#topic" + index + "\" data-toggle=\"modal\">" + topicList.get(i).getTitle() + "</a></td>");
-													out.println("<td>" + supervisorList.get(i) + "</td>");
-													if (topicList.get(i).getIndividual()) {
-														out.println("<td>Individual</td>");
-													} else {
-														out.println("<td>Group</td>");
-													}
+											ArrayList<String> supervisorList = (ArrayList<String>) request.getAttribute("supervisorList");
+											String state = (String)request.getAttribute("state");
+											System.out.println("topicList size " + topicList.size());
+											for (int i = 0; i < topicList.size(); i++) {
+												int index = i + 1;
+												out.println("<tr>");
+												out.println("<td>" + index + "</td>");
+												out.println("<td><a href=\"#topic" + index + "\" data-toggle=\"modal\">" + topicList.get(i).getTitle() + "</a></td>");
+												out.println("<td>" + supervisorList.get(i) + "</td>");
+												if (topicList.get(i).getIndividual()) {
+													out.println("<td>Individual</td>");
+												} else {
+													out.println("<td>Group</td>");
+												}
+												
+												if(state.equals("viewTopic")){
+													out.println("<td></td>");
+												}else{
 													if (topicList.get(i).getIsfull()) {
 														out.println("<td><span class=\"label label-important\">Full</span></td>");
 													} else {
@@ -253,8 +278,9 @@
 															out.println("</form></td>");
 														}
 													}
-													out.println("</tr>");
 												}
+												out.println("</tr>");
+											}
 										%>
 									</tbody>
 								</table>
