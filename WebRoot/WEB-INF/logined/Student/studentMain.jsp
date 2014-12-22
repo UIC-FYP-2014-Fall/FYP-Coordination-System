@@ -199,8 +199,12 @@
 													<td>
 														<strong>Observer</strong>
 													</td>
-													<td
-														<c:if test="${chooseObserver=='true' }">${Observer }</c:if>
+													<td>
+														<c:if test="${chooseObserver=='true' }">${stuObserver }</c:if>
+														<c:if test="${chooseObserver=='false' }">
+															<span class="label label-info">To Be Determined</span>
+														</c:if>
+														
 													</td>
 												</tr>
 												<tr>

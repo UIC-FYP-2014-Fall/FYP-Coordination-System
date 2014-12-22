@@ -78,15 +78,18 @@ public class GoStudentMainAction extends DispatchAction {
 			}else{
 				request.setAttribute("chooseTopic", "false");
 			}
+			
 			//check whether student has observer
 			if(studentSericeInter.checkObserverState(stu.getSid())){
 				request.setAttribute("chooseObserver", "true");
 				//get student observer info
 				Teacher observer = studentSericeInter.getObserver(stu.getSid());
-				request.setAttribute("Observer", observer.getName());
+				request.setAttribute("stuObserver", observer.getName());
 			}else{
 				request.setAttribute("chooseObserver", "false");
+				//System.out.println("chooseObserver: False");
 			}
+			
 			//check whether student choose examiner
 			if(studentSericeInter.checkExaminerState(stu.getSid())){
 				
@@ -99,6 +102,7 @@ public class GoStudentMainAction extends DispatchAction {
 			}else{
 				request.setAttribute("chooseExaminer", "false");
 			}
+			
 			//check whether student choose presentation time
 			if(studentSericeInter.checkPretimeState(stu.getSid())){
 				request.setAttribute("choosePretime", "true");
