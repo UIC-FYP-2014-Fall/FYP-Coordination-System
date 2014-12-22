@@ -171,7 +171,7 @@
 											<c:if test="${requestScope.isUploadTopicDate=='true' }">
 												<th>Operation</th>
 											</c:if>
-											<c:if test="${requestScope.isUploadTopicDate=='false' }">
+											<c:if test="${requestScope.isUploadTopicDate=='after' }">
 												<th>Students</th>
 											</c:if>
 										</tr>
@@ -183,11 +183,14 @@
 												System.out.println("upload topic state " + uploadState);
 												ArrayList<TeaTopic> indTeaTopic = (ArrayList<TeaTopic>) request.getAttribute("indTeaTopic");
 												ArrayList<String> indSupervisor = (ArrayList<String>) request.getAttribute("indSupervisor");
+												ArrayList<String> indStudent = (ArrayList<String>) request.getAttribute("indStudent");
 												System.out.println("get List size " + indTeaTopic.size());
+												int index = 0;
 												for (int i = 0; i < indTeaTopic.size(); i++) {
 													if (indTeaTopic.get(i).getTopic().getIndividual()) {
+														index = i+1;
 														out.println("<tr>");
-														out.println("<td>" + i + "</td>");
+														out.println("<td>" + index + "</td>");
 														out.println("<td>" + indTeaTopic.get(i).getTopic().getTitle() + "</td>");
 														out.println("<td>" + indSupervisor.get(i) + "</td>");
 														if (indTeaTopic.get(i).getTopic().getIndividual()) {
@@ -200,9 +203,15 @@
 															out.println("<td>");
 															if (uploadState.equals("true")) {
 																out.println("<a class=\"btn btn-primary btn-mini\" href=\"" + request.getContextPath() + "/editFYP.do?flag=editTopicUi&eid=" + indTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-pencil icon-white\"></i> Edit</a>");
-																out.println("<a class=\"btn btn-danger btn-mini\" data-confirm=\"Are you sure to delete the topic?\" href=\"" + request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + indTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-remove icon-white\"></i> Delete</a>");
+																/* out.println("<a class=\"btn btn-danger btn-mini\" data-confirm=\"Are you sure to delete the topic?\" href=\"" + request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + indTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-remove icon-white\"></i> Delete</a>"); */
+																out.println("<a class=\"btn btn-danger btn-mini\" data-target=\"#confirm"+indTeaTopic.get(i).getTopic().getFid()+"\" data-toggle=\"modal\"> <i class=\"icon-remove icon-white\"></i> Delete</a>");
+																out.println("<div class=\"modal hide fade\" id=\"confirm"+indTeaTopic.get(i).getTopic().getFid()+"\"><div class=\"modal-header\"><h4>Delete</h4></div><div class=\"modal-body\">Are you sure?</div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cancel</button><a href=\""+request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + indTeaTopic.get(i).getTopic().getFid() +"\" class=\"btn btn-danger\">Delete</a></div></div>");
 															} else {
-																out.println("Student who choose this project");
+																if(uploadState.equals("before")){
+																	out.println("None");
+																}else{
+																	out.println(indStudent.get(i));
+																}
 															}
 															out.println("</td>");
 														}
@@ -216,6 +225,9 @@
 								</table>
 							</div>
 						</div>
+						
+						
+						
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
 								<div class="muted pull-left">Grop Topic List</div>
@@ -232,19 +244,22 @@
 											<c:if test="${requestScope.isUploadTopicDate=='true' }">
 												<th>Operation</th>
 											</c:if>
-											<c:if test="${requestScope.isUploadTopicDate=='false' }">
+											<c:if test="${requestScope.isUploadTopicDate=='after' }">
 												<th>Students</th>
 											</c:if>
 										</tr>
 									</thead>
 									<tbody>
 										<%
-											ArrayList<TeaTopic> groTeaTopic = (ArrayList<TeaTopic>) request.getAttribute("groTeaTopic");
+												ArrayList<TeaTopic> groTeaTopic = (ArrayList<TeaTopic>) request.getAttribute("groTeaTopic");
 												ArrayList<String> groSupervisor = (ArrayList<String>) request.getAttribute("groSupervisor");
+												ArrayList<String> groStudent = (ArrayList<String>) request.getAttribute("groStudent");
+												index=0;
 												for (int i = 0; i < groTeaTopic.size(); i++) {
 													if (!groTeaTopic.get(i).getTopic().getIndividual()) {
+														index=i+1;
 														out.println("<tr>");
-														out.println("<td>" + i + "</td>");
+														out.println("<td>" + index + "</td>");
 														out.println("<td>" + groTeaTopic.get(i).getTopic().getTitle() + "</td>");
 														out.println("<td>" + groSupervisor.get(i) + "</td>");
 														if (groTeaTopic.get(i).getTopic().getIndividual()) {
@@ -257,9 +272,15 @@
 															out.println("<td>");
 															if (uploadState.equals("true")) {
 																out.println("<a class=\"btn btn-primary btn-mini\" href=\"" + request.getContextPath() + "/editFYP.do?flag=editTopicUi&eid=" + groTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-pencil icon-white\"></i> Edit</a>");
-																out.println("<a class=\"btn btn-danger btn-mini\" data-confirm=\"Are you sure to delete the topic?\" href=\"" + request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + groTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-remove icon-white\"></i> Delete</a>");
+																//out.println("<a class=\"btn btn-danger btn-mini\" data-confirm=\"Are you sure to delete the topic?\" href=\"" + request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + groTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-remove icon-white\"></i> Delete</a>");
+																out.println("<a class=\"btn btn-danger btn-mini\" data-target=\"#confirm"+groTeaTopic.get(i).getTopic().getFid()+"\" data-toggle=\"modal\"> <i class=\"icon-remove icon-white\"></i> Delete</a>");
+																out.println("<div class=\"modal hide fade\" id=\"confirm"+groTeaTopic.get(i).getTopic().getFid()+"\"><div class=\"modal-header\"><h4>Delete</h4></div><div class=\"modal-body\">Are you sure?</div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cancel</button><a href=\""+request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + groTeaTopic.get(i).getTopic().getFid() +"\" class=\"btn btn-danger\">Delete</a></div></div>");
 															} else {
-																out.println("Student who choose this project");
+																if(uploadState.equals("before")){
+																	out.println("None");
+																}else{
+																	out.println(groStudent.get(i));
+																}
 															}
 															out.println("</td>");
 														}

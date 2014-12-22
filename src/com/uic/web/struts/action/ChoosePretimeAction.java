@@ -48,12 +48,15 @@ public class ChoosePretimeAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("student")) {
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
+			String selectPreTimeStart = ph.getProperties("ChoosePresentationStartDateTime");
+			String selectPreTimeEnd = ph.getProperties("ChoosePresentationEndDateTime");
 			String preStart = ph.getProperties("PreStartDateTime");
 			String preEnd = ph.getProperties("PreEndDateTime");
-			String timetablePeriod = preStart + " to " + preEnd;
-			if (preStart != null && preEnd != null) {
-				if (BaseUtil.todayIsInPeriod(preStart, preEnd)) {
+			String timetablePeriod = selectPreTimeStart + " to " + selectPreTimeEnd;
+			if (selectPreTimeStart != null && selectPreTimeEnd != null) {
+				if (BaseUtil.todayIsInPeriod(selectPreTimeStart, selectPreTimeEnd)) {
 					// check if the student have been select a time
+					System.out.println("is in the period.");
 					Student student = (Student) request.getSession().getAttribute("studentinfo");
 					TimetableServiceImp timetableService = new TimetableServiceImp();
 					StudentServiceImp studentService = new StudentServiceImp();
@@ -145,7 +148,7 @@ public class ChoosePretimeAction extends DispatchAction {
 		supervisor.add(observer);
 		boolean flag = false;
 		for (int i = 0; i < supervisor.size(); i++) {
-			flag = timetableService.checkIfTimeHaveBeenSelected(observer, timeslot);
+			flag = timetableService.checkIfTimeHaveBeenSelected(supervisor.get(i), timeslot);
 		}
 
 		if (flag) {

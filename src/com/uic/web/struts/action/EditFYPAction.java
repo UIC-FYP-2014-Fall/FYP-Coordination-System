@@ -53,7 +53,6 @@ public class EditFYPAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		if(request.getSession().getAttribute("role").equals("teacher")){
 			FYPServiceImp fypServiceImp=new FYPServiceImp();
-			
 			Teacher teacher=(Teacher)request.getSession().getAttribute("teacherinfo");
 			PropertiesHelper ph = new PropertiesHelper(
 					"/WEB-INF/config/FYP-system.properties");
@@ -65,7 +64,11 @@ public class EditFYPAction extends DispatchAction {
 				if (BaseUtil.todayIsInPeriod(start, end)) {
 					request.setAttribute("isUploadTopicDate", "true");
 				}else{
-					request.setAttribute("isUploadTopicDate", "false");
+					if(BaseUtil.todayIsBefore(start)){
+						request.setAttribute("isUploadTopicDate", "before");
+					}else{
+						request.setAttribute("isUploadTopicDate", "after");
+					}
 				}
 			}else{
 				request.setAttribute("noUpLoadTime", "true");
@@ -73,6 +76,8 @@ public class EditFYPAction extends DispatchAction {
 			}
 			List<TeaTopic> teaTopicList= fypServiceImp.getTeaTopic(teacher.getId().toString());
 			System.out.println("send List size "+ teaTopicList.size());
+			
+			//get topiclist
 			ArrayList<TeaTopic> indTeaTopic = new ArrayList<TeaTopic>();
 			ArrayList<TeaTopic> groTeaTopic = new ArrayList<TeaTopic>();
 			
@@ -83,7 +88,7 @@ public class EditFYPAction extends DispatchAction {
 					groTeaTopic.add(teaTopic);
 				}
 			}
-			
+			//get supervisor
 			ArrayList<String> indSupervisor=new ArrayList<String>();
 			ArrayList<String> groSupervisor=new ArrayList<String>();
 			
@@ -95,7 +100,24 @@ public class EditFYPAction extends DispatchAction {
 				String groSuperv=fypServiceImp.getSupervisorsByTopicId(groTopic.getTopic().getFid().toString());
 				groSupervisor.add(groSuperv);
 			}
+			
+			//get student who choose the topic.
+			ArrayList<String> indStudent= new ArrayList<String>();
+			ArrayList<String> groStudent= new ArrayList<String>();
+			
+			for(TeaTopic indTopic:indTeaTopic ){
+				String indStu=fypServiceImp.getStudentByTopicId(indTopic.getTopic().getFid().toString());
+				indStudent.add(indStu);
+			}
+			for(TeaTopic groTopic:groTeaTopic ){
+				String groStu=fypServiceImp.getStudentByTopicId(groTopic.getTopic().getFid().toString());
+				groStudent.add(groStu);
+			}
+			
+			
 			request.setAttribute("noUpLoadTime", "false");
+			request.setAttribute("indStudent", indStudent);
+			request.setAttribute("groStudent", groStudent);
 			request.setAttribute("indTeaTopic", indTeaTopic);
 			request.setAttribute("groTeaTopic", groTeaTopic);
 			request.setAttribute("indSupervisor", indSupervisor);

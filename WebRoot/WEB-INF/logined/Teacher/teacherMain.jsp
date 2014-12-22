@@ -98,7 +98,7 @@
 
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">Students under Supervision</div>
+							<div class="muted pull-left">Schedule</div>
 						</div>
 						<div class="block-content collapse in">
 							<table class="table table-striped table-bordered" id="groupTopic">

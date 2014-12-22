@@ -218,6 +218,21 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 		}
 
 	}
+	
+	public List<StuTopic> getStuTopicByTopicId(String topicId) {
+		// TODO Auto-generated method stub
+		String hql = "from StuTopic where topic_id=?";
+		String[] parameters = { topicId };
+		try {
+			List<StuTopic> stutopic = (List<StuTopic>) getListObject(hql,
+					parameters);
+			return stutopic;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
 	public boolean ifTopicHasBeenChoosenByStu(String topicId) {
 		// TODO Auto-generated method stub
 		String hql = "from StuTopic where topic_id=?";
@@ -366,6 +381,25 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 			return null;
 		}
 		return buff.toString();
+	}
+	
+	
+	public String getStudentByTopicId(String topicId){
+		StringBuffer buff=new StringBuffer();
+		try{
+			List<StuTopic> list= getStuTopicByTopicId(topicId);
+			if(list.size()==0){
+				buff.append("No one choose the topic.");
+			}else{
+				for(StuTopic stuTopic: list){
+					buff.append(stuTopic.getStudent().getSid()+" "+stuTopic.getStudent().getName()+"<br>");
+				}
+			}
+			return buff.toString();
+		}catch(Exception e){
+			e.printStackTrace();
+			return "Obtained Student failed.";
+		}
 	}
 	public List<ObsTopic> getObsTopicByTeacherId(String teacherId) {
 		String hql = "from ObsTopic where observer_id=?";

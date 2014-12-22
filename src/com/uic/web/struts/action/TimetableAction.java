@@ -49,30 +49,38 @@ public class TimetableAction extends DispatchAction {
 		if (request.getSession().getAttribute("role").equals("teacher")) {
 			PropertiesHelper ph = new PropertiesHelper(
 					"/WEB-INF/config/FYP-system.properties");
-			String preStart = ph.getProperties("PreStartDateTime");
-			String preEnd = ph.getProperties("PreEndDateTime");
-			String timetablePeriod = preStart+" to "+preEnd;
-			if (preStart != null && preEnd != null) {
-				String numOfWeek = BaseUtil.getNumOfWeekBetweenTwoDate(preStart,preEnd);
-				String beginWeekDay = BaseUtil.getDayOfWeek(preStart);
-				String endWeekDay = BaseUtil.getDayOfWeek(preEnd);
-				ArrayList<String> timeTableTime = BaseUtil.getEveryWeekStartAndEndDay(preStart, preEnd);
-				TimetableServiceImp timetableService = new TimetableServiceImp();
-				Teacher teacher = (Teacher) request.getSession().getAttribute(
-						"teacherinfo");
-				List<String> timeslots = timetableService
-						.getTimtableOfOneTeacher(teacher);
-				for(int i =0;i<timeTableTime.size();i++){
-					System.out.println(timeTableTime.get(i));
+			String selectPreTimeStart = ph.getProperties("ChooseExaminersEndDateTime");
+			String selectPreTimeEnd = ph.getProperties("ChoosePresentationStartDateTime");
+			String timetablePeriod = selectPreTimeStart+" to "+selectPreTimeEnd;
+			if (selectPreTimeStart != null && selectPreTimeEnd != null) {
+				if(BaseUtil.todayIsInPeriod(selectPreTimeStart, selectPreTimeEnd)){
+					String preStart = ph.getProperties("PreStartDateTime");
+					String preEnd = ph.getProperties("PreEndDateTime");
+					String numOfWeek = BaseUtil.getNumOfWeekBetweenTwoDate(preStart,preEnd);
+					String beginWeekDay = BaseUtil.getDayOfWeek(preStart);
+					String endWeekDay = BaseUtil.getDayOfWeek(preEnd);
+					ArrayList<String> timeTableTime = BaseUtil.getEveryWeekStartAndEndDay(preStart, preEnd);
+					TimetableServiceImp timetableService = new TimetableServiceImp();
+					Teacher teacher = (Teacher) request.getSession().getAttribute(
+							"teacherinfo");
+					List<String> timeslots = timetableService
+							.getTimtableOfOneTeacher(teacher);
+					for(int i =0;i<timeTableTime.size();i++){
+						System.out.println(timeTableTime.get(i));
+					}
+					request.setAttribute("timeTableTime", timeTableTime);
+					request.setAttribute("timetablePeriod", timetablePeriod);
+					request.setAttribute("timetableStart", "true");
+					request.setAttribute("numOfWeek", numOfWeek);
+					request.setAttribute("timeslots", timeslots);
+					request.setAttribute("beginWeekDay", beginWeekDay);
+					request.setAttribute("endWeekDay", endWeekDay);
+					return mapping.findForward("timetableUi");
+				}else{
+					request.setAttribute("timetablePeriod", timetablePeriod);
+					request.setAttribute("timetableStart", "false");
+					return mapping.findForward("timetableUi");
 				}
-				request.setAttribute("timeTableTime", timeTableTime);
-				request.setAttribute("timetablePeriod", timetablePeriod);
-				request.setAttribute("timetableStart", "true");
-				request.setAttribute("numOfWeek", numOfWeek);
-				request.setAttribute("timeslots", timeslots);
-				request.setAttribute("beginWeekDay", beginWeekDay);
-				request.setAttribute("endWeekDay", endWeekDay);
-				return mapping.findForward("timetableUi");
 			} else {
 				request.setAttribute("timetablePeriod", timetablePeriod);
 				request.setAttribute("timetableStart", "false");
@@ -121,7 +129,7 @@ public class TimetableAction extends DispatchAction {
 			for (int week = 1; week <= Integer.parseInt(weeks); week++) {
 				for (int time = 1; time < 8; time++) {
 					for (int day = 1; day <= 5; day++) {
-						// 如果和返回结果匹配，就收入数据库，availabel=true
+						// availabel=true
 						// else availabel =false
 						String tempslot = week + "," + day + "," + time;
 						if (timeslotsArrayList.contains(tempslot)) {

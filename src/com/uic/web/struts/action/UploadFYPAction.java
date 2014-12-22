@@ -111,7 +111,13 @@ public class UploadFYPAction extends DispatchAction {
 		}
 		
 		//if the supervisor contain current teacher
-		if(!teacherlist.contains(teacher)){
+		boolean f = false;
+		for(Teacher t: teacherlist){
+			if(t.getId().intValue()==teacher.getId().intValue()){
+				f=true;
+			}
+		}
+		if(!f){
 			System.out.println("do not contain");
 			request.setAttribute("didNotContainSupervisor", "true");
 			return mapping.findForward("uploaderr");

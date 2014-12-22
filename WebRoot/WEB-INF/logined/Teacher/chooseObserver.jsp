@@ -94,7 +94,7 @@
 						</div>
 						<%
 							request.removeAttribute("setObserverSuccess");
-								request.removeAttribute("setObserverInfo");
+							request.removeAttribute("setObserverInfo");
 						%>
 					</c:if>
 					<c:if test="${requestScope.setObserverSuccess=='false' }">
@@ -105,9 +105,29 @@
 						</div>
 						<%
 							request.removeAttribute("setObserverSuccess");
-								request.removeAttribute("setObserverInfo");
+							request.removeAttribute("setObserverInfo");
 						%>
 					</c:if>
+					<c:if test="${requestScope.chooseObserverStart=='false' }">
+						<div class="alert alert-error">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Error</h4>
+							Coordinator has not set the time.
+						</div>
+					</c:if>
+					<c:if test="${requestScope.chooseObserverStart=='before' }">
+						<div class="alert alert-error">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Error</h4>
+							Choose observer is not available. Please wait for student choose topic.
+						</div>
+					</c:if>
+					<c:if test="${requestScope.chooseObserverStart=='true' }">
+						<div class="alert alert-info alert-block">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4 class="alert-heading">Info!</h4>
+								Choose Observer Start from ${requestScope.chooseObserverPeriod}
+						</div>
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
@@ -130,6 +150,7 @@
 										<%
 											ArrayList<ObsTopic> indObsTopics = (ArrayList<ObsTopic>) request.getAttribute("indObsTopics");
 											ArrayList<String> indObserverList = (ArrayList<String>) request.getAttribute("indObserverList");
+											String afterChooseObserver = (String)request.getAttribute("afterChooseObs");
 											int index=0;
 											for (int i = 0; i < indObsTopics.size(); i++) {
 												index=i+1;
@@ -141,9 +162,17 @@
 												for(int j = 0; j<tempObserver1.length;j++){
 													String[] temp=tempObserver1[j].split(",");
 													if(indObsTopics.get(i).getObserver().getName().equals(temp[1])){
-														out.println("<option value=\"" + indObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\" selected>" + temp[1] + "</option>");
+														if(afterChooseObserver.equals("true")){
+															out.println("<option value=\"" + indObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\" selected>" + temp[1] + "</option>");
+														}else{
+															out.println("<option value=\"" + indObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\" selected>" + temp[1] + "</option>");
+														}
 													}else{
-														out.println("<option value=\"" + indObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\">" + temp[1] + "</option>");
+														if(afterChooseObserver.equals("true")){
+															
+														}else{
+															out.println("<option value=\"" + indObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\">" + temp[1] + "</option>");
+														}
 													}
 												}
 												out.println("</select></td>");
@@ -177,9 +206,17 @@
 												for(int j = 0; j<tempObserver2.length;j++){
 													String[] temp=tempObserver2[j].split(",");
 													if(groObsTopics.get(i).getObserver().getName().equals(temp[1])){
-														out.println("<option value=\"" + groObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\" selected>" + temp[1] + "</option>");
+														if(afterChooseObserver.equals("true")){
+															out.println("<option value=\"" + groObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\" selected>" + temp[1] + "</option>");
+														}else{
+															out.println("<option value=\"" + groObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\" selected>" + temp[1] + "</option>");
+														}
 													}else{
-														out.println("<option value=\"" + groObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\">" + temp[1] + "</option>");
+														if(afterChooseObserver.equals("true")){
+															
+														}else{
+															out.println("<option value=\"" + groObsTopics.get(i).getTopic().getFid() + "," + temp[0] + "\">" + temp[1] + "</option>");
+														}
 													}
 												}
 												
@@ -190,11 +227,14 @@
 									</tbody>
 								</table>
 								<div class="form-actions">
+								<c:if test="${requestScope.afterChooseObs=='false' }">
 									<button type="submit" class="btn btn-primary">Submit</button>
+								</c:if>
 								</div>
 							</form>
 						</div>
 					</div>
+					</c:if>
 				</div>
 			</div>
 

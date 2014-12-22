@@ -1,7 +1,6 @@
 package com.uic.service.inter;
 
 import com.uic.domain.Teacher;
-import com.uic.domain.Timeslot;
 import com.uic.domain.Topic;
 
 import java.util.ArrayList;

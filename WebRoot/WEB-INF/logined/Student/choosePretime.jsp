@@ -250,7 +250,7 @@
 									%>
 									<div class="form-actions">
 										<button type="submit" class="btn btn-primary">Submit</button>
-										<button type="reset" class="btn">Reset</button>
+										
 									</div>
 								</form>
 							</div>

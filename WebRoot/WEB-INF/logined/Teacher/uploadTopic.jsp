@@ -90,7 +90,7 @@
 							<div class="alert alert-error ErrorInfo">
 								<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
 								<h4>Note:</h4>
-								Today is before the upload topic state. The upload topic time is start from ${requestScope.uploadPeriod }
+								Today is before the upload topic state. The upload topic time is started from ${requestScope.uploadPeriod }.
 							</div>
 							<%
 								request.removeAttribute("uploadTopicStart");
