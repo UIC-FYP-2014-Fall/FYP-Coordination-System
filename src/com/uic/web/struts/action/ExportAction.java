@@ -68,14 +68,34 @@ public class ExportAction extends DispatchAction {
 					
 					String supervisors = "";
 					ArrayList<Teacher> al = studentServiceInter.getSupervisor(stuAl.get(i));
-					for(int j=0;j<al.size();j++){
-						supervisors = al.get(j).getName()+", "+supervisors;
+					
+					if(al.size()>1){
+						for(int j=0;j<al.size();j++){
+							supervisors = al.get(j).getName()+", "+supervisors;
+						}
+					}else{
+						supervisors = al.get(0).getName();
 					}
+					
+					
+					
 					tb.setSupervisor(supervisors);
+					
 					tb.setObserver(studentServiceInter.getObserver(stuAl.get(i).getSid()).getName());
 					
 					tb.setDatetime(studentServiceInter.getPreTimeByStudentId(stuAl.get(i).getId().toString()));
-					tb.setExaminer(studentServiceInter.getObserver(stuAl.get(i).getSid()).getName());
+					
+					//tb.setExaminer(studentServiceInter.getExaminer(stuAl.get(i).getSid()).getName());
+					String examiner = "";
+					try {
+						 examiner = studentServiceInter.getExaminer(stuAl.get(i).getSid()).getName();
+						 tb.setExaminer(examiner);
+
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					//System.out.println(examiner);
+					//tb.setExaminer(studentServiceInter.getExaminer(stuAl.get(i).getSid()).getName());
 					
 					preList.add(tb);
 					
