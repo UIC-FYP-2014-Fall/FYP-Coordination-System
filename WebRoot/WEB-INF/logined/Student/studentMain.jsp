@@ -176,7 +176,7 @@
 									<c:if test="${timeType==3 && chooseTopic=='false' }">
 										<div class="alert alert-info alert-block">
 											<h4 class="alert-heading">News!</h4>
-											You can select your FYP topic now! Please click<a href="#"> <strong>here</strong> </a>to select.
+											You can select your FYP topic now! Please click<a href="${pageContext.request.contextPath }/chooseTopic.do?flag=goChooseTopic"> <strong>here</strong> </a>to select.
 										</div>
 									</c:if>
 
