@@ -96,12 +96,13 @@ public class TeacherPageControlAction extends DispatchAction {
 			}
 			
 			
-				String showObserver = ph.getProperties("ChooseExaminersStartDateTime");
-				String showExaminer = ph.getProperties("ChooseExaminersEndDateTime");
+			String showObserver = ph.getProperties("ChooseExaminersStartDateTime");
+			String showExaminer = ph.getProperties("ChooseExaminersEndDateTime");
 			if(showObserver!=null&&showExaminer!=null){
 				if(BaseUtil.todayIsAfter(showObserver)){
 					request.setAttribute("showObserver", "true");
 					List<ObsTopic> obsTopicList = fypService.getObsTopicByTeacherId(teacher.getId().toString());
+					
 					request.setAttribute("obsTopicList", obsTopicList);
 				}
 				if(BaseUtil.todayIsAfter(showExaminer)){

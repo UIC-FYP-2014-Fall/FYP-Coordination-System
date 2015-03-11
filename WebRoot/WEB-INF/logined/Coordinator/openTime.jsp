@@ -83,7 +83,7 @@
                 <!--/span-->
                 <div class="span9" id="content">
                      <div class="row-fluid">
-                     
+                     <a href="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=goToSettingUi"  target="_black">setting link</a>
                      <c:if test="${TimeOperation=='success'}">
       					<div class="alert alert-success SuccessInfo">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -605,9 +605,9 @@ var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
 
           var checkin = $('#dpd1').datepicker({
            format: 'yyyy-mm-dd',
-           onRender: function(date) {
+           /* onRender: function(date) {
             return date.valueOf() < now.valueOf() ? 'disabled' : '';
-          }
+          } */
         }).on('changeDate', function(ev) {
           if (ev.date.valueOf() > checkout.date.valueOf()) {
             var newDate = new Date(ev.date)
@@ -619,9 +619,9 @@ var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
         }).data('datepicker');
         var checkout = $('#dpd2').datepicker({
          format: 'yyyy-mm-dd',
-         onRender: function(date) {
+        /*  onRender: function(date) {
           return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-        }
+        } */
       }).on('changeDate', function(ev) {
 		var newDate1 = new Date(ev.date)
             newDate1.setDate(newDate1.getDate() + 1);

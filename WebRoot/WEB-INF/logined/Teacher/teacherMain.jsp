@@ -122,7 +122,7 @@
 					</div>
 					
 					
-					<c:if test="${requestScope.showObserver=='true' }">
+					<%-- <c:if test="${requestScope.showObserver=='true' }">
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">Observation</div>
@@ -169,7 +169,7 @@
 							</table>
 						</div>
 					</div>
-					</c:if>
+					</c:if> --%>
 					
 					 
 				</div>

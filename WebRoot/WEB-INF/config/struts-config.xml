@@ -238,6 +238,14 @@
       <forward name="goChoosePretimeUi" path="/WEB-INF/logined/Student/choosePretime.jsp" />
       <forward name="updateChooseTopic" path="/choosePretime.do?flag=goChoosePretime" />
     </action>
+    <action
+      parameter="flag"
+      path="/tempSetOpenTime"
+      type="com.uic.web.struts.action.TempSetOpenTimeAction"
+      cancellable="true">
+      <forward name="tempSetOpenTime" path="/WEB-INF/logined/Coordinator/tempSetOpenTime.jsp" />
+      <forward name="gotempSetOpenTimeUi" path="/tempSetOpenTime.do?flag=goToSettingUi" />
+    </action>
     
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />
