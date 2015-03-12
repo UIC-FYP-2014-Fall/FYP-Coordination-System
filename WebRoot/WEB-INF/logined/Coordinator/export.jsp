@@ -103,6 +103,12 @@
 							Set Pre Time
 						</a>
 					</li>
+					<li>
+						<a href="${pageContext.request.contextPath }/import.do?flag=goImportUi">
+							<i class="icon-chevron-right"></i>
+							Import
+						</a>
+					</li>
 					<li class="active">
 						<a href="${pageContext.request.contextPath }/export.do?flag=goExportUi">
 							<i class="icon-chevron-right"></i>

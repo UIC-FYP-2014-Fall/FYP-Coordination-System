@@ -15,6 +15,7 @@
     <form-bean name="timeslotForm" type="com.uic.web.struts.form.TimeslotForm" />
     <form-bean name="choosePreTimeForm" type="com.uic.web.struts.form.ChoosePreTimeForm" />
     <form-bean name="selectTopicForm" type="com.uic.web.struts.form.SelectTopicForm" />
+    <form-bean name="fileUploadForm" type="com.uic.web.struts.form.FileUploadForm" />
   </form-beans>
   <global-exceptions />
   <global-forwards >
@@ -246,6 +247,19 @@
       <forward name="tempSetOpenTime" path="/WEB-INF/logined/Coordinator/tempSetOpenTime.jsp" />
       <forward name="gotempSetOpenTimeUi" path="/tempSetOpenTime.do?flag=goToSettingUi" />
     </action>
+    <action
+      attribute="fileUploadForm"
+      input="/WEB-INF/logined/Coordinator/importStudent.jsp"
+      name="fileUploadForm"
+      parameter="flag"
+      path="/import"
+      scope="request"
+      type="com.uic.web.struts.action.ImportAction"
+      validate="false"
+      cancellable="true">
+      <forward name="goImportUi" path="/WEB-INF/logined/Coordinator/importStudent.jsp" />
+    </action>
+
     
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />

@@ -73,6 +73,8 @@
 								Set Workload</a></li>
 						<li><a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi"><i class="icon-chevron-right"></i>
 								Set Pre Time</a></li>
+						<li><a href="${pageContext.request.contextPath }/import.do?flag=goImportUi"><i class="icon-chevron-right"></i>
+								Import</a></li>
 						<li><a href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i class="icon-chevron-right"></i>
 								Export</a></li>				
 						<li class="active"><a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i>

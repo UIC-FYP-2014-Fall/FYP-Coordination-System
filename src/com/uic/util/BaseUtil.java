@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import org.joda.time.DateTime;
 import org.joda.time.Weeks;
@@ -27,6 +28,13 @@ public class BaseUtil {
 			throw new RuntimeException(e.getMessage());
 		}
 		return date;
+	}
+	/**
+	 * Returns a string of non-repetition.
+	 * @return 
+	 */
+	public static String uuid() {
+		return UUID.randomUUID().toString().replace("-", "").toUpperCase();
 	}
 	
 	public static boolean todayIsInPeriod(String startTime,String endTime){

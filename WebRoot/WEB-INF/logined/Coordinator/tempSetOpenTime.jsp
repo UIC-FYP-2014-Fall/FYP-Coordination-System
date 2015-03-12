@@ -10,28 +10,29 @@
 <body>
 	<table>
 		<tr>
-			<th>Time</th>
-			<th>Modify to Change</th>
+			<th>Open Time Period</th>
+			<th colspan="2">Modify to Change (eg:2015-03-14 09:00:00)</th>
 		</tr>
 		<tr>
 			<td>Upload Topics</td>
-			<td><form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setUploadTopicTime" method="post"><input type="text" name="start" value="${UTstartDateTime }"><input type="text" name="end" value="${UTendDateTime }"><input type="submit" value="submit"></form></td>
+			<td>
+				<form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setUploadTopicTime" method="post">From:<input type="text" name="start" value="${UTstartDateTime }"></td><td>To:<input type="text" name="end" value="${UTendDateTime }">&nbsp;<input type="submit" value="Submit"></form></td>
 		</tr>
 		<tr>
 			<td>Choose Topics</td>
-			<td><form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setChooseTopicTime" method="post"><input type="text" name="start" value="${CTstartDateTime }"><input type="text" name="end" value="${CTendDateTime }"><input type="submit" value="submit"></form></td>
+			<td><form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setChooseTopicTime" method="post">From:<input type="text" name="start" value="${CTstartDateTime }"></td><td>To:<input type="text" name="end" value="${CTendDateTime }">&nbsp;<input type="submit" value="Submit"></form></td>
 		</tr>
 		<tr>
 			<td>Choose Examiner</td>
-			<td><form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setChooseExaminerTime" method="post"><input type="text" name="start" value="${CEstartDateTime }"><input type="text" name="end" value="${CEendDateTime }"><input type="submit" value="submit"></form></td>
+			<td><form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setChooseExaminerTime" method="post">From:<input type="text" name="start" value="${CEstartDateTime }"></td><td>To:<input type="text" name="end" value="${CEendDateTime }">&nbsp;<input type="submit" value="Submit"></form></td>
 		</tr>
 		<tr>
 			<td>Choose Presentation Time</td>
-			<td><form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setChoosePresentationTime" method="post"><input type="text" name="start" value="${CPstartDateTime }"><input type="text" name="end" value="${CPendDateTime }"><input type="submit" value="submit"></form></td>
+			<td><form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setChoosePresentationTime" method="post">From:<input type="text" name="start" value="${CPstartDateTime }"></td><td>To:<input type="text" name="end" value="${CPendDateTime }">&nbsp;<input type="submit" value="Submit"></form></td>
 		</tr>
 		<tr>
 			<td>Presentation Period</td>
-			<td><form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setPresentationTime" method="post"><input type="text" name="start" value="${PreStartDateTime }"><input type="text" name="end" value="${PreEndDateTime }"><input type="submit" value="submit"></form></td>
+			<td><form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setPresentationTime" method="post">From:<input type="text" name="start" value="${PreStartDateTime }"></td><td>To:<input type="text" name="end" value="${PreEndDateTime }">&nbsp;<input type="submit" value="Submit"></form></td>
 		</tr>
 	</table>
 </body>
