@@ -82,12 +82,17 @@ public class TempSetOpenTimeAction extends DispatchAction {
 		PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 		
 		try {
-			ph.setProperties("UploadTopicsStartDateTime", startTime);
-			ph.setProperties("UploadTopicsEndDateTime", endTime);
-			ph.setProperties("UploadTopicsDateTimeState", "true");
+			if(ph.getProperties("UploadTopicsStartDateTime").equals("")){
+				request.setAttribute("tempMsg","Coordinator Does Not Set UploadTopicsDateTime.");
+			}else{
+				ph.setProperties("UploadTopicsStartDateTime", startTime);
+				ph.setProperties("UploadTopicsEndDateTime", endTime);
+				ph.setProperties("UploadTopicsDateTimeState", "true");
+			}
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			request.setAttribute("tempMsg","Coordinator Does Not Set UploadTopicsDateTime.");
 			e.printStackTrace();
 		}
 		return mapping.findForward("gotempSetOpenTimeUi");
@@ -101,12 +106,16 @@ public class TempSetOpenTimeAction extends DispatchAction {
 		PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 		
 		try {
-			ph.setProperties("ChooseTopicStartDateTime", startTime);
-			ph.setProperties("ChooseTopicEndDateTime", endTime);
-			ph.setProperties("ChooseTopicDateTimeState", "true");
-			
+			if(ph.getProperties("ChooseTopicStartDateTime").equals("")){
+				request.setAttribute("tempMsg","Coordinator Does Not Set ChooseTopicDateTime.");
+			}else{
+				ph.setProperties("ChooseTopicStartDateTime", startTime);
+				ph.setProperties("ChooseTopicEndDateTime", endTime);
+				ph.setProperties("ChooseTopicDateTimeState", "true");
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			request.setAttribute("tempMsg","Coordinator Does Not Set ChooseTopicDateTime.");
 			e.printStackTrace();
 		}
 		return mapping.findForward("gotempSetOpenTimeUi");
@@ -120,11 +129,15 @@ public class TempSetOpenTimeAction extends DispatchAction {
 		PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 		
 		try {
-			ph.setProperties("ChooseExaminersStartDateTime", startTime);
-			ph.setProperties("ChooseExaminersEndDateTime", endTime);
-			ph.setProperties("ChooseExaminersDateTimeState", "true");
-			
+			if(ph.getProperties("ChooseExaminersStartDateTime").equals("")){
+				request.setAttribute("tempMsg","Coordinator Does Not Set ChooseExaminersDateTime.");
+			}else{
+				ph.setProperties("ChooseExaminersStartDateTime", startTime);
+				ph.setProperties("ChooseExaminersEndDateTime", endTime);
+				ph.setProperties("ChooseExaminersDateTimeState", "true");
+			}
 		} catch (Exception e) {
+			request.setAttribute("tempMsg","Coordinator Does Not Set ChooseExaminersDateTime.");
 			// TODO: handle exception
 			e.printStackTrace();
 		}
@@ -139,12 +152,16 @@ public class TempSetOpenTimeAction extends DispatchAction {
 		PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 		
 		try {
-			ph.setProperties("ChoosePresentationStartDateTime", startTime);
-			ph.setProperties("ChoosePresentationEndDateTime", endTime);
-			ph.setProperties("ChoosePresentationDateTimeState", "true");
-			
+			if(ph.getProperties("ChoosePresentationStartDateTime").equals("")){
+				request.setAttribute("tempMsg","Coordinator Does Not Set ChoosePresentationDateTime.");
+			}else{
+				ph.setProperties("ChoosePresentationStartDateTime", startTime);
+				ph.setProperties("ChoosePresentationEndDateTime", endTime);
+				ph.setProperties("ChoosePresentationDateTimeState", "true");
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			request.setAttribute("tempMsg","Coordinator Does Not Set ChoosePresentationDateTime.");
 			e.printStackTrace();
 		}
 		return mapping.findForward("gotempSetOpenTimeUi");
@@ -158,12 +175,16 @@ public class TempSetOpenTimeAction extends DispatchAction {
 		PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 		
 		try {
-			ph.setProperties("PreStartDateTime", startTime);
-			ph.setProperties("PreEndDateTime", endTime);
-			ph.setProperties("PreDateTimeState", "true");
-			
+			if(ph.getProperties("PreStartDateTime").equals("")){
+				request.setAttribute("tempMsg","Coordinator Does Not Set PreDateTime.");
+			}else{
+				ph.setProperties("PreStartDateTime", startTime);
+				ph.setProperties("PreEndDateTime", endTime);
+				ph.setProperties("PreDateTimeState", "true");
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			request.setAttribute("tempMsg","Coordinator Does Not Set PreDateTime.");
 			e.printStackTrace();
 		}
 		return mapping.findForward("gotempSetOpenTimeUi");

@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<p>${tempMsg }  </p>
 	<table>
 		<tr>
 			<th>Open Time Period</th>
