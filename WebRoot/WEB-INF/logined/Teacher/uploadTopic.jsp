@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import="com.uic.domain.Teacher"
+	import="java.util.List" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.uic.domain.Teacher"%>
-<%@ page import="java.util.List"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -32,32 +32,32 @@
 				</a> <a class="brand" href="index.html">FYP Coordination System</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li class="dropdown">
-                        	<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i></a>
-                            <ul class="dropdown-menu">
-                            	<li><a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a></li>
-                            </ul>
-                        </li>
+						<li class="dropdown"><a href="#" role="button"
+							class="dropdown-toggle" data-toggle="dropdown"> <i
+								class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i></a>
+							<ul class="dropdown-menu">
+								<li><a tabindex="-1" data-target="#logout"
+									data-toggle="modal" href="">Logout</a></li>
+							</ul></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="modal hide fade" id="logout">
-			<div class="modal-header">
-				<h4>Logout</h4>
-			</div>
-			<div class="modal-body">
-				Are you sure?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
-			</div>
+		<div class="modal-header">
+			<h4>Logout</h4>
+		</div>
+		<div class="modal-body">Are you sure?</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			<a href="${pageContext.request.contextPath }/logout.do"
+				class="btn btn-danger">Logout</a>
+		</div>
 	</div>
-	
+
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
@@ -90,11 +90,12 @@
 							<div class="alert alert-error ErrorInfo">
 								<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
 								<h4>Note:</h4>
-								Today is before the upload topic state. The upload topic time is started from ${requestScope.uploadPeriod }.
+								Today is before the upload topic state. The upload topic time is
+								started from ${requestScope.uploadPeriod }.
 							</div>
 							<%
 								request.removeAttribute("uploadTopicStart");
-								request.removeAttribute("todayIsBeforeUploadTime");
+													request.removeAttribute("todayIsBeforeUploadTime");
 							%>
 						</c:if>
 						<c:if test="${requestScope.todayIsAfterUploadTime=='true' }">
@@ -105,7 +106,7 @@
 							</div>
 							<%
 								request.removeAttribute("uploadTopicStart");
-								request.removeAttribute("todayIsAfterUploadTime");
+													request.removeAttribute("todayIsAfterUploadTime");
 							%>
 						</c:if>
 						<c:if test="${requestScope.noUploadTime=='true'}">
@@ -116,29 +117,28 @@
 							</div>
 							<%
 								request.removeAttribute("uploadTopicStart");
-								request.removeAttribute("noUploadTime");
-								request.removeAttribute("noUploadTimeInfo");
+													request.removeAttribute("noUploadTime");
+													request.removeAttribute("noUploadTimeInfo");
 							%>
 						</c:if>
 					</c:if>
 					<c:if test="${requestScope.didNotContainSupervisor=='true' }">
-							<div class="alert alert-error ErrorInfo">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<h4>Error :</h4>
-								You only can upload your topic.
-							</div>
-							<%
-								request.removeAttribute("didNotContainSupervisor");
-								
-							%>
-						</c:if>
+						<div class="alert alert-error ErrorInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Error :</h4>
+							You only can upload your topic.
+						</div>
+						<%
+							request.removeAttribute("didNotContainSupervisor");
+						%>
+					</c:if>
 					<c:if test="${requestScope.uploadTopicStart=='true' }">
 						<div class="alert alert-info alert-block">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 							<h4>Note:</h4>
 							Please upload your topic from ${requestScope.uploadPeriod }.
 						</div>
-					
+
 						<!-- block -->
 						<div class="block">
 
@@ -169,8 +169,8 @@
 												id="multiSelect" class="chzn-select span4">
 												<%
 													List<Teacher> teacherList = (List<Teacher>)request.getAttribute("teacherList");
-		                                           	  Teacher curTeacher = (Teacher)request.getSession().getAttribute("teacherinfo");
-		                                                 for(int i=0;i<teacherList.size();i++){
+		                                           	Teacher curTeacher = (Teacher)request.getSession().getAttribute("teacherinfo");
+	                                                 for(int i=0;i<teacherList.size();i++){
 		                                               	  if(curTeacher.getId().equals(teacherList.get(i).getId())){
 		                                               	  	out.println("<option selected=\"selected\" value=\""+teacherList.get(i).getName()+"\">"+teacherList.get(i).getName()+"</option>");
 		                                               	  }else{
@@ -209,13 +209,13 @@
 										<label class="control-label">Number of students <span
 											class="required">*</span></label>
 										<div class="controls">
-										<select name="numOfStu" id="numofStu" disabled="false">
-											<option value="1">Please select</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-										</select>
-									</div>
+											<select name="numOfStu" id="numofStu" disabled="false">
+												<option value="1">Please select</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+											</select>
+										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label" for="textarea2">Description

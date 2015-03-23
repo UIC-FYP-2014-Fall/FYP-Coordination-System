@@ -1,9 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="com.uic.domain.TeaTopic" import="java.util.ArrayList"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.uic.domain.TeaTopic"%>
-<%@ page import="com.uic.domain.Teacher"%>
-<%@ page import="com.uic.domain.Topic"%>
-<%@ page import="java.util.ArrayList;"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html class="no-js">
@@ -180,60 +176,61 @@
 									<tbody>
 										<%
 											String uploadState = (String) request.getAttribute("isUploadTopicDate");
-												System.out.println("upload topic state " + uploadState);
-												ArrayList<TeaTopic> indTeaTopic = (ArrayList<TeaTopic>) request.getAttribute("indTeaTopic");
-												ArrayList<String> indSupervisor = (ArrayList<String>) request.getAttribute("indSupervisor");
-												ArrayList<String> indStudent = (ArrayList<String>) request.getAttribute("indStudent");
-												System.out.println("get List size " + indTeaTopic.size());
-												int index = 0;
-												for (int i = 0; i < indTeaTopic.size(); i++) {
+												
+											ArrayList<TeaTopic> indTeaTopic = (ArrayList<TeaTopic>) request.getAttribute("indTeaTopic");
+											ArrayList<String> indSupervisor = (ArrayList<String>) request.getAttribute("indSupervisor");
+											ArrayList<String> indStudent = (ArrayList<String>) request.getAttribute("indStudent");
+											
+											int index = 0;
+											for (int i = 0; i < indTeaTopic.size(); i++) {
+												if (indTeaTopic.get(i).getTopic().getIndividual()) {
+													index = i+1;
+													out.println("<tr>");
+													out.println("<td>" + index + "</td>");
+													out.println("<td>" + indTeaTopic.get(i).getTopic().getTitle() + "</td>");
+													out.println("<td>" + indSupervisor.get(i) + "</td>");
 													if (indTeaTopic.get(i).getTopic().getIndividual()) {
-														index = i+1;
-														out.println("<tr>");
-														out.println("<td>" + index + "</td>");
-														out.println("<td>" + indTeaTopic.get(i).getTopic().getTitle() + "</td>");
-														out.println("<td>" + indSupervisor.get(i) + "</td>");
-														if (indTeaTopic.get(i).getTopic().getIndividual()) {
-															out.println("<td>" + "Individual" + "</td>");
-														} else {
-															out.println("<td>" + "Group" + "</td>");
-														}
-														out.println("<td>" + indTeaTopic.get(i).getTopic().getCredit() + "</td>");
-														if (uploadState != null) {
-															out.println("<td>");
-															if (uploadState.equals("true")) {
-																out.println("<a class=\"btn btn-primary btn-mini\" href=\"" + request.getContextPath() + "/editFYP.do?flag=editTopicUi&eid=" + indTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-pencil icon-white\"></i> Edit</a>");
-																/* out.println("<a class=\"btn btn-danger btn-mini\" data-confirm=\"Are you sure to delete the topic?\" href=\"" + request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + indTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-remove icon-white\"></i> Delete</a>"); */
-																out.println("<a class=\"btn btn-danger btn-mini\" data-target=\"#confirm"+indTeaTopic.get(i).getTopic().getFid()+"\" data-toggle=\"modal\"> <i class=\"icon-remove icon-white\"></i> Delete</a>");
-																out.println("<div class=\"modal hide fade\" id=\"confirm"+indTeaTopic.get(i).getTopic().getFid()+"\"><div class=\"modal-header\"><h4>Delete</h4></div><div class=\"modal-body\">Are you sure?</div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cancel</button><a href=\""+request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + indTeaTopic.get(i).getTopic().getFid() +"\" class=\"btn btn-danger\">Delete</a></div></div>");
-															} else {
-																if(uploadState.equals("before")){
-																	out.println("None");
-																}else{
-																	out.println(indStudent.get(i));
-																}
-															}
-															out.println("</td>");
-														}
-														out.println("</tr>");
+														out.println("<td>" + "Individual" + "</td>");
 													} else {
-														//do nothing
+														out.println("<td>" + "Group" + "</td>");
 													}
+													out.println("<td>" + indTeaTopic.get(i).getTopic().getCredit() + "</td>");
+													if (uploadState != null) {
+														out.println("<td>");
+														if (uploadState.equals("true")) {
+															out.println("<a class=\"btn btn-primary btn-mini\" href=\"" + request.getContextPath() + "/editFYP.do?flag=editTopicUi&eid=" + indTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-pencil icon-white\"></i> Edit</a>");
+															/* out.println("<a class=\"btn btn-danger btn-mini\" data-confirm=\"Are you sure to delete the topic?\" href=\"" + request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + indTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-remove icon-white\"></i> Delete</a>"); */
+															out.println("<a class=\"btn btn-danger btn-mini\" data-target=\"#confirm"+indTeaTopic.get(i).getTopic().getFid()+"\" data-toggle=\"modal\"> <i class=\"icon-remove icon-white\"></i> Delete</a>");
+															out.println("<div class=\"modal hide fade\" id=\"confirm"+indTeaTopic.get(i).getTopic().getFid()+"\"><div class=\"modal-header\"><h4>Delete</h4></div><div class=\"modal-body\">Are you sure?</div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cancel</button><a href=\""+request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + indTeaTopic.get(i).getTopic().getFid() +"\" class=\"btn btn-danger\">Delete</a></div></div>");
+														} else {
+															if(uploadState.equals("before")){
+																out.println("None");
+															}else{
+																out.println(indStudent.get(i));
+															}
+														}
+														out.println("</td>");
+													}
+													out.println("</tr>");
+												} else {
+													//do nothing
 												}
+											}
 										%>
 									</tbody>
 								</table>
 							</div>
 						</div>
-						
-						
-						
+
+
+
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
 								<div class="muted pull-left">Grop Topic List</div>
 							</div>
 							<div class="block-content collapse in">
-								<table class="table table-striped table-bordered" id="groupTopic">
+								<table class="table table-striped table-bordered"
+									id="groupTopic">
 									<thead>
 										<tr>
 											<th>#</th>

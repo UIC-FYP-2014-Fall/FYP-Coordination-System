@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList;"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html class="no-js">
@@ -103,29 +102,29 @@
 						%>
 					</c:if>
 					<c:if test="${requestScope.timetableSelected=='true' }">
-							<div class="alert alert-success SuccessInfo">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<h4>Success</h4>
-								${requestScope.timetableSelectInfo }
-							</div>
-							<%
+						<div class="alert alert-success SuccessInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Success</h4>
+							${requestScope.timetableSelectInfo }
+						</div>
+						<%
 							request.removeAttribute("timetableSelected");
 							request.removeAttribute("timetableSelectInfo");
 						%>
 					</c:if>
 					<c:if test="${requestScope.timeHaveBeenSelected=='true' }">
-							<div class="alert alert-error ErrorInfo">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<h4>Note:</h4>
-								${requestScope.timetableSelectInfo }
-							</div>
-							<%
+						<div class="alert alert-error ErrorInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Note:</h4>
+							${requestScope.timetableSelectInfo }
+						</div>
+						<%
 							request.removeAttribute("timeHaveBeenSelected");
 							request.removeAttribute("timetableSelectInfo");
 						%>
 					</c:if>
 					<!-- block -->
-					
+
 					<c:if test="${requestScope.timetableStart=='true' }">
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
@@ -250,7 +249,7 @@
 									%>
 									<div class="form-actions">
 										<button type="submit" class="btn btn-primary">Submit</button>
-										
+
 									</div>
 								</form>
 							</div>

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.ArrayList"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList;"%>
+ 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html class="no-js">
@@ -26,35 +26,34 @@
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> 
-				<a class="brand" href="index.html">FYP Coordination System</a>
+				</a> <a class="brand" href="index.html">FYP Coordination System</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li class="dropdown">
-                        	<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i></a>
-                            <ul class="dropdown-menu">
-                            	<li><a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a></li>
-                            </ul>
-                        </li>
+						<li class="dropdown"><a href="#" role="button"
+							class="dropdown-toggle" data-toggle="dropdown"> <i
+								class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i></a>
+							<ul class="dropdown-menu">
+								<li><a tabindex="-1" data-target="#logout"
+									data-toggle="modal" href="">Logout</a></li>
+							</ul></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="modal hide fade" id="logout">
-			<div class="modal-header">
-				<h4>Logout</h4>
-			</div>
-			<div class="modal-body">
-				Are you sure?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
-			</div>
-	</div>				
+		<div class="modal-header">
+			<h4>Logout</h4>
+		</div>
+		<div class="modal-body">Are you sure?</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			<a href="${pageContext.request.contextPath }/logout.do"
+				class="btn btn-danger">Logout</a>
+		</div>
+	</div>
 
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -109,7 +108,7 @@
 							</div>
 							<%
 								request.removeAttribute("ifUpdateTableSuccess");
-													request.removeAttribute("updateTableInfo");
+								request.removeAttribute("updateTableInfo");
 							%>
 						</c:if>
 						<c:if test="${requestScope.ifUpdateTableSuccess=='false' }">
@@ -120,7 +119,7 @@
 							</div>
 							<%
 								request.removeAttribute("timetableStart");
-												request.removeAttribute("updateTableInfo");
+								request.removeAttribute("updateTableInfo");
 							%>
 						</c:if>
 						<div class="block">
@@ -150,12 +149,8 @@
 									<%
 										String[] timeArray={"9:00-9:30","9:30-10:00","10:00-10:30","10:30-11:00","11:00-11:30","11:30-12:00","14:00-14:30","14:30-15:00","15:00-15:30","15:30-16:00","16:00-16:30","16:30-17:00","17:00-17:30","17:30-18:00"};
                                     	ArrayList<String> timeslots=(ArrayList<String>)request.getAttribute("timeslots");
-                                    	System.out.println(timeArray.length);
                                     	String beginWeekDay = (String)request.getAttribute("beginWeekDay");
                                     	String endWeekDay = (String)request.getAttribute("endWeekDay");
-                                    	
-                                    	System.out.println("beginWeekDay "+beginWeekDay);
-                                    	System.out.println("endWeekDay"+endWeekDay);
                                     	for(int week=1;week<=Integer.parseInt(weeks);week++){
                                             if(week==1){
                                                 out.println("<table id=\"week"+week+"\" border=\"0\" class=\"table table-bordered\" style='DISPLAY:'>");
