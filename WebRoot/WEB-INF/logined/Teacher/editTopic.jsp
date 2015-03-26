@@ -3,7 +3,7 @@
 <%@ page import="com.uic.domain.TeaTopic"%>
 <%@ page import="com.uic.domain.Teacher"%>
 <%@ page import="com.uic.domain.Topic"%>
-<%@ page import="java.util.List;"%>
+<%@ page import="java.util.List"%>
 
 <!DOCTYPE html>
 <html class="no-js">

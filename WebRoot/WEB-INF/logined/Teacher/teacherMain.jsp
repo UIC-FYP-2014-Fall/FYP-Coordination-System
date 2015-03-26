@@ -4,7 +4,7 @@
 <html class="no-js">
 <%@ page import="com.uic.domain.ObsTopic"%>
 <%@ page import="com.uic.domain.Stuexaminer" %>
-<%@ page import="java.util.List;"%>
+<%@ page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <title>FYP Coordination System</title>

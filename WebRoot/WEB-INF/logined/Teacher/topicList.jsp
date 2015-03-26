@@ -3,7 +3,7 @@
 <%@ page import="com.uic.domain.TeaTopic"%>
 <%@ page import="com.uic.domain.Teacher"%>
 <%@ page import="com.uic.domain.Topic"%>
-<%@ page import="java.util.ArrayList;"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html class="no-js">
