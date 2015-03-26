@@ -16,7 +16,12 @@ final public class HibernateUtil {
 	};
 
 	static {
-		sessionFactory = new Configuration().configure().buildSessionFactory();
+		try {
+			sessionFactory = new Configuration().configure().buildSessionFactory();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
 	}
 
 	// 获取全新的全新的sesession
