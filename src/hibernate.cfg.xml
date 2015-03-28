@@ -12,16 +12,20 @@
 	<property name="dialect">
 		org.hibernate.dialect.MySQLDialect
 	</property>
-	<property name="connection.url">
-		jdbc:mysql://localhost:3306/fyp
-	</property>
+	<property name="connection.url">jdbc:mysql://localhost:3306/fyp?useUnicode=true&amp;characterEncoding=UTF8&amp;useServerPrepStmts=true&amp;prepStmtCacheSqlLimit=256&amp;cachePrepStmts=true&amp;prepStmtCacheSize=256&amp;rewriteBatchedStatements=true</property>
 	<property name="connection.username">root</property>
 	<property name="connection.password">123456</property>
 	<property name="connection.driver_class">
 		com.mysql.jdbc.Driver
 	</property>
 	<property name="myeclipse.connection.profile">MySQL</property>
-	<property name="connection.autocommit">false</property>
+	<property name="c3p0.min_size">1</property>
+	<property name="c3p0.max_size">50</property>
+	<property name="c3p0.timeout">1800</property>
+	<property name="c3p0.max_statements">50</property>
+	<property name="c3p0.acquire_increment">1</property>
+
+
 	<mapping resource="com/uic/domain/Student.hbm.xml" />
 	<mapping resource="com/uic/domain/Teacher.hbm.xml" />
 	<mapping resource="com/uic/domain/Coordinator.hbm.xml" />
