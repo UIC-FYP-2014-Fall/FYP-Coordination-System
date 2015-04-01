@@ -137,6 +137,8 @@
                                                           <option value="${teacher.id },3" <c:if test="${teacher.quota=='3' }">selected</c:if> >3</option>
                                                           <option value="${teacher.id },4" <c:if test="${teacher.quota=='4' }">selected</c:if> >4</option>
                                                           <option value="${teacher.id },5" <c:if test="${teacher.quota=='5' }">selected</c:if> >5</option>
+                                                          <option value="${teacher.id },6" <c:if test="${teacher.quota=='6' }">selected</c:if> >6</option>
+                                                          <option value="${teacher.id },7" <c:if test="${teacher.quota=='7' }">selected</c:if> >7</option>
                                                 </select>
                                            	</td>
                                         </tr>
