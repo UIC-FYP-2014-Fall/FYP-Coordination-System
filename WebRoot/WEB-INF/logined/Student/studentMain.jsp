@@ -33,8 +33,12 @@
 
 							</a>
 							<ul class="dropdown-menu">
-								<li>
-									<a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a>
+								<li><a tabindex="-1"
+									href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi">Settings </a>
+								</li>
+								<li class="divider"></li>
+								<li><a tabindex="-1" data-target="#logout"
+									data-toggle="modal" href="">Logout</a>
 								</li>
 							</ul>
 						</li>
@@ -87,7 +91,7 @@
 					<li>
 						<a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi">
 							<i class="icon-chevron-right"></i>
-							Change Password
+							Settings 
 						</a>
 					</li>
 				</ul>
@@ -145,10 +149,15 @@
 
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">Selected Topic</div>
+							<div class="muted pull-left">INFORMATION</div>
 						</div>
 						<div class="block-content collapse in">
-
+							<c:if test="${PhoneState=='error' }">
+								<div class="alert alert-error alert-block">
+									<h4 class="alert-heading">Important!</h4>
+									Please update your mobile phone number to ensure that it is available! Please click<a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"> <strong>here</strong> </a>to update.
+								</div>
+							</c:if>
 							<c:choose>
 								<c:when test="${timeType==0||timeType==1||timeType==2||timeType==9 }">
 									<c:if test="${timeType==0 }">

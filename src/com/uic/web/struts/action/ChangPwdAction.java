@@ -4,6 +4,9 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +18,9 @@ import org.apache.struts.actions.DispatchAction;
 import com.uic.domain.Coordinator;
 import com.uic.domain.Student;
 import com.uic.domain.Teacher;
+import com.uic.service.imp.StudentServiceImp;
 import com.uic.service.imp.UsersServiceImp;
+import com.uic.service.inter.StudentServiceInter;
 import com.uic.service.inter.UsersServiceInter;
 import com.uic.web.struts.form.ChangePwdForm;
 
@@ -43,7 +48,7 @@ public class ChangPwdAction extends DispatchAction {
 	public ActionForward teacherChangePwdUi(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		System.out.println("Using TeacherPageControlAction");
+		//System.out.println("Using TeacherPageControlAction");
 		if(request.getSession().getAttribute("role").equals("teacher")){
 			return mapping.findForward("goTeacherPwdUi");
 		}else{
@@ -58,8 +63,55 @@ public class ChangPwdAction extends DispatchAction {
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
 			return mapping.findForward("goPwdUi");
 		}else if(request.getSession().getAttribute("role").equals("student")){
+			StudentServiceInter studentService = new StudentServiceImp();
+			Student stu = (Student)request.getSession().getAttribute("studentinfo");
+			Student s = studentService.getStudentById(stu.getSid());
+			request.setAttribute("telephone", s.getTelephone());
 			return mapping.findForward("goStudentChangePwdUi");
 		}else {
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
+	}
+	
+	public ActionForward updateTelephone(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) {
+		String role = (String) request.getSession().getAttribute("role");
+		if (role.equals("student")) {
+			/*
+			 * 1.get telephone number from web page
+			 */
+			String telephone = request.getParameter("telephone");
+			//System.out.println(telephone);
+			/*
+			 * 2. validate the telephone
+			 */
+			Map<String, String> errors = validateTelephone(telephone);
+			//System.out.println(errors.size());
+			if(errors.size()>0){
+				request.setAttribute("telephone", telephone);
+				request.setAttribute("errors", errors);
+				//return mapping.findForward("goStudentChangePwdUi");
+				return new ActionForward("/changPwd.do?flag=goPwdUi");
+			}
+			/*
+			 * 3. use studentService to complete
+			 */
+			StudentServiceInter studentService = new StudentServiceImp();
+			Student stu = (Student)request.getSession().getAttribute("studentinfo");
+			if(studentService.updateTelephone(stu.getId()+"", telephone)){
+				//success
+				request.setAttribute("updateTelephoneState", "success");
+			}else{
+				request.setAttribute("updateTelephoneState", "failed");
+			}
+			/*
+			 * 4. return
+			 */
+			//return mapping.findForward("goStudentChangePwdUi");
+			return new ActionForward("/changPwd.do?flag=goPwdUi");
+			
+		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
 		}
@@ -162,5 +214,17 @@ public class ChangPwdAction extends DispatchAction {
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
 		}
+	}
+	
+	private Map<String, String> validateTelephone(String telephone){
+		Map<String, String> errors = new HashMap<String, String>();
+		if(telephone == null || telephone.trim().isEmpty()){
+			errors.put("telephone", "Mobile phone number is required!");
+			//System.out.println("Empty");
+		}else if(!telephone.matches("^0?1[3|4|5|8][0-9]\\d{8}$")){
+			errors.put("telephone", "Your mobile phone number is incorrect,  please enter your phone number in the correct format.");
+			//System.out.println("format error");
+		}
+		return errors;
 	}
 }

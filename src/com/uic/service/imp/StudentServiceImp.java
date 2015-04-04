@@ -352,4 +352,20 @@ public class StudentServiceImp extends BaseServiceImp implements
 		return flag;
 	}
 
+
+	@Override
+	public boolean updateTelephone(String id, String telephone) {
+		// TODO Auto-generated method stub
+		String hql = "update Student set telephone=? where id=?";
+		String[] parameters = { telephone,id};
+		try {
+			updateObject(hql, parameters);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }

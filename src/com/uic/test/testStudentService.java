@@ -37,8 +37,8 @@ public class testStudentService {
 		
 		//stu.updateExaminer("1", "5");
 		//System.out.println(t.getName());
-		Teacher time = stu.getObserver("1130300035");
-		System.out.println(time.getName());
+		System.out.println(stu.updateTelephone("2", "13631202180"));
+		
 
 	}
 

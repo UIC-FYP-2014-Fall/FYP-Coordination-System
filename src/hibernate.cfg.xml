@@ -10,12 +10,14 @@
 <hibernate-configuration>
 <session-factory>
 	<!-- 指明使用Proxool连接池 -->
-	<property name="hibernate.connection.provider_class">org.hibernate.connection.ProxoolConnectionProvider</property>
+	<property name="hibernate.connection.provider_class">
+		org.hibernate.connection.ProxoolConnectionProvider
+	</property>
 	<!-- 指明Proxool配置文件所在位置，这里与Hibernate的配置文件在同一目录下 -->
 	<property name="hibernate.proxool.xml">proxool.xml</property>
 	<!-- 指明要使用的proxool.xml中定义的proxool别名 -->
 	<property name="hibernate.proxool.pool_alias">mysql</property>
-	
+
 	<!--指定连接的语言-->
 	<property name="dialect">
 		org.hibernate.dialect.MySQLDialect

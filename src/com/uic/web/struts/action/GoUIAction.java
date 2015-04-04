@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.uic.domain.Message;
+import com.uic.domain.Student;
 import com.uic.domain.Users;
 import com.uic.service.imp.MessagesServiceImp;
 import com.uic.service.inter.MessagesServiceInter;
@@ -129,6 +130,13 @@ public class GoUIAction extends DispatchAction {
 		}else if(request.getSession().getAttribute("role").equals("teacher")){
 			return mapping.findForward("goTeacherMain");
 		}else if(request.getSession().getAttribute("role").equals("student")){
+			Student stu = (Student) request.getSession().getAttribute("studentinfo");
+			String phoneNumber = stu.getTelephone();
+			if (!phoneNumber.matches("^0?1[3|4|5|8][0-9]\\d{8}$")) {
+				request.setAttribute("PhoneState", "error");
+			} else {
+				request.setAttribute("PhoneState", "ok");
+			}
 			return mapping.findForward("goStudentMain");
 		}else{
 			request.setAttribute("msg", "ERROR: Permission denied.");

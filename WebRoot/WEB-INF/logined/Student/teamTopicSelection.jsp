@@ -40,9 +40,14 @@
 
 						</a>
 							<ul class="dropdown-menu">
+								<li><a tabindex="-1"
+									href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi">Settings</a>
+								</li>
+								<li class="divider"></li>
 								<li><a tabindex="-1" data-target="#logout"
 									data-toggle="modal" href="">Logout</a></li>
-							</ul></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
@@ -67,7 +72,7 @@
 							class="icon-chevron-right"></i> Choose Presentation Time</a></li>
 					<li><a
 						href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i
-							class="icon-chevron-right"></i> Change Password</a></li>
+							class="icon-chevron-right"></i> Settings</a></li>
 				</ul>
 			</div>
 
@@ -126,7 +131,7 @@
                                         	out.println("<legend>"+topic.getTitle()+"</legend>");
                                         	out.println("<div class=\"control-group\">");
                                         	out.println("<label class=\"control-label\" for=\"select01\">Member</label>");
-                                        	out.println("<div class=\"controls\"><input value=\""+curStu.getSid()+"\"type=\"text\" class=\"m-wrap\" readonly=\"readonly\"></div>");
+                                        	out.println("<div class=\"controls\"><input value=\""+curStu.getSid()+" "+curStu.getName()+"\"type=\"text\" class=\"m-wrap\" readonly=\"readonly\"></div>");
                                         	out.println("<input type=\"hidden\" name=\"member\"value=\""+curStu.getId()+"\"/>");
                                         	out.println("</div>");
                                         	out.println("<input type=\"hidden\" name=\"topicId\"value=\""+topic.getFid()+"\"/>");
