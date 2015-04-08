@@ -29,7 +29,7 @@ var FormValidation = function () {
                         email: true
                     },
 					oldPwd: {
-						required: true,
+						required: true
 					},
 					newPwd:{
 						required: true,
@@ -61,7 +61,7 @@ var FormValidation = function () {
                         creditcard: true
                     },
                     occupation: {
-                        minlength: 5,
+                        minlength: 5
                     },
                     category: {
                         required: true
@@ -73,7 +73,7 @@ var FormValidation = function () {
 					endDate: {
 						required: true,
 						date: true
-					},
+					}
                 },
 
                 invalidHandler: function (event, validator) { //display error alert on form submit              

@@ -8,23 +8,31 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 final public class HibernateUtil {
+	// SessionFactory会话工厂
 	private static SessionFactory sessionFactory = null;
 	// 使用线程局部模式
 	private static ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
 
-	private HibernateUtil() {
-	};
-
+	// 写在static块是因为该块只会被类被ClassLoader加载到虚拟机的时候执行一次
 	static {
 		try {
+			// 使用Configuration()对象.configure()方法去读取src/hibernate.cfg.xml配置文件
 			sessionFactory = new Configuration().configure().buildSessionFactory();
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e);
+		}  catch (Throwable e) {// 如果在执行static块的时候出现任何的Throwable(Error和Exception的类的父类)则处理
+			// 抛出明确的static程式错误的异常
+			throw new ExceptionInInitializerError(e);
 		}
 	}
+	
+	/**
+	 * 获得SessionFactory
+	 * @return
+	 */
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
 
-	// 获取全新的全新的sesession
+	// 获取全新的全新的Session
 	public static Session openSession() {
 		return sessionFactory.openSession();
 	}

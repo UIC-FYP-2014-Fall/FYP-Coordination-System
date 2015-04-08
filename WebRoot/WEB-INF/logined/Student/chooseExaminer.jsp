@@ -32,6 +32,10 @@
 
                                 </a>
                                 <ul class="dropdown-menu">
+                                	<li>
+                                        <a tabindex="-1" href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi">Settings</a>
+                                    </li>
+                                    <li class="divider"></li>
                                     <li>
                                         <a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a>
                                     </li>
@@ -72,7 +76,7 @@
                             <a href="${pageContext.request.contextPath }/choosePretime.do?flag=goChoosePretime"><i class="icon-chevron-right"></i> Choose Presentation Time</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i> Change Password</a>
+                            <a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i> Settings</a>
                         </li>
                     </ul>
                 </div>

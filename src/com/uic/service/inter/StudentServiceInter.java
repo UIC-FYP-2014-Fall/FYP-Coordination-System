@@ -41,5 +41,7 @@ public interface StudentServiceInter extends BaseInterface {
 	public ArrayList<Student> getAllStudent();
 	
 	public String getPreTimeByStudentId(String sid);
+	
+	public boolean updateTelephone(String sid,String telephone);
 
 }

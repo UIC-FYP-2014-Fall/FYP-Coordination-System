@@ -228,7 +228,7 @@
 
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
-								<div class="muted pull-left">Grop Topic List</div>
+								<div class="muted pull-left">Group Topic List</div>
 							</div>
 							<div class="block-content collapse in">
 								<table class="table table-striped table-bordered"
@@ -276,7 +276,7 @@
 																out.println("<div class=\"modal hide fade\" id=\"confirm"+groTeaTopic.get(i).getTopic().getFid()+"\"><div class=\"modal-header\"><h4>Delete</h4></div><div class=\"modal-body\">Are you sure?</div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cancel</button><a href=\""+request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + groTeaTopic.get(i).getTopic().getFid() +"\" class=\"btn btn-danger\">Delete</a></div></div>");
 															} else {
 																if(uploadState.equals("before")){
-																	out.println("None");
+																	out.println("Avaliable");
 																}else{
 																	out.println(groStudent.get(i));
 																}
