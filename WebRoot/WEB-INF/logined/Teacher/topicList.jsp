@@ -198,20 +198,24 @@
 													}
 													out.println("<td>" + indTeaTopic.get(i).getTopic().getCredit() + "</td>");
 													if (uploadState != null) {
-														out.println("<td>");
+														
 														if (uploadState.equals("true")) {
+															out.println("<td>");
 															out.println("<a class=\"btn btn-primary btn-mini\" href=\"" + request.getContextPath() + "/editFYP.do?flag=editTopicUi&eid=" + indTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-pencil icon-white\"></i> Edit</a>");
 															/* out.println("<a class=\"btn btn-danger btn-mini\" data-confirm=\"Are you sure to delete the topic?\" href=\"" + request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + indTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-remove icon-white\"></i> Delete</a>"); */
 															out.println("<a class=\"btn btn-danger btn-mini\" data-target=\"#confirm"+indTeaTopic.get(i).getTopic().getFid()+"\" data-toggle=\"modal\"> <i class=\"icon-remove icon-white\"></i> Delete</a>");
 															out.println("<div class=\"modal hide fade\" id=\"confirm"+indTeaTopic.get(i).getTopic().getFid()+"\"><div class=\"modal-header\"><h4>Delete</h4></div><div class=\"modal-body\">Are you sure?</div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cancel</button><a href=\""+request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + indTeaTopic.get(i).getTopic().getFid() +"\" class=\"btn btn-danger\">Delete</a></div></div>");
+															out.println("</td>");
 														} else {
 															if(uploadState.equals("before")){
-																out.println("None");
+																//out.println("None");
 															}else{
+																out.println("<td>");
 																out.println(indStudent.get(i));
+																out.println("</td>");
 															}
 														}
-														out.println("</td>");
+														
 													}
 													out.println("</tr>");
 												} else {
@@ -268,20 +272,25 @@
 														}
 														out.println("<td>" + groTeaTopic.get(i).getTopic().getCredit() + "</td>");
 														if (uploadState != null) {
-															out.println("<td>");
+															
 															if (uploadState.equals("true")) {
+																out.println("<td>");
 																out.println("<a class=\"btn btn-primary btn-mini\" href=\"" + request.getContextPath() + "/editFYP.do?flag=editTopicUi&eid=" + groTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-pencil icon-white\"></i> Edit</a>");
 																//out.println("<a class=\"btn btn-danger btn-mini\" data-confirm=\"Are you sure to delete the topic?\" href=\"" + request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + groTeaTopic.get(i).getTopic().getFid() + "\"><i class=\"icon-remove icon-white\"></i> Delete</a>");
 																out.println("<a class=\"btn btn-danger btn-mini\" data-target=\"#confirm"+groTeaTopic.get(i).getTopic().getFid()+"\" data-toggle=\"modal\"> <i class=\"icon-remove icon-white\"></i> Delete</a>");
 																out.println("<div class=\"modal hide fade\" id=\"confirm"+groTeaTopic.get(i).getTopic().getFid()+"\"><div class=\"modal-header\"><h4>Delete</h4></div><div class=\"modal-body\">Are you sure?</div><div class=\"modal-footer\"><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cancel</button><a href=\""+request.getContextPath() + "/editFYP.do?flag=removeTopic&rid=" + groTeaTopic.get(i).getTopic().getFid() +"\" class=\"btn btn-danger\">Delete</a></div></div>");
+																out.println("<td>");
 															} else {
 																if(uploadState.equals("before")){
-																	out.println("Avaliable");
+																	
+																	//out.println("Avaliable");
 																}else{
+																	out.println("<td>");
 																	out.println(groStudent.get(i));
+																	out.println("<td>");
 																}
 															}
-															out.println("</td>");
+															
 														}
 														out.println("</tr>");
 													} else {
