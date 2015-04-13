@@ -87,10 +87,8 @@
 
 			<!--/span-->
 
-			<div class="span9" id="content">
-				
+			<div class="span9" id="content">	
 				<div class="row-fluid">
-
 						<!-- block -->
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
@@ -207,30 +205,31 @@
 										</div>
 									</div>
 
-									<div class="control-group">
-										<label class="control-label" for="textarea2">Description
-											<span class="required">*</span>
-										</label>
-										<div class="controls">
-											<%
-												out.println("<textarea name=\"description\" class=\"input-xlarge textarea\" style=\"width: 810px; height: 200px\" >"+teaTopic.get(0).getTopic().getDescription()+"</textarea>");
-											%>
-										</div>
-										<div class="form-actions">
-											<button type="submit" class="btn btn-primary">Submit</button>
-											<button href="${pageContext.request.contextPath }/editFYP.do?flag=topicListUi" class="btn">Cancel</button>
-										</div>
+								<div class="control-group">
+									<label class="control-label" for="textarea2">Description
+										<span class="required">*</span>
+									</label>
+									<div class="controls">
+										<%
+											out.println("<textarea name=\"description\" class=\"input-xlarge textarea\" style=\"width: 98%; height: 200px\" >"+teaTopic.get(0).getTopic().getDescription()+"</textarea>");
+										%>
 									</div>
-								</form>
+								</div>
+								
+								<div class="form-actions">
+									<button type="submit" class="btn btn-primary">Submit</button>
+									<button
+										href="${pageContext.request.contextPath }/editFYP.do?flag=topicListUi"
+										class="btn">Cancel</button>
+								</div>
+							</form>
 							</div>
 						</div>
-
-
-				</div>
-			</div>
-
+					</div>
+				
 		</div>
 	</div>
+</div>
 
 
 

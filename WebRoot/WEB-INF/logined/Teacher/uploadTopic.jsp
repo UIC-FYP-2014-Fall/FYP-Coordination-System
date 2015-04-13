@@ -224,7 +224,7 @@
 										<div class="controls">
 											<textarea name="description" class="input-xlarge textarea"
 												placeholder="Enter text ..."
-												style="width: 810px; height: 200px"></textarea>
+												style="width: 98%; height: 200px"></textarea>
 										</div>
 									</div>
 									<div class="form-actions">
