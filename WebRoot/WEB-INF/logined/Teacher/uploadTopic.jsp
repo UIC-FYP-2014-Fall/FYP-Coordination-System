@@ -86,27 +86,16 @@
 			<div class="span9" id="content">
 				<div class="row-fluid">
 					<c:if test="${requestScope.uploadTopicStart=='false' }">
-						<c:if test="${requestScope.todayIsBeforeUploadTime=='true' }">
-							<div class="alert alert-error ErrorInfo">
-								<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-								<h4>Note:</h4>
-								Today is before the upload topic state. The upload topic time is
-								started from ${requestScope.uploadPeriod }.
-							</div>
-							<%
-								request.removeAttribute("uploadTopicStart");
-													request.removeAttribute("todayIsBeforeUploadTime");
-							%>
-						</c:if>
+						
 						<c:if test="${requestScope.todayIsAfterUploadTime=='true' }">
 							<div class="alert alert-error ErrorInfo">
 								<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
 								<h4>Note:</h4>
-								Upload topic is end.
+								Upload topic state has ended.
 							</div>
 							<%
 								request.removeAttribute("uploadTopicStart");
-													request.removeAttribute("todayIsAfterUploadTime");
+								request.removeAttribute("todayIsAfterUploadTime");
 							%>
 						</c:if>
 						<c:if test="${requestScope.noUploadTime=='true'}">
@@ -117,8 +106,8 @@
 							</div>
 							<%
 								request.removeAttribute("uploadTopicStart");
-													request.removeAttribute("noUploadTime");
-													request.removeAttribute("noUploadTimeInfo");
+								request.removeAttribute("noUploadTime");
+								request.removeAttribute("noUploadTimeInfo");
 							%>
 						</c:if>
 					</c:if>
@@ -132,11 +121,31 @@
 							request.removeAttribute("didNotContainSupervisor");
 						%>
 					</c:if>
+					<c:if test="${requestScope.noTitle=='true' }">
+						<div class="alert alert-error ErrorInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Error :</h4>
+							Missing a title.
+						</div>
+						<%
+							request.removeAttribute("noTitle");
+						%>
+					</c:if>
+					<c:if test="${requestScope.noDescription=='true' }">
+						<div class="alert alert-error ErrorInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Error :</h4>
+							Missing a description.
+						</div>
+						<%
+							request.removeAttribute("noDescription");
+						%>
+					</c:if>
 					<c:if test="${requestScope.uploadTopicStart=='true' }">
 						<div class="alert alert-info alert-block">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 							<h4>Note:</h4>
-							Please upload your topic from ${requestScope.uploadPeriod }.
+							Please upload your topic before ${requestScope.uploadPeriod }.
 						</div>
 
 						<!-- block -->

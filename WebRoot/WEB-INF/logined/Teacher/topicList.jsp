@@ -178,7 +178,6 @@
 									<tbody>
 										<%
 											String uploadState = (String) request.getAttribute("isUploadTopicDate");
-												
 											ArrayList<TeaTopic> indTeaTopic = (ArrayList<TeaTopic>) request.getAttribute("indTeaTopic");
 											ArrayList<String> indSupervisor = (ArrayList<String>) request.getAttribute("indSupervisor");
 											ArrayList<String> indStudent = (ArrayList<String>) request.getAttribute("indStudent");

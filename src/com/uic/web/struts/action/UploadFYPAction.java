@@ -5,17 +5,13 @@
 package com.uic.web.struts.action;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
-
 import com.uic.domain.ObsTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
@@ -52,7 +48,7 @@ public class UploadFYPAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("teacher")) {
 			// check propertises if the today is in upload period
-			PropertiesHelper ph = new PropertiesHelper(
+			/*PropertiesHelper ph = new PropertiesHelper(
 					"/WEB-INF/config/FYP-system.properties");
 			String start = ph.getProperties("UploadTopicsStartDateTime");
 			String end = ph.getProperties("UploadTopicsEndDateTime");
@@ -82,8 +78,24 @@ public class UploadFYPAction extends DispatchAction {
 				request.setAttribute("noUploadTimeInfo", "Coordinator does not set the upload topic time.");
 				request.setAttribute("uploadTopicStart", "false");
 				return mapping.findForward("uploadTopicUi");
+			}*/
+			PropertiesHelper ph = new PropertiesHelper(
+					"/WEB-INF/config/FYP-system.properties");
+			String end = ph.getProperties("ChooseTopicEndDateTime");
+			if(BaseUtil.todayIsBefore(end)){
+				TeachersServiceImp ts = new TeachersServiceImp();
+				List<Teacher> teacherList = ts.getTeachers();
+				request.setAttribute("teacherList", teacherList);
+				request.setAttribute("uploadPeriod", end);
+				request.setAttribute("uploadTopicStart", "true");
+				return mapping.findForward("uploadTopicUi");
+			}else{
+				System.out.println("after");
+				request.setAttribute("todayIsAfterUploadTime", "true");
+				request.setAttribute("uploadPeriod", end);
+				request.setAttribute("uploadTopicStart", "false");
+				return mapping.findForward("uploadTopicUi");
 			}
-
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
 			return mapping.findForward("goLogin");
@@ -93,7 +105,13 @@ public class UploadFYPAction extends DispatchAction {
 	public ActionForward uploadFYP(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		UploadFYPForm uploadFYPForm = (UploadFYPForm) form;
-
+		if(uploadFYPForm.getTitle().isEmpty()){
+			request.setAttribute("noTitle", "true");
+			return mapping.findForward("uploaderr");
+		}else if(uploadFYPForm.getDescription().isEmpty()){
+			request.setAttribute("noDescription", "true");
+			return mapping.findForward("uploaderr");
+		}
 		// set up the data service.
 		TeachersServiceImp teachersServiceImp = new TeachersServiceImp();
 		FYPServiceImp fypServiceImp = new FYPServiceImp();

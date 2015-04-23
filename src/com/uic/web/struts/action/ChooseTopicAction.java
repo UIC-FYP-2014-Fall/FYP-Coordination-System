@@ -50,12 +50,12 @@ public class ChooseTopicAction extends DispatchAction {
 		if (request.getSession().getAttribute("role").equals("student")) {
 			// first check if the student choose the topic
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
-			String viewTopicStart = ph.getProperties("UploadTopicsEndDateTime");
+			//String viewTopicStart = ph.getProperties("UploadTopicsEndDateTime");
 			String chooseTopicStart = ph.getProperties("ChooseTopicStartDateTime");
 			String chooseTopicEnd = ph.getProperties("ChooseTopicEndDateTime");
 			String timetablePeriod = chooseTopicStart + " to " + chooseTopicEnd;
-			if (viewTopicStart != null && chooseTopicEnd != null) {
-				if (BaseUtil.todayIsInPeriod(viewTopicStart, chooseTopicEnd)) {
+			if (chooseTopicEnd != null) {
+				if (BaseUtil.todayIsBefore(chooseTopicEnd)) {
 					Student curStudent = (Student) request.getSession().getAttribute("studentinfo");
 					FYPServiceImp fypServiceImp = new FYPServiceImp();
 					StudentServiceImp studentService = new StudentServiceImp();

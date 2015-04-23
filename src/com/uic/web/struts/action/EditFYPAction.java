@@ -56,7 +56,7 @@ public class EditFYPAction extends DispatchAction {
 			Teacher teacher=(Teacher)request.getSession().getAttribute("teacherinfo");
 			PropertiesHelper ph = new PropertiesHelper(
 					"/WEB-INF/config/FYP-system.properties");
-			String start = ph.getProperties("UploadTopicsStartDateTime");
+			/*String start = ph.getProperties("UploadTopicsStartDateTime");
 			String end = ph.getProperties("UploadTopicsEndDateTime");
 			
 			System.out.println("Teacher ID "+ teacher.getId());
@@ -73,7 +73,24 @@ public class EditFYPAction extends DispatchAction {
 			}else{
 				request.setAttribute("noUpLoadTime", "true");
 				return mapping.findForward("topicListUi");
+			}*/
+			String end = ph.getProperties("ChooseTopicStartDateTime");
+			if (end != null) {
+				if (BaseUtil.todayIsBefore(end)) {
+					request.setAttribute("isUploadTopicDate", "true");
+					System.out.println("choose topic does not start.");
+				}else{
+					request.setAttribute("isUploadTopicDate", "after");
+					System.out.println("choose topic does start.");
+				}
+			}else{
+				request.setAttribute("noUpLoadTime", "true");
+				return mapping.findForward("topicListUi");
 			}
+			
+			
+			
+			
 			List<TeaTopic> teaTopicList= fypServiceImp.getTeaTopic(teacher.getId().toString());
 			System.out.println("send List size "+ teaTopicList.size());
 			
