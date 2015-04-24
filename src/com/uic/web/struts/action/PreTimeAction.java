@@ -48,13 +48,13 @@ public class PreTimeAction extends DispatchAction {
 			//prepare data for the jsp page
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 			
-			String state1 = ph.getProperties("UploadTopicsDateTimeState");
+			//String state1 = ph.getProperties("UploadTopicsDateTimeState");
 			String state2 = ph.getProperties("ChooseTopicDateTimeState");
 			String state3 = ph.getProperties("ChooseExaminersDateTimeState");
 
 			
-			if(state1!=null&&state2!=null&&state3!=null){
-				if(state1.equals("true")&&state2.equals("true")&&state3.equals("true")){
+			if(state2!=null&&state3!=null){
+				if(state2.equals("true")&&state3.equals("true")){
 					
 					String CEendDateTime = ph.getProperties("ChooseExaminersEndDateTime");
 					

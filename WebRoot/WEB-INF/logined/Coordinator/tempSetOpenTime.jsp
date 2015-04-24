@@ -14,11 +14,7 @@
 			<th>Open Time Period</th>
 			<th colspan="2">Modify to Change (eg:2015-03-14 09:00:00)</th>
 		</tr>
-		<tr>
-			<td>Upload Topics</td>
-			<td>
-				<form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setUploadTopicTime" method="post">From:<input type="text" name="start" value="${UTstartDateTime }"></td><td>To:<input type="text" name="end" value="${UTendDateTime }">&nbsp;<input type="submit" value="Submit"></form></td>
-		</tr>
+		
 		<tr>
 			<td>Choose Topics</td>
 			<td><form action="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=setChooseTopicTime" method="post">From:<input type="text" name="start" value="${CTstartDateTime }"></td><td>To:<input type="text" name="end" value="${CTendDateTime }">&nbsp;<input type="submit" value="Submit"></form></td>

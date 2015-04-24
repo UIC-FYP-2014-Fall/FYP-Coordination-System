@@ -44,8 +44,8 @@ public class OpenTimeAction extends DispatchAction {
 			//prepare data for the jsp page
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 			//upload topics for teachers time
-			String UTstartDateTime = ph.getProperties("UploadTopicsStartDateTime");
-			String UTendDateTime = ph.getProperties("UploadTopicsEndDateTime");
+			//String UTstartDateTime = ph.getProperties("UploadTopicsStartDateTime");
+			//String UTendDateTime = ph.getProperties("UploadTopicsEndDateTime");
 			//choose topic for students time
 			String CTstartDateTime = ph.getProperties("ChooseTopicStartDateTime");
 			String CTendDateTime = ph.getProperties("ChooseTopicEndDateTime");
@@ -58,7 +58,7 @@ public class OpenTimeAction extends DispatchAction {
 			
 			//System.out.println(startDateTime);
 			//upload topics time load
-			if(UTstartDateTime!=null&&UTendDateTime!=null){			
+			/*if(UTstartDateTime!=null&&UTendDateTime!=null){			
 				String[] start = UTstartDateTime.split(" ");
 				String[] end = UTendDateTime.split(" ");
 				String[] startTime = start[1].split(":");
@@ -78,7 +78,7 @@ public class OpenTimeAction extends DispatchAction {
 				request.setAttribute("UploadTopicsEndDateTime", UTendDateTime);
 			}else{
 				request.setAttribute("UploadTopicsDateTime", "false");
-			}
+			}*/
 			//choose topic time load
 			if(CTstartDateTime!=null&&CTendDateTime!=null){			
 				String[] start = CTstartDateTime.split(" ");
@@ -208,9 +208,9 @@ public class OpenTimeAction extends DispatchAction {
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
 			//get upload topics end time
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
-			String state = ph.getProperties("UploadTopicsDateTimeState");
-			if(state.equals("true")){
-				String UTendDateTime = ph.getProperties("UploadTopicsEndDateTime");
+			//String state = ph.getProperties("UploadTopicsDateTimeState");
+			
+				//String UTendDateTime = ph.getProperties("UploadTopicsEndDateTime");
 				
 				PreTimeForm dateTimeForm = (PreTimeForm)form;
 				
@@ -226,9 +226,10 @@ public class OpenTimeAction extends DispatchAction {
 				
 				java.util.Date dStartTime = BaseUtil.StringConvertDate(startDateTime);
 				java.util.Date dEndTime = BaseUtil.StringConvertDate(endDateTime);
-				java.util.Date UTTime = BaseUtil.StringConvertDate(UTendDateTime);
+				//java.util.Date UTTime = BaseUtil.StringConvertDate(UTendDateTime);
+				java.util.Date nowDate = new java.util.Date();
 				
-				if(dStartTime.after(UTTime)&&dEndTime.after(UTTime)&&dStartTime.before(dEndTime)){
+				if(dStartTime.after(nowDate)&&dEndTime.after(nowDate)&&dStartTime.before(dEndTime)){
 					try {
 						ph.setProperties("ChooseTopicStartDateTime", startDateTime);
 						ph.setProperties("ChooseTopicEndDateTime", endDateTime);
@@ -243,10 +244,7 @@ public class OpenTimeAction extends DispatchAction {
 					request.setAttribute("TimeOperation", "error");
 					request.setAttribute("message", "Choose topic start or end time error! Please check.");
 				}
-			}else{
-				request.setAttribute("TimeOperation", "error");
-				request.setAttribute("message", "Upload topics time state is error! Please check.");
-			}
+			
 			
 			return new ActionForward("/openTime.do?flag=goUi");
 		}else {
@@ -261,10 +259,10 @@ public class OpenTimeAction extends DispatchAction {
 			//get upload topics end time
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 			
-			String state1 = ph.getProperties("UploadTopicsDateTimeState");
+			//String state1 = ph.getProperties("UploadTopicsDateTimeState");
 			String state2 = ph.getProperties("ChooseTopicDateTimeState");
 			
-			if(state1.equals("true")&&state2.equals("true")){
+			if(state2.equals("true")){
 				String CTendDateTime = ph.getProperties("ChooseTopicEndDateTime");
 				
 				PreTimeForm dateTimeForm = (PreTimeForm)form;
@@ -300,7 +298,7 @@ public class OpenTimeAction extends DispatchAction {
 				}
 			}else{
 				request.setAttribute("TimeOperation", "error");
-				request.setAttribute("message", "Choose topic for students or Upload topics for teachers time state is error! Please check.");
+				request.setAttribute("message", "Choose topic for students time state is error! Please check.");
 			}
 			
 			return new ActionForward("/openTime.do?flag=goUi");
@@ -315,11 +313,11 @@ public class OpenTimeAction extends DispatchAction {
 			//get upload topics end time
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 			
-			String state1 = ph.getProperties("UploadTopicsDateTimeState");
+			//String state1 = ph.getProperties("UploadTopicsDateTimeState");
 			String state2 = ph.getProperties("ChooseTopicDateTimeState");
 			String state3 = ph.getProperties("ChooseExaminersDateTimeState");
 			
-			if(state1.equals("true")&&state2.equals("true")&&state3.equals("true")){
+			if(state2.equals("true")&&state3.equals("true")){
 				
 				String CEendDateTime = ph.getProperties("ChooseExaminersEndDateTime");
 				
@@ -357,7 +355,7 @@ public class OpenTimeAction extends DispatchAction {
 				}
 			}else{
 				request.setAttribute("TimeOperation", "error");
-				request.setAttribute("message", "Choose examiner or Choose topic or Upload topics time state is error! Please check.");
+				request.setAttribute("message", "Choose examiner or Choose topic time state is error! Please check.");
 			}
 			
 			return new ActionForward("/openTime.do?flag=goUi");

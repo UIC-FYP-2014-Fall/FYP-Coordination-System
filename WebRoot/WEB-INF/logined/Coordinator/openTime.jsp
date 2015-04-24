@@ -101,7 +101,7 @@
           					The operation failed! ${message }
        					</div>
       				</c:if>
-                			<!-- block -->
+                			<%-- <!-- block -->
                             <div class="block">  
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Set Open Time for Teachers</div>
@@ -207,7 +207,7 @@
                                     </div>
 									                                   
 								</div>
-							</div>
+							</div> --%>
 								
 							<div class="block">  
 	                        	<div class="navbar navbar-inner block-header">
@@ -545,7 +545,7 @@ var nowTemp = new Date();
 
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 		  
-<%
+<%-- <%
 if(request.getAttribute("UTstartHH")!=null){
 %>
 var now1 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), <%=request.getAttribute("UTstartHH")%>, <%=request.getAttribute("UTstartMM")%>, <%=request.getAttribute("UTstartSS")%>, 0);
@@ -560,7 +560,7 @@ var now2 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
 <%}else{%>
 var now2 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 18, 0, 0, 0);
 <%}%>
-
+ --%>
 <%
 if(request.getAttribute("CTstartHH")!=null){
 %>
@@ -605,11 +605,11 @@ var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
 var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 18, 0, 0, 0);
 <%}%>
 
-          var checkin = $('#dpd1').datepicker({
+          /* var checkin = $('#dpd1').datepicker({
            format: 'yyyy-mm-dd',
-           /* onRender: function(date) {
+           onRender: function(date) {
             return date.valueOf() < now.valueOf() ? 'disabled' : '';
-          } */
+          } 
         }).on('changeDate', function(ev) {
           if (ev.date.valueOf() > checkout.date.valueOf()) {
             var newDate = new Date(ev.date)
@@ -617,13 +617,14 @@ var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
             checkout.setValue(newDate);
           }
           checkin.hide();
-          $('#dpd2')[0].focus();
+          $('#dpd3')[0].focus();
         }).data('datepicker');
+           
         var checkout = $('#dpd2').datepicker({
          format: 'yyyy-mm-dd',
-        /*  onRender: function(date) {
-          return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-        } */
+         onRender: function(date) {
+          return date.valueOf() <= now.valueOf() ? 'disabled' : '';
+        }
       }).on('changeDate', function(ev) {
 		var newDate1 = new Date(ev.date)
             newDate1.setDate(newDate1.getDate() + 1);
@@ -631,7 +632,7 @@ var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
         checkout.hide();
 		$('#dpd3')[0].focus();
       }).data('datepicker');
-	  
+	  */
       /* jQuery(document).ready(function() {   
         FormValidation.init();
       });
@@ -640,7 +641,7 @@ var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
 	  var checkin_ct = $('#dpd3').datepicker({
            format: 'yyyy-mm-dd',
            onRender: function(date) {
-            return date.valueOf() < checkout.date.valueOf() ? 'disabled' : '';
+            return date.valueOf() < now.valueOf() ? 'disabled' : '';
           }
         }).on('changeDate', function(ev) {
           if (ev.date.valueOf() > checkout_ct.date.valueOf()) {
@@ -722,9 +723,9 @@ var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
 	
 	  ///////////////////////////
 	  
-      $('#starttime').datetimepicker({
+     /*  $('#starttime').datetimepicker({
         pickDate: false
-      });
+      }); */
 	  $('#ct_starttime').datetimepicker({
         pickDate: false
       });
@@ -734,9 +735,9 @@ var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
 	  $('#cp_starttime').datetimepicker({
 	        pickDate: false
 	      });
-      $('#endtime').datetimepicker({
+     /*  $('#endtime').datetimepicker({
         pickDate: false
-      });
+      }); */
 	   $('#ct_endtime').datetimepicker({
         pickDate: false
       });
@@ -747,8 +748,8 @@ var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
 	        pickDate: false
 	      });
 
-      $("#starttime").data('datetimepicker').setLocalDate(now1);
-      $("#endtime").data('datetimepicker').setLocalDate(now2);
+      /* $("#starttime").data('datetimepicker').setLocalDate(now1);
+      $("#endtime").data('datetimepicker').setLocalDate(now2); */
       
 	  $("#ct_starttime").data('datetimepicker').setLocalDate(now3);
 	  $("#ct_endtime").data('datetimepicker').setLocalDate(now4);
@@ -766,25 +767,25 @@ var now8 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()
 	  var edit4=document.getElementById('edit4');
 	  
 	  function btn(){ 
-	  	edit.style.display='';
+	  	//edit.style.display='';
 	  	edit2.style.display='none';
 	  	edit3.style.display='none';
 	  	edit4.style.display='none';
 	  }
 	  function btn2(){ 
-		  	edit.style.display='none';
+		  	//edit.style.display='none';
 		  	edit2.style.display='';
 		  	edit3.style.display='none';
 		  	edit4.style.display='none';
 		  }
 	  function btn3(){ 
-		  	edit.style.display='none';
+		  	//edit.style.display='none';
 		  	edit2.style.display='none';
 		  	edit3.style.display='';
 		  	edit4.style.display='none';
 		  }
 	  function btn4(){ 
-		  	edit.style.display='none';
+		  	//edit.style.display='none';
 		  	edit2.style.display='none';
 		  	edit3.style.display='none';
 		  	edit4.style.display='';

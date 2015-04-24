@@ -174,8 +174,8 @@
 									</c:if>
 									<c:if test="${timeType==2 }">
 										<div class="alert alert-block">
-											<h4 class="alert-heading">Sorry!</h4>
-											Select topic time has not start yet. Please pay attention to select topic time will start from <strong>${start }</strong> to <strong>${end }</strong>.
+											<h4 class="alert-heading">Info!</h4>
+											Please pay attention to select topic time will start from <strong>${start }</strong> to <strong>${end }</strong>. Click <a href="${pageContext.request.contextPath }/chooseTopic.do?flag=goChooseTopic">here</a> to view topic.
 										</div>
 									</c:if>
 								</c:when>

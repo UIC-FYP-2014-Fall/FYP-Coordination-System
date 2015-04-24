@@ -95,12 +95,7 @@
 							</div>
 
 							<div class="block-content collapse in">
-								<c:choose>
-								<c:when test="${UploadTopicsDateTimeState=='true' }">
-									<div class="alert alert-success alert-block">
-										<h4 class="alert-heading">Upload Topics for Teacher Time</h4>
-										<p>From ${UTstartDateTime } to ${UTendDateTime }</p>											
-									</div>
+								
 									<c:choose>
 									<c:when test="${ChooseTopicDateTimeState=='true' }">
 										<div class="alert alert-success alert-block">
@@ -160,15 +155,7 @@
 									</c:otherwise>
 									</c:choose>
 									
-								</c:when>
 								
-								<c:otherwise>
-									<div class="alert alert-block">
-										<h4 class="alert-heading">Warning!</h4>
-										<p>Upload topics for teacher time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
-									</div>
-								</c:otherwise>
-								</c:choose>
 								
 								<c:forEach items="${messageList }" var="message">
 									<c:if test="${message.type=='info' }">

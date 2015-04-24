@@ -58,141 +58,142 @@ public class ChooseExaminerAction extends DispatchAction {
 			
 			// get the student information
 			Student stu = (Student) request.getSession().getAttribute("studentinfo");
+			String sid = stu.getSid();
 			StudentServiceInter studentSericeInter = new StudentServiceImp();
+			
+			// 1.check whether student has chosen a FYP project.
+			if(studentSericeInter.checkTopicState(sid)){
+				// 2.check whether student can choose examiner
+				// student has chosen a examiner
+				if (studentSericeInter.checkExaminerState(sid)) {
 
-			// check whether student can choose examiner
+					Teacher examiner = studentSericeInter.getExaminer(sid);
+					// student has chosen examiner
+					request.setAttribute("chooseExaminer", "true");
+					// System.out.println(TimeChecker.timeCheck().getType());
 
-			// student has chosen a examiner
-			if (studentSericeInter.checkExaminerState(stu.getSid())) {
+					// display the examiner who has been chosen by the student
+					if (TimeChecker.timeCheck().getType().equals(TimeType.choose_examiner)) {
+						// student can change examiner
+						request.setAttribute("chooseExaminerTime", "true");
 
-				Teacher examiner = studentSericeInter.getExaminer(stu.getSid());
-				// student has chosen examiner
-				request.setAttribute("chooseExaminer", "true");
-				// System.out.println(TimeChecker.timeCheck().getType());
+						// ready data for the student reselect a examiner
+						Integer isExaminer = examiner.getId();
+						//System.out.println(isExaminer);
+						
+						// get the student supervisors
+						List<Teacher> supervisor = studentSericeInter.getSupervisor(sid);
+						HashMap<Integer, Teacher> hm = new HashMap<>();
 
-				// display the examiner who has been chosen by the student
-				if (TimeChecker.timeCheck().getType().equals(TimeType.choose_examiner)) {
-					// student can change examiner
-					request.setAttribute("chooseExaminerTime", "true");
-
-					// ready data for the student reselect a examiner
-					Integer isExaminer = examiner.getId();
-					//System.out.println(isExaminer);
-					
-					// get the student supervisors
-					List<Teacher> supervisor = studentSericeInter.getSupervisor(stu.getSid());
-					HashMap<Integer, Teacher> hm = new HashMap<>();
-
-					for (int i = 0; i < supervisor.size(); i++) {
-						hm.put(supervisor.get(i).getId(), supervisor.get(i));
-					}
-					
-					// get the student observer
-					Teacher observer = studentSericeInter.getObserver(stu
-							.getSid());
-					Integer observerId = observer.getId();
-
-					// rewrap the teacher list which will add state
-					List<TeacherState> teacherStateList = new ArrayList<TeacherState>();
-
-					TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
-					List<Teacher> listTeacher = teachersServiceInter.getTeachers();
-					// loop the teacher list to add the new list,
-					// teacherStateList.
-					for (Teacher t : listTeacher) {
-
-						TeacherState ts = new TeacherState();
-						ts.setTid(t.getId());
-						ts.setName(t.getName());
-						ts.setEmail(t.getEmail());
-
-						if (hm.containsKey(t.getId())) {
-							continue;
-						} else if (t.getId().equals(observerId)) {
-							continue;
-						} else if (t.getId().equals(isExaminer)) {
-							ts.setState(TeacherStateType.selected);
-							teacherStateList.add(ts);
-							continue;
-						} else {
-							if (teachersServiceInter.getWorkload(t.getId().toString()) < Integer.parseInt(t.getWorkload())) {
-								ts.setState(TeacherStateType.can_select);
-							} else {
-								ts.setState(TeacherStateType.full);
-							}
-							teacherStateList.add(ts);
+						for (int i = 0; i < supervisor.size(); i++) {
+							hm.put(supervisor.get(i).getId(), supervisor.get(i));
 						}
+						
+						// get the student observer
+						Teacher observer = studentSericeInter.getObserver(sid);
+						Integer observerId = observer.getId();
 
-					}
-					request.setAttribute("teacherList", teacherStateList);
+						// rewrap the teacher list which will add state
+						List<TeacherState> teacherStateList = new ArrayList<TeacherState>();
 
-				} else {
-					// student only view examiner
-					request.setAttribute("chooseExaminerTime", "false");
-					// System.out.println("chooseExaminerTime----false");
-				}
+						TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
+						List<Teacher> listTeacher = teachersServiceInter.getTeachers();
+						// loop the teacher list to add the new list,
+						// teacherStateList.
+						for (Teacher t : listTeacher) {
 
-				request.setAttribute("StudentExaminer", examiner.getName());
-			} else {
-				// student has not choose a examiner yet
-				request.setAttribute("chooseExaminer", "false");
-				// check now time whether should choose examiner
-				if (TimeChecker.timeCheck().getType().equals(TimeType.choose_examiner)) {
-
-					request.setAttribute("chooseExaminerTime", "true");
-
-					// get student supervisor
-					List<Teacher> supervisor = studentSericeInter
-							.getSupervisor(stu.getSid());
-					// ArrayList<Integer> supervisorId = new ArrayList<>();
-
-					HashMap<Integer, Teacher> hm = new HashMap<>();
-
-					for (int i = 0; i < supervisor.size(); i++) {
-						hm.put(supervisor.get(i).getId(), supervisor.get(i));
-					}
-
-					Teacher observer = studentSericeInter.getObserver(stu.getSid());
-					Integer observerId = observer.getId();
-
-					// rewrap the teacher list which will add state
-					List<TeacherState> teacherStateList = new ArrayList<TeacherState>();
-
-					TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
-					List<Teacher> listTeacher = teachersServiceInter
-							.getTeachers();
-					// loop the teacher list to add the new list,
-					// teacherStateList.
-					for (Teacher t : listTeacher) {
-
-						TeacherState ts = new TeacherState();
-
-						if (hm.containsKey(t.getId())) {
-							continue;
-						} else if (t.getId().equals(observerId)) {
-							continue;
-						} else {
+							TeacherState ts = new TeacherState();
 							ts.setTid(t.getId());
 							ts.setName(t.getName());
 							ts.setEmail(t.getEmail());
-							if (teachersServiceInter.getWorkload(t.getId().toString()) < Integer.parseInt(t.getWorkload())) {
-								ts.setState(TeacherStateType.can_select);
+
+							if (hm.containsKey(t.getId())) {
+								continue;
+							} else if (t.getId().equals(observerId)) {
+								continue;
+							} else if (t.getId().equals(isExaminer)) {
+								ts.setState(TeacherStateType.selected);
+								teacherStateList.add(ts);
+								continue;
 							} else {
-								ts.setState(TeacherStateType.full);
+								if (teachersServiceInter.getWorkload(t.getId().toString()) < Integer.parseInt(t.getWorkload())) {
+									ts.setState(TeacherStateType.can_select);
+								} else {
+									ts.setState(TeacherStateType.full);
+								}
+								teacherStateList.add(ts);
 							}
-							teacherStateList.add(ts);
+
+						}
+						request.setAttribute("teacherList", teacherStateList);
+
+					} else {
+						// student only view examiner
+						request.setAttribute("chooseExaminerTime", "false");
+						// System.out.println("chooseExaminerTime----false");
+					}
+
+					request.setAttribute("StudentExaminer", examiner.getName());
+				} else {
+					// student has not choose a examiner yet
+					request.setAttribute("chooseExaminer", "false");
+					// check now time whether should choose examiner
+					if (TimeChecker.timeCheck().getType().equals(TimeType.choose_examiner)) {
+						request.setAttribute("chooseExaminerTime", "true");
+						// get student supervisor
+						List<Teacher> supervisor = studentSericeInter.getSupervisor(stu.getSid());
+						// ArrayList<Integer> supervisorId = new ArrayList<>();
+
+						HashMap<Integer, Teacher> hm = new HashMap<>();
+
+						for (int i = 0; i < supervisor.size(); i++) {
+							hm.put(supervisor.get(i).getId(), supervisor.get(i));
 						}
 
+						Teacher observer = studentSericeInter.getObserver(stu.getSid());
+						Integer observerId = observer.getId();
+
+						// rewrap the teacher list which will add state
+						List<TeacherState> teacherStateList = new ArrayList<TeacherState>();
+
+						TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
+						List<Teacher> listTeacher = teachersServiceInter
+								.getTeachers();
+						// loop the teacher list to add the new list,
+						// teacherStateList.
+						for (Teacher t : listTeacher) {
+
+							TeacherState ts = new TeacherState();
+
+							if (hm.containsKey(t.getId())) {
+								continue;
+							} else if (t.getId().equals(observerId)) {
+								continue;
+							} else {
+								ts.setTid(t.getId());
+								ts.setName(t.getName());
+								ts.setEmail(t.getEmail());
+								if (teachersServiceInter.getWorkload(t.getId().toString()) < Integer.parseInt(t.getWorkload())) {
+									ts.setState(TeacherStateType.can_select);
+								} else {
+									ts.setState(TeacherStateType.full);
+								}
+								teacherStateList.add(ts);
+							}
+
+						}
+						request.setAttribute("teacherList", teacherStateList);
+
+					} else {
+						request.setAttribute("chooseExaminerTime", "false");
 					}
-					request.setAttribute("teacherList", teacherStateList);
-
-				} else {
-					request.setAttribute("chooseExaminerTime", "false");
 				}
+			}else{
+				// student has not choose a FYP project yet
+				request.setAttribute("studentOperation", "error");
+				request.setAttribute("ErrorInfo", "You have not chosen a FYP project. Please contact your coordinator to solve this problem! ");
 			}
-
 			// System.out.println(TimeChecker.timeCheck().getType());
-
 			return mapping.findForward("goChooseExaminerUi");
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");

@@ -17,102 +17,82 @@ public class TimeChecker {
 				"/WEB-INF/config/FYP-system.properties");
 		Time returnTime = new Time();
 
-		String state1 = ph.getProperties("UploadTopicsDateTimeState");
+		//String state1 = ph.getProperties("UploadTopicsDateTimeState");
 		String state2 = ph.getProperties("ChooseTopicDateTimeState");
 		String state3 = ph.getProperties("ChooseExaminersDateTimeState");
 		//String state4 = ph.getProperties("PreDateTimeState");
 		String state4 = ph.getProperties("ChoosePresentationDateTimeState");
 
-		if (state1 != null) {
-			String UTstartDateTime = ph
-					.getProperties("UploadTopicsStartDateTime");
-			String UTendDateTime = ph.getProperties("UploadTopicsEndDateTime");
+		
+		if (state2 != null) {
 
-			if (compareTime(UTstartDateTime)) {
-				returnTime.setType(TimeType.system_close);
+			String CTstartDateTime = ph.getProperties("ChooseTopicStartDateTime");
+			String CTendDateTime = ph.getProperties("ChooseTopicEndDateTime");
+
+			if (compareTime(CTstartDateTime)) {
+				returnTime.setType(TimeType.view_topic);
+				returnTime.setStartTime(CTstartDateTime);
+				returnTime.setEndTime(CTendDateTime);
 				return returnTime;
 			} else {
-				if (compareTime(UTstartDateTime, UTendDateTime)) {
-					returnTime.setType(TimeType.upload_topic);
-					returnTime.setStartTime(UTstartDateTime);
-					returnTime.setEndTime(UTendDateTime);
+				
+				if (compareTime(CTstartDateTime, CTendDateTime)) {
+					returnTime.setType(TimeType.choose_topic);
+					returnTime.setStartTime(CTstartDateTime);
+					returnTime.setEndTime(CTendDateTime);
 					return returnTime;
 				}
-				if (state2 != null) {
-					
-					String CTstartDateTime = ph.getProperties("ChooseTopicStartDateTime");
-					String CTendDateTime = ph.getProperties("ChooseTopicEndDateTime");
-					
-					if (compareTime(UTendDateTime, CTstartDateTime)) {
-						returnTime.setType(TimeType.upload_to_topic_choose);
-						returnTime.setStartTime(CTstartDateTime);
-						returnTime.setEndTime(CTendDateTime);
+
+				if (state3 != null) {
+
+					String CEstartDateTime = ph.getProperties("ChooseExaminersStartDateTime");
+					String CEendDateTime = ph.getProperties("ChooseExaminersEndDateTime");
+
+					if (compareTime(CTendDateTime, CEstartDateTime)) {
+						returnTime.setType(TimeType.topic_to_examiner_choose);
+						returnTime.setStartTime(CEstartDateTime);
+						returnTime.setEndTime(CEendDateTime);
+						return returnTime;
+					} else if (compareTime(CEstartDateTime, CEendDateTime)) {
+						returnTime.setType(TimeType.choose_examiner);
+						returnTime.setStartTime(CEstartDateTime);
+						returnTime.setEndTime(CEendDateTime);
 						return returnTime;
 					}
-					
-					else if (compareTime(CTstartDateTime, CTendDateTime)) {
-						returnTime.setType(TimeType.choose_topic);
-						returnTime.setStartTime(CTstartDateTime);
-						returnTime.setEndTime(CTendDateTime);
-						return returnTime;
-					}
-					
-					if (state3 != null) {
-						
-						String CEstartDateTime = ph.getProperties("ChooseExaminersStartDateTime");
-						String CEendDateTime = ph.getProperties("ChooseExaminersEndDateTime");
-						
-						if (compareTime(CTendDateTime, CEstartDateTime)) {
-							returnTime.setType(TimeType.topic_to_examiner_choose);
-							returnTime.setStartTime(CEstartDateTime);
-							returnTime.setEndTime(CEendDateTime);
+					if (state4 != null) {
+
+						String PstartDateTime = ph.getProperties("ChoosePresentationStartDateTime");
+						String PendDateTime = ph.getProperties("ChoosePresentationEndDateTime");
+
+						if (compareTime(CEendDateTime, PstartDateTime)) {
+							returnTime.setType(TimeType.examiner_to_pretime_choose);
+							returnTime.setStartTime(PstartDateTime);
+							returnTime.setEndTime(PendDateTime);
 							return returnTime;
-						}
-						else if (compareTime(CEstartDateTime, CEendDateTime)) {
-							returnTime.setType(TimeType.choose_examiner);
-							returnTime.setStartTime(CEstartDateTime);
-							returnTime.setEndTime(CEendDateTime);
+						} else if (compareTime(PstartDateTime, PendDateTime)) {
+							returnTime.setType(TimeType.choose_pretime);
+							returnTime.setStartTime(PstartDateTime);
+							returnTime.setEndTime(PendDateTime);
 							return returnTime;
-						}
-						if (state4 != null) {
-							
-							String PstartDateTime = ph.getProperties("ChoosePresentationStartDateTime");
-							String PendDateTime = ph.getProperties("ChoosePresentationEndDateTime");
-							
-							if (compareTime(CEendDateTime, PstartDateTime)) {
-								returnTime.setType(TimeType.examiner_to_pretime_choose);
-								returnTime.setStartTime(PstartDateTime);
-								returnTime.setEndTime(PendDateTime);
-								return returnTime;
-							}
-							else if (compareTime(PstartDateTime, PendDateTime)) {
-								returnTime.setType(TimeType.choose_pretime);
-								returnTime.setStartTime(PstartDateTime);
-								returnTime.setEndTime(PendDateTime);
-								return returnTime;
-							} else {
-								returnTime.setType(TimeType.system_done);
-								return returnTime;
-							}
 						} else {
-							returnTime.setType(TimeType.examiner_after_no_pretime);
+							returnTime.setType(TimeType.system_done);
 							return returnTime;
 						}
 					} else {
-						returnTime.setType(TimeType.topic_choose_after_no_examiner);
+						returnTime.setType(TimeType.examiner_after_no_pretime);
 						return returnTime;
 					}
 				} else {
-					returnTime.setType(TimeType.upload_after_no_topic_choose);
-					returnTime.setStartTime(UTstartDateTime);
-					returnTime.setEndTime(UTendDateTime);
+					returnTime.setType(TimeType.topic_choose_after_no_examiner);
 					return returnTime;
 				}
+				
 			}
-		} else {
+		}else{
 			returnTime.setType(TimeType.system_close);
 			return returnTime;
 		}
+		
 	}
 
 	/**
