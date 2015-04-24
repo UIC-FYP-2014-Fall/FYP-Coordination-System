@@ -26,7 +26,7 @@
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="index.html">FYP Coordination System</a>
+				</a> <a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP Coordination System</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
 						<li class="dropdown"><a href="#" role="button"
@@ -226,7 +226,6 @@
 	<!--/.fluid-container-->
 	<script src="vendors/jquery-1.9.1.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="vendors/easypiechart/jquery.easy-pie-chart.js"></script>
 	<script src="assets/scripts.js"></script>
 	<script>
 		function setChange() {

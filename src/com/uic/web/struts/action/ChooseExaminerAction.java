@@ -61,6 +61,7 @@ public class ChooseExaminerAction extends DispatchAction {
 			String sid = stu.getSid();
 			StudentServiceInter studentSericeInter = new StudentServiceImp();
 			
+			
 			// 1.check whether student has chosen a FYP project.
 			if(studentSericeInter.checkTopicState(sid)){
 				// 2.check whether student can choose examiner
