@@ -82,18 +82,27 @@ public class UploadFYPAction extends DispatchAction {
 			PropertiesHelper ph = new PropertiesHelper(
 					"/WEB-INF/config/FYP-system.properties");
 			String end = ph.getProperties("ChooseTopicEndDateTime");
-			if(BaseUtil.todayIsBefore(end)){
+			if(end!=null){
+				if(BaseUtil.todayIsBefore(end)){
+					TeachersServiceImp ts = new TeachersServiceImp();
+					List<Teacher> teacherList = ts.getTeachers();
+					request.setAttribute("teacherList", teacherList);
+					request.setAttribute("uploadPeriod", end);
+					request.setAttribute("uploadTopicStart", "true");
+					return mapping.findForward("uploadTopicUi");
+				}else{
+					System.out.println("after");
+					request.setAttribute("todayIsAfterUploadTime", "true");
+					request.setAttribute("uploadPeriod", end);
+					request.setAttribute("uploadTopicStart", "false");
+					return mapping.findForward("uploadTopicUi");
+				}
+			}else{
 				TeachersServiceImp ts = new TeachersServiceImp();
 				List<Teacher> teacherList = ts.getTeachers();
 				request.setAttribute("teacherList", teacherList);
 				request.setAttribute("uploadPeriod", end);
 				request.setAttribute("uploadTopicStart", "true");
-				return mapping.findForward("uploadTopicUi");
-			}else{
-				System.out.println("after");
-				request.setAttribute("todayIsAfterUploadTime", "true");
-				request.setAttribute("uploadPeriod", end);
-				request.setAttribute("uploadTopicStart", "false");
 				return mapping.findForward("uploadTopicUi");
 			}
 		} else {

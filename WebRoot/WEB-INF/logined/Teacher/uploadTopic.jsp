@@ -29,7 +29,8 @@
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP Coordination System</a>
+				</a> <a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP
+					Coordination System</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
 						<li class="dropdown"><a href="#" role="button"
@@ -86,7 +87,7 @@
 			<div class="span9" id="content">
 				<div class="row-fluid">
 					<c:if test="${requestScope.uploadTopicStart=='false' }">
-						
+
 						<c:if test="${requestScope.todayIsAfterUploadTime=='true' }">
 							<div class="alert alert-error ErrorInfo">
 								<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
@@ -145,7 +146,16 @@
 						<div class="alert alert-info alert-block">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 							<h4>Note:</h4>
-							Please upload your topic before ${requestScope.uploadPeriod }.
+
+							<c:choose>
+								<c:when test="${requestScope.uploadPeriod==null}">
+   									Please upload your topic.
+  								</c:when>
+								<c:otherwise>
+  									 Please upload your topic before ${requestScope.uploadPeriod}.
+   								</c:otherwise>
+							</c:choose>
+
 						</div>
 
 						<!-- block -->
