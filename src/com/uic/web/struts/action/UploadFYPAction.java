@@ -176,6 +176,7 @@ public class UploadFYPAction extends DispatchAction {
 		// set a default observer
 		ObsTopic obsTopic = new ObsTopic();
 		obsTopic.setObserver(teacherlist.get(0));
+		System.out.println(teacherlist.get(0).getName());
 		obsTopic.setTopic(topic);
 		fypServiceImp.saveObject(obsTopic);
 		return mapping.findForward("uploadok");

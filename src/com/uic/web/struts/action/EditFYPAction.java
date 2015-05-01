@@ -84,8 +84,8 @@ public class EditFYPAction extends DispatchAction {
 					System.out.println("choose topic does start.");
 				}
 			}else{
-				request.setAttribute("noUpLoadTime", "true");
-				return mapping.findForward("topicListUi");
+				request.setAttribute("isUploadTopicDate", "true");
+				System.out.println("choose topic does not start.");
 			}
 			
 			
@@ -287,7 +287,7 @@ public class EditFYPAction extends DispatchAction {
 			fypServiceImp.updateEditTopic(teacherNeedToUpdate,topic);
 		}
 		request.setAttribute("ifEditSuccess", "true");
-		request.setAttribute("operationInfo", "edit topic success");
+		request.setAttribute("operationInfo", "Edit topic success");
 		return mapping.findForward("editOk");
 	}
 }
