@@ -21,6 +21,10 @@ public class TimeslotForm extends ActionForm {
 	 * Generated fields
 	 */
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** timeslot property */
 	private String[] timeslot;
 

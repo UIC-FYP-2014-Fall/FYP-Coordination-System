@@ -21,6 +21,10 @@ public class ObserverForm extends ActionForm {
 	 * Generated fields
 	 */
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** obsTopic property */
 	private String[] obsTopic;
 

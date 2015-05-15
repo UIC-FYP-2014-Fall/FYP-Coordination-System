@@ -16,6 +16,8 @@
     <form-bean name="choosePreTimeForm" type="com.uic.web.struts.form.ChoosePreTimeForm" />
     <form-bean name="selectTopicForm" type="com.uic.web.struts.form.SelectTopicForm" />
     <form-bean name="fileUploadForm" type="com.uic.web.struts.form.FileUploadForm" />
+    <form-bean name="assessItemForm" type="com.uic.web.struts.form.AssessItemForm" />
+    <form-bean name="testForm" type="com.uic.web.struts.form.TestForm" />
   </form-beans>
   <global-exceptions />
   <global-forwards >
@@ -259,6 +261,19 @@
       cancellable="true">
       <forward name="goImportUi" path="/WEB-INF/logined/Coordinator/importStudent.jsp" />
     </action>
+    <action
+      attribute="assessItemForm"
+      input="/WEB-INF/logined/Coordinator/assessItem.jsp"
+      name="assessItemForm"
+      parameter="flag"
+      path="/assessItem"
+      scope="request"
+      type="com.uic.web.struts.action.AssessItemAction"
+      validate="false"
+      cancellable="true">
+      <forward name="goAssessItemUi" path="/WEB-INF/logined/Coordinator/assessItem.jsp" />
+    </action>
+
 
     
   </action-mappings>

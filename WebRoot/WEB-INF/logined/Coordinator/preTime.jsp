@@ -92,6 +92,10 @@
 					<li><a
 						href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i
 							class="icon-chevron-right"></i> Change Password</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/assessItem.do?flag=goAssessItemUi">
+							<i class="icon-chevron-right"></i> Assessment Item
+					</a></li>
 				</ul>
 			</div>
 			<!--/span-->
@@ -289,61 +293,83 @@
 
 
 	<script>
-var nowTemp = new Date();
-var now = new Date(<%=request.getAttribute("CEyear")%>, <%=request.getAttribute("CEmonth")%>, <%=request.getAttribute("CEday")%>, 0, 0, 0, 0);
-<%
-	if(request.getAttribute("startHH")!=null){
-%>
-var now1 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), <%=request.getAttribute("startHH")%>, <%=request.getAttribute("startMM")%>, <%=request.getAttribute("startSS")%>, 0);
-<%}else{%>
-var now1 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 9, 0, 0, 0);
-<%}%>
-<%
-	if(request.getAttribute("endHH")!=null){
-%>
-var now2 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), <%=request.getAttribute("endHH")%>, <%=request.getAttribute("endMM")%>, <%=request.getAttribute("endSS")%>, 0);
-<%}else{%>
-var now2 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 18, 0, 0, 0);
-<%}%>
-var checkin = $('#dpd1').datepicker({
-			format: 'yyyy-mm-dd',
-          	onRender: function(date) {
-            return date.valueOf() < now.valueOf() ? 'disabled' : '';
-          }
-        }).on('changeDate', function(ev) {
-          if (ev.date.valueOf() > checkout.date.valueOf()) {
-            var newDate = new Date(ev.date)
-            newDate.setDate(newDate.getDate() + 1);
-            checkout.setValue(newDate);
-          }
-          checkin.hide();
-          $('#dpd2')[0].focus();
-        }).data('datepicker');
-        var checkout = $('#dpd2').datepicker({
-			format: 'yyyy-mm-dd',
-          onRender: function(date) {
-            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-          }
-        }).on('changeDate', function(ev) {
-          checkout.hide();
-        }).data('datepicker');
-jQuery(document).ready(function() {   
-	   FormValidation.init();
-	});
-$('#starttime').datetimepicker({
-    pickDate: false
-});
-$('#endtime').datetimepicker({
-    pickDate: false
-});
+		var nowTemp = new Date();
+		var now = new Date(
+	<%=request.getAttribute("CEyear")%>
+		,
+	<%=request.getAttribute("CEmonth")%>
+		,
+	<%=request.getAttribute("CEday")%>
+		, 0, 0, 0, 0);
+	<%if (request.getAttribute("startHH") != null) {%>
+		var now1 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp
+				.getDate(),
+	<%=request.getAttribute("startHH")%>
+		,
+	<%=request.getAttribute("startMM")%>
+		,
+	<%=request.getAttribute("startSS")%>
+		, 0);
+	<%} else {%>
+		var now1 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp
+				.getDate(), 9, 0, 0, 0);
+	<%}%>
+		
+	<%if (request.getAttribute("endHH") != null) {%>
+		var now2 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp
+				.getDate(),
+	<%=request.getAttribute("endHH")%>
+		,
+	<%=request.getAttribute("endMM")%>
+		,
+	<%=request.getAttribute("endSS")%>
+		, 0);
+	<%} else {%>
+		var now2 = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp
+				.getDate(), 18, 0, 0, 0);
+	<%}%>
+		var checkin = $('#dpd1').datepicker({
+			format : 'yyyy-mm-dd',
+			onRender : function(date) {
+				return date.valueOf() < now.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function(ev) {
+			if (ev.date.valueOf() > checkout.date.valueOf()) {
+				var newDate = new Date(ev.date)
+				newDate.setDate(newDate.getDate() + 1);
+				checkout.setValue(newDate);
+			}
+			checkin.hide();
+			$('#dpd2')[0].focus();
+		}).data('datepicker');
+		var checkout = $('#dpd2')
+				.datepicker(
+						{
+							format : 'yyyy-mm-dd',
+							onRender : function(date) {
+								return date.valueOf() <= checkin.date.valueOf() ? 'disabled'
+										: '';
+							}
+						}).on('changeDate', function(ev) {
+					checkout.hide();
+				}).data('datepicker');
+		jQuery(document).ready(function() {
+			FormValidation.init();
+		});
+		$('#starttime').datetimepicker({
+			pickDate : false
+		});
+		$('#endtime').datetimepicker({
+			pickDate : false
+		});
 
-$("#starttime").data('datetimepicker').setLocalDate(now1);
-$("#endtime").data('datetimepicker').setLocalDate(now2);
+		$("#starttime").data('datetimepicker').setLocalDate(now1);
+		$("#endtime").data('datetimepicker').setLocalDate(now2);
 
-var edit=document.getElementById('edit');
-function btn(){ 
-	edit.style.display='';
-}
-</script>
+		var edit = document.getElementById('edit');
+		function btn() {
+			edit.style.display = '';
+		}
+	</script>
 </body>
 </html>

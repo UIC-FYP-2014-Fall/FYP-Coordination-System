@@ -1,107 +1,122 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>FYP Coordination System</title>
-        <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-		<link href="assets/styles.css" rel="stylesheet" media="screen">	
-		<link href="bootstrap/css/datepicker.css" rel="stylesheet" type="text/css">
-		<link href="bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
+<!-- Bootstrap -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	media="screen">
+<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"
+	media="screen">
+<link href="assets/styles.css" rel="stylesheet" media="screen">
+<link href="bootstrap/css/datepicker.css" rel="stylesheet"
+	type="text/css">
+<link href="bootstrap/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet" type="text/css">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
-    	<div class="container-fluid">
-        	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                	 <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP Coordination System</a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav pull-right">
-                            <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> ${coordinatorinfo.name } <i class="caret"></i>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP
+					Coordination System</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav pull-right">
+						<li class="dropdown"><a href="#" role="button"
+							class="dropdown-toggle" data-toggle="dropdown"> <i
+								class="icon-user"></i> ${coordinatorinfo.name } <i class="caret"></i>
 
-                                </a>
-                                <ul class="dropdown-menu">                              	
-                                    <li>
-                                        <a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>                       
-                    </div>
-                    <!--/.nav-collapse -->
-                </div>
-     </div>
-</div>
-        <div class="modal hide fade" id="logout">
-			<div class="modal-header">
-				<h4>Logout</h4>
-			</div>
-			<div class="modal-body">
-				Are you sure?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a tabindex="-1" data-target="#logout"
+									data-toggle="modal" href="">Logout</a></li>
+							</ul></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
 			</div>
 		</div>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span3" id="sidebar">
-                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                        <li><a href="${pageContext.request.contextPath }/goUI.do"><i class="icon-chevron-right"></i> Main</a></li>
-						<li><a
-							href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=goUi"><i
-								class="icon-chevron-right"></i> Manage Account</a></li>
-						<li><a href="${pageContext.request.contextPath }/quota.do?flag=goUi"><i class="icon-chevron-right"></i>
-								Set Quota</a></li>
-						<li class="active"><a href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i class="icon-chevron-right"></i>
-								Set Open Time</a></li>
-						<li><a href="${pageContext.request.contextPath }/setWorkload.do?flag=goUi"><i class="icon-chevron-right"></i>
-								Set Workload</a></li>
-						<li><a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi"><i class="icon-chevron-right"></i>
-								Set Pre Time</a></li>
-						<li><a href="${pageContext.request.contextPath }/import.do?flag=goImportUi"><i class="icon-chevron-right"></i>
-								Import</a></li>
-						<li><a href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i class="icon-chevron-right"></i>
-								Export</a></li>				
-						<li><a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i>
-								Change Password</a></li>
-                    </ul>
-                </div>
-                <!--/span-->
-                <div class="span9" id="content">
-                     <div class="row-fluid">
-                     <a href="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=goToSettingUi"  target="_black">setting link</a>
-                     <c:if test="${TimeOperation=='success'}">
-      					<div class="alert alert-success SuccessInfo">
+	</div>
+	<div class="modal hide fade" id="logout">
+		<div class="modal-header">
+			<h4>Logout</h4>
+		</div>
+		<div class="modal-body">Are you sure?</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			<a href="${pageContext.request.contextPath }/logout.do"
+				class="btn btn-danger">Logout</a>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span3" id="sidebar">
+				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+					<li><a href="${pageContext.request.contextPath }/goUI.do"><i
+							class="icon-chevron-right"></i> Main</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=goUi"><i
+							class="icon-chevron-right"></i> Manage Account</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/quota.do?flag=goUi"><i
+							class="icon-chevron-right"></i> Set Quota</a></li>
+					<li class="active"><a
+						href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i
+							class="icon-chevron-right"></i> Set Open Time</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/setWorkload.do?flag=goUi"><i
+							class="icon-chevron-right"></i> Set Workload</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi"><i
+							class="icon-chevron-right"></i> Set Pre Time</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/import.do?flag=goImportUi"><i
+							class="icon-chevron-right"></i> Import</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i
+							class="icon-chevron-right"></i> Export</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i
+							class="icon-chevron-right"></i> Change Password</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/assessItem.do?flag=goAssessItemUi">
+							<i class="icon-chevron-right"></i> Assessment Item
+					</a></li>
+				</ul>
+			</div>
+			<!--/span-->
+			<div class="span9" id="content">
+				<div class="row-fluid">
+					<a
+						href="${pageContext.request.contextPath }/tempSetOpenTime.do?flag=goToSettingUi"
+						target="_black">setting link</a>
+					<c:if test="${TimeOperation=='success'}">
+						<div class="alert alert-success SuccessInfo">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
-            				<h4>Success</h4>
-            				The operation completed successfully! ${message }
-        				</div>
-      				</c:if>
-      				
-      				<c:if test="${TimeOperation=='error'}">
-      					<div class="alert alert-error ErrorInfo">
-          					<button type="button" class="close" data-dismiss="alert">&times;</button>
-          					<h4>Error</h4>
-          					The operation failed! ${message }
-       					</div>
-      				</c:if>
-                			<%-- <!-- block -->
+							<h4>Success</h4>
+							The operation completed successfully! ${message }
+						</div>
+					</c:if>
+
+					<c:if test="${TimeOperation=='error'}">
+						<div class="alert alert-error ErrorInfo">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Error</h4>
+							The operation failed! ${message }
+						</div>
+					</c:if>
+					<%-- <!-- block -->
                             <div class="block">  
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Set Open Time for Teachers</div>
@@ -208,339 +223,408 @@
 									                                   
 								</div>
 							</div> --%>
-								
-							<div class="block">  
-	                        	<div class="navbar navbar-inner block-header">
-	                            	<div class="muted pull-left">Set Open Time for Students</div>
-	                            </div>
-	                            <div class="block-content collapse in">
-	                            	<div class="span4">
-                                        
-                                        <fieldset>
-                                            <legend>Choose Topic</legend>
-                                            
-                                            <c:if test="${ChooseTopicDateTime=='false' }">
-                                            
-                                            <form class="form-inline" method="post" action="${pageContext.request.contextPath }/openTime.do?flag=saveChooseTopicDateTime" id="form_sample_2">
-                                            <div class="alert alert-error hide">
-                                                <button class="close" data-dismiss="alert"></button>
-                                                You must complete your selection. Please check.
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">Start</label>
-                                                <div class="controls">
-                                                    <div class="input-prepend">
-                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-                                                        <input type="text" name="CT_startDate" style="width:100px" value="<c:if test="${CTstartDate!=null }">${CTstartDate }</c:if>" id="dpd3" readonly>
-                                                    </div>
-                                                    <div id="ct_starttime" class="input-append">
-                                                        <input data-format="hh:mm:ss" name="CT_startTime" type="text" style="width:60px" readonly></input>
-                                                        <span class="add-on">
-                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">End</label>
-                                                <div class="controls">
-                                                    <div class="input-prepend">
-                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-                                                        <input type="text" name="CT_endDate" style="width:100px" value="<c:if test="${CTendDate!=null }">${CTendDate }</c:if>" id="dpd4" readonly>
-                                                    </div>
-                                                    <div id="ct_endtime" class="input-append">
-                                                        <input data-format="hh:mm:ss" name="CT_endTime" type="text" style="width:60px" readonly></input>
-                                                        <span class="add-on">
-                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-actions">
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                <button type="reset" class="btn">Reset</button>
-                                            </div>
-                                            </form>
-                                            </c:if>
-                                            
-                                            <c:if test="${ChooseTopicDateTime=='true' }">
-                                        		<div class="alert alert-info">
-													<p>From: <strong>${ChooseTopicStartDateTime }</strong></p>
-													<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChooseTopicEndDateTime }</strong>.</p>
-													<p>Click <a href="#edit2" onclick="btn2()"><strong>here</strong></a> to change.</p>
-												</div>
-											</c:if>
-											
-											<div id="edit2" style="display:none;">
-											<form class="form-inline" method="post" action="${pageContext.request.contextPath }/openTime.do?flag=saveChooseTopicDateTime" id="form_sample_2">
-                                            <div class="alert alert-error hide">
-                                                <button class="close" data-dismiss="alert"></button>
-                                                You must complete your selection. Please check.
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">Start</label>
-                                                <div class="controls">
-                                                    <div class="input-prepend">
-                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-                                                        <input type="text" name="CT_startDate" style="width:100px" value="<c:if test="${CTstartDate!=null }">${CTstartDate }</c:if>" id="dpd3" readonly>
-                                                    </div>
-                                                    <div id="ct_starttime" class="input-append">
-                                                        <input data-format="hh:mm:ss" name="CT_startTime" type="text" style="width:60px" readonly></input>
-                                                        <span class="add-on">
-                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label">End</label>
-                                                <div class="controls">
-                                                    <div class="input-prepend">
-                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-                                                        <input type="text" name="CT_endDate" style="width:100px" value="<c:if test="${CTendDate!=null }">${CTendDate }</c:if>" id="dpd4" readonly>
-                                                    </div>
-                                                    <div id="ct_endtime" class="input-append">
-                                                        <input data-format="hh:mm:ss" name="CT_endTime" type="text" style="width:60px" readonly></input>
-                                                        <span class="add-on">
-                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-actions">
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                <button type="reset" class="btn">Reset</button>
-                                            </div>
-                                            </form>
+
+					<div class="block">
+						<div class="navbar navbar-inner block-header">
+							<div class="muted pull-left">Set Open Time for Students</div>
+						</div>
+						<div class="block-content collapse in">
+							<div class="span4">
+
+								<fieldset>
+									<legend>Choose Topic</legend>
+
+									<c:if test="${ChooseTopicDateTime=='false' }">
+
+										<form class="form-inline" method="post"
+											action="${pageContext.request.contextPath }/openTime.do?flag=saveChooseTopicDateTime"
+											id="form_sample_2">
+											<div class="alert alert-error hide">
+												<button class="close" data-dismiss="alert"></button>
+												You must complete your selection. Please check.
 											</div>
-                                            </fieldset>
-                                        
-                                    </div>
-	                            	<div class="span4">                                        
-	                                        <fieldset>
-	                                            <legend>Choose Examiners</legend>
-	                                            <c:if test="${ChooseExaminersDateTime=='false' }">
-	                                            <form class="form-inline" method="post" action="${pageContext.request.contextPath }/openTime.do?flag=saveChooseExaminersDateTime" id="form_sample_3">
-	                                            <div class="alert alert-error hide">
-	                                                <button class="close" data-dismiss="alert"></button>
-	                                                You must complete your selection. Please check.
-	                                            </div>
-	                                            <div class="control-group">
-	                                                <label class="control-label">Start</label>
-	                                                <div class="controls">
-	                                                    <div class="input-prepend">
-	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CE_startDate" style="width:100px" value="<c:if test="${CEstartDate!=null }">${CEstartDate }</c:if>" id="dpd5" readonly>
-	                                                    </div>
-	                                                    <div id="ce_starttime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CE_startTime" type="text" style="width:60px" readonly></input>
-	                                                        <span class="add-on">
-	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-	                                                        </span>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="control-group">
-	                                                <label class="control-label">End</label>
-	                                                <div class="controls">
-	                                                    <div class="input-prepend">
-	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CE_endDate" style="width:100px" value="<c:if test="${CEendDate!=null }">${CEendDate }</c:if>" id="dpd6" readonly>
-	                                                    </div>
-	                                                    <div id="ce_endtime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CE_endTime" type="text" style="width:60px" readonly></input>
-	                                                        <span class="add-on">
-	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-	                                                        </span>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="form-actions">
-	                                                <button type="submit" class="btn btn-primary">Save</button>
-	                                                <button type="reset" class="btn">Reset</button>
-	                                            </div>
-	                                            </form>
-	                                            </c:if>
-	                                            
-	                                            <c:if test="${ChooseExaminersDateTime=='true' }">
-	                                        		<div class="alert alert-info">
-														<p>From: <strong>${ChooseExaminersStartDateTime }</strong></p> 
-														<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChooseExaminersEndDateTime }</strong>.</p>
-														<p>Click <a href="#edit3" onclick="btn3()"><strong>here</strong></a> to change.</p>
+											<div class="control-group">
+												<label class="control-label">Start</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CT_startDate" style="width:100px"
+															value="<c:if test="${CTstartDate!=null }">${CTstartDate }</c:if>"
+															id="dpd3" readonly>
 													</div>
-													</c:if>
-													<div id="edit3" style="display:none;">
-														<form class="form-inline" method="post" action="${pageContext.request.contextPath }/openTime.do?flag=saveChooseExaminersDateTime" id="form_sample_3">
-	                                            <div class="alert alert-error hide">
-	                                                <button class="close" data-dismiss="alert"></button>
-	                                                You must complete your selection. Please check.
-	                                            </div>
-	                                            <div class="control-group">
-	                                                <label class="control-label">Start</label>
-	                                                <div class="controls">
-	                                                    <div class="input-prepend">
-	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CE_startDate" style="width:100px" value="<c:if test="${CEstartDate!=null }">${CEstartDate }</c:if>" id="dpd5" readonly>
-	                                                    </div>
-	                                                    <div id="ce_starttime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CE_startTime" type="text" style="width:60px" readonly></input>
-	                                                        <span class="add-on">
-	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-	                                                        </span>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="control-group">
-	                                                <label class="control-label">End</label>
-	                                                <div class="controls">
-	                                                    <div class="input-prepend">
-	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CE_endDate" style="width:100px" value="<c:if test="${CEendDate!=null }">${CEendDate }</c:if>" id="dpd6" readonly>
-	                                                    </div>
-	                                                    <div id="ce_endtime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CE_endTime" type="text" style="width:60px" readonly></input>
-	                                                        <span class="add-on">
-	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-	                                                        </span>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="form-actions">
-	                                                <button type="submit" class="btn btn-primary">Save</button>
-	                                                <button type="reset" class="btn">Reset</button>
-	                                            </div>
-	                                            </form>
-												</div>
-	                                                                                  
-	                                         </fieldset>
-	                                        
-	                                    </div>
-	                               
-	                                    <div class="span4">                                        
-	                                        <fieldset>
-	                                            <legend>Choose Presentation Time</legend>
-	                                            <c:if test="${ChoosePresentationDateTime=='false' }">
-	                                            <form class="form-inline" method="post" action="${pageContext.request.contextPath }/openTime.do?flag=saveChoosePresentationDateTime" id="form_sample_4">
-	                                            <div class="alert alert-error hide">
-	                                                <button class="close" data-dismiss="alert"></button>
-	                                                You must complete your selection. Please check.
-	                                            </div>
-	                                            <div class="control-group">
-	                                                <label class="control-label">Start</label>
-	                                                <div class="controls">
-	                                                    <div class="input-prepend">
-	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CP_startDate" style="width:100px" value="<c:if test="${CPstartDate!=null }">${CPstartDate }</c:if>" id="dpd7" readonly>
-	                                                    </div>
-	                                                    <div id="cp_starttime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CP_startTime" type="text" style="width:60px" readonly></input>
-	                                                        <span class="add-on">
-	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-	                                                        </span>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="control-group">
-	                                                <label class="control-label">End</label>
-	                                                <div class="controls">
-	                                                    <div class="input-prepend">
-	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CP_endDate" style="width:100px" value="<c:if test="${CPendDate!=null }">${CPendDate }</c:if>" id="dpd8" readonly>
-	                                                    </div>
-	                                                    <div id="cp_endtime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CP_endTime" type="text" style="width:60px" readonly></input>
-	                                                        <span class="add-on">
-	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-	                                                        </span>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="form-actions">
-	                                                <button type="submit" class="btn btn-primary">Save</button>
-	                                                <button type="reset" class="btn">Reset</button>
-	                                            </div>
-	                                            </form>
-	                                            </c:if>
-	                                            
-	                                            <c:if test="${ChoosePresentationDateTime=='true' }">
-	                                        		<div class="alert alert-info">
-														<p>From: <strong>${ChoosePresentationStartDateTime }</strong></p> 
-														<p>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChoosePresentationEndDateTime }</strong>.</p>
-														<p>Click <a href="#edit4" onclick="btn4()"><strong>here</strong></a> to change.</p>
+													<div id="ct_starttime" class="input-append">
+														<input data-format="hh:mm:ss" name="CT_startTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
 													</div>
-													</c:if>
-													<div id="edit4" style="display:none;">
-														<form class="form-inline" method="post" action="${pageContext.request.contextPath }/openTime.do?flag=saveChoosePresentationDateTime" id="form_sample_4">
-	                                            <div class="alert alert-error hide">
-	                                                <button class="close" data-dismiss="alert"></button>
-	                                                You must complete your selection. Please check.
-	                                            </div>
-	                                            <div class="control-group">
-	                                                <label class="control-label">Start</label>
-	                                                <div class="controls">
-	                                                    <div class="input-prepend">
-	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CP_startDate" style="width:100px" value="<c:if test="${CPstartDate!=null }">${CPstartDate }</c:if>" id="dpd7" readonly>
-	                                                    </div>
-	                                                    <div id="cp_starttime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CP_startTime" type="text" style="width:60px" readonly></input>
-	                                                        <span class="add-on">
-	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-	                                                        </span>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="control-group">
-	                                                <label class="control-label">End</label>
-	                                                <div class="controls">
-	                                                    <div class="input-prepend">
-	                                                        <span class="add-on"><i class="icon-calendar"></i></span>
-	                                                        <input type="text" name="CP_endDate" style="width:100px" value="<c:if test="${CPendDate!=null }">${CPendDate }</c:if>" id="dpd8" readonly>
-	                                                    </div>
-	                                                    <div id="cp_endtime" class="input-append">
-	                                                        <input data-format="hh:mm:ss" name="CP_endTime" type="text" style="width:60px" readonly></input>
-	                                                        <span class="add-on">
-	                                                            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-	                                                        </span>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="form-actions">
-	                                                <button type="submit" class="btn btn-primary">Save</button>
-	                                                <button type="reset" class="btn">Reset</button>
-	                                            </div>
-	                                            </form>
 												</div>
-	                                                                                  
-	                                         </fieldset>
-	                                        
-	                                    </div>
-	  								                                  
-	                                
-								</div>
-                                    
-                            </div>
-                        </div>
-                    </div>
+											</div>
+											<div class="control-group">
+												<label class="control-label">End</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CT_endDate" style="width:100px"
+															value="<c:if test="${CTendDate!=null }">${CTendDate }</c:if>"
+															id="dpd4" readonly>
+													</div>
+													<div id="ct_endtime" class="input-append">
+														<input data-format="hh:mm:ss" name="CT_endTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="form-actions">
+												<button type="submit" class="btn btn-primary">Save</button>
+												<button type="reset" class="btn">Reset</button>
+											</div>
+										</form>
+									</c:if>
 
-            </div>
-			
-        </div>
+									<c:if test="${ChooseTopicDateTime=='true' }">
+										<div class="alert alert-info">
+											<p>
+												From: <strong>${ChooseTopicStartDateTime }</strong>
+											</p>
+											<p>
+												To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChooseTopicEndDateTime }</strong>.
+											</p>
+											<p>
+												Click <a href="#edit2" onclick="btn2()"><strong>here</strong></a>
+												to change.
+											</p>
+										</div>
+									</c:if>
+
+									<div id="edit2" style="display:none;">
+										<form class="form-inline" method="post"
+											action="${pageContext.request.contextPath }/openTime.do?flag=saveChooseTopicDateTime"
+											id="form_sample_2">
+											<div class="alert alert-error hide">
+												<button class="close" data-dismiss="alert"></button>
+												You must complete your selection. Please check.
+											</div>
+											<div class="control-group">
+												<label class="control-label">Start</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CT_startDate" style="width:100px"
+															value="<c:if test="${CTstartDate!=null }">${CTstartDate }</c:if>"
+															id="dpd3" readonly>
+													</div>
+													<div id="ct_starttime" class="input-append">
+														<input data-format="hh:mm:ss" name="CT_startTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="control-group">
+												<label class="control-label">End</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CT_endDate" style="width:100px"
+															value="<c:if test="${CTendDate!=null }">${CTendDate }</c:if>"
+															id="dpd4" readonly>
+													</div>
+													<div id="ct_endtime" class="input-append">
+														<input data-format="hh:mm:ss" name="CT_endTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="form-actions">
+												<button type="submit" class="btn btn-primary">Save</button>
+												<button type="reset" class="btn">Reset</button>
+											</div>
+										</form>
+									</div>
+								</fieldset>
+
+							</div>
+							<div class="span4">
+								<fieldset>
+									<legend>Choose Examiners</legend>
+									<c:if test="${ChooseExaminersDateTime=='false' }">
+										<form class="form-inline" method="post"
+											action="${pageContext.request.contextPath }/openTime.do?flag=saveChooseExaminersDateTime"
+											id="form_sample_3">
+											<div class="alert alert-error hide">
+												<button class="close" data-dismiss="alert"></button>
+												You must complete your selection. Please check.
+											</div>
+											<div class="control-group">
+												<label class="control-label">Start</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CE_startDate" style="width:100px"
+															value="<c:if test="${CEstartDate!=null }">${CEstartDate }</c:if>"
+															id="dpd5" readonly>
+													</div>
+													<div id="ce_starttime" class="input-append">
+														<input data-format="hh:mm:ss" name="CE_startTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="control-group">
+												<label class="control-label">End</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CE_endDate" style="width:100px"
+															value="<c:if test="${CEendDate!=null }">${CEendDate }</c:if>"
+															id="dpd6" readonly>
+													</div>
+													<div id="ce_endtime" class="input-append">
+														<input data-format="hh:mm:ss" name="CE_endTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="form-actions">
+												<button type="submit" class="btn btn-primary">Save</button>
+												<button type="reset" class="btn">Reset</button>
+											</div>
+										</form>
+									</c:if>
+
+									<c:if test="${ChooseExaminersDateTime=='true' }">
+										<div class="alert alert-info">
+											<p>
+												From: <strong>${ChooseExaminersStartDateTime }</strong>
+											</p>
+											<p>
+												To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChooseExaminersEndDateTime }</strong>.
+											</p>
+											<p>
+												Click <a href="#edit3" onclick="btn3()"><strong>here</strong></a>
+												to change.
+											</p>
+										</div>
+									</c:if>
+									<div id="edit3" style="display:none;">
+										<form class="form-inline" method="post"
+											action="${pageContext.request.contextPath }/openTime.do?flag=saveChooseExaminersDateTime"
+											id="form_sample_3">
+											<div class="alert alert-error hide">
+												<button class="close" data-dismiss="alert"></button>
+												You must complete your selection. Please check.
+											</div>
+											<div class="control-group">
+												<label class="control-label">Start</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CE_startDate" style="width:100px"
+															value="<c:if test="${CEstartDate!=null }">${CEstartDate }</c:if>"
+															id="dpd5" readonly>
+													</div>
+													<div id="ce_starttime" class="input-append">
+														<input data-format="hh:mm:ss" name="CE_startTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="control-group">
+												<label class="control-label">End</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CE_endDate" style="width:100px"
+															value="<c:if test="${CEendDate!=null }">${CEendDate }</c:if>"
+															id="dpd6" readonly>
+													</div>
+													<div id="ce_endtime" class="input-append">
+														<input data-format="hh:mm:ss" name="CE_endTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="form-actions">
+												<button type="submit" class="btn btn-primary">Save</button>
+												<button type="reset" class="btn">Reset</button>
+											</div>
+										</form>
+									</div>
+
+								</fieldset>
+
+							</div>
+
+							<div class="span4">
+								<fieldset>
+									<legend>Choose Presentation Time</legend>
+									<c:if test="${ChoosePresentationDateTime=='false' }">
+										<form class="form-inline" method="post"
+											action="${pageContext.request.contextPath }/openTime.do?flag=saveChoosePresentationDateTime"
+											id="form_sample_4">
+											<div class="alert alert-error hide">
+												<button class="close" data-dismiss="alert"></button>
+												You must complete your selection. Please check.
+											</div>
+											<div class="control-group">
+												<label class="control-label">Start</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CP_startDate" style="width:100px"
+															value="<c:if test="${CPstartDate!=null }">${CPstartDate }</c:if>"
+															id="dpd7" readonly>
+													</div>
+													<div id="cp_starttime" class="input-append">
+														<input data-format="hh:mm:ss" name="CP_startTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="control-group">
+												<label class="control-label">End</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CP_endDate" style="width:100px"
+															value="<c:if test="${CPendDate!=null }">${CPendDate }</c:if>"
+															id="dpd8" readonly>
+													</div>
+													<div id="cp_endtime" class="input-append">
+														<input data-format="hh:mm:ss" name="CP_endTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="form-actions">
+												<button type="submit" class="btn btn-primary">Save</button>
+												<button type="reset" class="btn">Reset</button>
+											</div>
+										</form>
+									</c:if>
+
+									<c:if test="${ChoosePresentationDateTime=='true' }">
+										<div class="alert alert-info">
+											<p>
+												From: <strong>${ChoosePresentationStartDateTime }</strong>
+											</p>
+											<p>
+												To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>${ChoosePresentationEndDateTime }</strong>.
+											</p>
+											<p>
+												Click <a href="#edit4" onclick="btn4()"><strong>here</strong></a>
+												to change.
+											</p>
+										</div>
+									</c:if>
+									<div id="edit4" style="display:none;">
+										<form class="form-inline" method="post"
+											action="${pageContext.request.contextPath }/openTime.do?flag=saveChoosePresentationDateTime"
+											id="form_sample_4">
+											<div class="alert alert-error hide">
+												<button class="close" data-dismiss="alert"></button>
+												You must complete your selection. Please check.
+											</div>
+											<div class="control-group">
+												<label class="control-label">Start</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CP_startDate" style="width:100px"
+															value="<c:if test="${CPstartDate!=null }">${CPstartDate }</c:if>"
+															id="dpd7" readonly>
+													</div>
+													<div id="cp_starttime" class="input-append">
+														<input data-format="hh:mm:ss" name="CP_startTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="control-group">
+												<label class="control-label">End</label>
+												<div class="controls">
+													<div class="input-prepend">
+														<span class="add-on"><i class="icon-calendar"></i></span>
+														<input type="text" name="CP_endDate" style="width:100px"
+															value="<c:if test="${CPendDate!=null }">${CPendDate }</c:if>"
+															id="dpd8" readonly>
+													</div>
+													<div id="cp_endtime" class="input-append">
+														<input data-format="hh:mm:ss" name="CP_endTime"
+															type="text" style="width:60px" readonly></input> <span
+															class="add-on"> <i data-time-icon="icon-time"
+															data-date-icon="icon-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="form-actions">
+												<button type="submit" class="btn btn-primary">Save</button>
+												<button type="reset" class="btn">Reset</button>
+											</div>
+										</form>
+									</div>
+
+								</fieldset>
+
+							</div>
 
 
-<!--/.fluid-container-->
-<script src="vendors/jquery-1.9.1.min.js"></script> 
-<script src="bootstrap/js/bootstrap.min.js"></script> 
-<script src="assets/scripts.js"></script> 
+						</div>
 
-<script src="assets/form-validation.js"></script>
-<script src="vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
 
 
-<script src="bootstrap/js/bootstrap-datepicker.js"></script>
-<script src="bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+	<!--/.fluid-container-->
+	<script src="vendors/jquery-1.9.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/scripts.js"></script>
 
-<script>
+	<script src="assets/form-validation.js"></script>
+	<script src="vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+
+
+	<script src="bootstrap/js/bootstrap-datepicker.js"></script>
+	<script src="bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+
+	<script>
 var nowTemp = new Date();
 
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);

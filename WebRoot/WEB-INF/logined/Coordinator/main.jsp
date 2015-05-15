@@ -21,12 +21,10 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container-fluid">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                	 <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                </a>
-				<a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="${pageContext.request.contextPath }/goUI.do">FYP
 					Coordination System</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
@@ -35,10 +33,9 @@
 								class="icon-user"></i> ${coordinatorinfo.name } <i class="caret"></i>
 
 						</a>
-							<ul class="dropdown-menu">								
-								<li>
-									<a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a>
-								</li>
+							<ul class="dropdown-menu">
+								<li><a tabindex="-1" data-target="#logout"
+									data-toggle="modal" href="">Logout</a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -47,16 +44,15 @@
 		</div>
 	</div>
 	<div class="modal hide fade" id="logout">
-			<div class="modal-header">
-				<h4>Logout</h4>
-			</div>
-			<div class="modal-body">
-				Are you sure?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<a href="${pageContext.request.contextPath }/logout.do" class="btn btn-danger">Logout</a>
-			</div>
+		<div class="modal-header">
+			<h4>Logout</h4>
+		</div>
+		<div class="modal-body">Are you sure?</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			<a href="${pageContext.request.contextPath }/logout.do"
+				class="btn btn-danger">Logout</a>
+		</div>
 	</div>
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -68,143 +64,199 @@
 					<li><a
 						href="${pageContext.request.contextPath }/goManageAccountUi.do?flag=goUi"><i
 							class="icon-chevron-right"></i> Manage Account</a></li>
-					<li><a href="${pageContext.request.contextPath }/quota.do?flag=goUi"><i class="icon-chevron-right"></i>
-							Set Quota</a></li>
-					<li><a href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i class="icon-chevron-right"></i>
-							Set Open Time</a></li>
-					<li><a href="${pageContext.request.contextPath }/setWorkload.do?flag=goUi"><i class="icon-chevron-right"></i>
-							Set Workload</a></li>
-					<li><a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi"><i class="icon-chevron-right"></i>
-							Set Pre Time</a></li>
-					<li><a href="${pageContext.request.contextPath }/import.do?flag=goImportUi"><i class="icon-chevron-right"></i>
-							Import</a></li>
-					<li><a href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i class="icon-chevron-right"></i>
-							Export</a></li>				
-					<li><a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i>
-							Change Password</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/quota.do?flag=goUi"><i
+							class="icon-chevron-right"></i> Set Quota</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/openTime.do?flag=goUi"><i
+							class="icon-chevron-right"></i> Set Open Time</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/setWorkload.do?flag=goUi"><i
+							class="icon-chevron-right"></i> Set Workload</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi"><i
+							class="icon-chevron-right"></i> Set Pre Time</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/import.do?flag=goImportUi"><i
+							class="icon-chevron-right"></i> Import</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/export.do?flag=goExportUi"><i
+							class="icon-chevron-right"></i> Export</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i
+							class="icon-chevron-right"></i> Change Password</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/assessItem.do?flag=goAssessItemUi">
+							<i class="icon-chevron-right"></i> Assessment Item
+					</a></li>
 				</ul>
 			</div>
 
 			<div class="span9" id="content">
 				<div class="row-fluid">
-					
-						<!-- block -->
-						<div class="block">
-							<div class="navbar navbar-inner block-header">
-								<div class="muted pull-left">News</div>
-							</div>
 
-							<div class="block-content collapse in">
-								
+					<!-- block -->
+					<div class="block">
+						<div class="navbar navbar-inner block-header">
+							<div class="muted pull-left">News</div>
+						</div>
+
+						<div class="block-content collapse in">
+
+							<c:choose>
+								<c:when test="${ChooseTopicDateTimeState=='true' }">
+									<div class="alert alert-success alert-block">
+										<h4 class="alert-heading">Choose Topic for Student Time</h4>
+										<p>From ${CTstartDateTime } to ${CTendDateTime }</p>
+									</div>
 									<c:choose>
-									<c:when test="${ChooseTopicDateTimeState=='true' }">
-										<div class="alert alert-success alert-block">
-											<h4 class="alert-heading">Choose Topic for Student Time</h4>
-											<p>From ${CTstartDateTime } to ${CTendDateTime }</p>											
-										</div>
-										<c:choose>
 										<c:when test="${ChooseExaminersDateTimeState=='true' }">
 											<div class="alert alert-success alert-block">
-												<h4 class="alert-heading">Choose Examiner for Student Time</h4>
-												<p>From ${CEstartDateTime } to ${CEendDateTime }</p>											
+												<h4 class="alert-heading">Choose Examiner for Student
+													Time</h4>
+												<p>From ${CEstartDateTime } to ${CEendDateTime }</p>
 											</div>
 											<c:choose>
-											<c:when test="${PreDateTimeState=='true' }">
-												<div class="alert alert-info alert-block">
-													<h4 class="alert-heading">Presentation Time</h4>
-													<p>From ${PstartDateTime } to ${PendDateTime }</p>											
-												</div>
-											
-												<c:choose>
-													<c:when test="${ChoosePresentationDateTimeState=='true' }">
-														<div class="alert alert-success alert-block">
-															<h4 class="alert-heading">Choose Presentation for Students Time</h4>
-															<p>From ${CPstartDateTime } to ${CPendDateTime }</p>											
-														</div>
-													</c:when>
-													<c:otherwise>
+												<c:when test="${PreDateTimeState=='true' }">
+													<div class="alert alert-info alert-block">
+														<h4 class="alert-heading">Presentation Time</h4>
+														<p>From ${PstartDateTime } to ${PendDateTime }</p>
+													</div>
+
+													<c:choose>
+														<c:when test="${ChoosePresentationDateTimeState=='true' }">
+															<div class="alert alert-success alert-block">
+																<h4 class="alert-heading">Choose Presentation for
+																	Students Time</h4>
+																<p>From ${CPstartDateTime } to ${CPendDateTime }</p>
+															</div>
+														</c:when>
+														<c:otherwise>
+															<div class="alert alert-block">
+																<h4 class="alert-heading">Warning!</h4>
+																<p>
+																	Choose presentation for student time is not completed.
+																	Please check <a
+																		href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a>
+																	to set up.
+																</p>
+															</div>
+														</c:otherwise>
+													</c:choose>
+												</c:when>
+												<c:otherwise>
 													<div class="alert alert-block">
 														<h4 class="alert-heading">Warning!</h4>
-														<p>Choose presentation for student time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
+														<p>
+															Presentation time is not completed. Please check <a
+																href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi">here</a>
+															to set up.
+														</p>
 													</div>
 												</c:otherwise>
-												</c:choose>
-											</c:when>
-											<c:otherwise>
-												<div class="alert alert-block">
-													<h4 class="alert-heading">Warning!</h4>
-													<p>Presentation time is not completed. Please check <a href="${pageContext.request.contextPath }/preTime.do?flag=goPreTimeUi">here</a> to set up.</p>											
-												</div>
-											</c:otherwise>
 											</c:choose>
-										
+
 										</c:when>
 										<c:otherwise>
 											<div class="alert alert-block">
 												<h4 class="alert-heading">Warning!</h4>
-												<p>Choose examiner for student time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
+												<p>
+													Choose examiner for student time is not completed. Please
+													check <a
+														href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a>
+													to set up.
+												</p>
 											</div>
 										</c:otherwise>
-										</c:choose>
-									</c:when>
-									<c:otherwise>
-										<div class="alert alert-block">
-											<h4 class="alert-heading">Warning!</h4>
-											<p>Choose topic for student time is not completed. Please check <a href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a> to set up.</p>											
-										</div>
-									</c:otherwise>
 									</c:choose>
-									
-								
-								
-								<c:forEach items="${messageList }" var="message">
-									<c:if test="${message.type=='info' }">
-										<div class="alert alert-info alert-block">
-											<h4 class="alert-heading">Info!</h4>
-											<p>${message.content }</p>
-											<span class=" pull-right"><small>${message.date }</small></span>
-										</div>
-									</c:if>
-									<c:if test="${message.type=='warning' }">
-										<div class="alert alert-block">
-											<h4 class="alert-heading">Warning!</h4>
-											<p>${message.content }</p>
-											<span class=" pull-right"><small>${message.date }</small></span>
-										</div>
-									</c:if>
-									<c:if test="${message.type=='success' }">
-										<div class="alert alert-success alert-block">
-											<h4 class="alert-heading">Success!</h4>
-											<p>${message.content }</p>
-											<span class=" pull-right"><small>${message.date }</small></span>
-										</div>
-									</c:if>
-									<c:if test="${message.type=='error' }">
-										<div class="alert alert-error alert-block">
-											<h4 class="alert-heading">Error!</h4>
-											<p>${message.content }</p>
-											<span class=" pull-right"><small>${message.date }</small></span>
-										</div>
-									</c:if>
+								</c:when>
+								<c:otherwise>
+									<div class="alert alert-block">
+										<h4 class="alert-heading">Warning!</h4>
+										<p>
+											Choose topic for student time is not completed. Please check
+											<a
+												href="${pageContext.request.contextPath }/openTime.do?flag=goUi">here</a>
+											to set up.
+										</p>
+									</div>
+								</c:otherwise>
+							</c:choose>
+							
+							
+							
+							<c:if test="${totalPercent<100 }">
+								<div class="alert alert-error alert-block">
+									<h4 class="alert-heading">Importance!</h4>
+									<p>
+										The total percentage of assessment item less than 100%. Please check <a
+											href="${pageContext.request.contextPath }/assessItem.do?flag=goAssessItemUi">here</a>
+										to adjust.
+									</p>
+								</div>
+							</c:if>
+							<c:if test="${totalPercent>100 }">
+								<div class="alert alert-error alert-block">
+									<h4 class="alert-heading">Importance!</h4>
+									<p>
+										The total percentage of assessment item more than 100%. Please check <a
+											href="${pageContext.request.contextPath }/assessItem.do?flag=goAssessItemUi">here</a>
+										to adjust.
+									</p>
+								</div>
+							</c:if>
+							
+							
+							
 
-								</c:forEach>
-								<ul class="pager">
-									<c:if test="${pageNow>1 }">
-										<li class="previous"><a
-											href="${pageContext.request.contextPath }/goUI.do?pageNow=${pageNow-1 }">Prev</a></li>
-									</c:if>
-									<c:if test="${pageNow<pageCount }">
-										<li class="next"><a
-											href="${pageContext.request.contextPath }/goUI.do?pageNow=${pageNow+1 }">Next</a></li>
-									</c:if>
-								</ul>
+							<c:forEach items="${messageList }" var="message">
+								<c:if test="${message.type=='info' }">
+									<div class="alert alert-info alert-block">
+										<h4 class="alert-heading">Info!</h4>
+										<p>${message.content }</p>
+										<span class=" pull-right"><small>${message.date }</small></span>
+									</div>
+								</c:if>
+								<c:if test="${message.type=='warning' }">
+									<div class="alert alert-block">
+										<h4 class="alert-heading">Warning!</h4>
+										<p>${message.content }</p>
+										<span class=" pull-right"><small>${message.date }</small></span>
+									</div>
+								</c:if>
+								<c:if test="${message.type=='success' }">
+									<div class="alert alert-success alert-block">
+										<h4 class="alert-heading">Success!</h4>
+										<p>${message.content }</p>
+										<span class=" pull-right"><small>${message.date }</small></span>
+									</div>
+								</c:if>
+								<c:if test="${message.type=='error' }">
+									<div class="alert alert-error alert-block">
+										<h4 class="alert-heading">Error!</h4>
+										<p>${message.content }</p>
+										<span class=" pull-right"><small>${message.date }</small></span>
+									</div>
+								</c:if>
+
+							</c:forEach>
+							<ul class="pager">
+								<c:if test="${pageNow>1 }">
+									<li class="previous"><a
+										href="${pageContext.request.contextPath }/goUI.do?pageNow=${pageNow-1 }">Prev</a></li>
+								</c:if>
+								<c:if test="${pageNow<pageCount }">
+									<li class="next"><a
+										href="${pageContext.request.contextPath }/goUI.do?pageNow=${pageNow+1 }">Next</a></li>
+								</c:if>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 
-	</div>
-	<hr>
+		</div>
+		<hr>
 	</div>
 	<!--/.fluid-container-->
 	<script src="vendors/jquery-1.9.1.min.js"></script>

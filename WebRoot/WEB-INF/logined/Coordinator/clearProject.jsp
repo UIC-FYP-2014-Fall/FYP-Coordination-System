@@ -79,6 +79,12 @@
 								class="icon-chevron-right"></i> Clear Project</a></li>
 						<li><a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i>
 								Change Password</a></li>
+						<li>
+							<a href="${pageContext.request.contextPath }/assessItem.do?flag=goAssessItemUi">
+								<i class="icon-chevron-right"></i>
+								Assessment Item
+							</a>
+						</li>
                     </ul>
                 </div>
                 <!--/span-->

@@ -17,7 +17,9 @@ import org.apache.struts.actions.DispatchAction;
 import com.uic.domain.Message;
 import com.uic.domain.Student;
 import com.uic.domain.Users;
+import com.uic.service.imp.AssessItemServiceImp;
 import com.uic.service.imp.MessagesServiceImp;
+import com.uic.service.inter.AssessItemServiceInter;
 import com.uic.service.inter.MessagesServiceInter;
 import com.uic.util.PropertiesHelper;
 
@@ -50,13 +52,13 @@ public class GoUIAction extends DispatchAction {
 			//prepare data for the jsp page
 			PropertiesHelper ph = new PropertiesHelper("/WEB-INF/config/FYP-system.properties");
 			
-			String state1 = ph.getProperties("UploadTopicsDateTimeState");
+			//String state1 = ph.getProperties("UploadTopicsDateTimeState");
 			String state2 = ph.getProperties("ChooseTopicDateTimeState");
 			String state3 = ph.getProperties("ChooseExaminersDateTimeState");
 			String state5 = ph.getProperties("ChoosePresentationDateTimeState");
 			String state4 = ph.getProperties("PreDateTimeState");
 			
-			if(state1!=null){
+			/*if(state1!=null){
 				if(state1.equals("true")){
 					request.setAttribute("UploadTopicsDateTimeState", "true");
 					request.setAttribute("UTstartDateTime", ph.getProperties("UploadTopicsStartDateTime"));
@@ -64,7 +66,7 @@ public class GoUIAction extends DispatchAction {
 				}else{
 					request.setAttribute("UploadTopicsDateTimeState", "false");
 				}
-			}
+			}*/
 			if(state2!=null){
 				if(state2.equals("true")){
 					request.setAttribute("ChooseTopicDateTimeState", "true");
@@ -102,8 +104,8 @@ public class GoUIAction extends DispatchAction {
 				}
 			}
 			
-			
-			
+			AssessItemServiceInter assessItemService = new AssessItemServiceImp();
+			request.setAttribute("totalPercent", assessItemService.totalPercent());
 			
 			//pagination
 			int pageNow=1;

@@ -121,6 +121,12 @@
 							Change Password
 						</a>
 					</li>
+					<li>
+						<a href="${pageContext.request.contextPath }/assessItem.do?flag=goAssessItemUi">
+							<i class="icon-chevron-right"></i>
+							Assessment Item
+						</a>
+					</li>
 				</ul>
 			</div>
 

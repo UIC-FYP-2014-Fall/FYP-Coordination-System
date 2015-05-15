@@ -6,10 +6,7 @@ var FormValidation = function () {
 
             var form1 = $('#form_sample_1');
             var error1 = $('.alert-error', form1);
-            var success1 = $('.alert-success', form1);
-			
-			
-
+            var success1 = $('.alert-success', form1);						
             form1.validate({
                 errorElement: 'span', //default input error message container
                 errorClass: 'help-inline', // default input error message class
@@ -73,7 +70,19 @@ var FormValidation = function () {
 					endDate: {
 						required: true,
 						date: true
-					}
+					},
+					
+					assessName: {
+						minlength: 2,
+						required: true
+					},
+					percentage: {
+                        required: true,
+                        digits: true
+                    },
+                    teacherType:{
+                    	required: true
+                    }
                 },
 
                 invalidHandler: function (event, validator) { //display error alert on form submit              
