@@ -50,6 +50,8 @@ public class AssessItemAction extends DispatchAction {
 				request.setAttribute("addAvailable", "false");
 			}
 			request.setAttribute("totalPercent", assessItemService.totalPercent());
+			// check the system status return ${LockInfo}
+			
 			return mapping.findForward("goAssessItemUi");
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");

@@ -18,6 +18,7 @@
     <form-bean name="fileUploadForm" type="com.uic.web.struts.form.FileUploadForm" />
     <form-bean name="assessItemForm" type="com.uic.web.struts.form.AssessItemForm" />
     <form-bean name="testForm" type="com.uic.web.struts.form.TestForm" />
+    <form-bean name="gradeLevelForm" type="com.uic.web.struts.form.GradeLevelForm" />
   </form-beans>
   <global-exceptions />
   <global-forwards >
@@ -273,6 +274,19 @@
       cancellable="true">
       <forward name="goAssessItemUi" path="/WEB-INF/logined/Coordinator/assessItem.jsp" />
     </action>
+    <action
+      attribute="gradeLevelForm"
+      input="/WEB-INF/logined/Coordinator/gradeLevel.jsp"
+      name="gradeLevelForm"
+      parameter="flag"
+      path="/gradeLevel"
+      scope="request"
+      type="com.uic.web.struts.action.GradeLevelAction"
+      validate="false"
+      cancellable="true">
+      <forward name="goGradeLevelUi" path="/WEB-INF/logined/Coordinator/gradeLevel.jsp" />
+    </action>
+
 
 
     

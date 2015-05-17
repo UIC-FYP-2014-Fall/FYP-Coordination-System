@@ -127,6 +127,11 @@
 							Assessment Item
 						</a>
 					</li>
+					<li>
+						<a href="${pageContext.request.contextPath }/gradeLevel.do?flag=goGradeLevelUi">
+							<i class="icon-chevron-right"></i> Grade Level
+						</a>
+					</li>
 				</ul>
 			</div>
 

@@ -88,6 +88,10 @@
 						href="${pageContext.request.contextPath }/assessItem.do?flag=goAssessItemUi">
 							<i class="icon-chevron-right"></i> Assessment Item
 					</a></li>
+					<li><a
+						href="${pageContext.request.contextPath }/gradeLevel.do?flag=goGradeLevelUi">
+							<i class="icon-chevron-right"></i> Grade Level
+					</a></li>
 				</ul>
 			</div>
 
@@ -98,21 +102,21 @@
 						<div class="alert alert-success SuccessInfo">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 							<h4>Success</h4>
-							The operation completed successfully
+							Save assessment item percentage successfully! 
 						</div>
 					</c:if>
 					<c:if test="${requestScope.AssessItemOperation=='error'}">
 						<div class="alert alert-error ErrorInfo">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 							<h4>Error</h4>
-							The operation failed! ${ErrorInfo}
+							Save assessment item percentage failed! ${ErrorInfo}
 						</div>
 					</c:if>
 					<c:if test="${addAvailable=='false'}">
-						<div class="alert">
+						<div class="alert alert-info alert-block">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 							<h4>Info</h4>
-							The total percentage of assessment item is 100%.
+							The sum of the percentage is 100%. ${LockInfo }
 						</div>
 					</c:if>
 					<!-- block -->

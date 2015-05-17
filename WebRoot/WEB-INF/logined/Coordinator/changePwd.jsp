@@ -79,12 +79,11 @@
 								Export</a></li>				
 						<li class="active"><a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"><i class="icon-chevron-right"></i>
 								Change Password</a></li>
-						<li>
-							<a href="${pageContext.request.contextPath }/assessItem.do?flag=goAssessItemUi">
-								<i class="icon-chevron-right"></i>
-								Assessment Item
-							</a>
-						</li>
+						<li><a href="${pageContext.request.contextPath }/assessItem.do?flag=goAssessItemUi"><i class="icon-chevron-right"></i>
+								Assessment Item</a></li>
+						<li><a href="${pageContext.request.contextPath }/gradeLevel.do?flag=goGradeLevelUi">
+							<i class="icon-chevron-right"></i>
+								Grade Level</a></li>
                     </ul>
 			</div>
 

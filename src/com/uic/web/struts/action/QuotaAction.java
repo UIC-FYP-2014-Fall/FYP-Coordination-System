@@ -49,7 +49,7 @@ public class QuotaAction extends DispatchAction {
 			if(CTstartDateTime!=null){
 				java.util.Date StartTime = BaseUtil.StringConvertDate(CTstartDateTime);
 				java.util.Date nowDate = new java.util.Date();
-				System.out.println(nowDate);
+				//System.out.println(nowDate);
 				//lock quota change
 				if(StartTime.before(nowDate)){
 					request.setAttribute("lock", "true");
