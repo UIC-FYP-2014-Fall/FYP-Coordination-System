@@ -3,6 +3,7 @@ package com.uic.service.imp;
 import java.util.List;
 
 import com.uic.domain.Gradelevel;
+import com.uic.domain.StudentGrade;
 import com.uic.service.inter.GradeLevelServiceInter;
 import com.uic.util.HibernateUtil;
 
@@ -64,6 +65,47 @@ public class GradeLevelServiceImp extends BaseServiceImp implements GradeLevelSe
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
+			return false;
+		}
+	}
+
+	@Override
+	public List<StudentGrade> getStudentGrade(String sid) {
+		// TODO Auto-generated method stub
+		String hql="from StudentGrade where student_id = ?";
+		String[] parameters = {sid};
+		try{
+			List<StudentGrade> studentGrades = getListObject(hql,parameters);
+			return studentGrades;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	@Override
+	public boolean saveStudentGrade(StudentGrade studentGrade) {
+		// TODO Auto-generated method stub
+		try{
+			saveObject(studentGrade);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean updateStudentGrade(String studentGradeList, String totalScore, String studentID) {
+		// TODO Auto-generated method stub
+		String hql = "update StudentGrade set grade=?, totalScore=? where student_id=?";
+		String[] parameters = {studentGradeList,totalScore,studentID};
+		try{
+			updateObject(hql,parameters);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
 			return false;
 		}
 	}

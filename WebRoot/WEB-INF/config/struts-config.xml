@@ -286,6 +286,21 @@
       cancellable="true">
       <forward name="goGradeLevelUi" path="/WEB-INF/logined/Coordinator/gradeLevel.jsp" />
     </action>
+    <action
+      path="/printAssessmentTable"
+      type="com.uic.web.struts.action.PrintAssessmentTableAction"
+      cancellable="true">
+      <forward name="printATable" path="/WEB-INF/logined/Teacher/printATable.jsp" />
+    </action>
+    <action
+      parameter="flag"
+      path="/grading"
+      type="com.uic.web.struts.action.GradingAction"
+      cancellable="true">
+      <forward name="goGrading" path="/grading.do?flag=goGradingUI" />
+      <forward name="gradingUI" path="/WEB-INF/logined/Teacher/Grading.jsp" />
+      <forward name="editGradeUI" path="/WEB-INF/logined/Teacher/detailGrading.jsp" />
+    </action>
 
 
 

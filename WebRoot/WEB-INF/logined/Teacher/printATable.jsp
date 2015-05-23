@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="com.uic.domain.Student"%>
+<%@ page import="com.uic.domain.AssessItem"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html class="no-js">
 
 <head>
@@ -62,8 +70,7 @@
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-					<li class="active"><a
-						href="${pageContext.request.contextPath }/goUI.do"><i
+					<li><a href="${pageContext.request.contextPath }/goUI.do"><i
 							class="icon-chevron-right"></i> Main</a></li>
 					<li><a
 						href="${pageContext.request.contextPath }/uploadFYP.do?flag=uploadTopicUi"><i
@@ -80,103 +87,99 @@
 					<li><a
 						href="${pageContext.request.contextPath }/changPwd.do?flag=teacherChangePwdUi"><i
 							class="icon-chevron-right"></i> Change Password</a></li>
-					<li><a
-						href="${pageContext.request.contextPath }/printAssessmentTable.do"><i
+					<li class="active"><a href="${pageContext.request.contextPath }/printAssessmentTable.do"><i
 							class="icon-chevron-right"></i> Print Assessment Table</a></li>
-					<li><a
-						href="${pageContext.request.contextPath }/grading.do?flag=goGradingUI"><i
-							class="icon-chevron-right"></i> Grading</a></li>
+					<li><a href="${pageContext.request.contextPath }/grading.do?flag=goGradingUI"><i class="icon-chevron-right"></i>
+							Grading</a></li>
 				</ul>
 			</div>
-
+			<%
+				ArrayList<Student> supStu = (ArrayList<Student>)request.getAttribute("superviseStudentList");
+				ArrayList<Student> obserStu = (ArrayList<Student>)request.getAttribute("observateStudentList");
+				ArrayList<Student> examStu = (ArrayList<Student>)request.getAttribute("examineStudentList");
+				ArrayList<AssessItem> assessItemList = (ArrayList<AssessItem>)request.getAttribute("assessItemslist");
+			%>
 
 
 			<div class="span9" id="content">
 				<div class="row-fluid">
-
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">Schedule</div>
+							<div class="muted pull-left">Print Assessment Table</div>
 						</div>
 						<div class="block-content collapse in">
-							<table class="table table-striped table-bordered" id="groupTopic">
-								<thead>
-									<tr>
-										<th>State</th>
-										<th>Time</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Upload/Edit Topic</td>
-										<td>${requestScope.uploadTopicTime}</td>
-									</tr>
-
-									<tr>
-										<td>View Student's choice & Choose Observer</td>
-										<td>${requestScope.chooseTopicTime}</td>
-									</tr>
-									<tr>
-										<td>Select Available Time</td>
-										<td>${requestScope.choosePreTime}</td>
-									</tr>
-								</tbody>
-							</table>
+							<form>
+								<table class="table table-striped table-bordered" id=" ">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Role</th>
+											<%
+											for(AssessItem assessItem:assessItemList){
+												out.println("<th>"+assessItem.getName()+"</th>");
+												System.out.println(assessItem.getSupervisor());
+											}
+											
+											%>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+											for(Student s:supStu){
+												out.println("<tr>");
+												out.println("<td>"+s.getName()+"</td>");
+												out.println("<td>Supervisor</td>");
+												for(AssessItem assessItem:assessItemList){
+													if(assessItem.getSupervisor().equals("1")){
+														out.println("<td>&nbsp</td>");
+													}else{
+														out.println("<td>None</td>");
+													}
+												}
+												out.println("</tr>");
+											}
+										%>
+										<%
+											for(Student s:obserStu){
+												out.println("<tr>");
+												out.println("<td>"+s.getName()+"</td>");
+												out.println("<td>Observer</td>");
+												for(AssessItem assessItem:assessItemList){
+													if(assessItem.getObserver().equals("1")){
+														out.println("<td>&nbsp</td>");
+													}else{
+														out.println("<td>None</td>");
+													}
+												}
+												out.println("</tr>");
+											}
+										%>
+										<%
+											for(Student s:examStu){
+												out.println("<tr>");
+												out.println("<td>"+s.getName()+"</td>");
+												out.println("<td>Examiner</td>");
+												for(AssessItem assessItem:assessItemList){
+													if(assessItem.getExaminer().equals("1")){
+														out.println("<td>&nbsp</td>");
+													}else{
+														out.println("<td>None</td>");
+													}
+												}
+												out.println("</tr>");
+											}
+										%>
+									</tbody>
+								</table>
+								<div class="form-actions">
+									<button type="submit" class="btn btn-primary">
+										<i class="icon-print icon-white"></i> Print
+									</button>
+								</div>
+							</form>
 						</div>
 					</div>
-
-
-					<%-- <c:if test="${requestScope.showObserver=='true' }">
-					<div class="block">
-						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">Observation</div>
-						</div>
-						<div class="block-content collapse in">
-							<table class="table table-striped table-bordered" id="groupTopic">
-								<thead>
-									<tr>
-										<th>Project</th>
-									</tr>
-								</thead>
-								<tbody>
-								<%
-									List<ObsTopic> obsTopicList = (List<ObsTopic>)request.getAttribute("obsTopicList");
-									for(ObsTopic obsTopic:obsTopicList){
-										out.println("<tr><td>"+obsTopic.getTopic().getTitle()+"</td></tr>");
-									}
-								%>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					</c:if>
-					<c:if test="${requestScope.showExaminer=='true' }">
-					<div class="block">
-						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">Examination</div>
-						</div>
-						<div class="block-content collapse in">
-							<table class="table table-striped table-bordered" id="groupTopic">
-								<thead>
-									<tr>
-										<th>Student</th>
-									</tr>
-								</thead>
-								<tbody>
-									<%
-										List<Stuexaminer> stuExaminerList = (List<Stuexaminer>)request.getAttribute("stuExaminerList");
-										for(Stuexaminer stuExaminer:stuExaminerList){
-											out.println("<tr><td>"+stuExaminer.getStudent().getSid()+" "+stuExaminer.getStudent().getName()+"</td></tr>");
-										}
-									%>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					</c:if> --%>
-
-
 				</div>
 			</div>
 		</div>
@@ -191,3 +194,4 @@
 </body>
 
 </html>
+
