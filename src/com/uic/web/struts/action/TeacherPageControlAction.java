@@ -4,7 +4,6 @@
  */
 package com.uic.web.struts.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +47,7 @@ public class TeacherPageControlAction extends DispatchAction {
 	 * @param response
 	 * @return ActionForward
 	 */
-	public ActionForward mainPage(ActionMapping mapping, ActionForm form,
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		System.out.println("Using TeacherPageControlAction");

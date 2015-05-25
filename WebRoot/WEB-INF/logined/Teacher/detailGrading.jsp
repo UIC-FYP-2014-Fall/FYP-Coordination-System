@@ -40,20 +40,34 @@
 				</a> <a class="brand" href="index.html">FYP Coordination System</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li class="dropdown"><a href="#" role="button"
+						<li class="dropdown">
+							<a href="#" role="button"
 							class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="icon-user"></i> Teacher <i class="caret"></i>
-
-						</a>
+								class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i>
+							</a>
 							<ul class="dropdown-menu">
 								<li><a tabindex="-1" href="login.html">Logout</a></li>
-							</ul></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal hide fade" id="logout">
+		<div class="modal-header">
+			<h4>Logout</h4>
+		</div>
+		<div class="modal-body">Are you sure?</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			<a href="${pageContext.request.contextPath }/logout.do"
+				class="btn btn-danger">Logout</a>
+		</div>
+	</div>
+	
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
@@ -110,7 +124,7 @@
 									title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
 								<i class="icon-chevron-right show-sidebar" style="display:none;"><a
 									href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
-								<li><a href="Grading.html">Student List</a> <span
+								<li><a href="${pageContext.request.contextPath }/grading.do?flag=goGradingUI">Student List</a> <span
 									class="divider">/</span></li>
 								<li class="active">Edit Grade</li>
 							</ul>

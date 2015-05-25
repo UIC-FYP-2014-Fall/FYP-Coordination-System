@@ -11,7 +11,7 @@
 		</id>
         <many-to-one name="student" column="student_id" />
         <property name="grade" lazy="false" type="java.lang.String">
-            <column name="grade" length="50"/>
+            <column name="grade" length="128"/>
         </property>
         <property name="totalScore" lazy="false" type="java.lang.String">
             <column name="totalScore" length="10"/>

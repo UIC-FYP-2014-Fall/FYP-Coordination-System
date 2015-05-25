@@ -76,6 +76,10 @@
 					<li class="active"><a
 						href="${pageContext.request.contextPath }/changPwd.do?flag=teacherChangePwdUi"><i
 							class="icon-chevron-right"></i> Change Password</a></li>
+					<li><a href="${pageContext.request.contextPath }/printAssessmentTable.do"><i
+							class="icon-chevron-right"></i> Print Assessment Table</a></li>
+					<li><a href="${pageContext.request.contextPath }/grading.do?flag=goGradingUI"><i class="icon-chevron-right"></i>
+							Grading</a></li>
 				</ul>
 			</div>
 
