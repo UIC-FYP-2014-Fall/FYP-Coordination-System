@@ -31,9 +31,12 @@
       type="com.uic.web.struts.action.GoUIAction"
       validate="false"
       cancellable="true" >
-      <forward name="goMainUi" path="/WEB-INF/logined/Coordinator/main.jsp" />
-      <forward name="goTeacherMain" path="/teacherPageControl.do?flag=mainPage" />
+      
+      
       <forward name="goStudentMain" path="/goStudentMain.do" />
+      <forward name="goTeacherMain" path="/teacherPageControl.do" />
+      <forward name="goMainUi" path="/WEB-INF/logined/Coordinator/main.jsp" />
+      
     </action>
     <action
       attribute="teacherForm"
@@ -207,8 +210,10 @@
       scope="request"
       type="com.uic.web.struts.action.SetOberverAction"
       cancellable="true">
-      <forward name="chooseObserverUi" path="/WEB-INF/logined/Teacher/chooseObserver.jsp" />
+      
       <forward name="obsSaved" path="/setObserver.do?flag=chooseObserverUi" />
+      <forward name="chooseObserverUi" path="/WEB-INF/logined/Teacher/chooseObserver.jsp" />
+      
       </action>
     <action
       parameter="flag"
@@ -285,6 +290,21 @@
       validate="false"
       cancellable="true">
       <forward name="goGradeLevelUi" path="/WEB-INF/logined/Coordinator/gradeLevel.jsp" />
+    </action>
+    <action
+      path="/printAssessmentTable"
+      type="com.uic.web.struts.action.PrintAssessmentTableAction"
+      cancellable="true">
+      <forward name="printATable" path="/WEB-INF/logined/Teacher/printATable.jsp" />
+    </action>
+    <action
+      parameter="flag"
+      path="/grading"
+      type="com.uic.web.struts.action.GradingAction"
+      cancellable="true">
+      <forward name="goGrading" path="/grading.do?flag=goGradingUI" />
+      <forward name="gradingUI" path="/WEB-INF/logined/Teacher/Grading.jsp" />
+      <forward name="editGradeUI" path="/WEB-INF/logined/Teacher/detailGrading.jsp" />
     </action>
 
 

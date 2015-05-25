@@ -1,7 +1,9 @@
 package com.uic.service.inter;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.uic.domain.Student;
 import com.uic.domain.Teacher;
 
 public interface TeachersServiceInter extends BaseInterface{
@@ -27,4 +29,9 @@ public interface TeachersServiceInter extends BaseInterface{
 	
 	public Teacher getUniqueTeacherById(String id);
 
+	public ArrayList<Student> getSuperviseStudentList(String id);
+	
+	public ArrayList<Student> getObservateStudentList(String id);
+	
+	public ArrayList<Student> getExmineStudentList(String id);
 }

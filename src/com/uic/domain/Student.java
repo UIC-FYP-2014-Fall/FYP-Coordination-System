@@ -26,8 +26,16 @@ public class Student implements java.io.Serializable {
 	private Set<Timeslot> timeslot;
 	private Set<StuTopic> stuTopic;
 	private Set<Stuexaminer> stuExaminer;
-
+	private Set<StudentGrade> studentGrade;
 	// Constructors
+
+	public Set<StudentGrade> getStudentGrade() {
+		return studentGrade;
+	}
+
+	public void setStudentGrade(Set<StudentGrade> studentGrade) {
+		this.studentGrade = studentGrade;
+	}
 
 	public Set<Stuexaminer> getStuExaminer() {
 		return stuExaminer;

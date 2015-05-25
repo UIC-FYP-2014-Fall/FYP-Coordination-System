@@ -1,7 +1,12 @@
 package com.uic.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.uic.domain.ObsTopic;
+import com.uic.domain.StuTopic;
+import com.uic.domain.Student;
+import com.uic.domain.Stuexaminer;
 import com.uic.domain.TeaTopic;
 import com.uic.domain.Teacher;
 import com.uic.service.inter.TeachersServiceInter;
@@ -228,6 +233,78 @@ public class TeachersServiceImp extends BaseServiceImp implements TeachersServic
 			e.printStackTrace();
 		}
 		return count;
+	}
+
+	@Override
+	public ArrayList<Student> getSuperviseStudentList(String id) {
+		// TODO Auto-generated method stub
+		String hql = "from TeaTopic where teacher_id = ?";
+		String[] parameters={id};
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		try{
+			List<TeaTopic> teaTopics = getListObject(hql,parameters);
+			if(teaTopics.size() != 0 ){
+				for(TeaTopic teaTopic : teaTopics){
+					System.out.println("teaTopic Found."+teaTopics.size());
+					String hql2 ="from StuTopic where topic_id = ?";
+					String[] parameters2 = {teaTopic.getTopic().getFid().toString()};
+					System.out.println("Topic id."+teaTopic.getTopic().getFid().toString());
+					List<StuTopic> stuTopics = getListObject(hql2,parameters2);
+					System.out.println("stuTopics size:"+stuTopics.size());
+					for(StuTopic stuTopic:stuTopics){
+						studentList.add(stuTopic.getStudent());
+					}
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return studentList;
+	}
+
+	@Override
+	public ArrayList<Student> getObservateStudentList(String id) {
+		// TODO Auto-generated method stub
+		String hql = "from ObsTopic where observer_id = ?";
+		String[] parameters={id};
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		try{
+			List<ObsTopic> obsTopics = getListObject(hql,parameters);
+			if(obsTopics.size() != 0 ){
+				for(ObsTopic obsTopic : obsTopics){
+					System.out.println("obsTopic Found."+obsTopics.size());
+					String hql2 ="from StuTopic where topic_id = ?";
+					String[] parameters2 = {obsTopic.getTopic().getFid().toString()};
+					System.out.println("Topic id."+obsTopic.getTopic().getFid().toString());
+					List<StuTopic> stuTopics = getListObject(hql2,parameters2);
+					System.out.println("stuTopics size:"+stuTopics.size());
+					for(StuTopic stuTopic:stuTopics){
+						studentList.add(stuTopic.getStudent());
+					}
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return studentList;
+		
+	}
+
+	@Override
+	public ArrayList<Student> getExmineStudentList(String id) {
+		// TODO Auto-generated method stub
+		String hql = "from Stuexaminer where teacher_id = ?";
+		String[] parameters = {id};
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		try{
+			List<Stuexaminer> stuExaminers = getListObject(hql,parameters);
+			for(Stuexaminer stuExaminer:stuExaminers){
+				studentList.add(stuExaminer.getStudent());
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return studentList;
 	}
 
 

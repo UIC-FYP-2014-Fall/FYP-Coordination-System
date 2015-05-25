@@ -41,6 +41,8 @@
 	<mapping resource="com/uic/domain/StuTopic.hbm.xml" />
 	<mapping resource="com/uic/domain/Assessitem.hbm.xml" />
 	<mapping resource="com/uic/domain/Gradelevel.hbm.xml" />
+	<mapping resource="com/uic/domain/StudentGrade.hbm.xml" />
+
 
 </session-factory>
 
