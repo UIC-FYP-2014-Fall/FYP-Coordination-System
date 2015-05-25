@@ -189,7 +189,7 @@ public class ChangPwdAction extends DispatchAction {
 					request.setAttribute(
 							"PwdError",
 							"Your new password can't be the same as the original password. Please try again!");
-					return mapping.findForward("goTeacherPwdUi");
+					return mapping.findForward("goStudentPwdUi");
 				} else {
 					UsersServiceInter usersServiceInter = new UsersServiceImp();
 					if (usersServiceInter.changePwd(role, newPwd,

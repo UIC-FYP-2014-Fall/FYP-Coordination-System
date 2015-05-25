@@ -47,7 +47,7 @@ public class LoginAction extends Action {
 	 */
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("Using LoginAction");
+		//System.out.println("Using LoginAction");
 		
 		UserForm userForm = (UserForm) form;// TODO Auto-generated method stub
 
