@@ -306,6 +306,15 @@
       <forward name="gradingUI" path="/WEB-INF/logined/Teacher/Grading.jsp" />
       <forward name="editGradeUI" path="/WEB-INF/logined/Teacher/detailGrading.jsp" />
     </action>
+    <action
+      parameter="flag"
+      path="/gradeReport"
+      type="com.uic.web.struts.action.GradeReportAction"
+      validate="false"
+      cancellable="true" >
+      <forward name="goGradeReportUi" path="/WEB-INF/logined/Coordinator/generateGradeReport.jsp" />
+    </action>
+
 
 
 

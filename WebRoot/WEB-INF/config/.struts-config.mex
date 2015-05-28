@@ -58,6 +58,8 @@
   <StrutsActivity path="/WEB-INF/logined/Teacher/Grading.jsp" location="-210,1215" dimension="271,76" />
   <StrutsActivity path="/WEB-INF/logined/Teacher/detailGrading.jsp" location="-210,1125" dimension="271,76" />
   <StrutsActivity path="/index.jsp" location="-660,-555" dimension="121,76" />
+  <StrutsActivity path="/WEB-INF/logined/Coordinator/generateGradeReport.jsp" location="-1950,1620" dimension="271,91" />
+  <StrutsActivity path="/gradeReport.do" location="-1395,1620" dimension="286,104" />
   <StrutsTransition id="/WEB-INF/logined/Teacher/uploadTopic.jsp,null,/uploadFYP.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="-210,405" />
@@ -161,8 +163,10 @@
   </StrutsTransition>
   <StrutsTransition id="/grading.do,gradingUI,/WEB-INF/logined/Teacher/Grading.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="-434,1246" />
-      <AbsolutePoint location="-210,1246" />
+      <AbsolutePoint location="-434,1186" />
+      <AbsolutePoint location="-284,1186" />
+      <AbsolutePoint location="-284,1253" />
+      <AbsolutePoint location="-210,1253" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/goUI.do,goMainUi,/WEB-INF/logined/Coordinator/main.jsp,1" routingType="1">
@@ -205,8 +209,8 @@
   </StrutsTransition>
   <StrutsTransition id="/grading.do,editGradeUI,/WEB-INF/logined/Teacher/detailGrading.jsp,1" routingType="0">
     <AutomaticBendpoints>
-      <AbsolutePoint location="-434,1186" />
-      <AbsolutePoint location="-210,1186" />
+      <AbsolutePoint location="-434,1156" />
+      <AbsolutePoint location="-210,1156" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/printAssessmentTable.do,printATable,/WEB-INF/logined/Teacher/printATable.jsp,1" routingType="0">
@@ -231,6 +235,12 @@
     <AutomaticBendpoints>
       <AbsolutePoint location="-1664,465" />
       <AbsolutePoint location="-1395,465" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gradeReport.do,goGradeReportUi,/WEB-INF/logined/Coordinator/generateGradeReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="-1395,1665" />
+      <AbsolutePoint location="-1679,1665" />
     </AutomaticBendpoints>
   </StrutsTransition>
   <StrutsTransition id="/teacherPageControl.do,mainPage,/WEB-INF/logined/Teacher/teacherMain.jsp,1" routingType="0">
