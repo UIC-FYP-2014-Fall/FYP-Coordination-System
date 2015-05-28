@@ -155,7 +155,7 @@ public class GradingAction extends DispatchAction {
 			System.out.println("studentGradeList.size()"+studentGradeList.size());
 			if (studentGradeList.size() == 0) {
 				for (AssessItem assessItem : assessItemslist) {
-					gradeList = codeScore(assessItem.getName(), request.getParameter(assessItem.getName()), gradeList);
+					gradeList = codeScore(assessItem.getId().toString(), request.getParameter(assessItem.getName()), gradeList);
 				}
 				StudentGrade sg = new StudentGrade();
 				sg.setGrade(gradeList);
@@ -168,7 +168,7 @@ public class GradingAction extends DispatchAction {
 				return mapping.findForward("goGrading");
 			}else{
 				for (AssessItem assessItem : assessItemslist) {
-					gradeList = codeScore(assessItem.getName(), request.getParameter(assessItem.getName()), gradeList);
+					gradeList = codeScore(assessItem.getId().toString(), request.getParameter(assessItem.getName()), gradeList);
 				}
 				
 				// update sg
@@ -200,7 +200,7 @@ public class GradingAction extends DispatchAction {
 		float totalScore = 0;
 		System.out.println("initial total score:"+totalScore);
 		for(AssessItem assessItem: assessItemsList){
-			totalScore = totalScore + Float.parseFloat(scoreMap.get(score.get(assessItem.getName()))) * assessItem.getPercent()/100;
+			totalScore = totalScore + Float.parseFloat(scoreMap.get(score.get(assessItem.getId().toString()))) * assessItem.getPercent()/100;
 			System.out.println("next total score " +assessItem.getName()+":"+totalScore);
 		}
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
@@ -224,8 +224,8 @@ public class GradingAction extends DispatchAction {
 	}
 	
 	
-	public String codeScore(String name, String grade, String gradeList) {
-		gradeList = gradeList + name + "," + grade + ";";
+	public String codeScore(String itemID, String grade, String gradeList) {
+		gradeList = gradeList + itemID + "," + grade + ";";
 		return gradeList;
 	}
 

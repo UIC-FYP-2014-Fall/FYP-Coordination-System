@@ -230,8 +230,8 @@
 										}else{
 											System.out.println(record +" match has Record");
 											for(String gl:gradeLevel){
-												System.out.print(sgMap.get(assessItem.getName())+" "+gl);
-												if(sgMap.get(assessItem.getName()).equals(gl)){
+												System.out.print(sgMap.get(assessItem.getId().toString())+" "+gl);
+												if(sgMap.get(assessItem.getId().toString()).equals(gl)){
 													System.out.println("  match");
 													out.println("<option selected value=\""+gl+"\">"+gl+"</option>");
 												}else{
