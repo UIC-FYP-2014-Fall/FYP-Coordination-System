@@ -28,7 +28,6 @@
 	</property>
 	<property name="hbm2ddl.auto">update</property>
 
-
 	<mapping resource="com/uic/domain/Student.hbm.xml" />
 	<mapping resource="com/uic/domain/Teacher.hbm.xml" />
 	<mapping resource="com/uic/domain/Coordinator.hbm.xml" />

@@ -25,12 +25,14 @@ public interface GradeLevelServiceInter extends BaseInterface{
 
 	public boolean saveStudentGrade(StudentGrade studentGrade);
 	
-	public boolean updateStudentGrade(String studentGradeList, String totalScore, String studentID);
+	public boolean updateStudentGrade(String role, String studentGradeList, String totalScore, String studentID);
 	
 	/*
 	 * Generate student grade report
 	 */
 	public List<StudentGrade> getValidStudentGrade();
 	
+	
+
 	
 }

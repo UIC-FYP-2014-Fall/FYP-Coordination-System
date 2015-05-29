@@ -100,6 +100,7 @@
 			<%
 				String record = (String)request.getAttribute("record");
 				String[] gradeLevel = {"A","A-","B+","B","B-","C+","C","C-","D","F"};
+				String role = (String)request.getAttribute("role");
 				HashMap<String, String> sgMap = null;
 				if(record == "hasRecord"){
 					System.out.println("detail grading has record");
@@ -216,6 +217,7 @@
 								<fieldset>
 								<%
 									out.println("<input  style=\"display:none;\" type=\"text\" name=\"studentID\" value=\""+curStudent.getSid()+"\">");
+									out.println("<input  style=\"display:none;\" type=\"text\" name=\"role\" value=\""+role+"\">");
 									for(AssessItem assessItem:assessItemslist){
 										out.println("<div class=\"control-group\">");
 										out.println("<label class=\"control-label\">"+assessItem.getName()+"</label>");

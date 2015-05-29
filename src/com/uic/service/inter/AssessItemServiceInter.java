@@ -16,6 +16,8 @@ public interface AssessItemServiceInter extends BaseInterface {
 	public List<AssessItem> getAssessItems();
 	//public List<String> getAssessItemsName();
 	
+	public List<AssessItem> getAssessItems(String role);
+	
 	public boolean deleteAssessItem(String assessItemId);
 	
 	public int totalPercent();

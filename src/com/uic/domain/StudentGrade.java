@@ -10,10 +10,10 @@ public class StudentGrade implements java.io.Serializable {
 	private String totalScore;
 	private String totalLetterGrade;
 	private Student student;
-	private String grade;
 	private AssessItem assessItemGrade;
-	
-	
+	private String supervisorGrade;
+	private String observerGrade;
+	private String examinerGrade;
 
 	public AssessItem getAssessItemGrade() {
 		return assessItemGrade;
@@ -29,6 +29,30 @@ public class StudentGrade implements java.io.Serializable {
 
 	public void setTotalLetterGrade(String totalLetterGrade) {
 		this.totalLetterGrade = totalLetterGrade;
+	}
+
+	public String getSupervisorGrade() {
+		return supervisorGrade;
+	}
+
+	public void setSupervisorGrade(String supervisorGrade) {
+		this.supervisorGrade = supervisorGrade;
+	}
+
+	public String getObserverGrade() {
+		return observerGrade;
+	}
+
+	public void setObserverGrade(String observerGrade) {
+		this.observerGrade = observerGrade;
+	}
+
+	public String getExaminerGrade() {
+		return examinerGrade;
+	}
+
+	public void setExaminerGrade(String examinerGrade) {
+		this.examinerGrade = examinerGrade;
 	}
 
 	public String getTotalScore() {
@@ -53,14 +77,7 @@ public class StudentGrade implements java.io.Serializable {
 
 	public void setStudent(Student student) {
 		this.student = student;
-	}
 
-	public String getGrade() {
-		return grade;
-	}
-
-	public void setGrade(String grade) {
-		this.grade = grade;
 	}
 
 }

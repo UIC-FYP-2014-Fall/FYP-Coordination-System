@@ -152,38 +152,43 @@ public class ChooseExaminerAction extends DispatchAction {
 						}
 
 						Teacher observer = studentSericeInter.getObserver(stu.getSid());
-						Integer observerId = observer.getId();
+						if(observer.getId()!=null){
+							Integer observerId = observer.getId();
+							// rewrap the teacher list which will add state
+							List<TeacherState> teacherStateList = new ArrayList<TeacherState>();
 
-						// rewrap the teacher list which will add state
-						List<TeacherState> teacherStateList = new ArrayList<TeacherState>();
+							TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
+							List<Teacher> listTeacher = teachersServiceInter
+									.getTeachers();
+							// loop the teacher list to add the new list,
+							// teacherStateList.
+							for (Teacher t : listTeacher) {
 
-						TeachersServiceInter teachersServiceInter = new TeachersServiceImp();
-						List<Teacher> listTeacher = teachersServiceInter
-								.getTeachers();
-						// loop the teacher list to add the new list,
-						// teacherStateList.
-						for (Teacher t : listTeacher) {
+								TeacherState ts = new TeacherState();
 
-							TeacherState ts = new TeacherState();
-
-							if (hm.containsKey(t.getId())) {
-								continue;
-							} else if (t.getId().equals(observerId)) {
-								continue;
-							} else {
-								ts.setTid(t.getId());
-								ts.setName(t.getName());
-								ts.setEmail(t.getEmail());
-								if (teachersServiceInter.getWorkload(t.getId().toString()) < Integer.parseInt(t.getWorkload())) {
-									ts.setState(TeacherStateType.can_select);
+								if (hm.containsKey(t.getId())) {
+									continue;
+								} else if (t.getId().equals(observerId)) {
+									continue;
 								} else {
-									ts.setState(TeacherStateType.full);
+									ts.setTid(t.getId());
+									ts.setName(t.getName());
+									ts.setEmail(t.getEmail());
+									if (teachersServiceInter.getWorkload(t.getId().toString()) < Integer.parseInt(t.getWorkload())) {
+										ts.setState(TeacherStateType.can_select);
+									} else {
+										ts.setState(TeacherStateType.full);
+									}
+									teacherStateList.add(ts);
 								}
-								teacherStateList.add(ts);
-							}
 
+							}
+							request.setAttribute("teacherList", teacherStateList);
+						}else{
+							request.setAttribute("studentOperation", "false");
+							request.setAttribute("ErrorInfo", "You need a observer. Please wait your supervisor selects a observer for you.");
 						}
-						request.setAttribute("teacherList", teacherStateList);
+						
 
 					} else {
 						request.setAttribute("chooseExaminerTime", "false");

@@ -139,7 +139,6 @@ final public class HibernateUtil {
 				query.setString(i, parameters[i]);
 			}
 		}
-		// System.out.println("query+++++++++++++++++++++++++++++++"+query.toString());
 		query.executeUpdate();
 		s.flush();
 	}
