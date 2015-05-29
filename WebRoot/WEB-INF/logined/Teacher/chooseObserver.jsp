@@ -165,6 +165,7 @@
 													ArrayList<Teacher> teacherList = (ArrayList<Teacher>) request.getAttribute("teacherList");
 													HashMap<String, String> topicObsMap = (HashMap<String, String>) request.getAttribute("topicObsMap");
 													HashMap<String, List<TeaTopic>> multiSupTopicMap = (HashMap<String, List<TeaTopic>>) request.getAttribute("multiSupTopicMap");
+													String afterChooseObs = (String)request.getAttribute("afterChooseObs");
 													boolean flag = false;
 
 													int index = 1;
@@ -172,7 +173,13 @@
 														out.println("<tr>");
 														out.println("<td>" + index + "</td>");
 														out.println("<td>" + teaTopic.getTopic().getTitle() + "</td>");
-														out.println("<td><select name=\"obsTopic\" class=\"chzn-select\">");
+														System.out.println("after   "+afterChooseObs);
+														if(afterChooseObs=="false"){
+															out.println("<td><select name=\"obsTopic\" class=\"chzn-select\">");
+														}else{
+															out.println("<td><select disabled name=\"obsTopic\" class=\"chzn-select\">");
+														}
+														
 														if (topicObsMap.get(teaTopic.getTopic().getTitle()) == "null") {
 															//还没选observer
 															out.println("<option value=\"-1,-1\" selected>Please Select</option>");
@@ -325,11 +332,11 @@
 											%>
 										</tbody>
 									</table> --%>
-									<div class="form-actions">
-										<c:if test="${requestScope.afterChooseObs=='false' }">
+									<c:if test="${requestScope.afterChooseObs=='false' }">
+										<div class="form-actions">
 											<button type="submit" class="btn btn-primary">Submit</button>
-										</c:if>
-									</div>
+										</div>
+									</c:if>
 								</form>
 							</div>
 						</div>
