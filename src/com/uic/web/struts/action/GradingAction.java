@@ -70,6 +70,7 @@ public class GradingAction extends DispatchAction {
 			ArrayList<StuTopic> sst = new ArrayList<StuTopic>();
 			ArrayList<StuTopic> ost = new ArrayList<StuTopic>();
 			ArrayList<StuTopic> est = new ArrayList<StuTopic>();
+			
 			HashMap<String,StudentGrade> studentGrade = new HashMap<String,StudentGrade>();
 			for (Student s : ss) {
 				List<StuTopic> st = fypService.getStuTopicByStudent(s);
