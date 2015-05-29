@@ -12,7 +12,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
-import com.uic.domain.ObsTopic;
 import com.uic.domain.Teacher;
 import com.uic.domain.Topic;
 import com.uic.service.imp.FYPServiceImp;
@@ -173,12 +172,6 @@ public class UploadFYPAction extends DispatchAction {
 			request.setAttribute("ifTopicUploadSuccess", "false");
 			request.setAttribute("operationInfo", "Upload topic faile.");
 		}
-		// set a default observer
-		ObsTopic obsTopic = new ObsTopic();
-		obsTopic.setObserver(teacherlist.get(0));
-		System.out.println(teacherlist.get(0).getName());
-		obsTopic.setTopic(topic);
-		fypServiceImp.saveObject(obsTopic);
 		return mapping.findForward("uploadok");
 	}
 }

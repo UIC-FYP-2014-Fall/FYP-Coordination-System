@@ -10,8 +10,14 @@
 			<generator class="identity" />
 		</id>
         <many-to-one name="student" column="student_id" />
-        <property name="grade" lazy="false" type="java.lang.String">
-            <column name="grade" length="128"/>
+        <property name="supervisorGrade" lazy="false" type="java.lang.String">
+            <column name="supervisorGrade" length="128"/>
+        </property>
+        <property name="observerGrade" lazy="false" type="java.lang.String">
+            <column name="observerGrade" length="128"/>
+        </property>
+        <property name="examinerGrade" lazy="false" type="java.lang.String">
+            <column name="examinerGrade" length="128"/>
         </property>
         <property name="totalScore" lazy="false" type="java.lang.String">
             <column name="totalScore" length="10"/>

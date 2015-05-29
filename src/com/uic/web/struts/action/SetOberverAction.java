@@ -5,6 +5,7 @@
 package com.uic.web.struts.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,72 +58,39 @@ public class SetOberverAction extends DispatchAction {
 			String start = ph.getProperties("ChooseTopicEndDateTime");
 			String end = ph.getProperties("ChooseExaminersStartDateTime");
 			if (start != null && end != null) {
+				//如果在时间段里面
 				if(BaseUtil.todayIsInPeriod(start, end)||BaseUtil.todayIsAfter(end)){
 					//prepare date: teacherList and Teatopic List of the current teacher.
 					Teacher curTeacher = (Teacher) request.getSession().getAttribute("teacherinfo");
+					
 					TeachersServiceImp teachersServiceImp=new TeachersServiceImp();
 					FYPServiceImp fypServiceImp = new FYPServiceImp();
+					
 					ArrayList<Teacher> teacherList =(ArrayList<Teacher>) teachersServiceImp.getTeachers();
-					List<TeaTopic> teaTopicList = fypServiceImp.getTeaTopic(curTeacher.getId().toString());
-					ArrayList<ObsTopic> indObsTopics=new ArrayList<ObsTopic>();
-					ArrayList<ObsTopic> groObsTopics=new ArrayList<ObsTopic>();
-					ArrayList<String> indObserverList = new ArrayList<String>();
-					ArrayList<String> groObserverList = new ArrayList<String>();
-				
-					ArrayList<TeaTopic> removeObj= new ArrayList<TeaTopic>();
-					for(int i =0;i<teaTopicList.size();i++){
-						if(fypServiceImp.ifTopicHasBeenChoosenByStu(teaTopicList.get(i).getTopic().getFid().toString())){
-							//do nothings
-							System.out.println("topic choosen "+teaTopicList.get(i).getTopic().getTitle());
-						}else{
-							System.out.println("topic remove "+teaTopicList.get(i).getTopic().getTitle());
-							removeObj.add(teaTopicList.get(i));
-						}
-					}
-					for(TeaTopic t :removeObj){
-						teaTopicList.remove(t);
-					}
+					ArrayList<TeaTopic> teaTopicList = (ArrayList<TeaTopic>)fypServiceImp.getTeaTopic(curTeacher.getId().toString());
+					
+					HashMap<String,String> topicObsMap = new HashMap<String, String>();
+					HashMap<String,List<TeaTopic>> multiSupTopicMap = new HashMap<String, List<TeaTopic>>();
 					
 					for(TeaTopic teaTopic: teaTopicList){
-						if(teaTopic.getTopic().getIndividual()){
-							indObsTopics.add(fypServiceImp.getObsTopicByTopicId(teaTopic.getTopic().getFid().toString()));
+						ObsTopic obsTopic = fypServiceImp.getObsTopicByTopicId(teaTopic.getTopic().getFid().toString());
+						if(obsTopic==null){
+							topicObsMap.put(teaTopic.getTopic().getTitle(), "null");
 						}else{
-							groObsTopics.add(fypServiceImp.getObsTopicByTopicId(teaTopic.getTopic().getFid().toString()));
+							topicObsMap.put(teaTopic.getTopic().getTitle(), obsTopic.getObserver().getName());
 						}
+						if(fypServiceImp.getTeaTopicByTopicId(teaTopic.getTopic().getFid().toString()).size()>1){
+							System.out.println("multi supervisor");
+							multiSupTopicMap.put(teaTopic.getTopic().getFid().toString(), fypServiceImp.getTeaTopicByTopicId(teaTopic.getTopic().getFid().toString()));
+						}
+						
 					}
 					
-					boolean bool=true;
-					for(int i = 0; i<indObsTopics.size();i++){
-						StringBuffer buff = new StringBuffer();
-						ObsTopic obsTopic=fypServiceImp.refreshObsTopic(indObsTopics.get(i));
-						for(int j=0;j<teacherList.size();j++){
-							if(fypServiceImp.checkIfTeacherIsTheSupervisor(obsTopic.getTopic().getFid().toString(),teacherList.get(j))){
-								if(bool){
-									buff.append(teaTopicList.get(i).getTeacher().getId()+",Please Select;");
-									bool=false;
-								}
-							}else{
-								buff.append(teacherList.get(j).getId()+","+teacherList.get(j).getName()+";");
-							}
-						}
-						indObserverList.add(buff.toString());
-					}
-					bool=true;
-					for(int i = 0; i<groObsTopics.size();i++){
-						StringBuffer buff = new StringBuffer();
-						ObsTopic obsTopic=fypServiceImp.refreshObsTopic(groObsTopics.get(i));
-						for(int j=0;j<teacherList.size();j++){
-							if(fypServiceImp.checkIfTeacherIsTheSupervisor(obsTopic.getTopic().getFid().toString(),teacherList.get(j))){
-								if(bool){
-									buff.append(teaTopicList.get(i).getTeacher().getId()+",Please Select;");
-									bool=false;
-								}
-							}else{
-								buff.append(teacherList.get(j).getId()+","+teacherList.get(j).getName()+";");
-							}
-						}
-						groObserverList.add(buff.toString());
-					}
+					
+					request.setAttribute("teaTopicList", teaTopicList);
+					request.setAttribute("teacherList", teacherList);
+					request.setAttribute("topicObsMap", topicObsMap);
+					request.setAttribute("multiSupTopicMap", multiSupTopicMap);
 					if(BaseUtil.todayIsAfter(end)){
 						request.setAttribute("afterChooseObs", "true");
 					}else{
@@ -130,11 +98,9 @@ public class SetOberverAction extends DispatchAction {
 					}
 					request.setAttribute("chooseObserverPeriod", start+ " to " +end);
 					request.setAttribute("chooseObserverStart", "true");
-					request.setAttribute("indObserverList", indObserverList);
-					request.setAttribute("groObserverList", groObserverList);
-					request.setAttribute("indObsTopics", indObsTopics);
-					request.setAttribute("groObsTopics", groObsTopics);
+					
 					return mapping.findForward("chooseObserverUi");
+					
 				}else{
 					request.setAttribute("chooseObserverStart","before");
 					return mapping.findForward("chooseObserverUi");
@@ -159,9 +125,13 @@ public class SetOberverAction extends DispatchAction {
 		String[] obsTopic=observerForm.getObsTopic();
 		for(int i=0;i<obsTopic.length;i++){
 			String[] temp=obsTopic[i].split(",");
-			Topic topic = fypService.getUniqueTopic(temp[0]);
-			Teacher observer= teacherService.getUniqueTeacherById(temp[1]);
-			flag=fypService.setObserver(observer, topic);
+			if(temp[0].equals("-1")&&temp[1].equals("-1")){
+				
+			}else{
+				Topic topic = fypService.getUniqueTopic(temp[0]);
+				Teacher observer= teacherService.getUniqueTeacherById(temp[1]);
+				flag=fypService.setObserver(observer, topic);
+			}
 		}
 		if(flag){
 			request.setAttribute("setObserverSuccess", "true");

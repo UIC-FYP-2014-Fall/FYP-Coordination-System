@@ -115,23 +115,56 @@ public class GradingAction extends DispatchAction {
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("teacher")) {
 			String studentID = request.getParameter("sid");
+			String role = request.getParameter("role");
 			AssessItemServiceInter assessItemService = new AssessItemServiceImp();
 			GradeLevelServiceInter gradeService = new GradeLevelServiceImp();
 			StudentServiceInter studentService = new StudentServiceImp();
 
-			List<AssessItem> assessItemslist = assessItemService.getAssessItems();
+			List<AssessItem> assessItemslist = assessItemService.getAssessItems(role);
 			Student curStudent = studentService.getStudentById(studentID);
 			List<StudentGrade> sg = gradeService.getStudentGrade(curStudent.getId().toString());
 			if (sg.size() == 0) {
 				request.setAttribute("record", "noRecord");
 				System.out.println("No record");
 			} else {
-				request.setAttribute("record", "hasRecord");
-				HashMap<String, String> sgMap = getScore(sg.get(0).getGrade());
-				request.setAttribute("grade", sgMap);
-				System.out.println("Has record");
+				if(role.equals("supervisor")){
+					if(sg.get(0).getSupervisorGrade()==null){
+						request.setAttribute("record", "noRecord");
+						System.out.println("No record");
+					}else{
+						request.setAttribute("record", "hasRecord");
+						HashMap<String, String> sgMap = getScore(sg.get(0).getSupervisorGrade());
+						request.setAttribute("grade", sgMap);
+
+						System.out.println("Has record");
+					}
+				}else if(role.equals("observer")){
+					if(sg.get(0).getObserverGrade()==null){
+						request.setAttribute("record", "noRecord");
+						System.out.println("No record");
+					}else{
+						request.setAttribute("record", "hasRecord");
+						HashMap<String, String> sgMap = getScore(sg.get(0).getObserverGrade());
+						request.setAttribute("grade", sgMap);
+
+						System.out.println("Has record");
+					}
+				}else if(role.equals("examiner")){
+					if(sg.get(0).getExaminerGrade()==null){
+						request.setAttribute("record", "noRecord");
+						System.out.println("No record");
+					}else{
+						request.setAttribute("record", "hasRecord");
+						HashMap<String, String> sgMap = getScore(sg.get(0).getExaminerGrade());
+						request.setAttribute("grade", sgMap);
+
+						System.out.println("Has record");
+					}
+				}
+				
 			}
 			request.setAttribute("assementItemList", assessItemslist);
+			request.setAttribute("role", role);
 			request.setAttribute("curStudent", curStudent);
 			return mapping.findForward("editGradeUI");
 		} else {
@@ -146,9 +179,11 @@ public class GradingAction extends DispatchAction {
 			AssessItemServiceInter assessItemService = new AssessItemServiceImp();
 			StudentServiceInter studentService = new StudentServiceImp();
 			GradeLevelServiceInter gradeLevelService = new GradeLevelServiceImp();
-
-			List<AssessItem> assessItemslist = assessItemService.getAssessItems();
+			
+			String role = request.getParameter("role");
 			String studentID = request.getParameter("studentID");
+			
+			List<AssessItem> assessItemslist = assessItemService.getAssessItems(role);
 			Student student = studentService.getStudentById(studentID);
 			List<StudentGrade> studentGradeList = gradeLevelService.getStudentGrade(student.getId().toString());
 			String gradeList = new String();
@@ -158,24 +193,29 @@ public class GradingAction extends DispatchAction {
 					gradeList = codeScore(assessItem.getId().toString(), request.getParameter(assessItem.getName()), gradeList);
 				}
 				StudentGrade sg = new StudentGrade();
-				sg.setGrade(gradeList);
+				if(role.equals("supervisor")){
+					sg.setSupervisorGrade(gradeList);;
+				}else if(role.equals("observer")){
+					sg.setObserverGrade(gradeList);
+				}else if(role.equals("examiner")){
+					sg.setExaminerGrade(gradeList);
+				}
 				sg.setStudent(student);
-				sg.setTotalScore(calculateTotalScore(gradeList,assessItemslist));
 				// save sg
 				gradeLevelService.saveStudentGrade(sg);
 				request.setAttribute("gradeSavedSuccess", "true");
 				request.setAttribute("gradeSavedSuccessInfo", student.getName()+"'s grade saved.");
-				return mapping.findForward("goGrading");
+				return new ActionForward("/grading.do?flag=goGradingUI");
 			}else{
 				for (AssessItem assessItem : assessItemslist) {
 					gradeList = codeScore(assessItem.getId().toString(), request.getParameter(assessItem.getName()), gradeList);
 				}
-				
+				System.out.println("here, gradeList"+gradeList);
 				// update sg
-				gradeLevelService.updateStudentGrade(gradeList,calculateTotalScore(gradeList,assessItemslist),student.getId().toString());
+				gradeLevelService.updateStudentGrade(role, gradeList,calculateTotalScore(studentGradeList.get(0),assessItemslist),student.getId().toString());
 				request.setAttribute("gradeSavedSuccess", "true");
 				request.setAttribute("gradeSavedSuccessInfo", student.getName()+"'s grade updated.");
-				return mapping.findForward("goGrading");
+				return new ActionForward("/grading.do?flag=goGradingUI");
 			}
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");
@@ -193,9 +233,45 @@ public class GradingAction extends DispatchAction {
 		return map;
 	}
 
-	public String calculateTotalScore(String gradeList, List<AssessItem> assessItemsList){
+	public String calculateTotalScore(StudentGrade studentGrade, List<AssessItem> assessItemsList){
 		//算总分公式
-		HashMap<String, String> score = getScore(gradeList);
+		if(studentGrade.getSupervisorGrade()==null||studentGrade.getObserverGrade()==null||studentGrade.getExaminerGrade()==null){
+			return null;
+		}
+		HashMap<String, String> scoreMap = getScoreMap();
+		HashMap<String, String> supScoreMap = getScore(studentGrade.getSupervisorGrade());
+		HashMap<String, String> obsScoreMap = getScore(studentGrade.getObserverGrade());
+		HashMap<String, String> examScoreMap = getScore(studentGrade.getExaminerGrade());
+		
+		float totalScore = 0, supScore=0,obsScore=0,examScore=0;
+		int numOfRole = 0;
+		for(AssessItem assessItem: assessItemsList){
+			if(assessItem.getSupervisor().equals("1")){
+				supScore=Float.parseFloat(scoreMap.get(supScoreMap.get(assessItem.getId().toString())));
+				numOfRole++;
+			}else{
+				supScore = 0;
+			}
+			if(assessItem.getObserver().equals("1")){
+				obsScore=Float.parseFloat(scoreMap.get(obsScoreMap.get(assessItem.getId().toString())));
+				numOfRole++;
+			}else{
+				obsScore = 0;
+			}
+			if(assessItem.getExaminer().equals("1")){
+				examScore=Float.parseFloat(scoreMap.get(examScoreMap.get(assessItem.getId().toString())));
+				numOfRole++;
+			}else{
+				examScore = 0;
+			}
+			totalScore = totalScore + (supScore + obsScore + examScore)/numOfRole* assessItem.getPercent()/100;
+			numOfRole = 0;
+		}
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
+        String total = df.format(totalScore);
+		return total;
+		
+		/*HashMap<String, String> score = getScore(gradeList);
 		HashMap<String, String> scoreMap = getScoreMap();
 		float totalScore = 0;
 		System.out.println("initial total score:"+totalScore);
@@ -205,7 +281,7 @@ public class GradingAction extends DispatchAction {
 		}
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
         String total = df.format(totalScore);
-		return total;
+		return total;*/
 	}
 	
 	public HashMap<String,String> getScoreMap(){

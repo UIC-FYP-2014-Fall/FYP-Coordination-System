@@ -97,9 +97,17 @@ public class GradeLevelServiceImp extends BaseServiceImp implements GradeLevelSe
 	}
 
 	@Override
-	public boolean updateStudentGrade(String studentGradeList, String totalScore, String studentID) {
+	public boolean updateStudentGrade(String role, String studentGradeList, String totalScore, String studentID) {
 		// TODO Auto-generated method stub
-		String hql = "update StudentGrade set grade=?, totalScore=? where student_id=?";
+		String hql =null;
+		if(role.equals("supervisor")){
+			hql = "update StudentGrade set supervisorGrade=?, totalScore=? where student_id=?";
+		}else if(role.equals("observer")){
+			hql = "update StudentGrade set observerGrade=?, totalScore=? where student_id=?";
+		}else if(role.equals("examiner")){
+			hql = "update StudentGrade set examinerGrade=?, totalScore=? where student_id=?";
+		}
+		
 		String[] parameters = {studentGradeList,totalScore,studentID};
 		try{
 			updateObject(hql,parameters);
