@@ -1,10 +1,14 @@
 package com.uic.service.imp;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.uic.domain.Gradelevel;
+import com.uic.domain.Student;
 import com.uic.domain.StudentGrade;
 import com.uic.service.inter.GradeLevelServiceInter;
+import com.uic.service.inter.StudentServiceInter;
 import com.uic.util.HibernateUtil;
 
 public class GradeLevelServiceImp extends BaseServiceImp implements GradeLevelServiceInter{
@@ -72,7 +76,7 @@ public class GradeLevelServiceImp extends BaseServiceImp implements GradeLevelSe
 	@Override
 	public List<StudentGrade> getStudentGrade(String sid) {
 		// TODO Auto-generated method stub
-		String hql="from StudentGrade where student_id = ?";
+		String hql="from StudentGrade where student.id = ?";
 		String[] parameters = {sid};
 		try{
 			List<StudentGrade> studentGrades = getListObject(hql,parameters);
@@ -107,6 +111,82 @@ public class GradeLevelServiceImp extends BaseServiceImp implements GradeLevelSe
 		}catch(Exception e){
 			e.printStackTrace();
 			return false;
+		}
+	}
+
+	/**
+	 * Valid student grade mean three different role teachers give the student grade
+	 * 
+	 * @return List<StudentGrade>
+	 */
+	@Override
+	public List<StudentGrade> getValidStudentGrade() {
+		
+		// 1. get the students who have been graded by three teachers
+		List<StudentGrade> validateStudent = getValidStudent();
+		List<Integer> validateStudentId = getValidStudentId();
+		
+		StudentServiceImp studentService = new StudentServiceImp();
+		
+		HashMap<String, Student> studentMap = new HashMap<>();
+		for(int i=0;i<validateStudentId.size();i++){
+			
+		}
+		
+		// 2. repackage these students
+		List<StudentGrade> newStudentGrade = new ArrayList<>();
+		
+		
+		
+		// student(id, name)
+		// Assessment Item grade (assessItem)
+		// total score
+		// letter grade => gradelevel decided
+		for(int i=0;i<validateStudentId.size();i++){
+			StudentGrade stu = new StudentGrade();
+			stu.setStudent(studentService.getUniqueStudent(validateStudentId.get(i)+""));
+			//stu.setAssessItemGrade();
+			
+			//stu.setTotalScore();
+			//stu.setTotalLetterGrade();
+			
+			newStudentGrade.add(stu);
+		}
+		return null;
+	}
+	
+	private String studentGrade(String student_id){
+		String str = null;
+		List<StudentGrade> list = getStudentGrade(student_id);
+		
+		for(int i=0;i<list.size();i++){
+			
+		}
+		
+		return str;
+	}
+	
+	//private 
+	
+	private List<StudentGrade> getValidStudent(){
+		String hql="from StudentGrade WHERE student.id in (SELECT student.id from StudentGrade GROUP BY student.id HAVING COUNT(*)=3)";
+		try{
+			List<StudentGrade> validStudentGrade = getListObject(hql,null);
+			return validStudentGrade;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	private List<Integer> getValidStudentId(){
+		String hql = "SELECT student.id from StudentGrade GROUP BY student.id HAVING COUNT(*)=3";
+		try{
+			List<Integer> validStudentGradeId = getListObject(hql,null);
+			return validStudentGradeId;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
 		}
 	}
 	

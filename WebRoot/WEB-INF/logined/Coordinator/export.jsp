@@ -132,6 +132,11 @@
 							<i class="icon-chevron-right"></i> Grade Level
 						</a>
 					</li>
+					<li>
+						<a href="${pageContext.request.contextPath }/gradeReport.do">
+							<i class="icon-chevron-right"></i> Generate Report
+						</a>
+					</li>
 				</ul>
 			</div>
 
@@ -185,12 +190,9 @@
 												<td>${preStudent.classroom }</td>
 											</tr>
 										</c:forEach>
-											
-											
 										</tbody>
 									</table>
 									<div class="table-toolbar"></div>
-
 								</c:if>
 							</div>
 						</div>

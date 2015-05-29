@@ -9,6 +9,9 @@
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 <link href="assets/styles.css" rel="stylesheet" media="screen">
+
+<link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -90,7 +93,7 @@
 							<i class="icon-chevron-right"></i> Grade Level
 					</a></li>
 					<li class="active"><a
-						href="${pageContext.request.contextPath }/gradeReport.do?flag=goGradeReportUi">
+						href="${pageContext.request.contextPath }/gradeReport.do">
 							<i class="icon-chevron-right"></i> Generate Report
 					</a></li>
 				</ul>
@@ -98,66 +101,54 @@
 			<!--/span-->
 			<div class="span9" id="content">
 				<div class="row-fluid">
-
-					<c:if test="${SaveGradeLevelOperation=='success'}">
-						<div class="alert alert-success SuccessInfo">
-							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<h4>Success</h4>
-							Save grade level percentage successfully!
-						</div>
-					</c:if>
-
-					<c:if test="${SaveGradeLevelOperation=='error'}">
-						<div class="alert alert-error ErrorInfo">
-							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<h4>Error</h4>
-							Save grade level percentage failed! ${ErrorInfo }
-						</div>
-					</c:if>
-
-					<c:if test="${GradeLevelLock=='true'}">
-						<div class="alert alert-info alert-block">
-							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<h4>Info</h4>
-							The system has been locked, grade level percentage can not be
-							modified.
-						</div>
-					</c:if>
-
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">Set Grade Level Percentage</div>
+							<ul class="breadcrumb">
+								<i class="icon-chevron-left hide-sidebar"><a href='#'
+									title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+								<i class="icon-chevron-right show-sidebar" style="display:none;"><a
+									href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+								<li class="active">Student Grade Report</li>
+							</ul>
 						</div>
-
+						<c:if test="${validateAssessmentItem=='false' }">
+							<div class="alert alert-error ErrorInfo">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>Error</h4>
+								The total percentage of assessment item must be 100%.
+							</div>
+						</c:if>
+						<c:if test="${validateAssessmentItem=='true' }">
 						<div class="block-content collapse in">
 							<div class="span12">
-								<form action="${pageContext.request.contextPath }/gradeLevel.do?flag=saveGradelevel" method="post">
-									<table class="table table-striped table-hover " cellpadding="0" cellspacing="0" border="0">
-										<thead>
-											<tr>
-												<th>#</th>
-												<th>Grade Level</th>
-												<th>Percentage</th>
-											</tr>
-										</thead>
-										<tbody>
-										<c:forEach items="${gradeLevelList }" var="gradeLevel" varStatus="status">
-											<tr>
-												<td>${status.index + 1}</td>
-												<td>${gradeLevel.gradeLevel }</td>
-												<td>
-													<input type="hidden" name="GradeLevel_id" value="${gradeLevel.id }">
-													<input class="span2" type="number" min="0" max="99" name="GradeLevel_percent" data-required="1" value="${gradeLevel.percent }" required> %
-												</td>
-											</tr>
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="table table-striped table-bordered" id="gradeTable">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Name</th>
+											<c:forEach items="${assessItemList }" var="assessItem">
+												<th>${assessItem.name }</th>
+											</c:forEach>
+											<th>Point</th>
+											<th>Grade</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${studentGradeList }" var="studentGrade">
+											<td>${studentGrade.id }</td>
+											<td>${studentGrade.name}</td>
+											
+											<td>${studentGrade.score }</td>
+											<td>${studentGrade.grade }</td>
 										</c:forEach>
-										</tbody>
-									</table>
-									<input type="submit" class="btn btn-primary" value="Save">
-								</form>
+									</tbody>
+								</table>
+								<div class="table-toolbar"></div>
 							</div>
 						</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -168,5 +159,46 @@
 	<script src="vendors/jquery-1.9.1.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/scripts.js"></script>
+	
+	<script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="vendors/datatables/js/dataTables.tableTools.min.js"></script>
+
+	<script src="assets/DT_bootstrap.js"></script>
+	<script>
+	$(document).ready(function() {
+		var table = $('#gradeTable').dataTable({
+			"sDom": "<'row'<'span5'l><'span7'f>r>t<'row'<'span3'i><'span9'p>>",
+			"sPaginationType": "bootstrap",
+			"oLanguage": {
+				"sLengthMenu": "_MENU_ records per page"
+			}
+		} );
+		var tableTools = new $.fn.dataTable.TableTools( table, {
+			
+				"sSwfPath":  "../FYP_system/vendors/datatables/swf/copy_csv_xls_pdf.swf",
+	           	"aButtons": [
+	                "copy",
+	                {
+						"sExtends": "csv",
+						"sTitle": "Student FYP Grade Report"
+					},
+	                {
+						"sExtends": "xls",
+						"sTitle": "Student FYP Grade Report",
+					},
+	                {
+	                    "sExtends": "pdf",
+						"sTitle": "Student FYP Grade Report",
+	                    "sPdfOrientation": "landscape",
+	                    "sPdfMessage": ""
+	                },
+	                "print"
+	        	],
+				
+	    } );
+		$( tableTools.fnContainer() ).insertAfter('div.table-toolbar');
+
+	} );
+	</script>
 </body>
 </html>

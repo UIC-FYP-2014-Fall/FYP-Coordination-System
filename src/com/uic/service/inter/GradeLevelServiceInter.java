@@ -5,7 +5,12 @@ import java.util.List;
 import com.uic.domain.Gradelevel;
 import com.uic.domain.StudentGrade;
 
-
+/**
+ * GradeLevelServiceInter include Gradelevel table and StudentGrade table
+ * This interface name has a problem.
+ * @author lenovo
+ *
+ */
 public interface GradeLevelServiceInter extends BaseInterface{
 	
 	public List<Gradelevel> getGradeLevels();
@@ -13,9 +18,19 @@ public interface GradeLevelServiceInter extends BaseInterface{
 	public boolean updateGradeLevel(String id, String percent);
 	//public boolean updateGradeLevel(GradeLevelForm gradeLevelForm);
 	
-	public List<StudentGrade>  getStudentGrade(String sid);
+	/*
+	 * StudentGrade
+	 */
+	public List<StudentGrade> getStudentGrade(String sid);
 
 	public boolean saveStudentGrade(StudentGrade studentGrade);
 	
 	public boolean updateStudentGrade(String studentGradeList, String totalScore, String studentID);
+	
+	/*
+	 * Generate student grade report
+	 */
+	public List<StudentGrade> getValidStudentGrade();
+	
+	
 }

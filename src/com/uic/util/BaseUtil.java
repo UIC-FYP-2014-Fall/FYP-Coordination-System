@@ -110,4 +110,45 @@ public class BaseUtil {
 		startWeekDate = startWeekDate.dayOfWeek().withMinimumValue();
 		return startWeekDate;
 	}
+	
+	/**
+	 * letter grade covert to score
+	 * @param letter
+	 * @return
+	 */
+	public static float covertScore(String letter){
+		float result = 0;
+		switch (letter) {
+		case "A":
+			result=4.00f;
+			break;
+		case "A-":
+			result=3.67f;
+			break;
+		case "B+":
+			result=3.33f;
+			break;
+		case "B":
+			result=3.00f;
+			break;
+		case "B-":
+			result=2.67f;
+			break;
+		case "C+":
+			result=2.33f;
+			break;
+		case "C":
+			result=2.00f;
+			break;
+		case "C-":
+			result=1.67f;
+			break;
+		case "D":
+			result=1.00f;
+			break;
+		default:
+			break;
+		}
+		return result;
+	}
 }

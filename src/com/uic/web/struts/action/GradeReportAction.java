@@ -4,18 +4,26 @@
  */
 package com.uic.web.struts.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-/** 
- * MyEclipse Struts
- * Creation date: 05-28-2015
+import com.uic.domain.AssessItem;
+import com.uic.service.imp.AssessItemServiceImp;
+import com.uic.service.inter.AssessItemServiceInter;
+
+
+/**
+ * MyEclipse Struts Creation date: 05-28-2015
  * 
  * XDoclet definition:
+ * 
  * @struts.action parameter="flag"
  */
 public class GradeReportAction extends DispatchAction {
@@ -23,8 +31,9 @@ public class GradeReportAction extends DispatchAction {
 	 * Generated Methods
 	 */
 
-	/** 
+	/**
 	 * Method execute
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -33,7 +42,28 @@ public class GradeReportAction extends DispatchAction {
 	 */
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+		if (request.getSession().getAttribute("role").equals("coordinator")) {
+			// 1. load data
+			AssessItemServiceInter assessItemService = new AssessItemServiceImp();
+			//check total Assessment Item percentage is 100%
+			if(assessItemService.totalPercent()==100){
+				List<AssessItem> assessItemList = assessItemService.getAssessItems();
+				//studentGrade List
+				
+				//repackage student grade 
+				
+				// return assessItem List
+				request.setAttribute("assessItemList", assessItemList);
+				// return student grade list
+				
+			}else{
+				request.setAttribute("validateAssessmentItem", "false");
+			}
+			
+			return mapping.findForward("goGradeReportUi");
+		} else {
+			request.setAttribute("msg", "ERROR: Permission denied.");
+			return mapping.findForward("goLogin");
+		}
 	}
 }

@@ -32,6 +32,8 @@ public interface StudentServiceInter extends BaseInterface {
 	
 	public Student getStudentById(String sid);
 	
+	//public Student getStudent(String id);
+	
 	public boolean updateExaminer(String sid, String tid);
 	
 	public String getStudentPreTime(String week, String day, String time);

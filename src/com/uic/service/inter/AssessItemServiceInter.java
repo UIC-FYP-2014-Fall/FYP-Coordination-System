@@ -14,6 +14,7 @@ public interface AssessItemServiceInter extends BaseInterface {
 	public boolean updateAssessItem(AssessItemForm assessItemForm);
 	
 	public List<AssessItem> getAssessItems();
+	//public List<String> getAssessItemsName();
 	
 	public boolean deleteAssessItem(String assessItemId);
 	

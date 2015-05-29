@@ -8,6 +8,7 @@ import com.uic.service.imp.AssessItemServiceImp;
 import com.uic.service.imp.GradeLevelServiceImp;
 import com.uic.service.inter.AssessItemServiceInter;
 import com.uic.service.inter.GradeLevelServiceInter;
+import com.uic.util.BaseUtil;
 
 public class testTips {
 	
@@ -16,11 +17,12 @@ public class testTips {
 		System.out.println(str.trim().equals(""));*/
 		/*AssessItemServiceInter ass = new AssessItemServiceImp();
 		System.out.println(ass.totalPercent());*/
-		GradeLevelServiceInter g = new GradeLevelServiceImp();
+		/*GradeLevelServiceInter g = new GradeLevelServiceImp();
 		List<Gradelevel> al = g.getGradeLevels();
 		for(int i=0;i<al.size();i++){
 			System.out.println(al.get(i).getGradeLevel());
-		}
+		}*/
+		System.out.println(BaseUtil.covertScore("B"));
 
 	}
 }
