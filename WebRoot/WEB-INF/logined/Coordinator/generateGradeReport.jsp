@@ -101,6 +101,13 @@
 			<!--/span-->
 			<div class="span9" id="content">
 				<div class="row-fluid">
+					<c:if test="${warnInfo=='true'}">
+						<div class="alert alert-error alert-block">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h4>Info</h4>
+							The grade level is disabled. Cause: lacking the students who have been graded.
+						</div>
+					</c:if>
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
@@ -131,17 +138,19 @@
 											<c:forEach items="${assessItemList }" var="assessItem">
 												<th>${assessItem.name }</th>
 											</c:forEach>
-											<th>Point</th>
+											<th>Total</th>
 											<th>Grade</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody>			
 										<c:forEach items="${studentGradeList }" var="studentGrade">
-											<td>${studentGrade.id }</td>
-											<td>${studentGrade.name}</td>
-											
-											<td>${studentGrade.score }</td>
-											<td>${studentGrade.grade }</td>
+											<td>${studentGrade.student.sid }</td>
+											<td>${studentGrade.student.name}</td>
+											<c:forEach items="${studentGrade.assessItemGrade }" var="assessItemGrade">
+												<td>${assessItemGrade.grade }</td>
+											</c:forEach>
+											<td>${studentGrade.totalScore }</td>
+											<td>${studentGrade.totalLetterGrade }</td>
 										</c:forEach>
 									</tbody>
 								</table>

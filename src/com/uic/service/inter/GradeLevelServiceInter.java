@@ -14,6 +14,7 @@ import com.uic.domain.StudentGrade;
 public interface GradeLevelServiceInter extends BaseInterface{
 	
 	public List<Gradelevel> getGradeLevels();
+	public List<Gradelevel> getValidGradeLevels();
 	
 	public boolean updateGradeLevel(String id, String percent);
 	//public boolean updateGradeLevel(GradeLevelForm gradeLevelForm);

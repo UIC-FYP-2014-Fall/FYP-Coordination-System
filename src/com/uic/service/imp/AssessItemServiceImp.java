@@ -111,11 +111,11 @@ public class AssessItemServiceImp extends BaseServiceImp implements AssessItemSe
 		// TODO Auto-generated method stub
 		String hql=null;
 		if(role.equals("supervisor")){
-			hql = "from AssessItem where supervisor='1' order by name";
+			hql = "from AssessItem where supervisor='1' order by 'name'";
 		}else if(role.equals("observer")){
-			hql = "from AssessItem where observer='1' order by name";
+			hql = "from AssessItem where observer='1' order by 'name'";
 		}else if(role.equals("examiner")){
-			hql = "from AssessItem where examiner='1' order by name";
+			hql = "from AssessItem where examiner='1' order by 'name'";
 		}
 		try{
 			List<AssessItem> list = getListObject(hql, null);
@@ -189,6 +189,18 @@ public class AssessItemServiceImp extends BaseServiceImp implements AssessItemSe
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public AssessItem getAssessItemById(String id) {
+		String hql = "from AssessItem where id=?";
+		String[] parameters={id};
+		try {
+			return (AssessItem)getUniqueObject(hql, parameters);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
 	}
 
 	

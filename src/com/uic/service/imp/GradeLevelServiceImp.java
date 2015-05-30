@@ -129,74 +129,17 @@ public class GradeLevelServiceImp extends BaseServiceImp implements GradeLevelSe
 	 */
 	@Override
 	public List<StudentGrade> getValidStudentGrade() {
-		
-		// 1. get the students who have been graded by three teachers
-		List<StudentGrade> validateStudent = getValidStudent();
-		List<Integer> validateStudentId = getValidStudentId();
-		
-		StudentServiceImp studentService = new StudentServiceImp();
-		
-		HashMap<String, Student> studentMap = new HashMap<>();
-		for(int i=0;i<validateStudentId.size();i++){
-			
-		}
-		
-		// 2. repackage these students
-		List<StudentGrade> newStudentGrade = new ArrayList<>();
-		
-		
-		
-		// student(id, name)
-		// Assessment Item grade (assessItem)
-		// total score
-		// letter grade => gradelevel decided
-		for(int i=0;i<validateStudentId.size();i++){
-			StudentGrade stu = new StudentGrade();
-			stu.setStudent(studentService.getUniqueStudent(validateStudentId.get(i)+""));
-			//stu.setAssessItemGrade();
-			
-			//stu.setTotalScore();
-			//stu.setTotalLetterGrade();
-			
-			newStudentGrade.add(stu);
-		}
-		return null;
-	}
-	
-	private String studentGrade(String student_id){
-		String str = null;
-		List<StudentGrade> list = getStudentGrade(student_id);
-		
-		for(int i=0;i<list.size();i++){
-			
-		}
-		
-		return str;
-	}
-	
-	//private 
-	
-	private List<StudentGrade> getValidStudent(){
-		String hql="from StudentGrade WHERE student.id in (SELECT student.id from StudentGrade GROUP BY student.id HAVING COUNT(*)=3)";
+		String hql="from StudentGrade where averageGrade is not null order by totalScore desc";
 		try{
-			List<StudentGrade> validStudentGrade = getListObject(hql,null);
-			return validStudentGrade;
+			List<StudentGrade> studentGrades = getListObject(hql,null);
+			return studentGrades;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}
 	}
 	
-	private List<Integer> getValidStudentId(){
-		String hql = "SELECT student.id from StudentGrade GROUP BY student.id HAVING COUNT(*)=3";
-		try{
-			List<Integer> validStudentGradeId = getListObject(hql,null);
-			return validStudentGradeId;
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-	}
+	
 
 	@Override
 	public boolean checkIfOtherTeachersHaveMarkTheGrade(String studentID,String role) {
@@ -222,6 +165,18 @@ public class GradeLevelServiceImp extends BaseServiceImp implements GradeLevelSe
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public List<Gradelevel> getValidGradeLevels() {
+		String hql = "from Gradelevel where percent!='0'";
+		try{
+			List<Gradelevel> list = getListObject(hql, null);
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	

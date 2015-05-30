@@ -1,5 +1,7 @@
 package com.uic.domain;
 
+import java.util.List;
+
 public class StudentGrade implements java.io.Serializable {
 
 	/**
@@ -10,11 +12,20 @@ public class StudentGrade implements java.io.Serializable {
 	private String totalScore;
 	private String totalLetterGrade;
 	private Student student;
-	private AssessItem assessItemGrade;
+	private List<AssessItem> assessItemGrade;
+	private List<AssessItem> assessItem;
 	private String supervisorGrade;
 	private String observerGrade;
 	private String examinerGrade;
 	private String averageGrade;
+
+	public List<AssessItem> getAssessItem() {
+		return assessItem;
+	}
+
+	public void setAssessItem(List<AssessItem> assessItem) {
+		this.assessItem = assessItem;
+	}
 
 	public String getAverageGrade() {
 		return averageGrade;
@@ -24,11 +35,11 @@ public class StudentGrade implements java.io.Serializable {
 		this.averageGrade = averageGrade;
 	}
 
-	public AssessItem getAssessItemGrade() {
+	public List<AssessItem> getAssessItemGrade() {
 		return assessItemGrade;
 	}
 
-	public void setAssessItemGrade(AssessItem assessItemGrade) {
+	public void setAssessItemGrade(List<AssessItem> assessItemGrade) {
 		this.assessItemGrade = assessItemGrade;
 	}
 
