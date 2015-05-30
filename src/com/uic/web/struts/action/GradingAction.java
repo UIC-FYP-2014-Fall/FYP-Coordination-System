@@ -163,6 +163,7 @@ public class GradingAction extends DispatchAction {
 				}
 				
 			}
+			System.out.println("assessmentItemListSize: "+assessItemslist.size());
 			request.setAttribute("assementItemList", assessItemslist);
 			request.setAttribute("role", role);
 			request.setAttribute("curStudent", curStudent);
