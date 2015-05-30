@@ -166,10 +166,14 @@
 												out.println("<td>"+studentGrade.get(supStuTopic.getStudent().getName()).getTotalScore()+"</td>");
 											}
 											out.println("<td><button class=\"btn btn-primary btn-mini\" onclick=\"location.href='" + request.getContextPath() + "/grading.do?flag=goEditGradeUI&sid=" + supStuTopic.getStudent().getSid() + "&role=supervisor'\">Edit Grade</button></td>");
-											if(studentGrade.get(supStuTopic.getStudent().getName()).getSupervisorGrade()==null){
+											if(studentGrade.get(supStuTopic.getStudent().getName())==null){
 												out.println("<td><span class=\"label label-warning\">Incomplete</td>");
 											}else{
-												out.println("<td><span class=\"label label-success\">Complete</td>");
+												if(studentGrade.get(supStuTopic.getStudent().getName()).getSupervisorGrade()==null){
+													out.println("<td><span class=\"label label-warning\">Incomplete</td>");
+												}else{
+													out.println("<td><span class=\"label label-success\">Complete</td>");
+												}
 											}
 											out.println("</tr>");
 										}
@@ -186,10 +190,14 @@
 												out.println("<td>"+studentGrade.get(obserStuTopic.getStudent().getName()).getTotalScore()+"</td>");
 											}
 											out.println("<td><button class=\"btn btn-primary btn-mini\" onclick=\"location.href='" + request.getContextPath() + "/grading.do?flag=goEditGradeUI&sid=" + obserStuTopic.getStudent().getSid() + "&role=observer'\">Edit Grade</button></td>");
-											if(studentGrade.get(obserStuTopic.getStudent().getName()).getObserverGrade()==null){
+											if(studentGrade.get(obserStuTopic.getStudent().getName())==null){
 												out.println("<td><span class=\"label label-warning\">Incomplete</td>");
 											}else{
-												out.println("<td><span class=\"label label-success\">Complete</td>");
+												if(studentGrade.get(obserStuTopic.getStudent().getName()).getObserverGrade()==null){
+													out.println("<td><span class=\"label label-warning\">Incomplete</td>");
+												}else{
+													out.println("<td><span class=\"label label-success\">Complete</td>");
+												}
 											}
 											out.println("</tr>");
 										}
@@ -206,10 +214,14 @@
 												out.println("<td>"+studentGrade.get(examStuTopic.getStudent().getName()).getTotalScore()+"</td>");
 											}
 											out.println("<td><button class=\"btn btn-primary btn-mini\" onclick=\"location.href='" + request.getContextPath() + "/grading.do?flag=goEditGradeUI&sid=" + examStuTopic.getStudent().getSid() + "&role=examiner'\">Edit Grade</button></td>");
-											if(studentGrade.get(examStuTopic.getStudent().getName()).getExaminerGrade()==null){
+											if(studentGrade.get(examStuTopic.getStudent().getName())==null){
 												out.println("<td><span class=\"label label-warning\">Incomplete</td>");
 											}else{
-												out.println("<td><span class=\"label label-success\">Complete</td>");
+												if(studentGrade.get(examStuTopic.getStudent().getName()).getExaminerGrade()==null){
+													out.println("<td><span class=\"label label-warning\">Incomplete</td>");
+												}else{
+													out.println("<td><span class=\"label label-success\">Complete</td>");
+												}
 											}
 											out.println("</tr>");
 										}

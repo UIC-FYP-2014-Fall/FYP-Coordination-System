@@ -110,7 +110,7 @@
 						</div>
 						<div class="block-content collapse in">
 							<form>
-								<table class="table table-striped table-bordered" id=" ">
+								<table class="table table-striped table-bordered" id="preTable">
 									<thead>
 										<tr>
 											<th>Name</th>
@@ -139,8 +139,7 @@
 												}
 												out.println("</tr>");
 											}
-										%>
-										<%
+									
 											for(Student s:obserStu){
 												out.println("<tr>");
 												out.println("<td>"+s.getName()+"</td>");
@@ -154,8 +153,7 @@
 												}
 												out.println("</tr>");
 											}
-										%>
-										<%
+									
 											for(Student s:examStu){
 												out.println("<tr>");
 												out.println("<td>"+s.getName()+"</td>");
@@ -172,11 +170,13 @@
 										%>
 									</tbody>
 								</table>
-								<div class="form-actions">
+								<div class="table-toolbar"></div>
+								
+								<!-- <div class="form-actions">
 									<button type="submit" class="btn btn-primary">
 										<i class="icon-print icon-white"></i> Print
 									</button>
-								</div>
+								</div> -->
 							</form>
 						</div>
 					</div>
@@ -188,8 +188,46 @@
 	<!--/.fluid-container-->
 	<script src="vendors/jquery-1.9.1.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-
 	<script src="assets/scripts.js"></script>
+	<script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="vendors/datatables/js/dataTables.tableTools.min.js"></script>
+	<script src="assets/DT_bootstrap.js"></script>
+	<script>
+	$(document).ready(function() {
+		var table = $('#preTable').dataTable({
+			"sDom": "<'row'<'span5'l><'span7'f>r>t<'row'<'span3'i><'span9'p>>",
+			"sPaginationType": "bootstrap",
+			"oLanguage": {
+				"sLengthMenu": "_MENU_ records per page"
+			}
+		} );
+		var tableTools = new $.fn.dataTable.TableTools( table, {
+			
+				"sSwfPath":  "../FYP_system/vendors/datatables/swf/copy_csv_xls_pdf.swf",
+	           	"aButtons": [
+	                "copy",
+	                {
+						"sExtends": "csv",
+						"sTitle": "FYP Assessment"
+					},
+	                {
+						"sExtends": "xls",
+						"sTitle": "FYP Assessment",
+					},
+	                {
+	                    "sExtends": "pdf",
+						"sTitle": "FYP Assessment",
+	                    "sPdfOrientation": "landscape",
+	                    "sPdfMessage": ""
+	                },
+	                "print"
+	        	],
+				
+	    } );
+		$( tableTools.fnContainer() ).insertAfter('div.table-toolbar');
+
+	} );
+	</script>
 
 </body>
 
