@@ -41,15 +41,12 @@
 					Coordination System</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li class="dropdown"><a href="#" role="button"
-							class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i>
-
-						</a>
-							<ul class="dropdown-menu">
-								<li><a tabindex="-1" data-target="#logout"
-									data-toggle="modal">Logout</a></li>
-							</ul></li>
+						<li class="dropdown">
+                        	<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i></a>
+                            <ul class="dropdown-menu">
+                            	<li><a tabindex="-1" data-target="#logout" data-toggle="modal" href="">Logout</a></li>
+                            </ul>
+                        </li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
