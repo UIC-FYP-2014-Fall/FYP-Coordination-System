@@ -209,11 +209,10 @@
       path="/setObserver"
       scope="request"
       type="com.uic.web.struts.action.SetOberverAction"
+      validate="false"
       cancellable="true">
-      
       <forward name="obsSaved" path="/setObserver.do?flag=chooseObserverUi" />
       <forward name="chooseObserverUi" path="/WEB-INF/logined/Teacher/chooseObserver.jsp" />
-      
       </action>
     <action
       parameter="flag"

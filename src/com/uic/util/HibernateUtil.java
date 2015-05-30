@@ -152,6 +152,7 @@ final public class HibernateUtil {
 			tx = s.beginTransaction();
 			s.save(obj);
 			s.flush();
+			s.clear();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {

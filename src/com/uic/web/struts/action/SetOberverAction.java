@@ -85,8 +85,6 @@ public class SetOberverAction extends DispatchAction {
 						}
 						
 					}
-					
-					
 					request.setAttribute("teaTopicList", teaTopicList);
 					request.setAttribute("teacherList", teacherList);
 					request.setAttribute("topicObsMap", topicObsMap);
@@ -140,6 +138,8 @@ public class SetOberverAction extends DispatchAction {
 			request.setAttribute("setObserverSuccess", "false");
 			request.setAttribute("setObserverInfo", "Observer changed failed!");
 		}
-		return mapping.findForward("obsSaved");
+		
+		return new ActionForward("/setObserver.do?flag=chooseObserverUi",true);
+		//return mapping.findForward("obsSaved");
 	}
 }

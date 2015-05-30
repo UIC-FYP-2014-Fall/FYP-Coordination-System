@@ -221,7 +221,7 @@ public class GradingAction extends DispatchAction {
 				
 				request.setAttribute("gradeSavedSuccess", "true");
 				request.setAttribute("gradeSavedSuccessInfo", student.getName()+"'s grade updated.");
-				return new ActionForward("/grading.do?flag=goGradingUI");
+				return new ActionForward("/grading.do?flag=goGradingUI",true);
 			}
 		} else {
 			request.setAttribute("msg", "ERROR: Permission denied.");

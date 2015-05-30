@@ -26,6 +26,7 @@
   <StrutsActivity path="/gradeLevel.do" location="-1395,1485" dimension="286,104" />
   <StrutsActivity path="/printAssessmentTable.do" location="-750,1320" dimension="316,121" />
   <StrutsActivity path="/grading.do" location="-750,1155" dimension="316,106" />
+  <StrutsActivity path="/gradeReport.do" location="-1395,1620" dimension="286,104" />
   <StrutsActivity path="goLogin;6" location="-945,-555" dimension="151,76" />
   <StrutsActivity path="/WEB-INF/logined/Coordinator/main.jsp" location="-1950,-240" dimension="286,91" />
   <StrutsActivity path="/WEB-INF/logined/Coordinator/manageAccount.jsp" location="-1950,-105" dimension="286,121" />
@@ -57,9 +58,8 @@
   <StrutsActivity path="/WEB-INF/logined/Teacher/printATable.jsp" location="-210,1335" dimension="271,106" />
   <StrutsActivity path="/WEB-INF/logined/Teacher/Grading.jsp" location="-210,1215" dimension="271,76" />
   <StrutsActivity path="/WEB-INF/logined/Teacher/detailGrading.jsp" location="-210,1125" dimension="271,76" />
-  <StrutsActivity path="/index.jsp" location="-660,-555" dimension="121,76" />
   <StrutsActivity path="/WEB-INF/logined/Coordinator/generateGradeReport.jsp" location="-1950,1620" dimension="271,91" />
-  <StrutsActivity path="/gradeReport.do" location="-1395,1620" dimension="286,104" />
+  <StrutsActivity path="/index.jsp" location="-660,-555" dimension="121,76" />
   <StrutsTransition id="/WEB-INF/logined/Teacher/uploadTopic.jsp,null,/uploadFYP.do,2" routingType="0">
     <AutomaticBendpoints>
       <AbsolutePoint location="-210,405" />
