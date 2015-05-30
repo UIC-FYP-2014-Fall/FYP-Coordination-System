@@ -14,6 +14,15 @@ public class StudentGrade implements java.io.Serializable {
 	private String supervisorGrade;
 	private String observerGrade;
 	private String examinerGrade;
+	private String averageGrade;
+
+	public String getAverageGrade() {
+		return averageGrade;
+	}
+
+	public void setAverageGrade(String averageGrade) {
+		this.averageGrade = averageGrade;
+	}
 
 	public AssessItem getAssessItemGrade() {
 		return assessItemGrade;

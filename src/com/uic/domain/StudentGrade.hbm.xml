@@ -19,6 +19,9 @@
         <property name="examinerGrade" lazy="false" type="java.lang.String">
             <column name="examinerGrade" length="128"/>
         </property>
+        <property name="averageGrade" lazy="false" type="java.lang.String">
+            <column name="averageGrade" length="128"/>
+        </property>
         <property name="totalScore" lazy="false" type="java.lang.String">
             <column name="totalScore" length="10"/>
         </property>
