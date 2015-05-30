@@ -301,7 +301,7 @@
 				</div>
 			</div>
 		</div>
-		<hr>
+		
 		<c:if test="${requestScope.chooseTopicStart=='true' }">
 		<c:if test="${requestScope.ifStudentHasChoosedTopic=='false' }">
 			<%
@@ -373,6 +373,7 @@
 			%>
 		</c:if>
 		</c:if>
+		<hr>
 	</div>
 
 	<!--/.fluid-container-->

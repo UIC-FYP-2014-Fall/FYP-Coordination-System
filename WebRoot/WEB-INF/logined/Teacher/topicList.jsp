@@ -308,9 +308,10 @@
 					</div>
 				</c:if>
 
-				<hr>
+				
 			</div>
 		</div>
+		<hr>
 	</div>
 
 	<!--/.fluid-container-->

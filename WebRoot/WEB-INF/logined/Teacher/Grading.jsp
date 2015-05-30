@@ -252,9 +252,10 @@
 				</div>
 
 
-				<hr>
+				
 			</div>
 		</div>
+		<hr>
 	</div>
 
 	<!--/.fluid-container-->

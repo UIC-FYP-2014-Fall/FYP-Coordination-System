@@ -226,9 +226,9 @@
 			<!-- /block -->
 		</div>
 	</div>
-	</div>
 	<hr>
 	</div>
+	
 	<!--/.fluid-container-->
 	<script src="vendors/jquery-1.9.1.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>

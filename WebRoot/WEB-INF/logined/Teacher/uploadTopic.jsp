@@ -260,6 +260,7 @@
 				</div>
 			</div>
 		</div>
+		<hr>
 	</div>
 
 	<!--/.fluid-container-->
