@@ -252,7 +252,7 @@
 								%>
 									<div class="form-actions">
 										<button type="submit" class="btn btn-primary">Submit</button>
-										<button class="btn" onclick="location.href='${pageContext.request.contextPath }/grading.do?flag=goGradingUI'">Back</button>
+										<button class="btn" type="button" onclick="location.href='${pageContext.request.contextPath }/grading.do?flag=goGradingUI'">Back</button>
 									</div>
 									
 								</fieldset>

@@ -101,18 +101,18 @@ public class GradeLevelServiceImp extends BaseServiceImp implements GradeLevelSe
 	}
 
 	@Override
-	public boolean updateStudentGrade(String role, String studentGradeList, String totalScore, String studentID) {
+	public boolean updateStudentGrade(String role, String studentGradeList, String studentID) {
 		// TODO Auto-generated method stub
 		String hql =null;
 		if(role.equals("supervisor")){
-			hql = "update StudentGrade set supervisorGrade=?, totalScore=? where student_id=?";
+			hql = "update StudentGrade set supervisorGrade=? where student_id=?";
 		}else if(role.equals("observer")){
-			hql = "update StudentGrade set observerGrade=?, totalScore=? where student_id=?";
+			hql = "update StudentGrade set observerGrade=? where student_id=?";
 		}else if(role.equals("examiner")){
-			hql = "update StudentGrade set examinerGrade=?, totalScore=? where student_id=?";
+			hql = "update StudentGrade set examinerGrade=? where student_id=?";
 		}
 		
-		String[] parameters = {studentGradeList,totalScore,studentID};
+		String[] parameters = {studentGradeList,studentID};
 		try{
 			updateObject(hql,parameters);
 			return true;
@@ -196,6 +196,20 @@ public class GradeLevelServiceImp extends BaseServiceImp implements GradeLevelSe
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public boolean checkIfallTeachersHaveMarkTheGrade(String studentID) {
+		// TODO Auto-generated method stub
+		List<StudentGrade> studentGrade = getStudentGrade(studentID);
+		if(studentGrade.get(0).getSupervisorGrade()!=null){
+			if(studentGrade.get(0).getExaminerGrade()!=null){
+				if(studentGrade.get(0).getObserverGrade()!=null){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	

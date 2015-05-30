@@ -183,7 +183,7 @@ public class GradingAction extends DispatchAction {
 			
 			String role = request.getParameter("role");
 			String studentID = request.getParameter("studentID");
-			
+			List<AssessItem> allAssessItemslist = assessItemService.getAssessItems();
 			List<AssessItem> assessItemslist = assessItemService.getAssessItems(role);
 			Student student = studentService.getStudentById(studentID);
 			List<StudentGrade> studentGradeList = gradeLevelService.getStudentGrade(student.getId().toString());
@@ -213,7 +213,12 @@ public class GradingAction extends DispatchAction {
 				}
 				System.out.println("here, gradeList"+gradeList);
 				// update sg
-				gradeLevelService.updateStudentGrade(role, gradeList,calculateTotalScore(studentGradeList.get(0),assessItemslist),student.getId().toString());
+				gradeLevelService.updateStudentGrade(role, gradeList, student.getId().toString());
+				if(gradeLevelService.checkIfallTeachersHaveMarkTheGrade(student.getId().toString())){
+					StudentGrade studentGrade = calculateAverageAndTotalScore(studentGradeList.get(0),allAssessItemslist);
+					gradeLevelService.saveStudentGrade(studentGrade);
+				}
+				
 				request.setAttribute("gradeSavedSuccess", "true");
 				request.setAttribute("gradeSavedSuccessInfo", student.getName()+"'s grade updated.");
 				return new ActionForward("/grading.do?flag=goGradingUI");
@@ -234,12 +239,58 @@ public class GradingAction extends DispatchAction {
 		return map;
 	}
 
-	public String calculateTotalScore(StudentGrade studentGrade, List<AssessItem> assessItemsList){
-		//算总分公式
-		if(studentGrade.getSupervisorGrade()==null||studentGrade.getObserverGrade()==null||studentGrade.getExaminerGrade()==null){
-			return null;
-		}
+	public StudentGrade calculateAverageAndTotalScore(StudentGrade studentGrade, List<AssessItem> assessItemsList){
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
+		String average = null;
 		HashMap<String, String> scoreMap = getScoreMap();
+		HashMap<String, String> supScoreMap = getScore(studentGrade.getSupervisorGrade());
+		HashMap<String, String> obsScoreMap = getScore(studentGrade.getObserverGrade());
+		HashMap<String, String> examScoreMap = getScore(studentGrade.getExaminerGrade());
+		String averageGradeList = new String();
+		float averageScore = 0, supScore=0,obsScore=0,examScore=0;
+		int numOfRole = 0;
+		for(AssessItem assessItem: assessItemsList){
+			if(assessItem.getSupervisor().equals("1")){
+				supScore=Float.parseFloat(scoreMap.get(supScoreMap.get(assessItem.getId().toString())));
+				numOfRole++;
+			}else{
+				supScore = 0;
+			}
+			if(assessItem.getObserver().equals("1")){
+				obsScore=Float.parseFloat(scoreMap.get(obsScoreMap.get(assessItem.getId().toString())));
+				numOfRole++;
+			}else{
+				obsScore = 0;
+			}
+			if(assessItem.getExaminer().equals("1")){
+				examScore=Float.parseFloat(scoreMap.get(examScoreMap.get(assessItem.getId().toString())));
+				numOfRole++;
+			}else{
+				examScore = 0;
+			}
+			averageScore =  (supScore + obsScore + examScore)/numOfRole;
+			average = df.format(averageScore);
+			averageGradeList = codeScore(assessItem.getId().toString(),average,averageGradeList);
+			numOfRole = 0;
+		}
+		studentGrade.setAverageGrade(averageGradeList);
+		studentGrade.setTotalScore(calculateTotalScore(averageGradeList,assessItemsList));
+		return studentGrade;
+	}
+	public String calculateTotalScore(String averageGradeList, List<AssessItem> assessItemsList){
+		//算总分公式
+		float totalScore=0;
+		String itemGrade;
+		HashMap<String, String> averageGrade = getScore(averageGradeList);
+		
+		for(AssessItem assessItem: assessItemsList){
+			itemGrade = averageGrade.get(assessItem.getId().toString());
+			totalScore = Float.parseFloat(itemGrade)*assessItem.getPercent()/100 + totalScore;
+		}
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
+        String total = df.format(totalScore);
+		return total;
+	/*	HashMap<String, String> scoreMap = getScoreMap();
 		HashMap<String, String> supScoreMap = getScore(studentGrade.getSupervisorGrade());
 		HashMap<String, String> obsScoreMap = getScore(studentGrade.getObserverGrade());
 		HashMap<String, String> examScoreMap = getScore(studentGrade.getExaminerGrade());
@@ -270,7 +321,7 @@ public class GradingAction extends DispatchAction {
 		}
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
         String total = df.format(totalScore);
-		return total;
+		return total;*/
 	}
 	
 	public HashMap<String,String> getScoreMap(){
