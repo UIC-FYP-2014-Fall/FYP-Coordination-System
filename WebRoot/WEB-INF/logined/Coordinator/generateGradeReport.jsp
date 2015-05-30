@@ -144,6 +144,7 @@
 									</thead>
 									<tbody>			
 										<c:forEach items="${studentGradeList }" var="studentGrade">
+										<tr>
 											<td>${studentGrade.student.sid }</td>
 											<td>${studentGrade.student.name}</td>
 											<c:forEach items="${studentGrade.assessItemGrade }" var="assessItemGrade">
@@ -151,6 +152,7 @@
 											</c:forEach>
 											<td>${studentGrade.totalScore }</td>
 											<td>${studentGrade.totalLetterGrade }</td>
+										</tr>
 										</c:forEach>
 									</tbody>
 								</table>

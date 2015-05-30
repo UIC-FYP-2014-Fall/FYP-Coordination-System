@@ -15,8 +15,17 @@ public class Gradelevel implements java.io.Serializable {
 	private Integer id;
 	private String gradeLevel;
 	private Short percent;
+	private Short preTotal;
 
 	// Constructors
+
+	public Short getPreTotal() {
+		return preTotal;
+	}
+
+	public void setPreTotal(Short preTotal) {
+		this.preTotal = preTotal;
+	}
 
 	/** default constructor */
 	public Gradelevel() {

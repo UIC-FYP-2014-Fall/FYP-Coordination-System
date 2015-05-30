@@ -42,7 +42,21 @@ public class GradeReportAction extends DispatchAction {
 	
 	private static List<Gradelevel> getLevelList(){
 		GradeLevelServiceInter gradeLevelService = new GradeLevelServiceImp();
-		return gradeLevelService.getValidGradeLevels();
+		List<Gradelevel> gradeLevelList = gradeLevelService.getValidGradeLevels();
+		
+		List<Gradelevel> list = new ArrayList<>();
+		//repackage
+		for(int i=0;i<gradeLevelList.size();i++){
+			Gradelevel gradelevel = new Gradelevel();
+			gradelevel=gradeLevelList.get(i);
+			if(i==0){
+				gradelevel.setPreTotal(gradeLevelList.get(i).getPercent());
+			}else{
+				gradelevel.setPreTotal((short) (gradeLevelList.get(i-1).getPreTotal()+gradeLevelList.get(i).getPercent()));
+			}
+			list.add(gradelevel);
+		}
+		return list;
 	}
 	
 	/*private static HashMap<Integer, AssessItem> hashMapAssessItem(){
@@ -99,8 +113,11 @@ public class GradeReportAction extends DispatchAction {
 					// handle averageGrade for every valid student
 					StudentGrade studentGrade = new StudentGrade();
 					studentGrade = studentGradeList.get(i);
+					
 					studentGrade.setAssessItemGrade(gradeHelper(studentGradeList.get(i).getAverageGrade()));
+					
 					studentGrade.setTotalLetterGrade(getLetterGrade(i,sumCount));
+					
 					newStudentGradeList.add(studentGrade);
 				}
 				//System.out.println(assessItemList.size());
@@ -108,6 +125,9 @@ public class GradeReportAction extends DispatchAction {
 				if((sumCount*getLevelList().get(0).getPercent()/100)<1){
 					request.setAttribute("warnInfo", "true");
 				}
+				
+				//System.out.println(newStudentGradeList.get(0).getStudent().getName());
+				//System.out.println(newStudentGradeList.get(0).getAssessItemGrade().get(0).getGrade());
 				// return assessItem List
 				request.setAttribute("assessItemList", getAssessItemList());
 				// return student grade list
@@ -128,8 +148,9 @@ public class GradeReportAction extends DispatchAction {
 	private List<AssessItem> gradeHelper(String averageGrade) {
 		// get grade record from database such as
 		// String averageGrade="5,4.00;16,3.78;10,2.50;14,3.00;9,3.50;15,3.33;12,3.11;8,3.44;13,3.00;";
-		
 		List<AssessItem> list = getAssessItemList();
+		List<AssessItem> newList = new ArrayList<>();
+		
 		//AssessItemServiceInter assessItemService = new AssessItemServiceImp();
 
 		// remove the last ';
@@ -141,6 +162,9 @@ public class GradeReportAction extends DispatchAction {
 		}
 		// split grade record
 		String[] tmp = averageGrade.split(";");
+		
+		//System.out.println(averageGrade);
+		
 		//List<AssessItem> assessItemList = new ArrayList<>();
 		HashMap<String, String> map = new HashMap<>();
 		
@@ -148,13 +172,15 @@ public class GradeReportAction extends DispatchAction {
 			String tmp2[] = tmp[i].split(",");
 			map.put(tmp2[0], tmp2[1]);
 		}
-
 	
 		for(int j=0;j<list.size();j++){
-			list.get(j).setGrade(map.get(list.get(j).getId()+""));
+			AssessItem assessItem = new AssessItem();
+			assessItem.setId(list.get(j).getId());
+			assessItem.setGrade(map.get(list.get(j).getId()+""));
+			newList.add(assessItem);
 		}
 		
-		return list;
+		return newList;
 	}
 	
 	/**
@@ -169,11 +195,11 @@ public class GradeReportAction extends DispatchAction {
 		
 		List<Gradelevel> list = getLevelList();
 		
-		if((totalCount*list.get(0).getPercent()/100)>=1){
-			
-			for(int i=0;i<list.size();i++){
-				if(index<=Math.ceil(totalCount*list.get(i).getPercent()/100)){
-					str=list.get(i).getGradeLevel();
+		if ((totalCount * list.get(0).getPercent() / 100) >= 1) {
+
+			for (int i = 0; i < list.size(); i++) {
+				if (index <= Math.ceil(totalCount * list.get(i).getPreTotal()/ 100)) {
+					str = list.get(i).getGradeLevel();
 					break;
 				}
 			}
