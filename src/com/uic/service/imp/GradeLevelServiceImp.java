@@ -199,11 +199,23 @@ public class GradeLevelServiceImp extends BaseServiceImp implements GradeLevelSe
 	}
 
 	@Override
-	public boolean checkIfallTeachersHaveMarkTheGrade(String studentID) {
+	public boolean checkIfOtherTeachersHaveMarkTheGrade(String studentID,String role) {
 		// TODO Auto-generated method stub
 		List<StudentGrade> studentGrade = getStudentGrade(studentID);
-		if(studentGrade.get(0).getSupervisorGrade()!=null){
+		if(role.equals("supervisor")){
 			if(studentGrade.get(0).getExaminerGrade()!=null){
+				if(studentGrade.get(0).getObserverGrade()!=null){
+					return true;
+				}
+			}
+		}else if(role.equals("observer")){
+			if(studentGrade.get(0).getExaminerGrade()!=null){
+				if(studentGrade.get(0).getSupervisorGrade()!=null){
+					return true;
+				}
+			}
+		}else if(role.equals("examiner")){
+			if(studentGrade.get(0).getSupervisorGrade()!=null){
 				if(studentGrade.get(0).getObserverGrade()!=null){
 					return true;
 				}

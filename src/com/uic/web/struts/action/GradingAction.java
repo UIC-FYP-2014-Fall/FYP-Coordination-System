@@ -213,12 +213,26 @@ public class GradingAction extends DispatchAction {
 				}
 				System.out.println("here, gradeList"+gradeList);
 				// update sg
-				gradeLevelService.updateStudentGrade(role, gradeList, student.getId().toString());
-				if(gradeLevelService.checkIfallTeachersHaveMarkTheGrade(student.getId().toString())){
+				
+				if(gradeLevelService.checkIfOtherTeachersHaveMarkTheGrade(student.getId().toString(), role)){
+					System.out.println("jinrule dfsaf");
+					if(role.equals("supervisor")){
+						System.out.println("jinrule supervisor");
+						studentGradeList.get(0).setSupervisorGrade(gradeList);
+					}else if(role.equals("examiner")){
+						System.out.println("jinrule examiner");
+						studentGradeList.get(0).setExaminerGrade(gradeList);
+					}else if(role.equals("observer")){
+						System.out.println("jinrule observer");
+						studentGradeList.get(0).setObserverGrade(gradeList);
+					}
 					StudentGrade studentGrade = calculateAverageAndTotalScore(studentGradeList.get(0),allAssessItemslist);
 					gradeLevelService.saveStudentGrade(studentGrade);
+					request.setAttribute("gradeSavedSuccess", "true");
+					request.setAttribute("gradeSavedSuccessInfo", student.getName()+"'s grade updated.");
+					return new ActionForward("/grading.do?flag=goGradingUI",true);
 				}
-				
+				gradeLevelService.updateStudentGrade(role, gradeList, student.getId().toString());
 				request.setAttribute("gradeSavedSuccess", "true");
 				request.setAttribute("gradeSavedSuccessInfo", student.getName()+"'s grade updated.");
 				return new ActionForward("/grading.do?flag=goGradingUI",true);

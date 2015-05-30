@@ -313,11 +313,6 @@
       cancellable="true" >
       <forward name="goGradeReportUi" path="/WEB-INF/logined/Coordinator/generateGradeReport.jsp" />
     </action>
-
-
-
-
-    
   </action-mappings>
   <message-resources parameter="com.uic.web.struts.ApplicationResources" />
 </struts-config>

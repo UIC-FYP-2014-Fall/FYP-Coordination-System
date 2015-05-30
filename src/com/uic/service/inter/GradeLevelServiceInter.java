@@ -27,7 +27,7 @@ public interface GradeLevelServiceInter extends BaseInterface{
 	
 	public boolean updateStudentGrade(String role, String studentGradeList, String studentID);
 	
-	public boolean checkIfallTeachersHaveMarkTheGrade(String studentID);
+	public boolean checkIfOtherTeachersHaveMarkTheGrade(String studentID,String role);
 	
 	/*
 	 * Generate student grade report
