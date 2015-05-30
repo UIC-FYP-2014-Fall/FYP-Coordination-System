@@ -188,6 +188,10 @@ $(document).ready(function() {
 			"sLengthMenu": "_MENU_ records per page"
 		},
 		"aoColumnDefs": [{
+			"aTargets": [4],
+			"bSortable":false,
+			"bFilter":false
+        },{
 				"aTargets": [5],
 				"bSortable":false,
 				"bFilter":false

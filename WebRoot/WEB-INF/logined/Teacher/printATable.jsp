@@ -21,6 +21,8 @@
 	media="screen">
 
 <link href="assets/styles.css" rel="stylesheet" media="screen">
+
+<link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -99,8 +101,6 @@
 				ArrayList<Student> examStu = (ArrayList<Student>)request.getAttribute("examineStudentList");
 				ArrayList<AssessItem> assessItemList = (ArrayList<AssessItem>)request.getAttribute("assessItemslist");
 			%>
-
-
 			<div class="span9" id="content">
 				<div class="row-fluid">
 					<!-- block -->
@@ -109,8 +109,10 @@
 							<div class="muted pull-left">Print Assessment Table</div>
 						</div>
 						<div class="block-content collapse in">
-							<form>
-								<table class="table table-striped table-bordered" id="preTable">
+							
+							<div class="span12">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="table table-striped table-bordered" id="preTable">
 									<thead>
 										<tr>
 											<th>Name</th>
@@ -177,7 +179,7 @@
 										<i class="icon-print icon-white"></i> Print
 									</button>
 								</div> -->
-							</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -199,7 +201,16 @@
 			"sPaginationType": "bootstrap",
 			"oLanguage": {
 				"sLengthMenu": "_MENU_ records per page"
-			}
+			},
+			"aoColumnDefs": [{
+				"aTargets": [0],
+				"bSortable":true,
+				"bFilter":true
+            },{
+				"aTargets": ["_all"],
+				"bSortable":false,
+				"bFilter":false
+            }]
 		} );
 		var tableTools = new $.fn.dataTable.TableTools( table, {
 			
