@@ -151,8 +151,9 @@ public class ChooseExaminerAction extends DispatchAction {
 							hm.put(supervisor.get(i).getId(), supervisor.get(i));
 						}
 
-						Teacher observer = studentSericeInter.getObserver(stu.getSid());
-						if(observer.getId()!=null){
+						
+						if(studentSericeInter.checkObserverState(stu.getSid())){
+							Teacher observer = studentSericeInter.getObserver(stu.getSid());
 							Integer observerId = observer.getId();
 							// rewrap the teacher list which will add state
 							List<TeacherState> teacherStateList = new ArrayList<TeacherState>();
