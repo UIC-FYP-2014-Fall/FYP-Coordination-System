@@ -10,22 +10,19 @@
 <hibernate-configuration>
 <session-factory>
 	<!-- 指明使用Proxool连接池 -->
+	<property name="hibernate.connection.provider_class">
+		org.hibernate.connection.ProxoolConnectionProvider
+	</property>
 	<!-- 指明Proxool配置文件所在位置，这里与Hibernate的配置文件在同一目录下 -->
+	<property name="hibernate.proxool.xml">proxool.xml</property>
 	<!-- 指明要使用的proxool.xml中定义的proxool别名 -->
+	<property name="hibernate.proxool.pool_alias">mysql</property>
 
 	<!--指定连接的语言-->
 	<property name="dialect">
 		org.hibernate.dialect.MySQLDialect
 	</property>
-	<property name="myeclipse.connection.profile">MySQL</property>
-	<property name="connection.url">
-		jdbc:mysql://127.0.0.1:3306/fyp
-	</property>
-	<property name="connection.username">root</property>
-	<property name="connection.password">123456</property>
-	<property name="connection.driver_class">
-		com.mysql.jdbc.Driver
-	</property>
+	
 	<property name="hbm2ddl.auto">update</property>
 
 	<mapping resource="com/uic/domain/Student.hbm.xml" />
