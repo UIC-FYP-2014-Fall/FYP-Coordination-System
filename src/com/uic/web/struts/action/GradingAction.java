@@ -147,7 +147,6 @@ public class GradingAction extends DispatchAction {
 						request.setAttribute("record", "hasRecord");
 						HashMap<String, String> sgMap = getScore(sg.get(0).getObserverGrade());
 						request.setAttribute("grade", sgMap);
-
 						System.out.println("Has record");
 					}
 				}else if(role.equals("examiner")){
@@ -271,18 +270,6 @@ public class GradingAction extends DispatchAction {
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
         String total = df.format(totalScore);
 		return total;
-		
-		/*HashMap<String, String> score = getScore(gradeList);
-		HashMap<String, String> scoreMap = getScoreMap();
-		float totalScore = 0;
-		System.out.println("initial total score:"+totalScore);
-		for(AssessItem assessItem: assessItemsList){
-			totalScore = totalScore + Float.parseFloat(scoreMap.get(score.get(assessItem.getId().toString()))) * assessItem.getPercent()/100;
-			System.out.println("next total score " +assessItem.getName()+":"+totalScore);
-		}
-		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
-        String total = df.format(totalScore);
-		return total;*/
 	}
 	
 	public HashMap<String,String> getScoreMap(){
