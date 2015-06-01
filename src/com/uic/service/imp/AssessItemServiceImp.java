@@ -95,7 +95,7 @@ public class AssessItemServiceImp extends BaseServiceImp implements AssessItemSe
 	@Override
 	public List<AssessItem> getAssessItems() {
 		// TODO Auto-generated method stub
-		String hql = "from AssessItem order by name";
+		String hql = "from AssessItem";
 		try{
 			List<AssessItem> list = getListObject(hql, null);
 			return list;
@@ -111,11 +111,11 @@ public class AssessItemServiceImp extends BaseServiceImp implements AssessItemSe
 		// TODO Auto-generated method stub
 		String hql=null;
 		if(role.equals("supervisor")){
-			hql = "from AssessItem where supervisor='1' order by 'name'";
+			hql = "from AssessItem where supervisor='1'";
 		}else if(role.equals("observer")){
-			hql = "from AssessItem where observer='1' order by 'name'";
+			hql = "from AssessItem where observer='1'";
 		}else if(role.equals("examiner")){
-			hql = "from AssessItem where examiner='1' order by 'name'";
+			hql = "from AssessItem where examiner='1'";
 		}
 		try{
 			List<AssessItem> list = getListObject(hql, null);
@@ -146,6 +146,8 @@ public class AssessItemServiceImp extends BaseServiceImp implements AssessItemSe
 	public boolean updateAssessItem(AssessItemForm assessItemForm) {
 		// TODO Auto-generated method stub
 		String id = assessItemForm.getAssessId();
+		String name = assessItemForm.getAssessName();
+		//System.out.println(name);
 		String percent = assessItemForm.getPercentage()+"";
 		String[] teacherType = assessItemForm.getTeacherType();
 		
@@ -167,8 +169,8 @@ public class AssessItemServiceImp extends BaseServiceImp implements AssessItemSe
 			}
 		}
 		
-		String hql = "update AssessItem set percent=?,supervisor=?,observer=?,examiner=? where id=?";
-		String[] parameters={percent,supervisor,observer,examiner,id};
+		String hql = "update AssessItem set name=?,percent=?,supervisor=?,observer=?,examiner=? where id=?";
+		String[] parameters={name, percent,supervisor,observer,examiner,id};
 		try {
 			HibernateUtil.executeUpdateOpenInView(hql, parameters);
 			return true;
