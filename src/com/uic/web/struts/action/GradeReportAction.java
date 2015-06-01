@@ -35,7 +35,7 @@ import com.uic.service.inter.GradeLevelServiceInter;
 public class GradeReportAction extends DispatchAction {
 	
 	
-	private static List<AssessItem> getAssessItemList(){
+	private List<AssessItem> getAssessItemList(){
 		AssessItemServiceInter assessItemService = new AssessItemServiceImp();
 		return assessItemService.getAssessItems();
 	}
