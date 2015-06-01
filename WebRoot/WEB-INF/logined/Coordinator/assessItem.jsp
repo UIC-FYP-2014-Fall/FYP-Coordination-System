@@ -274,10 +274,9 @@
 												<div class="modal-body">
 													<div class="control-group">
 														<input type="hidden" name="assessId" class="assessItem_id" />
-														<label class="control-label">Assessment Item<span
-															class="required">*</span></label>
+														<label class="control-label">Assessment Item<span class="required">*</span></label>
 														<div class="controls">
-															<input type="text" disabled="" name="assessName" data-required="1" class="m-wrap disabled assessItem_name">
+															<input type="text" name="assessName" data-required="1" class="m-wrap disabled assessItem_name">
 														</div>
 													</div>
 													<div class="control-group">

@@ -122,7 +122,8 @@ public class GradeReportAction extends DispatchAction {
 				}
 				//System.out.println(assessItemList.size());
 				//System.out.println(newStudentGradeList.size());
-				if((sumCount*getLevelList().get(0).getPercent()/100)<1){
+				
+				if(getLevelList().size()>0&&(sumCount*getLevelList().get(0).getPercent()/100)<1){
 					request.setAttribute("warnInfo", "true");
 				}
 				
@@ -194,16 +195,20 @@ public class GradeReportAction extends DispatchAction {
 		String str = "";
 		
 		List<Gradelevel> list = getLevelList();
-		
-		if ((totalCount * list.get(0).getPercent() / 100) >= 1) {
 
-			for (int i = 0; i < list.size(); i++) {
-				if (index <= Math.ceil(totalCount * list.get(i).getPreTotal()/ 100)) {
-					str = list.get(i).getGradeLevel();
-					break;
+		if (list.size() > 0) {
+			if ((totalCount * list.get(0).getPercent() / 100) >= 1) {
+
+				for (int i = 0; i < list.size(); i++) {
+					if (index <= Math.ceil(totalCount
+							* list.get(i).getPreTotal() / 100)) {
+						str = list.get(i).getGradeLevel();
+						break;
+					}
 				}
 			}
 		}
+		
 		return str;
 	}
 	
