@@ -37,7 +37,7 @@
 								class="icon-user"></i> ${teacherinfo.name } <i class="caret"></i></a>
 							<ul class="dropdown-menu">
 								<li><a tabindex="-1" data-target="#logout"
-									data-toggle="modal">Logout</a></li>
+									data-toggle="modal" href="">Logout</a></li>
 							</ul></li>
 					</ul>
 				</div>

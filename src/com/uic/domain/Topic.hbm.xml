@@ -9,7 +9,7 @@
 			<generator class="identity" />
 		</id>
 		<property name="title" lazy="false" type="java.lang.String">
-			<column name="title" length="50" not-null="true" />
+			<column name="title" length="255" not-null="true" />
 		</property>
 		<property name="credit" lazy="false" type="java.lang.Integer">
 			<column name="credit" not-null="true" />

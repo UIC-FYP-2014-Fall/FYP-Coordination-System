@@ -114,6 +114,13 @@ public class GoStudentMainAction extends DispatchAction {
 			}
 			
 			//System.out.println("TimeType: "+time.getType());
+			//Student stu = (Student) request.getSession().getAttribute("studentinfo");
+			String phoneNumber = studentSericeInter.getStudentById(stu.getSid()).getTelephone();
+			if (!phoneNumber.matches("^0?1[3|4|5|8][0-9]\\d{8}$")) {
+				request.setAttribute("PhoneState", "error");
+			} else {
+				request.setAttribute("PhoneState", "ok");
+			}
 			
 			request.setAttribute("timeType", time.getType());
 			request.setAttribute("start", time.getStartTime());

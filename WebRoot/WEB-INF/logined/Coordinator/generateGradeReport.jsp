@@ -102,12 +102,19 @@
 			<div class="span9" id="content">
 				<div class="row-fluid">
 					<c:if test="${warnInfo=='true'}">
-						<div class="alert alert-error alert-block">
+						<div class="alert alert-error">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<h4>Info</h4>
-							The grade level is disabled. Cause: lacking the students who have been graded.
+							<h4>Error</h4>
+							The grade level is disabled. Cause: the number of students who have been graded too small.
 						</div>
 					</c:if>
+					<c:if test="${validateAssessmentItem=='false' }">
+							<div class="alert alert-error ErrorInfo">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>Error</h4>
+								The total percentage of assessment item must be 100%.
+							</div>
+						</c:if>
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
@@ -119,13 +126,6 @@
 								<li class="active">Student Grade Report</li>
 							</ul>
 						</div>
-						<c:if test="${validateAssessmentItem=='false' }">
-							<div class="alert alert-error ErrorInfo">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<h4>Error</h4>
-								The total percentage of assessment item must be 100%.
-							</div>
-						</c:if>
 						<c:if test="${validateAssessmentItem=='true' }">
 						<div class="block-content collapse in">
 							<div class="span12">
@@ -195,7 +195,7 @@
 					},
 	                {
 						"sExtends": "xls",
-						"sTitle": "Student FYP Grade Report",
+						"sTitle": "Student FYP Grade Report"
 					},
 	                {
 	                    "sExtends": "pdf",
