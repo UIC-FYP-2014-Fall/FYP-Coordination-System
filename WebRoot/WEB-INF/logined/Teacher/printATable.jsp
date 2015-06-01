@@ -133,7 +133,7 @@
 													if(assessItem.getSupervisor().equals("1")){
 														out.println("<td>&nbsp</td>");
 													}else{
-														out.println("<td>None</td>");
+														out.println("<td>-</td>");
 													}
 												}
 												out.println("</tr>");
@@ -147,7 +147,7 @@
 													if(assessItem.getObserver().equals("1")){
 														out.println("<td>&nbsp</td>");
 													}else{
-														out.println("<td>None</td>");
+														out.println("<td>-</td>");
 													}
 												}
 												out.println("</tr>");
@@ -161,7 +161,7 @@
 													if(assessItem.getExaminer().equals("1")){
 														out.println("<td>&nbsp</td>");
 													}else{
-														out.println("<td>None</td>");
+														out.println("<td>-</td>");
 													}
 												}
 												out.println("</tr>");
