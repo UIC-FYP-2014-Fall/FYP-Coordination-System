@@ -148,6 +148,10 @@ public class ChooseTopicAction extends DispatchAction {
 			Topic topic = fypService.getUniqueTopic(topicId);
 			Student curStudent = (Student) request.getSession().getAttribute("studentinfo");
 			ArrayList<Student> allStudentList = studentService.getAllStudent();
+			ArrayList<StuTopic> studentWhoChoosedTopic = (ArrayList<StuTopic>) fypService.getStuTopic();
+			for(StuTopic stuTopic:studentWhoChoosedTopic){
+				allStudentList.remove(stuTopic.getStudent());
+			}
 			request.setAttribute("curStudent", curStudent);
 			request.setAttribute("allStudentList", allStudentList);
 			request.setAttribute("topic", topic);

@@ -413,4 +413,17 @@ public class FYPServiceImp extends BaseServiceImp implements FYPServiceInter {
 			return null;
 		}
 	}
+	
+	public List<StuTopic> getStuTopic(){
+		String hql = "from StuTopic";
+		String[] parameters={};
+		try {
+			List<StuTopic> list = (List<StuTopic>) getListObject(hql,
+					parameters);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
