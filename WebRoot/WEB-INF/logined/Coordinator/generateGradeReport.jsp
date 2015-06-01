@@ -182,7 +182,8 @@
 			"sPaginationType": "bootstrap",
 			"oLanguage": {
 				"sLengthMenu": "_MENU_ records per page"
-			}
+			},
+			"bStateSave": true
 		} );
 		var tableTools = new $.fn.dataTable.TableTools( table, {
 			

@@ -199,8 +199,13 @@
 			"oLanguage": {
 				"sLengthMenu": "_MENU_ records per page"
 			},
+			"bStateSave": true,
 			"aoColumnDefs": [{
 				"aTargets": [0],
+				"bSortable":true,
+				"bFilter":true
+            },{
+				"aTargets": [1],
 				"bSortable":true,
 				"bFilter":true
             },{

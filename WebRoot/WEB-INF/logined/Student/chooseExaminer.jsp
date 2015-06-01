@@ -123,7 +123,7 @@
                                 </c:if>
                                 
                                 <c:if test="${chooseExaminerTime=='true' }">
-                                    <table class="table table-striped table-bordered">
+                                    <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
