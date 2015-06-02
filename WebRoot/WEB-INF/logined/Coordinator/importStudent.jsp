@@ -104,7 +104,7 @@
 					</a></li>
 					<li><a
 						href="${pageContext.request.contextPath }/gradeReport.do">
-							<i class="icon-chevron-right"></i> Generate Report
+							<i class="icon-chevron-right"></i> Grade Report
 					</a></li>
 				</ul>
 			</div>
@@ -146,7 +146,7 @@
 									action="${pageContext.request.contextPath }/import.do?flag=importStudents"
 									method="post" enctype="multipart/form-data">
 									<fieldset>
-										<legend>Import Students</legend>
+										<legend>Import Student's Information</legend>
 										<div class="control-group">
 											<label class="control-label" for="fileInput">File
 												input</label>

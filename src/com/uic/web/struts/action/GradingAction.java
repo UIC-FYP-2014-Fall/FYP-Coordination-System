@@ -292,7 +292,7 @@ public class GradingAction extends DispatchAction {
 		return studentGrade;
 	}
 	public String calculateTotalScore(String averageGradeList, List<AssessItem> assessItemsList){
-		//绠楁�诲垎鍏紡
+		//算总分公式
 		float totalScore=0;
 		String itemGrade;
 		HashMap<String, String> averageGrade = getScore(averageGradeList);

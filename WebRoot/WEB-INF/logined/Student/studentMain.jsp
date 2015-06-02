@@ -105,12 +105,14 @@
 					<c:choose>
 						<c:when test="${timeType==0 }">
 							<div class="alert alert-error alert-block">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
 								<h4 class="alert-heading">Sorry!</h4>
 								The FYP Coordination System has not open yet. Please come back later.
 							</div>
 						</c:when>
 						<c:when test="${timeType==8 }">
 							<div class="alert alert-success alert-block">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
 								<h4 class="alert-heading">Success!</h4>
 								Operation complete! You can view your FYP information.
 							</div>
@@ -153,7 +155,7 @@
 						</div>
 						<div class="block-content collapse in">
 							<c:if test="${PhoneState=='error' }">
-								<div class="alert alert-error alert-block">
+								<div class="alert alert-error alert-block">					
 									<h4 class="alert-heading">Important!</h4>
 									Please update your mobile phone number to ensure that it is available! Please click<a href="${pageContext.request.contextPath }/changPwd.do?flag=goPwdUi"> <strong>here</strong> </a>to update.
 								</div>

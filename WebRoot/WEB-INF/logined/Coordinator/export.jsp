@@ -134,7 +134,7 @@
 					</li>
 					<li>
 						<a href="${pageContext.request.contextPath }/gradeReport.do">
-							<i class="icon-chevron-right"></i> Generate Report
+							<i class="icon-chevron-right"></i> Grade Report
 						</a>
 					</li>
 				</ul>
@@ -214,6 +214,15 @@
 	
 	<script>
 	$(document).ready(function() {
+		var d = new Date();
+
+		var month = d.getMonth()+1;
+		var day = d.getDate();
+
+		var output = d.getFullYear() + '/' +
+		    (month<10 ? '0' : '') + month + '/' +
+		    (day<10 ? '0' : '') + day;
+		
 		var table = $('#preTable').dataTable({
 			"sDom": "<'row'<'span5'l><'span7'f>r>t<'row'<'span3'i><'span9'p>>",
 			"sPaginationType": "bootstrap",
@@ -238,7 +247,7 @@
 	                    "sExtends": "pdf",
 						"sTitle": "FYP Presentation Timetable",
 	                    "sPdfOrientation": "landscape",
-	                    "sPdfMessage": ""
+	                    "sPdfMessage": "Creation date: "+output
 	                },
 	                "print"
 	        	],

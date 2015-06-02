@@ -187,6 +187,7 @@ $(document).ready(function() {
 		"oLanguage": {
 			"sLengthMenu": "_MENU_ records per page"
 		},
+		"bStateSave": true,
 		"aoColumnDefs": [{
 			"aTargets": [4],
 			"bSortable":false,
