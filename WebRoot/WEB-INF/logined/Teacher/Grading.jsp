@@ -159,9 +159,13 @@
 											out.println("<td>" + supStuTopic.getTopic().getTitle() + "</td>");
 											out.println("<td>Supervisor</td>");
 											if(studentGrade.get(supStuTopic.getStudent().getName())==null){
-												out.println("<td>&nbsp;</td>");
+												out.println("<td> - </td>");
 											}else{
-												out.println("<td>"+studentGrade.get(supStuTopic.getStudent().getName()).getTotalScore()+"</td>");
+												if(studentGrade.get(supStuTopic.getStudent().getName()).getTotalScore()==null){
+													out.println("<td> - </td>");
+												}else{
+													out.println("<td>"+studentGrade.get(supStuTopic.getStudent().getName()).getTotalScore()+"</td>");
+												}
 											}
 											out.println("<td><button class=\"btn btn-primary btn-mini\" onclick=\"location.href='" + request.getContextPath() + "/grading.do?flag=goEditGradeUI&sid=" + supStuTopic.getStudent().getSid() + "&role=supervisor'\">Edit Grade</button></td>");
 											if(studentGrade.get(supStuTopic.getStudent().getName())==null){
@@ -183,9 +187,13 @@
 											out.println("<td>" + obserStuTopic.getTopic().getTitle() + "</td>");
 											out.println("<td>Observer</td>");
 											if(studentGrade.get(obserStuTopic.getStudent().getName())==null){
-												out.println("<td>&nbsp;</td>");
+												out.println("<td> - </td>");
 											}else{
-												out.println("<td>"+studentGrade.get(obserStuTopic.getStudent().getName()).getTotalScore()+"</td>");
+												if(studentGrade.get(obserStuTopic.getStudent().getName()).getTotalScore()==null){
+													out.println("<td> - </td>");
+												}else{
+													out.println("<td>"+studentGrade.get(obserStuTopic.getStudent().getName()).getTotalScore()+"</td>");
+												}
 											}
 											out.println("<td><button class=\"btn btn-primary btn-mini\" onclick=\"location.href='" + request.getContextPath() + "/grading.do?flag=goEditGradeUI&sid=" + obserStuTopic.getStudent().getSid() + "&role=observer'\">Edit Grade</button></td>");
 											if(studentGrade.get(obserStuTopic.getStudent().getName())==null){
@@ -207,9 +215,13 @@
 											out.println("<td>" + examStuTopic.getTopic().getTitle() + "</td>");
 											out.println("<td>Examiner</td>");
 											if(studentGrade.get(examStuTopic.getStudent().getName())==null){
-												out.println("<td>&nbsp;</td>");
+												out.println("<td> - </td>");
 											}else{
-												out.println("<td>"+studentGrade.get(examStuTopic.getStudent().getName()).getTotalScore()+"</td>");
+												if(studentGrade.get(examStuTopic.getStudent().getName()).getTotalScore()==null){
+													out.println("<td> - </td>");
+												}else{
+													out.println("<td>"+studentGrade.get(examStuTopic.getStudent().getName()).getTotalScore()+"</td>");
+												}
 											}
 											out.println("<td><button class=\"btn btn-primary btn-mini\" onclick=\"location.href='" + request.getContextPath() + "/grading.do?flag=goEditGradeUI&sid=" + examStuTopic.getStudent().getSid() + "&role=examiner'\">Edit Grade</button></td>");
 											if(studentGrade.get(examStuTopic.getStudent().getName())==null){
