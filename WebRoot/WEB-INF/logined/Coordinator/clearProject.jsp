@@ -86,7 +86,7 @@
 								Grade Level</a></li>
 						<li><a href="${pageContext.request.contextPath }/gradeReport.do">
 							<i class="icon-chevron-right"></i>
-							    Generate Report</a></li>
+							    Grade Report</a></li>
 				</ul>
                 </div>
                 <!--/span-->

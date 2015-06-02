@@ -134,7 +134,7 @@
 					</li>
 					<li>
 						<a href="${pageContext.request.contextPath }/gradeReport.do">
-							<i class="icon-chevron-right"></i> Generate Report
+							<i class="icon-chevron-right"></i> Grade Report
 						</a>
 					</li>
 				</ul>

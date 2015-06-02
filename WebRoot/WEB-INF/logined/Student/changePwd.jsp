@@ -102,7 +102,7 @@
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">CONTACT INFORMATION</div>
+							<div class="muted pull-left">Contact Information</div>
 						</div>
 						<div class="block-content collapse in">
 							<div class="span12">
@@ -134,12 +134,12 @@
 												
 											</span>
 											
-												<button class="btn btn-primary tooltip-right" data-original-title="Your mobile phone number must be available!" id="unlock" onclick="_unlock()"><i class="icon-pencil icon-white"></i> Edit</button>
+												<button class="btn btn-primary tooltip-right" data-original-title="Your mobile phone number must be available!" id="unlock" onclick="_unlock()"><i class="icon-pencil icon-white"> </i> Edit</button>
 										
 										</div>
 									</div>
 									<div class="form-actions" id="saveDiv" style="display: none">
-										<button type="submit" class="btn btn-primary">Save Changes</button>
+										<button type="submit" class="btn btn-primary">Save</button>
 										<button type="reset" class="btn" onclick="cancel()">Cancel</button>
 									</div>
 								</form>
@@ -153,7 +153,7 @@
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">ACCOUNT SETTINGS</div>
+							<div class="muted pull-left">Change Password</div>
 						</div>
 						<div class="block-content collapse in">
 							<div class="span12">
@@ -193,7 +193,7 @@
 										</div>
 									</div>
 									<div class="form-actions">
-										<button type="submit" class="btn btn-primary">Save Changes</button>
+										<button type="submit" class="btn btn-primary">Save</button>
 										<button type="reset" class="btn">Cancel</button>
 									</div>
 
