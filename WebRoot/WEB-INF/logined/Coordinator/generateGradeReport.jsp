@@ -177,6 +177,15 @@
 	<script src="assets/DT_bootstrap.js"></script>
 	<script>
 	$(document).ready(function() {
+		var d = new Date();
+
+		var month = d.getMonth()+1;
+		var day = d.getDate();
+
+		var output = d.getFullYear() + '/' +
+		    (month<10 ? '0' : '') + month + '/' +
+		    (day<10 ? '0' : '') + day;
+		
 		var table = $('#gradeTable').dataTable({
 			"sDom": "<'row'<'span5'l><'span7'f>r>t<'row'<'span3'i><'span9'p>>",
 			"sPaginationType": "bootstrap",
@@ -202,7 +211,7 @@
 	                    "sExtends": "pdf",
 						"sTitle": "Student FYP Grade Report",
 	                    "sPdfOrientation": "landscape",
-	                    "sPdfMessage": ""
+	                    "sPdfMessage": "Creation date: "+output,
 	                },
 	                "print"
 	        	],
