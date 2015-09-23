@@ -186,7 +186,9 @@ public class AssessItemServiceImp extends BaseServiceImp implements AssessItemSe
 		int res = 0;
 		String hql = "select sum(percent) from AssessItem";
 		try{
-			res = new Long((long)getUniqueObject(hql, null)).intValue();
+			if(!tableIsNull()){
+				res = new Long((long)getUniqueObject(hql, null)).intValue();
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -203,6 +205,16 @@ public class AssessItemServiceImp extends BaseServiceImp implements AssessItemSe
 			// TODO: handle exception
 			return null;
 		}
+	}
+	
+	private boolean tableIsNull(){
+		//true: table is null
+		String hql = "select count(*) from AssessItem";
+		
+		if(new Long((long)getUniqueObject(hql, null)).intValue()==0)
+			return true;
+		else
+			return false;
 	}
 
 	

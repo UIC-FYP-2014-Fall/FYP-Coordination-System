@@ -4,7 +4,6 @@
  */
 package com.uic.web.struts.action;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -61,10 +60,11 @@ public class ImportAction extends DispatchAction {
 	}
 	
 	public ActionForward importStudents(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		// TODO Auto-generated method stub
 		if (request.getSession().getAttribute("role").equals("coordinator")) {
+			
 			FileUploadForm fileUpload = (FileUploadForm)form;
 			
 			Integer flag2 = fileUpload.getFlag2();
@@ -87,9 +87,9 @@ public class ImportAction extends DispatchAction {
 						System.out.println(request.getServletContext().getRealPath("/"));
 						String filePath = request.getServletContext().getRealPath("/upload");// 上传到指定的upload包中
 						System.out.println(filePath);
-						ByteArrayOutputStream baos = new ByteArrayOutputStream();
-						OutputStream bos = new FileOutputStream(filePath + "/"+ excelFile.getFileName());// 建立一个上传文件的输出流
-						// System.out.println(filePath+"/"+file.getFileName());
+						//ByteArrayOutputStream baos = new ByteArrayOutputStream();
+						OutputStream bos = new FileOutputStream(filePath + "//"+ excelFile.getFileName());// 建立一个上传文件的输出流
+						//System.out.println(filePath+"/"+file.getFileName());
 						int bytesRead = 0;
 						byte[] buffer = new byte[8192];
 						while ((bytesRead = stream.read(buffer, 0, 8192)) != -1) {
@@ -99,6 +99,7 @@ public class ImportAction extends DispatchAction {
 						stream.close();
 					} catch (Exception e) {
 						System.err.print(e);
+						throw new Exception(e);
 					}
 					
 					
